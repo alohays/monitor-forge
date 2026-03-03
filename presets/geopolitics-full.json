@@ -1,0 +1,165 @@
+{
+  "monitor": {
+    "name": "Geopolitical Intelligence",
+    "slug": "geopolitical-intelligence",
+    "description": "Full-featured geopolitical intelligence dashboard with conflict tracking and AI analysis",
+    "domain": "geopolitics",
+    "tags": ["geopolitics", "conflict", "diplomacy", "security", "osint"]
+  },
+  "sources": [
+    {
+      "name": "bbc-world",
+      "type": "rss",
+      "url": "https://feeds.bbci.co.uk/news/world/rss.xml",
+      "category": "world-news",
+      "tier": 1,
+      "interval": 300,
+      "language": "en",
+      "tags": ["world"]
+    },
+    {
+      "name": "reuters-world",
+      "type": "rss",
+      "url": "https://www.reutersagency.com/feed/?taxonomy=best-topics&post_type=best",
+      "category": "world-news",
+      "tier": 1,
+      "interval": 300,
+      "language": "en",
+      "tags": ["world"]
+    },
+    {
+      "name": "aljazeera",
+      "type": "rss",
+      "url": "https://www.aljazeera.com/xml/rss/all.xml",
+      "category": "world-news",
+      "tier": 1,
+      "interval": 600,
+      "language": "en",
+      "tags": ["world", "middle-east"]
+    },
+    {
+      "name": "guardian-world",
+      "type": "rss",
+      "url": "https://www.theguardian.com/world/rss",
+      "category": "world-news",
+      "tier": 2,
+      "interval": 600,
+      "language": "en",
+      "tags": ["world"]
+    },
+    {
+      "name": "ap-news-world",
+      "type": "rss",
+      "url": "https://rsshub.app/apnews/topics/world-news",
+      "category": "world-news",
+      "tier": 2,
+      "interval": 600,
+      "language": "en",
+      "tags": ["world"]
+    },
+    {
+      "name": "foreign-affairs",
+      "type": "rss",
+      "url": "https://www.foreignaffairs.com/rss.xml",
+      "category": "analysis",
+      "tier": 1,
+      "interval": 3600,
+      "language": "en",
+      "tags": ["analysis", "policy"]
+    },
+    {
+      "name": "war-on-rocks",
+      "type": "rss",
+      "url": "https://warontherocks.com/feed/",
+      "category": "security",
+      "tier": 2,
+      "interval": 3600,
+      "language": "en",
+      "tags": ["defense", "security"]
+    },
+    {
+      "name": "gdelt-events",
+      "type": "rest-api",
+      "url": "https://api.gdeltproject.org/api/v2/doc/doc?query=conflict&mode=artlist&maxrecords=50&format=json",
+      "category": "events",
+      "tier": 2,
+      "interval": 900,
+      "language": "en",
+      "tags": ["events", "conflict"]
+    }
+  ],
+  "layers": [],
+  "panels": [
+    {
+      "name": "world-news",
+      "type": "news-feed",
+      "displayName": "World News Feed",
+      "position": 0,
+      "config": {
+        "categories": ["world-news", "security"],
+        "maxItems": 50
+      }
+    },
+    {
+      "name": "situation-brief",
+      "type": "ai-brief",
+      "displayName": "Situation Brief",
+      "position": 1,
+      "config": {
+        "refreshInterval": 600
+      }
+    },
+    {
+      "name": "entity-tracker",
+      "type": "entity-tracker",
+      "displayName": "Key Actors",
+      "position": 2,
+      "config": {
+        "entities": ["NATO", "UN", "EU", "China", "Russia", "USA", "Iran", "North Korea"],
+        "maxEntities": 20
+      }
+    },
+    {
+      "name": "instability-index",
+      "type": "instability-index",
+      "displayName": "Instability Index",
+      "position": 3,
+      "config": {}
+    },
+    {
+      "name": "service-status",
+      "type": "service-status",
+      "displayName": "Source Status",
+      "position": 4,
+      "config": {}
+    }
+  ],
+  "ai": {
+    "enabled": true,
+    "fallbackChain": ["groq", "openrouter"],
+    "providers": {
+      "groq": {
+        "model": "llama-3.3-70b-versatile",
+        "apiKeyEnv": "GROQ_API_KEY"
+      },
+      "openrouter": {
+        "model": "anthropic/claude-sonnet-4",
+        "apiKeyEnv": "OPENROUTER_API_KEY"
+      }
+    },
+    "analysis": {
+      "summarization": true,
+      "entityExtraction": true,
+      "sentimentAnalysis": true,
+      "focalPointDetection": true,
+      "customPrompt": "Focus on geopolitical tensions, military movements, diplomatic developments, sanctions, and territorial disputes. Highlight escalation/de-escalation signals."
+    }
+  },
+  "map": {
+    "style": "https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json",
+    "center": [30, 30],
+    "zoom": 3,
+    "projection": "globe",
+    "dayNightOverlay": true
+  }
+}

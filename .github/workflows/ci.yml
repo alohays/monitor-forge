@@ -1,0 +1,32 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      - name: Type check
+        run: npx tsc --noEmit
+
+      - name: Validate config
+        run: npx tsx forge/bin/forge.ts validate --format json
+
+      - name: List presets
+        run: npx tsx forge/bin/forge.ts preset list --format json
+
+      - name: Build
+        run: npx tsx forge/bin/forge.ts build --format json

@@ -1,0 +1,21 @@
+{
+  "monitor": {
+    "name": "My Monitor",
+    "slug": "my-monitor",
+    "description": "A blank dashboard ready for customization",
+    "domain": "general",
+    "tags": []
+  },
+  "sources": [],
+  "layers": [],
+  "panels": [],
+  "ai": {
+    "enabled": false
+  },
+  "map": {
+    "style": "https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json",
+    "center": [0, 20],
+    "zoom": 3,
+    "projection": "mercator"
+  }
+}

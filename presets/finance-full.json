@@ -1,0 +1,137 @@
+{
+  "monitor": {
+    "name": "Finance Intelligence",
+    "slug": "finance-intelligence",
+    "description": "Full-featured financial intelligence dashboard with market tracking and AI analysis",
+    "domain": "finance",
+    "tags": ["finance", "markets", "crypto", "macro", "commodities"]
+  },
+  "sources": [
+    {
+      "name": "reuters-business",
+      "type": "rss",
+      "url": "https://www.reutersagency.com/feed/?taxonomy=best-topics&post_type=best",
+      "category": "market-news",
+      "tier": 1,
+      "interval": 300,
+      "language": "en",
+      "tags": ["finance"]
+    },
+    {
+      "name": "cnbc-top",
+      "type": "rss",
+      "url": "https://search.cnbc.com/rs/search/combinedcms/view.xml?partnerId=wrss01&id=100003114",
+      "category": "market-news",
+      "tier": 1,
+      "interval": 300,
+      "language": "en",
+      "tags": ["finance", "markets"]
+    },
+    {
+      "name": "ft-markets",
+      "type": "rss",
+      "url": "https://www.ft.com/markets?format=rss",
+      "category": "market-news",
+      "tier": 1,
+      "interval": 600,
+      "language": "en",
+      "tags": ["finance", "markets"]
+    },
+    {
+      "name": "bloomberg-markets",
+      "type": "rss",
+      "url": "https://feeds.bloomberg.com/markets/news.rss",
+      "category": "market-news",
+      "tier": 1,
+      "interval": 600,
+      "language": "en",
+      "tags": ["finance", "markets"]
+    },
+    {
+      "name": "coindesk",
+      "type": "rss",
+      "url": "https://www.coindesk.com/arc/outboundfeeds/rss/",
+      "category": "crypto",
+      "tier": 2,
+      "interval": 600,
+      "language": "en",
+      "tags": ["crypto"]
+    },
+    {
+      "name": "fed-rss",
+      "type": "rss",
+      "url": "https://www.federalreserve.gov/feeds/press_all.xml",
+      "category": "central-bank",
+      "tier": 1,
+      "interval": 1800,
+      "language": "en",
+      "tags": ["macro", "fed"]
+    }
+  ],
+  "layers": [],
+  "panels": [
+    {
+      "name": "market-news",
+      "type": "news-feed",
+      "displayName": "Market News",
+      "position": 0,
+      "config": {
+        "categories": ["market-news"],
+        "maxItems": 50
+      }
+    },
+    {
+      "name": "market-brief",
+      "type": "ai-brief",
+      "displayName": "Market Intelligence Brief",
+      "position": 1,
+      "config": {
+        "refreshInterval": 600
+      }
+    },
+    {
+      "name": "entity-tracker",
+      "type": "entity-tracker",
+      "displayName": "Key Movers",
+      "position": 2,
+      "config": {
+        "entities": ["S&P 500", "NASDAQ", "Bitcoin", "Gold", "USD", "EUR", "JPY"],
+        "maxEntities": 20
+      }
+    },
+    {
+      "name": "service-status",
+      "type": "service-status",
+      "displayName": "Feed Status",
+      "position": 3,
+      "config": {}
+    }
+  ],
+  "ai": {
+    "enabled": true,
+    "fallbackChain": ["groq", "openrouter"],
+    "providers": {
+      "groq": {
+        "model": "llama-3.3-70b-versatile",
+        "apiKeyEnv": "GROQ_API_KEY"
+      },
+      "openrouter": {
+        "model": "anthropic/claude-sonnet-4",
+        "apiKeyEnv": "OPENROUTER_API_KEY"
+      }
+    },
+    "analysis": {
+      "summarization": true,
+      "entityExtraction": true,
+      "sentimentAnalysis": true,
+      "focalPointDetection": true,
+      "customPrompt": "Focus on market-moving events, central bank decisions, earnings surprises, and geopolitical risks affecting markets."
+    }
+  },
+  "map": {
+    "style": "https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json",
+    "center": [0, 30],
+    "zoom": 3,
+    "projection": "mercator"
+  }
+}

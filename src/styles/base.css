@@ -1,0 +1,291 @@
+:root {
+  --fg: #e0e0e0;
+  --bg: #0a0a0f;
+  --bg-secondary: #12121a;
+  --bg-panel: #1a1a2e;
+  --border: #2a2a3e;
+  --accent: #0052CC;
+  --accent-hover: #0066ff;
+  --success: #00b894;
+  --danger: #ff6b6b;
+  --warning: #ffc107;
+  --text-muted: #888;
+  --radius: 8px;
+  --panel-width: 380px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+  width: 100%;
+  height: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--fg);
+  overflow: hidden;
+}
+
+#app {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header */
+.forge-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border);
+  z-index: 100;
+  height: 48px;
+}
+
+.forge-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.forge-btn {
+  padding: 0.25rem 0.75rem;
+  background: var(--bg-panel);
+  color: var(--fg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+
+.forge-btn:hover { border-color: var(--accent); }
+
+/* Main layout */
+.forge-main {
+  flex: 1;
+  display: flex;
+  position: relative;
+  overflow: hidden;
+}
+
+.forge-map-container {
+  flex: 1;
+  position: relative;
+}
+
+.forge-map-container .maplibregl-map {
+  width: 100%;
+  height: 100%;
+}
+
+/* Sidebar */
+.forge-sidebar {
+  width: var(--panel-width);
+  background: var(--bg-secondary);
+  border-left: 1px solid var(--border);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+/* Panels */
+.forge-panel {
+  background: var(--bg-panel);
+  border-bottom: 1px solid var(--border);
+}
+
+.forge-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 0.75rem;
+  background: rgba(255,255,255,0.03);
+  cursor: pointer;
+}
+
+.forge-panel-title {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+}
+
+.forge-panel-toggle {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 0.9rem;
+  width: 20px;
+  text-align: center;
+}
+
+.forge-panel-body {
+  padding: 0.5rem 0.75rem;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.forge-panel-body.collapsed { display: none; }
+
+/* News Feed */
+.news-item {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.news-item:last-child { border-bottom: none; }
+
+.news-item a {
+  color: var(--fg);
+  text-decoration: none;
+}
+
+.news-item a:hover { color: var(--accent); }
+
+.news-item-title {
+  font-size: 0.85rem;
+  font-weight: 500;
+  line-height: 1.3;
+  margin-bottom: 0.25rem;
+}
+
+.news-item-meta {
+  display: flex;
+  gap: 0.5rem;
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+
+.news-item-summary {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: 0.25rem;
+  line-height: 1.4;
+}
+
+/* Sentiment */
+.sentiment-positive { color: var(--success); }
+.sentiment-negative { color: var(--danger); }
+.sentiment-neutral { color: var(--text-muted); }
+
+/* Market Ticker */
+.ticker-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.35rem 0;
+  font-size: 0.8rem;
+}
+
+.ticker-symbol { font-weight: 600; }
+.ticker-up .ticker-change { color: var(--success); }
+.ticker-down .ticker-change { color: var(--danger); }
+
+/* Entity Tracker */
+.entity-item {
+  padding: 0.35rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.entity-name { font-weight: 500; font-size: 0.85rem; }
+.entity-meta { display: flex; gap: 0.5rem; font-size: 0.7rem; color: var(--text-muted); }
+
+/* Service Status */
+.service-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.3rem 0;
+  font-size: 0.8rem;
+}
+
+.service-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.status-green { background: var(--success); }
+.status-yellow { background: var(--warning); }
+.status-red { background: var(--danger); }
+
+/* Layer Panel */
+.forge-layer-panel {
+  position: absolute;
+  top: 48px;
+  right: var(--panel-width);
+  width: 250px;
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.75rem;
+  z-index: 200;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.forge-layer-panel.hidden { display: none; }
+
+.forge-layer-panel h3 {
+  font-size: 0.8rem;
+  margin-bottom: 0.5rem;
+  color: var(--text-muted);
+}
+
+.layer-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.3rem 0;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+/* AI Brief */
+.ai-brief-content {
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+.ai-brief-content ul { padding-left: 1rem; }
+.ai-brief-content li { margin-bottom: 0.3rem; }
+
+.ai-brief-meta {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  margin-top: 0.5rem;
+}
+
+.ai-brief-placeholder {
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* Instability Index */
+.instability-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.3rem 0;
+  font-size: 0.8rem;
+}
+
+.risk-high .instability-score { color: var(--danger); }
+.risk-medium .instability-score { color: var(--warning); }
+.risk-low .instability-score { color: var(--success); }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .forge-sidebar { width: 100%; position: absolute; bottom: 0; height: 40vh; z-index: 150; }
+  .forge-layer-panel { right: 0; }
+}

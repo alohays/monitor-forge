@@ -1,0 +1,103 @@
+{
+  "monitor": {
+    "name": "Test Monitor",
+    "slug": "test-monitor",
+    "description": "Real-time intelligence dashboard for technology",
+    "domain": "technology",
+    "tags": [],
+    "branding": {
+      "primaryColor": "#0052CC"
+    }
+  },
+  "sources": [
+    {
+      "name": "bbc-world",
+      "type": "rss",
+      "url": "https://feeds.bbci.co.uk/news/world/rss.xml",
+      "category": "news",
+      "tier": 3,
+      "interval": 300,
+      "language": "en",
+      "tags": []
+    }
+  ],
+  "layers": [
+    {
+      "name": "test-layer",
+      "type": "points",
+      "displayName": "Test Points",
+      "color": "#FF0000",
+      "data": {
+        "source": "static",
+        "path": "data/geo/test.geojson"
+      },
+      "defaultVisible": false,
+      "category": "general"
+    }
+  ],
+  "panels": [
+    {
+      "name": "news",
+      "type": "news-feed",
+      "displayName": "World News",
+      "position": 0,
+      "config": {}
+    }
+  ],
+  "ai": {
+    "enabled": true,
+    "fallbackChain": [
+      "groq",
+      "openrouter"
+    ],
+    "providers": {
+      "groq": {
+        "model": "llama-3.3-70b-versatile",
+        "apiKeyEnv": "GROQ_API_KEY"
+      },
+      "openrouter": {
+        "model": "meta-llama/llama-3.3-70b-instruct",
+        "apiKeyEnv": "OPENROUTER_API_KEY"
+      }
+    },
+    "analysis": {
+      "summarization": true,
+      "entityExtraction": true,
+      "sentimentAnalysis": true,
+      "focalPointDetection": false
+    }
+  },
+  "map": {
+    "style": "https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json",
+    "center": [
+      0,
+      20
+    ],
+    "zoom": 3,
+    "minZoom": 2,
+    "maxZoom": 18,
+    "projection": "mercator",
+    "dayNightOverlay": false
+  },
+  "backend": {
+    "cache": {
+      "provider": "memory",
+      "ttlSeconds": 300
+    },
+    "rateLimit": {
+      "enabled": true,
+      "maxRequests": 100,
+      "windowSeconds": 60
+    },
+    "corsProxy": {
+      "enabled": true,
+      "allowedDomains": [
+        "*"
+      ]
+    }
+  },
+  "build": {
+    "target": "vercel",
+    "outDir": "dist"
+  }
+}

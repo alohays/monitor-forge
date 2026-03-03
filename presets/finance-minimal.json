@@ -1,0 +1,84 @@
+{
+  "monitor": {
+    "name": "Finance Monitor",
+    "slug": "finance-monitor",
+    "description": "Minimal financial market intelligence dashboard",
+    "domain": "finance",
+    "tags": ["finance", "markets", "crypto"]
+  },
+  "sources": [
+    {
+      "name": "reuters-business",
+      "type": "rss",
+      "url": "https://www.reutersagency.com/feed/?taxonomy=best-topics&post_type=best",
+      "category": "market-news",
+      "tier": 1,
+      "interval": 300,
+      "language": "en",
+      "tags": ["finance", "markets"]
+    },
+    {
+      "name": "cnbc-top",
+      "type": "rss",
+      "url": "https://search.cnbc.com/rs/search/combinedcms/view.xml?partnerId=wrss01&id=100003114",
+      "category": "market-news",
+      "tier": 1,
+      "interval": 300,
+      "language": "en",
+      "tags": ["finance", "markets"]
+    },
+    {
+      "name": "coindesk",
+      "type": "rss",
+      "url": "https://www.coindesk.com/arc/outboundfeeds/rss/",
+      "category": "crypto",
+      "tier": 2,
+      "interval": 600,
+      "language": "en",
+      "tags": ["crypto", "blockchain"]
+    }
+  ],
+  "layers": [],
+  "panels": [
+    {
+      "name": "market-news",
+      "type": "news-feed",
+      "displayName": "Market News",
+      "position": 0,
+      "config": {
+        "categories": ["market-news", "crypto"],
+        "maxItems": 30
+      }
+    },
+    {
+      "name": "ai-brief",
+      "type": "ai-brief",
+      "displayName": "Market Brief",
+      "position": 1,
+      "config": {
+        "refreshInterval": 900
+      }
+    }
+  ],
+  "ai": {
+    "enabled": true,
+    "fallbackChain": ["groq"],
+    "providers": {
+      "groq": {
+        "model": "llama-3.3-70b-versatile",
+        "apiKeyEnv": "GROQ_API_KEY"
+      }
+    },
+    "analysis": {
+      "summarization": true,
+      "entityExtraction": true,
+      "sentimentAnalysis": true
+    }
+  },
+  "map": {
+    "style": "https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json",
+    "center": [-74, 40.7],
+    "zoom": 5,
+    "projection": "mercator"
+  }
+}

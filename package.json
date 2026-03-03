@@ -1,0 +1,39 @@
+{
+  "name": "monitor-forge",
+  "version": "0.1.0",
+  "description": "Create your own real-time intelligence dashboard. A meta-level template for building customized worldmonitor-style dashboards.",
+  "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "forge": "tsx forge/bin/forge.ts",
+    "dev": "tsx forge/bin/forge.ts dev",
+    "build": "tsx forge/bin/forge.ts build",
+    "deploy": "tsx forge/bin/forge.ts deploy",
+    "validate": "tsx forge/bin/forge.ts validate",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint . --ext .ts,.tsx"
+  },
+  "dependencies": {
+    "@deck.gl/core": "^9.1.0",
+    "@deck.gl/layers": "^9.1.0",
+    "@deck.gl/geo-layers": "^9.1.0",
+    "@loaders.gl/core": "^4.3.0",
+    "d3": "^7.9.0",
+    "dompurify": "^3.2.0",
+    "fast-xml-parser": "^5.0.0",
+    "maplibre-gl": "^5.0.0",
+    "marked": "^15.0.0"
+  },
+  "devDependencies": {
+    "@types/d3": "^7.4.0",
+    "@types/dompurify": "^3.0.0",
+    "@types/node": "^22.0.0",
+    "commander": "^13.0.0",
+    "@clack/prompts": "^0.9.0",
+    "picocolors": "^1.1.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.0",
+    "vite": "^6.0.0",
+    "zod": "^3.24.0"
+  }
+}

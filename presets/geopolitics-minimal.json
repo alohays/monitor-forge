@@ -1,0 +1,84 @@
+{
+  "monitor": {
+    "name": "Geopolitics Monitor",
+    "slug": "geopolitics-monitor",
+    "description": "Minimal geopolitical intelligence dashboard",
+    "domain": "geopolitics",
+    "tags": ["geopolitics", "conflict", "diplomacy"]
+  },
+  "sources": [
+    {
+      "name": "bbc-world",
+      "type": "rss",
+      "url": "https://feeds.bbci.co.uk/news/world/rss.xml",
+      "category": "world-news",
+      "tier": 1,
+      "interval": 300,
+      "language": "en",
+      "tags": ["world", "geopolitics"]
+    },
+    {
+      "name": "reuters-world",
+      "type": "rss",
+      "url": "https://www.reutersagency.com/feed/?taxonomy=best-topics&post_type=best",
+      "category": "world-news",
+      "tier": 1,
+      "interval": 300,
+      "language": "en",
+      "tags": ["world", "geopolitics"]
+    },
+    {
+      "name": "aljazeera",
+      "type": "rss",
+      "url": "https://www.aljazeera.com/xml/rss/all.xml",
+      "category": "world-news",
+      "tier": 2,
+      "interval": 600,
+      "language": "en",
+      "tags": ["world", "middle-east"]
+    }
+  ],
+  "layers": [],
+  "panels": [
+    {
+      "name": "world-news",
+      "type": "news-feed",
+      "displayName": "World News",
+      "position": 0,
+      "config": {
+        "categories": ["world-news"],
+        "maxItems": 30
+      }
+    },
+    {
+      "name": "ai-brief",
+      "type": "ai-brief",
+      "displayName": "Situation Brief",
+      "position": 1,
+      "config": {
+        "refreshInterval": 900
+      }
+    }
+  ],
+  "ai": {
+    "enabled": true,
+    "fallbackChain": ["groq"],
+    "providers": {
+      "groq": {
+        "model": "llama-3.3-70b-versatile",
+        "apiKeyEnv": "GROQ_API_KEY"
+      }
+    },
+    "analysis": {
+      "summarization": true,
+      "entityExtraction": true,
+      "sentimentAnalysis": false
+    }
+  },
+  "map": {
+    "style": "https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json",
+    "center": [30, 30],
+    "zoom": 3,
+    "projection": "globe"
+  }
+}

@@ -1,0 +1,156 @@
+{
+  "monitor": {
+    "name": "Tech Intelligence",
+    "slug": "tech-intelligence",
+    "description": "Full-featured tech industry intelligence dashboard with AI analysis",
+    "domain": "technology",
+    "tags": ["tech", "ai", "startups", "open-source", "semiconductors"]
+  },
+  "sources": [
+    {
+      "name": "hackernews-rss",
+      "type": "rss",
+      "url": "https://hnrss.org/frontpage",
+      "category": "tech-news",
+      "tier": 1,
+      "interval": 300,
+      "language": "en",
+      "tags": ["tech", "startups"]
+    },
+    {
+      "name": "techcrunch-rss",
+      "type": "rss",
+      "url": "https://techcrunch.com/feed/",
+      "category": "tech-news",
+      "tier": 1,
+      "interval": 600,
+      "language": "en",
+      "tags": ["tech", "vc"]
+    },
+    {
+      "name": "ars-technica",
+      "type": "rss",
+      "url": "https://feeds.arstechnica.com/arstechnica/index",
+      "category": "tech-news",
+      "tier": 2,
+      "interval": 600,
+      "language": "en",
+      "tags": ["tech", "science"]
+    },
+    {
+      "name": "the-verge",
+      "type": "rss",
+      "url": "https://www.theverge.com/rss/index.xml",
+      "category": "tech-news",
+      "tier": 2,
+      "interval": 600,
+      "language": "en",
+      "tags": ["tech", "consumer"]
+    },
+    {
+      "name": "wired",
+      "type": "rss",
+      "url": "https://www.wired.com/feed/rss",
+      "category": "tech-news",
+      "tier": 2,
+      "interval": 900,
+      "language": "en",
+      "tags": ["tech", "culture"]
+    },
+    {
+      "name": "mit-tech-review",
+      "type": "rss",
+      "url": "https://www.technologyreview.com/feed/",
+      "category": "research",
+      "tier": 1,
+      "interval": 900,
+      "language": "en",
+      "tags": ["ai", "research"]
+    },
+    {
+      "name": "arxiv-cs-ai",
+      "type": "rss",
+      "url": "https://rss.arxiv.org/rss/cs.AI",
+      "category": "research",
+      "tier": 2,
+      "interval": 3600,
+      "language": "en",
+      "tags": ["ai", "research", "papers"]
+    },
+    {
+      "name": "github-trending",
+      "type": "rss",
+      "url": "https://mshibanami.github.io/GitHubTrendingRSS/daily/all.xml",
+      "category": "open-source",
+      "tier": 2,
+      "interval": 3600,
+      "language": "en",
+      "tags": ["open-source", "github"]
+    }
+  ],
+  "layers": [],
+  "panels": [
+    {
+      "name": "tech-news",
+      "type": "news-feed",
+      "displayName": "Tech News",
+      "position": 0,
+      "config": {
+        "categories": ["tech-news"],
+        "maxItems": 50
+      }
+    },
+    {
+      "name": "ai-brief",
+      "type": "ai-brief",
+      "displayName": "AI Intelligence Brief",
+      "position": 1,
+      "config": {
+        "refreshInterval": 600
+      }
+    },
+    {
+      "name": "entity-tracker",
+      "type": "entity-tracker",
+      "displayName": "Key Players",
+      "position": 2,
+      "config": {
+        "entities": ["OpenAI", "Google", "Meta", "Anthropic", "NVIDIA", "Apple", "Microsoft", "xAI"],
+        "maxEntities": 20
+      }
+    },
+    {
+      "name": "service-status",
+      "type": "service-status",
+      "displayName": "Feed Status",
+      "position": 3,
+      "config": {}
+    }
+  ],
+  "ai": {
+    "enabled": true,
+    "fallbackChain": ["groq", "openrouter"],
+    "providers": {
+      "groq": {
+        "model": "llama-3.3-70b-versatile",
+        "apiKeyEnv": "GROQ_API_KEY"
+      },
+      "openrouter": {
+        "model": "anthropic/claude-sonnet-4",
+        "apiKeyEnv": "OPENROUTER_API_KEY"
+      }
+    },
+    "analysis": {
+      "summarization": true,
+      "entityExtraction": true,
+      "sentimentAnalysis": true,
+      "focalPointDetection": true
+    }
+  },
+  "map": {
+    "style": "https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json",
+    "center": [-95, 38],
+    "zoom": 4,
+    "projection": "mercator"
+  }
+}
