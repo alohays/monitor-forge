@@ -1,79 +1,88 @@
 {
   "monitor": {
-    "name": "Test Monitor",
-    "slug": "test-monitor",
-    "description": "Real-time intelligence dashboard for technology",
+    "name": "Tech Monitor",
+    "slug": "tech-monitor",
+    "description": "Minimal tech industry intelligence dashboard",
     "domain": "technology",
-    "tags": [],
+    "tags": ["tech", "ai", "startups"],
     "branding": {
       "primaryColor": "#0052CC"
     }
   },
   "sources": [
     {
-      "name": "bbc-world",
+      "name": "hackernews-rss",
       "type": "rss",
-      "url": "https://feeds.bbci.co.uk/news/world/rss.xml",
-      "category": "news",
-      "tier": 3,
+      "url": "https://hnrss.org/frontpage",
+      "category": "tech-news",
+      "tier": 1,
       "interval": 300,
       "language": "en",
-      "tags": []
-    }
-  ],
-  "layers": [
+      "tags": ["tech", "startups"]
+    },
     {
-      "name": "test-layer",
-      "type": "points",
-      "displayName": "Test Points",
-      "color": "#FF0000",
-      "data": {
-        "source": "static",
-        "path": "data/geo/test.geojson"
-      },
-      "defaultVisible": false,
-      "category": "general"
+      "name": "techcrunch-rss",
+      "type": "rss",
+      "url": "https://techcrunch.com/feed/",
+      "category": "tech-news",
+      "tier": 1,
+      "interval": 600,
+      "language": "en",
+      "tags": ["tech", "startups", "vc"]
+    },
+    {
+      "name": "ars-technica",
+      "type": "rss",
+      "url": "https://feeds.arstechnica.com/arstechnica/index",
+      "category": "tech-news",
+      "tier": 2,
+      "interval": 600,
+      "language": "en",
+      "tags": ["tech", "science"]
     }
   ],
+  "layers": [],
   "panels": [
     {
-      "name": "news",
+      "name": "tech-news",
       "type": "news-feed",
-      "displayName": "World News",
+      "displayName": "Tech News",
       "position": 0,
-      "config": {}
+      "config": {
+        "categories": ["tech-news"],
+        "maxItems": 30
+      }
+    },
+    {
+      "name": "ai-brief",
+      "type": "ai-brief",
+      "displayName": "AI Brief",
+      "position": 1,
+      "config": {
+        "refreshInterval": 900
+      }
     }
   ],
   "ai": {
-    "enabled": true,
-    "fallbackChain": [
-      "groq",
-      "openrouter"
-    ],
+    "enabled": false,
+    "fallbackChain": ["groq"],
     "providers": {
       "groq": {
         "model": "llama-3.3-70b-versatile",
         "apiKeyEnv": "GROQ_API_KEY"
-      },
-      "openrouter": {
-        "model": "meta-llama/llama-3.3-70b-instruct",
-        "apiKeyEnv": "OPENROUTER_API_KEY"
       }
     },
     "analysis": {
       "summarization": true,
       "entityExtraction": true,
-      "sentimentAnalysis": true,
+      "sentimentAnalysis": false,
       "focalPointDetection": false
     }
   },
   "map": {
     "style": "https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json",
-    "center": [
-      0,
-      20
-    ],
-    "zoom": 3,
+    "center": [-95, 38],
+    "zoom": 4,
     "minZoom": 2,
     "maxZoom": 18,
     "projection": "mercator",
@@ -91,9 +100,7 @@
     },
     "corsProxy": {
       "enabled": true,
-      "allowedDomains": [
-        "*"
-      ]
+      "allowedDomains": ["*"]
     }
   },
   "build": {

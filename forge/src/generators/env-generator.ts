@@ -4,27 +4,36 @@ interface EnvVarDef {
   key: string;
   description: string;
   required: boolean;
+  signupUrl?: string;
 }
+
+const AI_PROVIDER_SIGNUP_URLS: Record<string, string> = {
+  groq: 'https://console.groq.com',
+  openrouter: 'https://openrouter.ai/keys',
+};
 
 export function generateEnvExample(config: MonitorForgeConfig): string {
   const vars = collectEnvVars(config);
   return vars
-    .map(v => `# ${v.description}${v.required ? ' (required)' : ' (optional)'}\n${v.key}=`)
+    .map(v => {
+      const label = v.required ? '(required)' : '(optional)';
+      const signup = v.signupUrl ? ` — sign up at ${v.signupUrl}` : '';
+      return `# ${v.description} ${label}${signup}\n${v.key}=`;
+    })
     .join('\n\n') + '\n';
 }
 
 function collectEnvVars(config: MonitorForgeConfig): EnvVarDef[] {
   const vars: EnvVarDef[] = [];
 
-  // AI providers
-  if (config.ai.enabled) {
-    for (const [name, provider] of Object.entries(config.ai.providers)) {
-      vars.push({
-        key: provider.apiKeyEnv,
-        description: `${name} API key`,
-        required: config.ai.fallbackChain.includes(name),
-      });
-    }
+  // AI providers — required only when AI is enabled AND provider is in fallback chain
+  for (const [name, provider] of Object.entries(config.ai.providers)) {
+    vars.push({
+      key: provider.apiKeyEnv,
+      description: `${name} API key`,
+      required: config.ai.enabled && config.ai.fallbackChain.includes(name),
+      signupUrl: AI_PROVIDER_SIGNUP_URLS[name],
+    });
   }
 
   // Cache

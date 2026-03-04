@@ -4,6 +4,9 @@
   "description": "Create your own real-time intelligence dashboard. A meta-level template for building customized worldmonitor-style dashboards.",
   "type": "module",
   "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "scripts": {
     "forge": "tsx forge/bin/forge.ts",
     "dev": "tsx forge/bin/forge.ts dev",
@@ -15,7 +18,7 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
-    "prepare": "git config core.hooksPath .githooks"
+    "prepare": "git config core.hooksPath .githooks && (tsx forge/bin/forge.ts build --skip-vite --format json || true)"
   },
   "dependencies": {
     "@deck.gl/core": "^9.1.0",

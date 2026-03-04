@@ -20,41 +20,36 @@ WorldMonitor has 25K+ stars and 4,100+ forks — but every fork is manually cust
 
 ## Quick Start
 
-### 1. Use this template
-
-Click "Use this template" on GitHub, or clone directly:
-
 ```bash
 git clone https://github.com/YOUR_USERNAME/monitor-forge.git my-monitor
 cd my-monitor
-npm install
+npm install    # auto-generates manifests
+npm run dev    # dashboard at http://localhost:5173
 ```
 
-### 2. Pick a preset
+Ships with a **tech-minimal** preset (Hacker News, TechCrunch, Ars Technica) out of the box. No API keys required.
+
+### Customize
 
 ```bash
+# Switch to a different preset
 npm run forge -- preset list
-npm run forge -- preset apply tech-minimal
-```
+npm run forge -- preset apply finance-minimal
 
-### 3. Customize
-
-```bash
 # Add sources
 npm run forge -- source add rss --name "my-feed" --url "https://example.com/rss.xml" --category news
 
 # Add panels
 npm run forge -- panel add news-feed --name "main" --display-name "News" --position 0
 
-# Configure AI (optional)
+# Enable AI analysis (optional — requires a free API key)
 npm run forge -- ai configure --provider groq --model "llama-3.3-70b-versatile" --api-key-env GROQ_API_KEY
 ```
 
-### 4. Preview & deploy
+### Deploy
 
 ```bash
 npm run forge -- validate
-npm run dev
 npm run deploy
 ```
 

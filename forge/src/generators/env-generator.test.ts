@@ -15,7 +15,7 @@ function buildConfig(overrides?: Partial<MonitorForgeConfig>): MonitorForgeConfi
 }
 
 describe('generateEnvExample', () => {
-  it('includes AI provider keys when AI enabled', () => {
+  it('marks fallback chain provider as required when AI enabled', () => {
     const config = buildConfig({
       ai: {
         enabled: true,
@@ -29,7 +29,7 @@ describe('generateEnvExample', () => {
     expect(result).toContain('(required)');
   });
 
-  it('marks fallback chain providers as required', () => {
+  it('marks non-fallback-chain providers as optional', () => {
     const config = buildConfig({
       ai: {
         enabled: true,
@@ -42,9 +42,10 @@ describe('generateEnvExample', () => {
       },
     });
     const result = generateEnvExample(config);
-    expect(result).toContain('GROQ_API_KEY=');
-    // openrouter is NOT in fallback chain, so it should be optional
-    expect(result).toContain('OPENROUTER_API_KEY=');
+    // groq IS in fallback chain → required
+    expect(result).toContain('groq API key (required)');
+    // openrouter is NOT in fallback chain → optional
+    expect(result).toContain('openrouter API key (optional)');
   });
 
   it('includes Upstash vars when upstash-redis cache configured', () => {
@@ -92,7 +93,7 @@ describe('generateEnvExample', () => {
     expect(result.trim()).toBe('');
   });
 
-  it('does not include AI vars when AI disabled', () => {
+  it('includes AI vars even when AI disabled (they are always optional)', () => {
     const config = buildConfig({
       ai: {
         enabled: false,
@@ -102,6 +103,7 @@ describe('generateEnvExample', () => {
       },
     });
     const result = generateEnvExample(config);
-    expect(result).not.toContain('GROQ_API_KEY');
+    expect(result).toContain('GROQ_API_KEY=');
+    expect(result).toContain('(optional)');
   });
 });
