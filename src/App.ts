@@ -38,7 +38,7 @@ export class App {
     await import('./generated/source-manifest.js');
     const { sourceConfigs } = await import('./generated/source-manifest.js');
     this.sourceManager = new SourceManager();
-    this.sourceManager.initialize(sourceConfigs as unknown as any[]);
+    this.sourceManager.initialize(sourceConfigs);
 
     // Initialize map
     const mapContainer = document.getElementById('forge-map')!;
@@ -49,7 +49,7 @@ export class App {
     await import('./generated/layer-manifest.js');
     const { layerConfigs } = await import('./generated/layer-manifest.js');
     for (const layerConfig of layerConfigs) {
-      await this.mapEngine.addLayer(layerConfig as any);
+      await this.mapEngine.addLayer(layerConfig);
     }
 
     // Initialize panels
@@ -57,7 +57,7 @@ export class App {
     const { panelConfigs } = await import('./generated/panel-manifest.js');
     const sidebar = document.getElementById('forge-sidebar')!;
     this.panelManager = new PanelManager(sidebar);
-    this.panelManager.initialize(panelConfigs as unknown as any[]);
+    this.panelManager.initialize(panelConfigs);
 
     // Initialize AI
     this.aiManager = new AIManager(config.ai as AIConfig);
