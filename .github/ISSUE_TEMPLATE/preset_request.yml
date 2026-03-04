@@ -1,0 +1,53 @@
+name: Preset Request
+description: Request a new domain preset
+labels: ["preset-request"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Want a preset for a specific domain? Describe it here!
+        Presets are JSON configurations that bundle sources, panels, and map settings for a particular use case.
+
+  - type: input
+    id: domain
+    attributes:
+      label: Domain
+      description: What domain should this preset cover?
+      placeholder: "e.g., cybersecurity, healthcare, sports, climate"
+    validations:
+      required: true
+
+  - type: textarea
+    id: sources
+    attributes:
+      label: Suggested Sources
+      description: What RSS feeds, APIs, or data sources should be included?
+      placeholder: |
+        - NIST NVD feed (cybersecurity vulnerabilities)
+        - Krebs on Security RSS
+        - SecurityWeek RSS
+    validations:
+      required: true
+
+  - type: textarea
+    id: panels
+    attributes:
+      label: Desired Panels
+      description: What panels would be useful? (news-feed, ai-brief, market-ticker, entity-tracker, instability-index, service-status)
+      placeholder: |
+        - news-feed for vulnerability alerts
+        - ai-brief for daily threat summary
+
+  - type: textarea
+    id: map-layers
+    attributes:
+      label: Map Layers
+      description: Any map visualization needs? (points, lines, polygons, heatmap, hexagon)
+      placeholder: "e.g., heatmap of attack origins"
+
+  - type: checkboxes
+    id: contribution
+    attributes:
+      label: Contribution
+      options:
+        - label: I'm willing to submit a PR with this preset
