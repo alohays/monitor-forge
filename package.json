@@ -18,7 +18,7 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
-    "prepare": "git config core.hooksPath .githooks && tsx forge/bin/forge.ts build --skip-vite --format json"
+    "prepare": "git config core.hooksPath .githooks && (tsx forge/bin/forge.ts build --skip-vite --format json || true)"
   },
   "dependencies": {
     "@deck.gl/core": "^9.1.0",

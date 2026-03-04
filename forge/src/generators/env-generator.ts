@@ -26,12 +26,12 @@ export function generateEnvExample(config: MonitorForgeConfig): string {
 function collectEnvVars(config: MonitorForgeConfig): EnvVarDef[] {
   const vars: EnvVarDef[] = [];
 
-  // AI providers — always optional since the dashboard works without AI
+  // AI providers — required only when AI is enabled AND provider is in fallback chain
   for (const [name, provider] of Object.entries(config.ai.providers)) {
     vars.push({
       key: provider.apiKeyEnv,
       description: `${name} API key`,
-      required: false,
+      required: config.ai.enabled && config.ai.fallbackChain.includes(name),
       signupUrl: AI_PROVIDER_SIGNUP_URLS[name],
     });
   }
