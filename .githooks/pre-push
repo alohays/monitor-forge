@@ -1,0 +1,3 @@
+#!/bin/sh
+echo "Pre-push: running typecheck..."
+npx tsc --noEmit || exit 1
