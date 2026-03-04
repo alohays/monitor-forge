@@ -29,6 +29,9 @@ jobs:
       - name: Test
         run: npm test
 
+      - name: Validate config
+        run: npx tsx forge/bin/forge.ts validate --format json
+
       - name: Build
         run: npx tsx forge/bin/forge.ts build --format json
 

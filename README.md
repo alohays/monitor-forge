@@ -63,7 +63,7 @@ You ──> AI Agent ──> forge CLI ──> config.json ──> Dashboard
 ## Quick Start
 
 ```bash
-git clone https://github.com/alohays/monitor-forge.git my-monitor
+git clone https://github.com/YOUR_USERNAME/monitor-forge.git my-monitor
 cd my-monitor
 npm install    # auto-generates manifests
 npm run dev    # dashboard at http://localhost:5173

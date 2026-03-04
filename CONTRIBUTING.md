@@ -40,9 +40,10 @@ Follow [Conventional Commits](https://www.conventionalcommits.org/):
 Run all checks:
 
 ```bash
-npm test                                    # run tests
-npm run typecheck                           # TypeScript check
-npm run forge -- validate --format json     # config validation
+npm test                                              # run tests
+npm run forge -- build --skip-vite --format json      # generate manifests (required for typecheck)
+npm run typecheck                                     # TypeScript check
+npm run forge -- validate --format json               # config validation
 ```
 
 ## How to Contribute

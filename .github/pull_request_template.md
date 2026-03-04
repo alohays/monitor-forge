@@ -13,6 +13,7 @@
 ## Checklist
 
 - [ ] `npm test` passes
+- [ ] `npm run forge -- build --skip-vite --format json` passes (required before typecheck)
 - [ ] `npm run typecheck` passes
 - [ ] `npm run forge -- validate --format json` passes
 - [ ] All text is in English
