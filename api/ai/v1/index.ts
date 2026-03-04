@@ -30,9 +30,9 @@ export default async function handler(request: Request): Promise<Response> {
 
     switch (provider) {
       case 'groq':
-        return handleGroq(model, prompt, systemPrompt, maxTokens, temperature);
+        return await handleGroq(model, prompt, systemPrompt, maxTokens, temperature);
       case 'openrouter':
-        return handleOpenRouter(model, prompt, systemPrompt, maxTokens, temperature);
+        return await handleOpenRouter(model, prompt, systemPrompt, maxTokens, temperature);
       default:
         return errorResponse(400, `Unknown provider: ${provider}`);
     }

@@ -5,7 +5,7 @@ import { z } from 'zod';
 export const SourceSchema = z.object({
   name: z.string().regex(/^[a-z0-9-]+$/, 'Name must be lowercase alphanumeric with hyphens'),
   type: z.enum(['rss', 'rest-api', 'websocket']),
-  url: z.string().url(),
+  url: z.string().url().refine(u => /^(https?|wss?):\/\//i.test(u), 'URL must use http(s) or ws(s) protocol'),
   category: z.string().min(1),
   tier: z.number().int().min(1).max(4).default(3),
   interval: z.number().int().min(10).default(300),
