@@ -26,7 +26,7 @@ describe('generateEnvExample', () => {
     });
     const result = generateEnvExample(config);
     expect(result).toContain('GROQ_API_KEY=');
-    expect(result).toContain('(required)');
+    expect(result).toContain('(optional)');
   });
 
   it('marks fallback chain providers as required', () => {
@@ -92,7 +92,7 @@ describe('generateEnvExample', () => {
     expect(result.trim()).toBe('');
   });
 
-  it('does not include AI vars when AI disabled', () => {
+  it('includes AI vars even when AI disabled (they are always optional)', () => {
     const config = buildConfig({
       ai: {
         enabled: false,
@@ -102,6 +102,7 @@ describe('generateEnvExample', () => {
       },
     });
     const result = generateEnvExample(config);
-    expect(result).not.toContain('GROQ_API_KEY');
+    expect(result).toContain('GROQ_API_KEY=');
+    expect(result).toContain('(optional)');
   });
 });
