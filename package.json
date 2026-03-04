@@ -4,6 +4,31 @@
   "description": "Create your own real-time intelligence dashboard. A meta-level template for building customized worldmonitor-style dashboards.",
   "type": "module",
   "license": "MIT",
+  "author": "Yunsung Lee",
+  "homepage": "https://github.com/alohays/monitor-forge",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alohays/monitor-forge.git"
+  },
+  "bugs": {
+    "url": "https://github.com/alohays/monitor-forge/issues"
+  },
+  "keywords": [
+    "dashboard",
+    "real-time",
+    "intelligence",
+    "monitoring",
+    "ai-agent",
+    "agent-native",
+    "claude-code",
+    "maplibre",
+    "deckgl",
+    "cli",
+    "template",
+    "rss",
+    "vercel",
+    "typescript"
+  ],
   "engines": {
     "node": ">=18.0.0"
   },
