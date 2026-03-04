@@ -1,7 +1,9 @@
 import { defineConfig } from 'vite';
 import { resolve } from 'node:path';
+import { apiDevPlugin } from './forge/src/vite/api-dev-plugin.js';
 
 export default defineConfig({
+  plugins: [apiDevPlugin()],
   resolve: {
     alias: {
       '@': resolve(__dirname, 'src'),
@@ -16,14 +18,6 @@ export default defineConfig({
           maplibre: ['maplibre-gl'],
           d3: ['d3'],
         },
-      },
-    },
-  },
-  server: {
-    proxy: {
-      '/api': {
-        target: 'http://localhost:3000',
-        changeOrigin: true,
       },
     },
   },
