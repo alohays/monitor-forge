@@ -19,6 +19,9 @@ jobs:
 
       - run: npm ci
 
+      - name: Generate manifests
+        run: npx tsx forge/bin/forge.ts build --skip-vite --format json
+
       - name: Type check
         run: npx tsc --noEmit
 

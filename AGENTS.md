@@ -7,7 +7,7 @@ CLI-driven template for building real-time intelligence dashboards.
 - NEVER manually edit `monitor-forge.config.json` — use `npx tsx forge/bin/forge.ts <cmd>`
 - Always append `--format json --non-interactive` for agent use
 - Always `forge validate` before `forge build` or `forge deploy`
-- Run `npx tsc --noEmit` before pushing — CI will fail otherwise
+- Run `forge build --skip-vite` then `npx tsc --noEmit` before pushing — typecheck requires generated manifests
 - All code, comments, commit messages, PRs, and documentation must be in English only
 
 ## Directory Guides
