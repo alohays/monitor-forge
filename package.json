@@ -11,7 +11,8 @@
     "deploy": "tsx forge/bin/forge.ts deploy",
     "validate": "tsx forge/bin/forge.ts validate",
     "typecheck": "tsc --noEmit",
-    "lint": "eslint . --ext .ts,.tsx"
+    "lint": "eslint . --ext .ts,.tsx",
+    "prepare": "git config core.hooksPath .githooks"
   },
   "dependencies": {
     "@deck.gl/core": "^9.1.0",

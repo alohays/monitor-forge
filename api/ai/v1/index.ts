@@ -110,3 +110,6 @@ async function handleOpenRouter(
 
   return jsonResponse({
     content: data.choices[0]?.message?.content ?? '',
+    tokens: data.usage?.total_tokens,
+  });
+}

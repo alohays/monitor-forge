@@ -88,7 +88,7 @@ export function registerValidateCommand(program: Command): void {
 
         if (errors.length > 0) {
           const output = failure('validate', `${errors.length} error(s) found`, warnings);
-          (output as Record<string, unknown>).data = { errors, warnings };
+          (output as unknown as Record<string, unknown>).data = { errors, warnings };
           console.log(formatOutput(output, format));
           if (format !== 'json') {
             for (const e of errors) console.log(`  ERROR: ${e}`);
