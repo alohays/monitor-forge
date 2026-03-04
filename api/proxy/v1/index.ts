@@ -17,7 +17,13 @@ export default async function handler(request: Request): Promise<Response> {
 
   try {
     const targetParsed = new URL(targetUrl);
-    // Basic security: block private IPs
+
+    // Only allow HTTP(S) protocols
+    if (!['http:', 'https:'].includes(targetParsed.protocol)) {
+      return errorResponse(403, 'Only HTTP and HTTPS protocols are allowed');
+    }
+
+    // Block private IPs
     if (isPrivateIP(targetParsed.hostname)) {
       return errorResponse(403, 'Cannot proxy to private IP addresses');
     }
@@ -48,5 +54,7 @@ export default async function handler(request: Request): Promise<Response> {
 }
 
 function isPrivateIP(hostname: string): boolean {
-  return /^(10\.|172\.(1[6-9]|2\d|3[01])\.|192\.168\.|127\.|0\.|localhost|::1)/i.test(hostname);
+  // Strip IPv6 brackets if present
+  const h = hostname.replace(/^\[|\]$/g, '');
+  return /^(10\.|172\.(1[6-9]|2\d|3[01])\.|192\.168\.|127\.|0\.|localhost|::1|::ffff:|169\.254\.|[fF][cCdD]|[fF][eE][89aAbB])/i.test(h);
 }

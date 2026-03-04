@@ -30,9 +30,9 @@ export default async function handler(request: Request): Promise<Response> {
 
     switch (provider) {
       case 'groq':
-        return handleGroq(model, prompt, systemPrompt, maxTokens, temperature);
+        return await handleGroq(model, prompt, systemPrompt, maxTokens, temperature);
       case 'openrouter':
-        return handleOpenRouter(model, prompt, systemPrompt, maxTokens, temperature);
+        return await handleOpenRouter(model, prompt, systemPrompt, maxTokens, temperature);
       default:
         return errorResponse(400, `Unknown provider: ${provider}`);
     }
@@ -63,7 +63,8 @@ async function handleGroq(
 
   if (!response.ok) {
     const err = await response.text();
-    throw new Error(`Groq error ${response.status}: ${err}`);
+    console.error(`Groq error ${response.status}: ${err}`);
+    throw new Error(`Upstream AI provider error (${response.status})`);
   }
 
   const data = await response.json() as {
@@ -100,7 +101,8 @@ async function handleOpenRouter(
 
   if (!response.ok) {
     const err = await response.text();
-    throw new Error(`OpenRouter error ${response.status}: ${err}`);
+    console.error(`OpenRouter error ${response.status}: ${err}`);
+    throw new Error(`Upstream AI provider error (${response.status})`);
   }
 
   const data = await response.json() as {

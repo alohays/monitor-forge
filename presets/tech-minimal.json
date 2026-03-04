@@ -62,7 +62,7 @@
   ],
   "ai": {
     "enabled": true,
-    "fallbackChain": ["groq", "openrouter"],
+    "fallbackChain": ["groq"],
     "providers": {
       "groq": {
         "model": "llama-3.3-70b-versatile",
