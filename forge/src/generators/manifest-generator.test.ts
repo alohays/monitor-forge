@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { generateManifests } from './manifest-generator.js';
+import { generateManifests, generateProxyAllowlist } from './manifest-generator.js';
 import type { MonitorForgeConfig } from '../config/schema.js';
 
 function buildConfig(overrides?: Partial<MonitorForgeConfig>): MonitorForgeConfig {
@@ -8,7 +8,7 @@ function buildConfig(overrides?: Partial<MonitorForgeConfig>): MonitorForgeConfi
     sources: [], layers: [], panels: [],
     ai: { enabled: false, fallbackChain: [], providers: {}, analysis: { summarization: true, entityExtraction: true, sentimentAnalysis: true, focalPointDetection: false } },
     map: { style: 'https://example.com/style.json', center: [0, 0], zoom: 3, minZoom: 2, maxZoom: 18, projection: 'mercator', dayNightOverlay: false },
-    backend: { cache: { provider: 'memory', ttlSeconds: 300 }, rateLimit: { enabled: true, maxRequests: 100, windowSeconds: 60 }, corsProxy: { enabled: true, allowedDomains: ['*'] } },
+    backend: { cache: { provider: 'memory', ttlSeconds: 300 }, rateLimit: { enabled: true, maxRequests: 100, windowSeconds: 60 }, corsProxy: { enabled: true, allowedDomains: ['*'], corsOrigins: ['*'] } },
     build: { target: 'vercel', outDir: 'dist' },
     ...overrides,
   };
@@ -500,5 +500,70 @@ describe('generateManifests', () => {
       const parsed = extractExportedJson(code, 'panelConfigs') as Array<{ config: Record<string, unknown> }>;
       expect(parsed[0].config).toEqual({ maxItems: 50, showImages: true, source: 'my-rss' });
     });
+  });
+});
+
+describe('generateProxyAllowlist', () => {
+  it('extracts hostnames from source URLs', () => {
+    const config = buildConfig({
+      sources: [
+        { name: 'bbc', type: 'rss', url: 'https://feeds.bbci.co.uk/news/rss.xml', category: 'news', tier: 3, interval: 300, language: 'en', tags: [] },
+        { name: 'api', type: 'rest-api', url: 'https://api.example.com/v1/data', category: 'data', tier: 3, interval: 300, language: 'en', tags: [] },
+      ],
+    });
+    const output = generateProxyAllowlist(config);
+    expect(output).toContain('feeds.bbci.co.uk');
+    expect(output).toContain('api.example.com');
+  });
+
+  it('extracts hostnames from layer API URLs', () => {
+    const config = buildConfig({
+      layers: [{ name: 'geo', type: 'points', displayName: 'G', color: '#FF0000', data: { source: 'api', url: 'https://geo.api.com/data' }, defaultVisible: false, category: 'c' }],
+    });
+    const output = generateProxyAllowlist(config);
+    expect(output).toContain('geo.api.com');
+  });
+
+  it('deduplicates domains', () => {
+    const config = buildConfig({
+      sources: [
+        { name: 'a', type: 'rss', url: 'https://api.com/a', category: 'n', tier: 3, interval: 300, language: 'en', tags: [] },
+        { name: 'b', type: 'rss', url: 'https://api.com/b', category: 'n', tier: 3, interval: 300, language: 'en', tags: [] },
+      ],
+    });
+    const output = generateProxyAllowlist(config);
+    const matches = output.match(/api\.com/g);
+    expect(matches).toHaveLength(1);
+  });
+
+  it('includes explicitly configured allowedDomains (including *)', () => {
+    const config = buildConfig({
+      backend: {
+        cache: { provider: 'memory', ttlSeconds: 300 },
+        rateLimit: { enabled: true, maxRequests: 100, windowSeconds: 60 },
+        corsProxy: { enabled: true, allowedDomains: ['*.custom.com', 'extra.net'], corsOrigins: ['*'] },
+      },
+    });
+    const output = generateProxyAllowlist(config);
+    expect(output).toContain('*.custom.com');
+    expect(output).toContain('extra.net');
+  });
+
+  it('includes CORS_ALLOWED_ORIGINS from config', () => {
+    const config = buildConfig({
+      backend: {
+        cache: { provider: 'memory', ttlSeconds: 300 },
+        rateLimit: { enabled: true, maxRequests: 100, windowSeconds: 60 },
+        corsProxy: { enabled: true, allowedDomains: ['*'], corsOrigins: ['https://myapp.vercel.app'] },
+      },
+    });
+    const output = generateProxyAllowlist(config);
+    expect(output).toContain('https://myapp.vercel.app');
+  });
+
+  it('generates empty array when no sources configured', () => {
+    const config = buildConfig();
+    const output = generateProxyAllowlist(config);
+    expect(output).toContain('"*"');
   });
 });

@@ -50,7 +50,7 @@ export function createDefaultConfig(overrides?: Partial<MonitorForgeConfig>): Mo
     backend: {
       cache: { provider: 'memory', ttlSeconds: 300 },
       rateLimit: { enabled: true, maxRequests: 100, windowSeconds: 60 },
-      corsProxy: { enabled: true, allowedDomains: ['*'] },
+      corsProxy: { enabled: true, allowedDomains: ['*'], corsOrigins: ['*'] },
       ...overrides?.backend,
     },
     build: {

@@ -74,6 +74,17 @@ export function registerValidateCommand(program: Command): void {
           }
         }
 
+        // Check proxy security
+        if (config.backend.corsProxy.enabled) {
+          const domains = config.backend.corsProxy.allowedDomains;
+          if (domains.length === 1 && domains[0] === '*') {
+            warnings.push(
+              'Proxy allowedDomains is wildcard ["*"]. Consider listing specific domains in ' +
+              'corsProxy.allowedDomains, or add sources so forge build can auto-generate the allowlist.',
+            );
+          }
+        }
+
         // Check AI providers
         if (config.ai.enabled) {
           if (Object.keys(config.ai.providers).length === 0) {

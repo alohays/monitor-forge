@@ -513,7 +513,7 @@ describe('defineConfig', () => {
       sources: [], layers: [], panels: [],
       ai: { enabled: false, fallbackChain: [], providers: {}, analysis: { summarization: true, entityExtraction: true, sentimentAnalysis: true, focalPointDetection: false } },
       map: { style: 'https://example.com/style.json', center: [0, 0], zoom: 3, minZoom: 1, maxZoom: 20, projection: 'mercator', dayNightOverlay: false },
-      backend: { cache: { provider: 'memory', ttlSeconds: 300 }, rateLimit: { enabled: true, maxRequests: 100, windowSeconds: 60 }, corsProxy: { enabled: true, allowedDomains: ['*'] } },
+      backend: { cache: { provider: 'memory', ttlSeconds: 300 }, rateLimit: { enabled: true, maxRequests: 100, windowSeconds: 60 }, corsProxy: { enabled: true, allowedDomains: ['*'], corsOrigins: ['*'] } },
       build: { target: 'vercel', outDir: 'dist' },
     });
     expect(config.monitor.name).toBe('Test');
