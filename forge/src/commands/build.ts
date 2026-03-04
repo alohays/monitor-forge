@@ -36,11 +36,11 @@ export function registerBuildCommand(program: Command): void {
         }
 
         // 2. Generate proxy allowlist for edge functions
+        const allowlistContent = generateProxyAllowlist(config);
+        changes.push({ type: 'created', file: 'api/_shared/proxy-allowlist.ts', description: 'Generated proxy domain allowlist' });
         if (!dryRun) {
-          const allowlistContent = generateProxyAllowlist(config);
           const allowlistPath = resolve(process.cwd(), 'api/_shared/proxy-allowlist.ts');
           writeFileSync(allowlistPath, allowlistContent, 'utf-8');
-          changes.push({ type: 'created', file: 'api/_shared/proxy-allowlist.ts', description: 'Generated proxy domain allowlist' });
         }
 
         // 3. Generate vercel.json

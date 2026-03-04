@@ -141,11 +141,9 @@ export function generateProxyAllowlist(config: MonitorForgeConfig): string {
     }
   }
 
-  // Merge explicitly configured allowedDomains (excluding wildcard)
+  // Merge explicitly configured allowedDomains (keep wildcard — isDomainAllowed handles it)
   for (const d of config.backend.corsProxy.allowedDomains) {
-    if (d !== '*') {
-      domains.add(d);
-    }
+    domains.add(d);
   }
 
   const domainArray = Array.from(domains).sort();

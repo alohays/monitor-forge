@@ -79,8 +79,8 @@ export function registerValidateCommand(program: Command): void {
           const domains = config.backend.corsProxy.allowedDomains;
           if (domains.length === 1 && domains[0] === '*') {
             warnings.push(
-              'Proxy allowedDomains is wildcard ["*"]. ' +
-              'Set PROXY_ALLOW_ALL=true env var at runtime, or run forge build to auto-generate from sources.',
+              'Proxy allowedDomains is wildcard ["*"]. Consider listing specific domains in ' +
+              'corsProxy.allowedDomains, or add sources so forge build can auto-generate the allowlist.',
             );
           }
         }

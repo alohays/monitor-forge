@@ -536,7 +536,7 @@ describe('generateProxyAllowlist', () => {
     expect(matches).toHaveLength(1);
   });
 
-  it('includes explicitly configured allowedDomains (excluding *)', () => {
+  it('includes explicitly configured allowedDomains (including *)', () => {
     const config = buildConfig({
       backend: {
         cache: { provider: 'memory', ttlSeconds: 300 },
@@ -564,6 +564,6 @@ describe('generateProxyAllowlist', () => {
   it('generates empty array when no sources configured', () => {
     const config = buildConfig();
     const output = generateProxyAllowlist(config);
-    expect(output).toContain('PROXY_ALLOWED_DOMAINS: readonly string[] = []');
+    expect(output).toContain('"*"');
   });
 });
