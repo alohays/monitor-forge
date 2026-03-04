@@ -28,6 +28,7 @@ function generateSourceManifest(config: MonitorForgeConfig): string {
   }
 
   imports.add("import { registerSource } from '../core/sources/source-registry.js';");
+  imports.add("import type { SourceConfig } from '../core/sources/SourceBase.js';");
 
   const sourceTypes = new Set(config.sources.map(s => s.type));
   if (sourceTypes.has('rss')) registrations.push("registerSource('rss', RSSSource);");
@@ -39,7 +40,7 @@ ${Array.from(imports).join('\n')}
 
 ${registrations.join('\n')}
 
-export const sourceConfigs = ${JSON.stringify(config.sources, null, 2)} as const;
+export const sourceConfigs: SourceConfig[] = ${JSON.stringify(config.sources, null, 2)};
 `;
 }
 
@@ -47,6 +48,7 @@ function generateLayerManifest(config: MonitorForgeConfig): string {
   const layerTypes = new Set(config.layers.map(l => l.type));
   const imports: string[] = [
     "import { registerLayerType } from '../core/map/layer-registry.js';",
+    "import type { LayerConfig } from '../core/map/LayerBase.js';",
   ];
 
   if (layerTypes.has('points')) {
@@ -77,7 +79,7 @@ ${imports.join('\n')}
 
 ${registrations.join('\n')}
 
-export const layerConfigs = ${JSON.stringify(config.layers, null, 2)} as const;
+export const layerConfigs: LayerConfig[] = ${JSON.stringify(config.layers, null, 2)};
 `;
 }
 
@@ -85,6 +87,7 @@ function generatePanelManifest(config: MonitorForgeConfig): string {
   const panelTypes = new Set(config.panels.map(p => p.type));
   const imports: string[] = [
     "import { registerPanelType } from '../core/panels/panel-registry.js';",
+    "import type { PanelConfig } from '../core/panels/PanelBase.js';",
   ];
 
   const typeMap: Record<string, string> = {
@@ -114,7 +117,7 @@ ${imports.join('\n')}
 
 ${registrations.join('\n')}
 
-export const panelConfigs = ${JSON.stringify(config.panels, null, 2)} as const;
+export const panelConfigs: PanelConfig[] = ${JSON.stringify(config.panels, null, 2)};
 `;
 }
 

@@ -21,7 +21,7 @@ function extractRegisteredClasses(code: string): string[] {
 }
 
 function extractExportedJson(code: string, varName: string): unknown[] {
-  const match = code.match(new RegExp(`export const ${varName} = (\\[[\\s\\S]*?\\]) as const;`));
+  const match = code.match(new RegExp(`export const ${varName}:\\s*\\w+\\[\\]\\s*=\\s*(\\[[\\s\\S]*?\\]);`));
   if (!match) throw new Error(`Could not extract ${varName}`);
   return JSON.parse(match[1]);
 }

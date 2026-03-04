@@ -87,7 +87,7 @@ describe('generateManifests', () => {
 
     it('handles empty sources array', () => {
       const manifest = generateManifests(buildConfig())['source-manifest.ts'];
-      expect(manifest).toContain('export const sourceConfigs = []');
+      expect(manifest).toContain('export const sourceConfigs: SourceConfig[] = []');
       expect(manifest).not.toContain('RSSSource');
     });
   });
@@ -117,7 +117,7 @@ describe('generateManifests', () => {
 
     it('handles empty layers array', () => {
       const manifest = generateManifests(buildConfig())['layer-manifest.ts'];
-      expect(manifest).toContain('export const layerConfigs = []');
+      expect(manifest).toContain('export const layerConfigs: LayerConfig[] = []');
       expect(manifest).not.toContain('PointsLayerPlugin');
     });
   });
@@ -143,7 +143,7 @@ describe('generateManifests', () => {
 
     it('handles empty panels array', () => {
       const manifest = generateManifests(buildConfig())['panel-manifest.ts'];
-      expect(manifest).toContain('export const panelConfigs = []');
+      expect(manifest).toContain('export const panelConfigs: PanelConfig[] = []');
     });
   });
 
@@ -178,9 +178,9 @@ describe('generateManifests', () => {
       return matches.map(m => m[1]);
     }
 
-    // Helper: extract the JSON array from "export const xxxConfigs = [...] as const;"
+    // Helper: extract the JSON array from "export const xxxConfigs: Type[] = [...];"
     function extractExportedJson(code: string, varName: string): unknown[] {
-      const match = code.match(new RegExp(`export const ${varName} = (\\[[\\s\\S]*?\\]) as const;`));
+      const match = code.match(new RegExp(`export const ${varName}:\\s*\\w+\\[\\]\\s*=\\s*(\\[[\\s\\S]*?\\]);`));
       if (!match) throw new Error(`Could not extract ${varName} from generated code`);
       return JSON.parse(match[1]);
     }
@@ -363,17 +363,29 @@ describe('generateManifests', () => {
       expect(parsed.map(p => p.name)).toEqual(['feed', 'brief']);
     });
 
-    // as const suffix
-    it('config arrays end with "as const"', () => {
+    // typed exports
+    it('config arrays use typed exports instead of as const', () => {
       const config = buildConfig({
         sources: [{ name: 'r', type: 'rss', url: 'https://a.com/rss', category: 'n', tier: 3, interval: 300, language: 'en', tags: [] }],
         layers: [{ name: 'p', type: 'points', displayName: 'P', color: '#FF0000', data: { source: 'static', path: 'f.geojson' }, defaultVisible: false, category: 'c' }],
         panels: [{ name: 'f', type: 'news-feed', displayName: 'F', position: 0, config: {} }],
       });
       const manifests = generateManifests(config);
-      expect(manifests['source-manifest.ts']).toMatch(/sourceConfigs = \[[\s\S]*?\] as const;/);
-      expect(manifests['layer-manifest.ts']).toMatch(/layerConfigs = \[[\s\S]*?\] as const;/);
-      expect(manifests['panel-manifest.ts']).toMatch(/panelConfigs = \[[\s\S]*?\] as const;/);
+      expect(manifests['source-manifest.ts']).toMatch(/sourceConfigs: SourceConfig\[\] = \[[\s\S]*?\];/);
+      expect(manifests['layer-manifest.ts']).toMatch(/layerConfigs: LayerConfig\[\] = \[[\s\S]*?\];/);
+      expect(manifests['panel-manifest.ts']).toMatch(/panelConfigs: PanelConfig\[\] = \[[\s\S]*?\];/);
+    });
+
+    it('manifests import the correct type definitions', () => {
+      const config = buildConfig({
+        sources: [{ name: 'r', type: 'rss', url: 'https://a.com/rss', category: 'n', tier: 3, interval: 300, language: 'en', tags: [] }],
+        layers: [{ name: 'p', type: 'points', displayName: 'P', color: '#FF0000', data: { source: 'static', path: 'f.geojson' }, defaultVisible: false, category: 'c' }],
+        panels: [{ name: 'f', type: 'news-feed', displayName: 'F', position: 0, config: {} }],
+      });
+      const manifests = generateManifests(config);
+      expect(manifests['source-manifest.ts']).toContain("import type { SourceConfig } from '../core/sources/SourceBase.js';");
+      expect(manifests['layer-manifest.ts']).toContain("import type { LayerConfig } from '../core/map/LayerBase.js';");
+      expect(manifests['panel-manifest.ts']).toContain("import type { PanelConfig } from '../core/panels/PanelBase.js';");
     });
   });
 
@@ -383,7 +395,7 @@ describe('generateManifests', () => {
 
   describe('config-to-code contract', () => {
     function extractExportedJson(code: string, varName: string): unknown[] {
-      const match = code.match(new RegExp(`export const ${varName} = (\\[[\\s\\S]*?\\]) as const;`));
+      const match = code.match(new RegExp(`export const ${varName}:\\s*\\w+\\[\\]\\s*=\\s*(\\[[\\s\\S]*?\\]);`));
       if (!match) throw new Error(`Could not extract ${varName}`);
       return JSON.parse(match[1]);
     }
