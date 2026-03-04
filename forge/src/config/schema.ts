@@ -110,6 +110,7 @@ export const RateLimitSchema = z.object({
 export const CorsProxySchema = z.object({
   enabled: z.boolean().default(true),
   allowedDomains: z.array(z.string()).default(['*']),
+  corsOrigins: z.array(z.string()).default(['*']),
 });
 
 export const BackendSchema = z.object({

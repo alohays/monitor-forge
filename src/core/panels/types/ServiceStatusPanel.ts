@@ -1,3 +1,4 @@
+import DOMPurify from 'dompurify';
 import { PanelBase } from '../PanelBase.js';
 
 interface ServiceStatus {
@@ -34,7 +35,7 @@ export class ServiceStatusPanel extends PanelBase {
       return `
         <div class="service-item">
           <span class="service-dot ${dot}"></span>
-          <span class="service-name">${s.name}</span>
+          <span class="service-name">${DOMPurify.sanitize(s.name)}</span>
           <span class="service-count">${s.itemCount} items</span>
         </div>
       `;

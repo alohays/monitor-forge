@@ -39,7 +39,7 @@ export function buildConfig(overrides?: Partial<MonitorForgeConfig>): MonitorFor
     backend: {
       cache: { provider: 'memory', ttlSeconds: 300 },
       rateLimit: { enabled: true, maxRequests: 100, windowSeconds: 60 },
-      corsProxy: { enabled: true, allowedDomains: ['*'] },
+      corsProxy: { enabled: true, allowedDomains: ['*'], corsOrigins: ['*'] },
     },
     build: { target: 'vercel', outDir: 'dist' },
     ...overrides,

@@ -1,3 +1,4 @@
+import DOMPurify from 'dompurify';
 import { PanelBase } from '../PanelBase.js';
 
 interface RiskScore {
@@ -33,7 +34,7 @@ export class InstabilityIndexPanel extends PanelBase {
       const riskClass = s.score > 7 ? 'risk-high' : s.score > 4 ? 'risk-medium' : 'risk-low';
       return `
         <div class="instability-item ${riskClass}">
-          <span class="instability-country">${s.country}</span>
+          <span class="instability-country">${DOMPurify.sanitize(s.country)}</span>
           <span class="instability-score">${s.score.toFixed(1)}</span>
           <span class="instability-trend">${trendIcon}</span>
         </div>

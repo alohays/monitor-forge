@@ -74,6 +74,17 @@ export function registerValidateCommand(program: Command): void {
           }
         }
 
+        // Check proxy security
+        if (config.backend.corsProxy.enabled) {
+          const domains = config.backend.corsProxy.allowedDomains;
+          if (domains.length === 1 && domains[0] === '*') {
+            warnings.push(
+              'Proxy allowedDomains is wildcard ["*"]. ' +
+              'Set PROXY_ALLOW_ALL=true env var at runtime, or run forge build to auto-generate from sources.',
+            );
+          }
+        }
+
         // Check AI providers
         if (config.ai.enabled) {
           if (Object.keys(config.ai.providers).length === 0) {
