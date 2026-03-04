@@ -139,14 +139,18 @@ describe('ai/v1 handler', () => {
       delete process.env.GROQ_API_KEY;
     });
 
-    it('handles upstream non-OK response', async () => {
+    it('handles upstream non-OK response without leaking details', async () => {
       process.env.GROQ_API_KEY = 'test-key';
       vi.spyOn(globalThis, 'fetch').mockResolvedValueOnce(
-        new Response('Rate limit exceeded', { status: 429 }),
+        new Response('Rate limit exceeded: quota=100, used=101, plan=free', { status: 429 }),
       );
       const request = makePostRequest({ provider: 'groq', model: 'm', prompt: 'test' });
       const response = await handler(request);
       expect(response.status).toBe(500);
+      const body = await response.json() as { error: string };
+      expect(body.error).not.toContain('Rate limit');
+      expect(body.error).not.toContain('quota');
+      expect(body.error).toContain('AI request failed');
       delete process.env.GROQ_API_KEY;
     });
 

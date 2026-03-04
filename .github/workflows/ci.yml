@@ -25,6 +25,9 @@ jobs:
       - name: Type check
         run: npx tsc --noEmit
 
+      - name: Run tests
+        run: npm test
+
       - name: Validate config
         run: npx tsx forge/bin/forge.ts validate --format json
 

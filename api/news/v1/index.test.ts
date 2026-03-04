@@ -1,6 +1,11 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import handler from './index.js';
 
+vi.mock('../../_shared/cache.js', () => ({
+  getCached: async (_key: string, _ttl: number, fetcher: () => Promise<unknown>) => fetcher(),
+  invalidateCache: vi.fn(),
+}));
+
 const sampleRSS = `<?xml version="1.0"?>
 <rss version="2.0">
   <channel>

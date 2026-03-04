@@ -84,8 +84,10 @@ describe('SourceManager', () => {
     const manager = new SourceManager();
     manager.initialize([makeConfig('e')]);
     manager.startAll();
+    expect(vi.getTimerCount()).toBeGreaterThan(0);
     manager.stopAll();
-    // No error means timers were cleared successfully
-    expect(manager.getSourceNames()).toEqual(['e']);
+    expect(vi.getTimerCount()).toBe(0);
+    // Advance time — no callbacks should fire (no errors thrown)
+    vi.advanceTimersByTime(7200_000);
   });
 });

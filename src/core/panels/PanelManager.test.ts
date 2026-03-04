@@ -5,15 +5,21 @@ import { registerPanelType } from './panel-registry.js';
 import { PanelBase, type PanelConfig } from './PanelBase.js';
 
 class MockPanel extends PanelBase {
+  static instances: MockPanel[] = [];
   rendered = false;
   lastData: unknown = undefined;
   destroyed = false;
+  constructor(container: HTMLElement, config: PanelConfig) {
+    super(container, config);
+    MockPanel.instances.push(this);
+  }
   render(): void { this.rendered = true; }
   update(data: unknown): void { this.lastData = data; }
   destroy(): void { this.destroyed = true; }
 }
 
 beforeEach(() => {
+  MockPanel.instances = [];
   registerPanelType('mock-mgr-panel', MockPanel);
 });
 
@@ -52,8 +58,10 @@ describe('PanelManager', () => {
     ]);
     const testData = [{ id: '1' }];
     manager.updateAll(testData);
-    // Panels were updated (we can verify by checking the DOM didn't break)
-    expect(container.querySelectorAll('.forge-panel')).toHaveLength(2);
+    expect(MockPanel.instances).toHaveLength(2);
+    for (const panel of MockPanel.instances) {
+      expect(panel.lastData).toEqual(testData);
+    }
   });
 
   it('destroy clears all panels', () => {

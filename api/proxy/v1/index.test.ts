@@ -118,5 +118,16 @@ describe('proxy/v1 handler', () => {
       // Should get rejected (502 from URL parse error is acceptable)
       expect(response.status).toBeGreaterThanOrEqual(400);
     });
+
+    it.each([
+      'fc00::1',
+      'fd12::1',
+      'fe80::1',
+      'fea0::1',
+    ])('blocks IPv6 ULA/link-local %s', async (ip) => {
+      const request = new Request(`https://example.com/api/proxy/v1?url=http://[${ip}]/`);
+      const response = await handler(request);
+      expect(response.status).toBe(403);
+    });
   });
 });

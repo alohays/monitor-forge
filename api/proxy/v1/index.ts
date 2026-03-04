@@ -56,5 +56,5 @@ export default async function handler(request: Request): Promise<Response> {
 function isPrivateIP(hostname: string): boolean {
   // Strip IPv6 brackets if present
   const h = hostname.replace(/^\[|\]$/g, '');
-  return /^(10\.|172\.(1[6-9]|2\d|3[01])\.|192\.168\.|127\.|0\.|localhost|::1|::ffff:|169\.254\.)/i.test(h);
+  return /^(10\.|172\.(1[6-9]|2\d|3[01])\.|192\.168\.|127\.|0\.|localhost|::1|::ffff:|169\.254\.|[fF][cCdD]|[fF][eE][89aAbB])/i.test(h);
 }
