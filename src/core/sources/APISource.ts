@@ -8,7 +8,7 @@ export class APISource extends SourceBase {
     for (const [key, value] of Object.entries(headers)) {
       const match = value.match(/\$\{env\.([A-Z_][A-Z0-9_]*)\}/);
       if (match) {
-        headers[key] = value.replace(match[0], import.meta.env?.[match[1]] ?? '');
+        headers[key] = value.replace(match[0], (import.meta as any).env?.[match[1]] ?? '');
       }
     }
 
