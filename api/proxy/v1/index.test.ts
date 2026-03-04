@@ -1,4 +1,10 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
+
+vi.mock('../../_shared/proxy-allowlist.js', () => ({
+  PROXY_ALLOWED_DOMAINS: ['feeds.bbci.co.uk'],
+  CORS_ALLOWED_ORIGINS: ['*'],
+}));
+
 import handler from './index.js';
 
 beforeEach(() => {
