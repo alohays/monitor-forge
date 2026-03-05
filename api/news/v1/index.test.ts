@@ -200,6 +200,94 @@ describe('news/v1 handler', () => {
       expect(body.items[0].title).not.toContain('/etc/passwd');
     });
 
+    it('extracts enclosure URL from RSS item', async () => {
+      const enclosureXml = `<?xml version="1.0"?>
+      <rss version="2.0"><channel>
+        <item>
+          <title>Podcast Episode</title>
+          <link>https://example.com/ep1</link>
+          <guid>enc-1</guid>
+          <enclosure url="https://example.com/audio.mp3" type="audio/mpeg" length="12345" />
+        </item>
+      </channel></rss>`;
+      vi.spyOn(globalThis, 'fetch').mockResolvedValueOnce(
+        new Response(enclosureXml, { status: 200 }),
+      );
+      const request = new Request('https://example.com/api/news/v1?feeds=https://feed.example.com/enc');
+      const response = await handler(request);
+      expect(response.status).toBe(200);
+      const body = await response.json() as { items: Array<{ enclosure?: { url: string } }> };
+      expect(body.items).toHaveLength(1);
+      expect(body.items[0].enclosure?.url).toBe('https://example.com/audio.mp3');
+    });
+
+    it('extracts media:thumbnail URL', async () => {
+      const mediaXml = `<?xml version="1.0"?>
+      <rss version="2.0" xmlns:media="http://search.yahoo.com/mrss/">
+        <channel>
+          <item>
+            <title>Article with thumbnail</title>
+            <link>https://example.com/thumb-article</link>
+            <guid>media-1</guid>
+            <media:thumbnail url="https://example.com/thumb.jpg" />
+          </item>
+        </channel>
+      </rss>`;
+      vi.spyOn(globalThis, 'fetch').mockResolvedValueOnce(
+        new Response(mediaXml, { status: 200 }),
+      );
+      const request = new Request('https://example.com/api/news/v1?feeds=https://feed.example.com/media');
+      const response = await handler(request);
+      expect(response.status).toBe(200);
+      const body = await response.json() as { items: Array<{ thumbnail?: string }> };
+      expect(body.items).toHaveLength(1);
+      expect(body.items[0].thumbnail).toBe('https://example.com/thumb.jpg');
+    });
+
+    it('decodes HTML entities in content', async () => {
+      const entityXml = `<?xml version="1.0"?>
+      <rss version="2.0"><channel>
+        <item>
+          <title>Breaking &amp; Latest</title>
+          <link>https://example.com/entities</link>
+          <guid>ent-1</guid>
+          <description>Stocks &lt;rise&gt; &amp; bonds fall</description>
+        </item>
+      </channel></rss>`;
+      vi.spyOn(globalThis, 'fetch').mockResolvedValueOnce(
+        new Response(entityXml, { status: 200 }),
+      );
+      const request = new Request('https://example.com/api/news/v1?feeds=https://feed.example.com/entity');
+      const response = await handler(request);
+      expect(response.status).toBe(200);
+      const body = await response.json() as { items: Array<{ title: string; description: string }> };
+      expect(body.items[0].title).toBe('Breaking & Latest');
+      expect(body.items[0].description).toContain('Stocks <rise>');
+    });
+
+    it('selects alternate link from Atom entry with multiple links', async () => {
+      const multiLinkAtom = `<?xml version="1.0"?>
+      <feed xmlns="http://www.w3.org/2005/Atom">
+        <title>Multi-Link Feed</title>
+        <entry>
+          <title>Multi Link Entry</title>
+          <link rel="self" href="https://example.com/self" />
+          <link rel="alternate" href="https://example.com/alternate" />
+          <id>ml-1</id>
+          <published>2024-01-01T12:00:00Z</published>
+        </entry>
+      </feed>`;
+      vi.spyOn(globalThis, 'fetch').mockResolvedValueOnce(
+        new Response(multiLinkAtom, { status: 200 }),
+      );
+      const request = new Request('https://example.com/api/news/v1?feeds=https://feed.example.com/multilink');
+      const response = await handler(request);
+      expect(response.status).toBe(200);
+      const body = await response.json() as { items: Array<{ link: string }> };
+      expect(body.items).toHaveLength(1);
+      expect(body.items[0].link).toBe('https://example.com/alternate');
+    });
+
     it('handles multiple feeds with mixed success', async () => {
       vi.spyOn(globalThis, 'fetch')
         .mockResolvedValueOnce(new Response(sampleRSS, { status: 200 }))

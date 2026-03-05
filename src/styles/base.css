@@ -62,6 +62,31 @@ html, body {
 
 .forge-btn:hover { border-color: var(--accent); }
 
+/* Health Indicator */
+.forge-health-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.2rem 0.6rem;
+  font-size: 0.75rem;
+  color: var(--fg);
+  background: rgba(255,255,255,0.05);
+  border-radius: var(--radius);
+  margin-right: 0.5rem;
+}
+
+.forge-health-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  animation: health-pulse 2s ease-in-out infinite;
+}
+
+@keyframes health-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
 /* Main layout */
 .forge-main {
   flex: 1;

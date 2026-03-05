@@ -1,6 +1,7 @@
 import { MapEngine, type MapConfig } from './core/map/MapEngine.js';
 import { PanelManager } from './core/panels/PanelManager.js';
 import { SourceManager } from './core/sources/SourceManager.js';
+import type { SourceHealth } from './core/sources/SourceHealth.js';
 import { AIManager, type AIConfig } from './core/ai/AIManager.js';
 import './styles/base.css';
 
@@ -24,6 +25,10 @@ export class App {
       <header class="forge-header">
         <h1 class="forge-title">${config.monitor.name}</h1>
         <div class="forge-header-actions">
+          <span id="forge-health-indicator" class="forge-health-indicator" style="display:none">
+            <span class="forge-health-dot"></span>
+            <span class="forge-health-text"></span>
+          </span>
           <button id="layer-toggle-btn" class="forge-btn">Layers</button>
         </div>
       </header>
@@ -65,6 +70,12 @@ export class App {
     // Wire up source updates to panels
     this.sourceManager.onItems((items) => {
       this.panelManager?.updateAll(items);
+    });
+
+    // Wire up source health to service-status panel and header indicator
+    this.sourceManager.onHealth((health) => {
+      this.panelManager?.updatePanel('service-status', health);
+      this.updateHealthIndicator(health);
     });
 
     // Layer toggle button
@@ -120,6 +131,33 @@ export class App {
         this.mapEngine?.toggleLayer(target.dataset.layer!, target.checked);
       });
     });
+  }
+
+  private updateHealthIndicator(health: Map<string, SourceHealth>): void {
+    const indicator = document.getElementById('forge-health-indicator');
+    if (!indicator) return;
+
+    const entries = Array.from(health.values());
+    const offline = entries.filter(h => h.status === 'offline').length;
+    const degraded = entries.filter(h => h.status === 'degraded').length;
+
+    if (offline === 0 && degraded === 0) {
+      indicator.style.display = 'none';
+      return;
+    }
+
+    indicator.style.display = 'inline-flex';
+    const dot = indicator.querySelector('.forge-health-dot') as HTMLElement;
+    const text = indicator.querySelector('.forge-health-text') as HTMLElement;
+
+    const parts: string[] = [];
+    if (offline > 0) parts.push(`${offline} offline`);
+    if (degraded > 0) parts.push(`${degraded} degraded`);
+
+    dot.className = offline > 0
+      ? 'forge-health-dot status-red'
+      : 'forge-health-dot status-yellow';
+    text.textContent = parts.join(', ');
   }
 
   destroy(): void {
