@@ -40,24 +40,40 @@ The first agent-native dashboard framework — designed for [Claude Code](https:
 
 ## Architecture
 
-```
-You ──> AI Agent ──> forge CLI ──> config.json ──> Dashboard
-         │                             │
-    "Track Korean              ┌───────┴────────┐
-     robotics news"            │ monitor-forge   │
-                               │ .config.json    │
-                               ├─────────────────┤
-                               │ sources: [RSS]  │
-                               │ panels: [news]  │
-                               │ map: {center}   │
-                               │ ai: {groq}      │
-                               └───────┬────────┘
-                                       │
-                    ┌──────────────────┼──────────────────┐
-                    ▼                  ▼                  ▼
-              MapLibre GL        Panel Engine       AI Pipeline
-              + deck.gl          6 panel types      Groq/OpenRouter
-              5 layer types      News, Ticker...    Summarize, NER
+```mermaid
+%%{init: {'theme': 'neutral'}}%%
+flowchart LR
+    subgraph CLI["forge CLI"]
+        CMD["forge commands"] --> CFG[("config.json")]
+    end
+
+    subgraph BUILD["Build Pipeline"]
+        GEN["Manifest Generator"]
+        GEN --> SM["source-manifest"]
+        GEN --> LM["layer-manifest"]
+        GEN --> PM["panel-manifest"]
+        GEN --> CR["config-resolved"]
+    end
+
+    subgraph APP["Frontend"]
+        MAP["MapEngine<br/>MapLibre + deck.gl"]
+        PNL["PanelManager<br/>6 panel types"]
+        SRC["SourceManager<br/>RSS / API / WS"]
+        AIM["AIManager<br/>Groq / OpenRouter"]
+        SRC --> PNL
+        SRC --> AIM
+        AIM --> PNL
+    end
+
+    subgraph EDGE["Vercel Edge Functions"]
+        NEWS["news/v1"]
+        PROXY["proxy/v1"]
+        AIEP["ai/v1"]
+    end
+
+    CFG --> GEN
+    SM & LM & PM & CR --> APP
+    SRC <--> EDGE
 ```
 
 ## Quick Start
@@ -71,6 +87,14 @@ npm run dev    # dashboard at http://localhost:5173
 
 Ships with a **tech-minimal** preset (Hacker News, TechCrunch, Ars Technica) out of the box. No API keys required.
 
+### Workflow
+
+```mermaid
+%%{init: {'theme': 'neutral'}}%%
+flowchart LR
+    A["Clone &<br/>Install"] --> B["Choose<br/>Preset"] --> C["Add Sources<br/>& Panels"] --> D["Configure AI<br/>(optional)"] --> E["Validate"] --> F["Build"] --> G["Deploy"]
+```
+
 ### Using with AI Agents
 
 Open the project in Claude Code (or any AGENTS.md-compatible agent) and say:
@@ -78,6 +102,9 @@ Open the project in Claude Code (or any AGENTS.md-compatible agent) and say:
 > "I want to create a geopolitics monitor focused on Southeast Asia"
 
 The agent reads CLAUDE.md/AGENTS.md, uses the forge CLI, and builds your dashboard. See [CLAUDE.md](./CLAUDE.md) for Claude Code integration or [AGENTS.md](./AGENTS.md) for other agents.
+
+> [!NOTE]
+> Every `forge` command supports `--format json --non-interactive` for AI agent consumption.
 
 ### Manual Customization
 
@@ -103,7 +130,50 @@ npm run forge -- validate
 npm run deploy
 ```
 
+## Data Flow
+
+```mermaid
+%%{init: {'theme': 'neutral'}}%%
+flowchart TD
+    subgraph Sources
+        RSS["RSS Feeds"]
+        API["REST APIs"]
+        WS["WebSockets"]
+    end
+
+    subgraph Edge["Vercel Edge"]
+        NE["news/v1<br/>RSS Aggregation"]
+        PE["proxy/v1<br/>CORS Proxy"]
+        AE["ai/v1<br/>LLM Endpoint"]
+    end
+
+    subgraph AI["AI Fallback Chain"]
+        G["Groq<br/>Llama 3.3"]
+        OR["OpenRouter<br/>Claude / GPT-4o"]
+        G -.->|fallback| OR
+    end
+
+    subgraph Panels
+        NF["News Feed"]
+        AB["AI Brief"]
+        MT["Market Ticker"]
+        ET["Entity Tracker"]
+    end
+
+    MAP["MapEngine<br/>5 Layer Types"]
+
+    RSS --> NE --> NF
+    API --> PE --> MT
+    WS --> ET
+    NE --> AE --> AI
+    AI --> AB
+    Sources --> MAP
+```
+
 ## Available Presets
+
+> [!TIP]
+> Start with a `*-minimal` preset to get running fast, then graduate to `*-full` when you need more sources and panels. Use `blank` for a completely custom build.
 
 | Preset | Domain | Sources | Panels | Description |
 |--------|--------|---------|--------|-------------|

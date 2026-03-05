@@ -2,6 +2,17 @@
 
 ## Overall Progress: COMPLETE
 
+```mermaid
+%%{init: {'theme': 'neutral'}}%%
+graph LR
+    P1["Phase 1<br/>Foundation"] --> P2["Phase 2<br/>CLI Commands"] --> P3["Phase 3<br/>Frontend Core"] --> P4["Phase 4<br/>Backend + Build"] --> P5["Phase 5<br/>Agent Integration"]
+    style P1 fill:#2ea043,color:#fff
+    style P2 fill:#2ea043,color:#fff
+    style P3 fill:#2ea043,color:#fff
+    style P4 fill:#2ea043,color:#fff
+    style P5 fill:#2ea043,color:#fff
+```
+
 | Phase | Status | Description |
 |-------|--------|-------------|
 | Phase 1 | DONE | Foundation - Repo structure + Zod schema + Config loader |
