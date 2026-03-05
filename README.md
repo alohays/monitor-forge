@@ -41,39 +41,54 @@ The first agent-native dashboard framework — designed for [Claude Code](https:
 ## Architecture
 
 ```mermaid
-%%{init: {'theme': 'neutral'}}%%
 flowchart LR
-    subgraph CLI["forge CLI"]
-        CMD["forge commands"] --> CFG[("config.json")]
+    subgraph CLI["🛠️ forge CLI"]
+        CMD(["forge commands"])
+        CFG[("config.json")]
+        CMD ==> CFG
     end
 
-    subgraph BUILD["Build Pipeline"]
-        GEN["Manifest Generator"]
-        GEN --> SM["source-manifest"]
-        GEN --> LM["layer-manifest"]
-        GEN --> PM["panel-manifest"]
-        GEN --> CR["config-resolved"]
+    subgraph BUILD["⚙️ Build Pipeline"]
+        GEN{{"Manifest Generator"}}
+        SM["source-manifest"]
+        LM["layer-manifest"]
+        PM["panel-manifest"]
+        CR["config-resolved"]
+        GEN ==> SM
+        GEN ==> LM
+        GEN ==> PM
+        GEN ==> CR
     end
 
-    subgraph APP["Frontend"]
-        MAP["MapEngine<br/>MapLibre + deck.gl"]
-        PNL["PanelManager<br/>6 panel types"]
-        SRC["SourceManager<br/>RSS / API / WS"]
-        AIM["AIManager<br/>Groq / OpenRouter"]
-        SRC --> PNL
-        SRC --> AIM
-        AIM --> PNL
+    subgraph APP["🖥️ Frontend"]
+        MAP(["MapEngine<br/>MapLibre + deck.gl"])
+        PNL(["PanelManager<br/>6 panel types"])
+        SRC(["SourceManager<br/>RSS / API / WS"])
+        AIM(["AIManager<br/>Groq / OpenRouter"])
+        SRC ==> PNL
+        SRC ==> AIM
+        AIM ==> PNL
     end
 
-    subgraph EDGE["Vercel Edge Functions"]
+    subgraph EDGE["☁️ Vercel Edge Functions"]
         NEWS["news/v1"]
         PROXY["proxy/v1"]
         AIEP["ai/v1"]
     end
 
-    CFG --> GEN
-    SM & LM & PM & CR --> APP
+    CFG ==> GEN
+    SM & LM & PM & CR ==> APP
     SRC <--> EDGE
+
+    classDef cli fill:#1565C0,stroke:#0D47A1,stroke-width:2px,color:#fff
+    classDef build fill:#2E7D32,stroke:#1B5E20,stroke-width:2px,color:#fff
+    classDef frontend fill:#D84315,stroke:#BF360C,stroke-width:2px,color:#fff
+    classDef edge fill:#7B1FA2,stroke:#4A148C,stroke-width:2px,color:#fff
+
+    class CMD,CFG cli
+    class GEN,SM,LM,PM,CR build
+    class MAP,PNL,SRC,AIM frontend
+    class NEWS,PROXY,AIEP edge
 ```
 
 ## Quick Start
@@ -90,9 +105,31 @@ Ships with a **tech-minimal** preset (Hacker News, TechCrunch, Ars Technica) out
 ### Workflow
 
 ```mermaid
-%%{init: {'theme': 'neutral'}}%%
 flowchart LR
-    A["Clone &<br/>Install"] --> B["Choose<br/>Preset"] --> C["Add Sources<br/>& Panels"] --> D["Configure AI<br/>(optional)"] --> E["Validate"] --> F["Build"] --> G["Deploy"]
+    A(["📥 Clone &<br/>Install"])
+    B(["📋 Choose<br/>Preset"])
+    C(["🔗 Add Sources<br/>& Panels"])
+    D(["🤖 Configure AI<br/>(optional)"])
+    E{{"✅ Validate"}}
+    F{{"📦 Build"}}
+    G(["🚀 Deploy"])
+
+    A ==> B ==> C ==> D
+    D -.-> E
+    C ==> E
+    E ==> F ==> G
+
+    classDef setup fill:#1565C0,stroke:#0D47A1,stroke-width:2px,color:#fff
+    classDef config fill:#00838F,stroke:#006064,stroke-width:2px,color:#fff
+    classDef ai fill:#EF6C00,stroke:#E65100,stroke-width:2px,color:#fff
+    classDef check fill:#2E7D32,stroke:#1B5E20,stroke-width:2px,color:#fff
+    classDef deploy fill:#AD1457,stroke:#880E4F,stroke-width:2px,color:#fff
+
+    class A,B setup
+    class C config
+    class D ai
+    class E,F check
+    class G deploy
 ```
 
 ### Using with AI Agents
@@ -133,41 +170,52 @@ npm run deploy
 ## Data Flow
 
 ```mermaid
-%%{init: {'theme': 'neutral'}}%%
 flowchart TD
-    subgraph Sources
-        RSS["RSS Feeds"]
-        API["REST APIs"]
-        WS["WebSockets"]
+    subgraph Sources["📡 Data Sources"]
+        RSS(["RSS Feeds"])
+        API(["REST APIs"])
+        WS(["WebSockets"])
     end
 
-    subgraph Edge["Vercel Edge"]
+    subgraph Edge["☁️ Vercel Edge"]
         NE["news/v1<br/>RSS Aggregation"]
         PE["proxy/v1<br/>CORS Proxy"]
         AE["ai/v1<br/>LLM Endpoint"]
     end
 
-    subgraph AI["AI Fallback Chain"]
-        G["Groq<br/>Llama 3.3"]
-        OR["OpenRouter<br/>Claude / GPT-4o"]
-        G -.->|fallback| OR
+    subgraph AI["🤖 AI Fallback Chain"]
+        GQ{{"Groq<br/>Llama 3.3"}}
+        OR{{"OpenRouter<br/>Claude / GPT-4o"}}
+        GQ -.->|fallback| OR
     end
 
-    subgraph Panels
+    subgraph Panels["📊 Dashboard Panels"]
         NF["News Feed"]
         AB["AI Brief"]
         MT["Market Ticker"]
         ET["Entity Tracker"]
     end
 
-    MAP["MapEngine<br/>5 Layer Types"]
+    MAP(["🗺️ MapEngine<br/>5 Layer Types"])
 
-    RSS --> NE --> NF
-    API --> PE --> MT
-    WS --> ET
-    NE --> AE --> AI
-    AI --> AB
-    Sources --> MAP
+    RSS ==> NE ==> NF
+    API ==> PE ==> MT
+    WS ==> ET
+    NE ==> AE ==> AI
+    AI ==> AB
+    Sources -.-> MAP
+
+    classDef source fill:#00838F,stroke:#006064,stroke-width:2px,color:#fff
+    classDef edge fill:#7B1FA2,stroke:#4A148C,stroke-width:2px,color:#fff
+    classDef ai fill:#EF6C00,stroke:#E65100,stroke-width:2px,color:#fff
+    classDef panel fill:#D84315,stroke:#BF360C,stroke-width:2px,color:#fff
+    classDef map fill:#1565C0,stroke:#0D47A1,stroke-width:2px,color:#fff
+
+    class RSS,API,WS source
+    class NE,PE,AE edge
+    class GQ,OR ai
+    class NF,AB,MT,ET panel
+    class MAP map
 ```
 
 ## Available Presets
