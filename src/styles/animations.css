@@ -1,0 +1,188 @@
+/* === Animation Infrastructure ===
+ * All dashboard animations and transitions.
+ * Imported alongside base.css in App.ts.
+ */
+
+/* --- Skeleton Loading --- */
+@keyframes skeleton-shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.skeleton-container {
+  transition: opacity 300ms ease;
+}
+
+.skeleton-container.loaded {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.skeleton-block {
+  background: linear-gradient(90deg, var(--bg-panel) 25%, rgba(255, 255, 255, 0.08) 50%, var(--bg-panel) 75%);
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.5s ease-in-out infinite;
+  border-radius: 4px;
+}
+
+.skeleton-line {
+  height: 12px;
+  margin-bottom: 8px;
+  width: 100%;
+}
+
+.skeleton-line-short { width: 60%; }
+.skeleton-line-medium { width: 80%; }
+
+/* --- Panel Pulse Effect --- */
+@keyframes panel-pulse {
+  0% { border-left-color: var(--accent); }
+  100% { border-left-color: transparent; }
+}
+
+.forge-panel-header {
+  border-left: 3px solid transparent;
+}
+
+.forge-panel-header.pulse {
+  animation: panel-pulse 1.5s ease-out forwards;
+}
+
+/* --- News Item Entrance/Exit --- */
+@keyframes slide-in-left {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fade-out-right {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+}
+
+.news-item-enter {
+  animation: slide-in-left 300ms ease-out both;
+}
+
+.news-item-exit {
+  animation: fade-out-right 200ms ease-in both;
+}
+
+/* --- Instability Bar --- */
+.instability-bar-container {
+  position: relative;
+  flex: 1;
+  height: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 2px;
+  margin: 0 0.5rem;
+  overflow: hidden;
+}
+
+.instability-bar-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  border-radius: 2px;
+  opacity: 0.3;
+  transition: width 400ms ease-out;
+  background: linear-gradient(90deg, var(--success), var(--warning), var(--danger));
+  background-size: 200% 100%;
+}
+
+.instability-score {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  font-weight: 600;
+}
+
+/* --- AI Brief Typing Cursor --- */
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+.ai-brief-cursor {
+  animation: blink 0.7s step-end infinite;
+  color: var(--accent);
+  font-weight: 300;
+}
+
+/* --- Sparkline --- */
+.ticker-sparkline {
+  display: inline-flex;
+  align-items: center;
+  width: 60px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.ticker-sparkline svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* --- Idle-Pause Overrides --- */
+body.animations-paused .skeleton-block,
+body.animations-paused .forge-panel-header.pulse,
+body.animations-paused .news-item-enter,
+body.animations-paused .ai-brief-cursor,
+body.animations-paused .forge-health-dot {
+  animation-play-state: paused;
+}
+
+body.animations-paused .instability-bar-fill {
+  transition: none;
+}
+
+/* --- Reduced Motion Overrides --- */
+@media (prefers-reduced-motion: reduce) {
+  .skeleton-block {
+    animation: none;
+  }
+
+  .forge-panel-header.pulse {
+    animation: none;
+    border-left-color: var(--accent);
+  }
+
+  .news-item-enter {
+    animation: none;
+  }
+
+  .news-item-exit {
+    animation: none;
+  }
+
+  .instability-bar-fill {
+    transition: none;
+  }
+
+  .ai-brief-cursor {
+    animation: none;
+  }
+
+  .skeleton-container.loaded {
+    transition: none;
+  }
+
+  .forge-health-dot {
+    animation: none;
+    opacity: 1;
+  }
+}
