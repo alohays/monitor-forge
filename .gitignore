@@ -9,3 +9,5 @@ api/_shared/proxy-allowlist.ts
 *.log
 .DS_Store
 2026-*.txt
+test-results/
+e2e/screenshots/

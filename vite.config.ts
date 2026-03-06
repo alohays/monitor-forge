@@ -1,9 +1,12 @@
-import { defineConfig } from 'vite';
+import { defineConfig } from 'vitest/config';
 import { resolve } from 'node:path';
 import { apiDevPlugin } from './forge/src/vite/api-dev-plugin.js';
 
 export default defineConfig({
   plugins: [apiDevPlugin()],
+  test: {
+    exclude: ['e2e/**', 'node_modules/**'],
+  },
   resolve: {
     alias: {
       '@': resolve(__dirname, 'src'),
