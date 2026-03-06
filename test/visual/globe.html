@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GLOBE TEST // PR-26 // monitor-forge</title>
+  <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.0.0/dist/maplibre-gl.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-void: #06060b;
+      --bg-deep: #0a0a0f;
+      --bg-panel: #0e0e16;
+      --bg-cell: #12121c;
+      --bg-raised: #181826;
+      --border-dim: #1e1e30;
+      --border-mid: #2a2a42;
+      --border-bright: #3a3a5a;
+      --fg: #c8c8d8;
+      --fg-bright: #e8e8f0;
+      --fg-dim: #6a6a82;
+      --fg-muted: #44445a;
+      --accent: #0052CC;
+      --accent-glow: #1a6eff;
+      --accent-dim: #002866;
+      --ok: #00e89d;
+      --ok-dim: #003d2a;
+      --warn: #ffb020;
+      --warn-dim: #3d2a00;
+      --err: #ff4060;
+      --err-dim: #3d0015;
+      --mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
+      --sans: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { width: 100%; height: 100%; overflow: hidden; background: var(--bg-void); color: var(--fg); }
+
+    body {
+      font-family: var(--sans);
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── Top Bar ─────────────────────────────────────────── */
+    .topbar {
+      height: 36px;
+      background: var(--bg-deep);
+      border-bottom: 1px solid var(--border-dim);
+      display: flex;
+      align-items: center;
+      padding: 0 16px;
+      gap: 12px;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 10;
+    }
+    .topbar::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent) 20%, var(--accent) 80%, transparent);
+      opacity: 0.3;
+    }
+    .topbar-label {
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--fg-dim);
+    }
+    .topbar-label strong {
+      color: var(--accent-glow);
+      font-weight: 600;
+    }
+    .topbar-sep {
+      width: 1px;
+      height: 16px;
+      background: var(--border-mid);
+    }
+    .topbar-status {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--fg-muted);
+      margin-left: auto;
+    }
+    .topbar-status .live {
+      color: var(--ok);
+      animation: pulse-glow 2s ease-in-out infinite;
+    }
+    @keyframes pulse-glow {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    /* ── Main Layout ─────────────────────────────────────── */
+    .layout {
+      flex: 1;
+      display: flex;
+      overflow: hidden;
+    }
+
+    /* ── Map ─────────────────────────────────────────────── */
+    .map-wrap {
+      flex: 1;
+      position: relative;
+      background: var(--bg-void);
+    }
+    #map {
+      width: 100%;
+      height: 100%;
+    }
+    .map-wrap::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      box-shadow: inset 0 0 80px rgba(0,0,0,0.5);
+      z-index: 1;
+    }
+
+    /* ── Sidebar ─────────────────────────────────────────── */
+    .sidebar {
+      width: 340px;
+      flex-shrink: 0;
+      background: var(--bg-deep);
+      border-left: 1px solid var(--border-dim);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .section {
+      border-bottom: 1px solid var(--border-dim);
+      flex-shrink: 0;
+    }
+    .section:last-child { border-bottom: none; }
+    .section.scrollable {
+      flex: 1;
+      overflow-y: auto;
+      min-height: 0;
+    }
+
+    .section-head {
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border-left: 2px solid var(--accent);
+      background: linear-gradient(90deg, var(--accent-dim), transparent 60%);
+    }
+    .section-head h2 {
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--fg-dim);
+    }
+    .section-head .counter {
+      margin-left: auto;
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--fg-muted);
+    }
+    .section-head .counter b {
+      color: var(--ok);
+      font-weight: 500;
+    }
+
+    /* ── Checklist ────────────────────────────────────────── */
+    .checklist {
+      padding: 6px 0;
+    }
+    .check-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      padding: 5px 14px;
+      cursor: pointer;
+      transition: background 0.15s;
+      position: relative;
+    }
+    .check-item:hover { background: var(--bg-panel); }
+    .check-item input {
+      appearance: none;
+      width: 14px;
+      height: 14px;
+      border: 1.5px solid var(--border-bright);
+      border-radius: 3px;
+      background: var(--bg-cell);
+      flex-shrink: 0;
+      margin-top: 1px;
+      cursor: pointer;
+      transition: all 0.15s;
+      position: relative;
+    }
+    .check-item input:checked {
+      background: var(--accent);
+      border-color: var(--accent-glow);
+    }
+    .check-item input:checked::after {
+      content: '';
+      position: absolute;
+      top: 1px;
+      left: 4px;
+      width: 4px;
+      height: 7px;
+      border: solid #fff;
+      border-width: 0 1.5px 1.5px 0;
+      transform: rotate(45deg);
+    }
+    .check-item span {
+      font-size: 11.5px;
+      line-height: 1.35;
+      color: var(--fg);
+    }
+    .check-item.done span {
+      color: var(--fg-dim);
+      text-decoration: line-through;
+      text-decoration-color: var(--border-mid);
+    }
+
+    /* ── Debug Panel ─────────────────────────────────────── */
+    .debug-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      padding: 1px;
+      background: var(--border-dim);
+    }
+    .debug-cell {
+      background: var(--bg-panel);
+      padding: 7px 10px;
+    }
+    .debug-cell.full { grid-column: 1 / -1; }
+    .debug-label {
+      font-family: var(--mono);
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--fg-muted);
+      margin-bottom: 2px;
+    }
+    .debug-value {
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--fg-bright);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .debug-value.num { color: var(--ok); }
+    .debug-value.warn { color: var(--warn); }
+
+    /* ── Status Badge ────────────────────────────────────── */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-family: var(--mono);
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: 2px 6px;
+      border-radius: 3px;
+    }
+    .badge::before {
+      content: '';
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .badge.on { background: var(--ok-dim); color: var(--ok); }
+    .badge.on::before { background: var(--ok); box-shadow: 0 0 4px var(--ok); }
+    .badge.off { background: var(--err-dim); color: var(--err); }
+    .badge.off::before { background: var(--err); }
+    .badge.wait { background: var(--warn-dim); color: var(--warn); }
+    .badge.wait::before { background: var(--warn); animation: pulse-glow 1.5s infinite; }
+
+    /* ── Controls ────────────────────────────────────────── */
+    .controls {
+      padding: 10px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .ctrl-row {
+      display: flex;
+      gap: 6px;
+    }
+    .ctrl-btn {
+      flex: 1;
+      height: 32px;
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      color: var(--fg);
+      background: var(--bg-cell);
+      border: 1px solid var(--border-mid);
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.15s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      text-transform: uppercase;
+      position: relative;
+      overflow: hidden;
+    }
+    .ctrl-btn::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), transparent);
+      pointer-events: none;
+    }
+    .ctrl-btn:hover {
+      border-color: var(--accent);
+      background: var(--bg-raised);
+      color: var(--fg-bright);
+    }
+    .ctrl-btn:active {
+      transform: scale(0.97);
+      border-color: var(--accent-glow);
+    }
+    .ctrl-btn.active {
+      border-color: var(--accent);
+      background: var(--accent-dim);
+      color: var(--accent-glow);
+    }
+    .ctrl-btn.danger:hover {
+      border-color: var(--err);
+      color: var(--err);
+    }
+    .ctrl-btn.full { flex: unset; width: 100%; }
+
+    /* ── Scrollbar ────────────────────────────────────────── */
+    .scrollable::-webkit-scrollbar { width: 4px; }
+    .scrollable::-webkit-scrollbar-track { background: transparent; }
+    .scrollable::-webkit-scrollbar-thumb { background: var(--border-mid); border-radius: 2px; }
+    .scrollable::-webkit-scrollbar-thumb:hover { background: var(--border-bright); }
+
+    /* ── Scanline Overlay (subtle) ────────────────────────── */
+    .sidebar::before {
+      content: '';
+      position: fixed;
+      right: 0;
+      top: 0;
+      width: 340px;
+      height: 100%;
+      pointer-events: none;
+      z-index: 100;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0,0,0,0.03) 2px,
+        rgba(0,0,0,0.03) 4px
+      );
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <span class="topbar-label"><strong>MF</strong> Globe Test</span>
+    <span class="topbar-sep"></span>
+    <span class="topbar-label">PR-26</span>
+    <span class="topbar-sep"></span>
+    <span class="topbar-status"><span class="live">&#9679;</span> <span id="utc-clock">--:--:--Z</span></span>
+  </div>
+
+  <div class="layout">
+    <div class="map-wrap">
+      <div id="map"></div>
+    </div>
+
+    <aside class="sidebar">
+      <!-- Checklist -->
+      <div class="section scrollable">
+        <div class="section-head">
+          <h2>Verification</h2>
+          <span class="counter" id="check-counter"><b>0</b>/15</span>
+        </div>
+        <div class="checklist" id="checklist"></div>
+      </div>
+
+      <!-- Debug -->
+      <div class="section">
+        <div class="section-head">
+          <h2>Telemetry</h2>
+        </div>
+        <div class="debug-grid">
+          <div class="debug-cell full">
+            <div class="debug-label">UTC</div>
+            <div class="debug-value" id="d-utc">--</div>
+          </div>
+          <div class="debug-cell">
+            <div class="debug-label">Declination</div>
+            <div class="debug-value num" id="d-decl">--</div>
+          </div>
+          <div class="debug-cell">
+            <div class="debug-label">Sub-Solar Lng</div>
+            <div class="debug-value num" id="d-sublng">--</div>
+          </div>
+          <div class="debug-cell">
+            <div class="debug-label">Map Center</div>
+            <div class="debug-value" id="d-center">--</div>
+          </div>
+          <div class="debug-cell">
+            <div class="debug-label">Zoom</div>
+            <div class="debug-value num" id="d-zoom">--</div>
+          </div>
+          <div class="debug-cell">
+            <div class="debug-label">Projection</div>
+            <div class="debug-value" id="d-proj">--</div>
+          </div>
+          <div class="debug-cell">
+            <div class="debug-label">Rotation</div>
+            <div class="debug-value" id="d-rotation">--</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Controls -->
+      <div class="section">
+        <div class="section-head">
+          <h2>Controls</h2>
+          <span id="overlay-badges"></span>
+        </div>
+        <div class="controls">
+          <div class="ctrl-row">
+            <button class="ctrl-btn active" id="btn-daynight">Day/Night</button>
+            <button class="ctrl-btn active" id="btn-atmos">Atmosphere</button>
+          </div>
+          <div class="ctrl-row">
+            <button class="ctrl-btn active" id="btn-rotation">Rotation</button>
+            <button class="ctrl-btn active" id="btn-projection">Globe &rarr; 2D</button>
+          </div>
+          <div class="ctrl-row">
+            <button class="ctrl-btn" id="btn-tw-back">&minus;6h</button>
+            <button class="ctrl-btn" id="btn-tw-fwd">+6h</button>
+          </div>
+          <div class="ctrl-row">
+            <button class="ctrl-btn" id="btn-idle5s">Idle 5s</button>
+            <button class="ctrl-btn" id="btn-force-rotate">Force Rotate</button>
+          </div>
+          <div class="ctrl-row">
+            <button class="ctrl-btn danger full" id="btn-reset">Reset All</button>
+          </div>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <script type="module" src="./globe-test.ts"></script>
+</body>
+</html>
