@@ -160,6 +160,9 @@
     "center": [30, 30],
     "zoom": 3,
     "projection": "globe",
-    "dayNightOverlay": true
+    "dayNightOverlay": true,
+    "atmosphericGlow": true,
+    "idleRotation": true,
+    "idleRotationSpeed": 0.3
   }
 }
