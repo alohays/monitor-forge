@@ -3,7 +3,9 @@ import { PanelManager } from './core/panels/PanelManager.js';
 import { SourceManager } from './core/sources/SourceManager.js';
 import type { SourceHealth } from './core/sources/SourceHealth.js';
 import { AIManager, type AIConfig } from './core/ai/AIManager.js';
+import { IdleDetector } from './core/ui/IdleDetector.js';
 import './styles/base.css';
+import './styles/animations.css';
 
 export class App {
   private root: HTMLElement;
@@ -11,6 +13,7 @@ export class App {
   private panelManager: PanelManager | null = null;
   private sourceManager: SourceManager | null = null;
   private aiManager: AIManager | null = null;
+  private idleDetector: IdleDetector | null = null;
 
   constructor(root: HTMLElement) {
     this.root = root;
@@ -85,6 +88,9 @@ export class App {
       layerPanel.classList.toggle('hidden');
       this.renderLayerPanel(layerPanel);
     });
+
+    // Idle detection — pause animations when inactive
+    this.idleDetector = new IdleDetector();
 
     // Start fetching data
     this.sourceManager.startAll();
@@ -164,5 +170,6 @@ export class App {
     this.sourceManager?.stopAll();
     this.panelManager?.destroy();
     this.mapEngine?.destroy();
+    this.idleDetector?.destroy();
   }
 }
