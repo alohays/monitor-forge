@@ -14,9 +14,9 @@ export default defineConfig({
     sourcemap: true,
     rollupOptions: {
       output: {
-        manualChunks: {
-          maplibre: ['maplibre-gl'],
-          d3: ['d3'],
+        manualChunks(id) {
+          if (id.includes('/node_modules/maplibre-gl/')) return 'maplibre';
+          if (/\/node_modules\/d3[\w-]*\//.test(id)) return 'd3';
         },
       },
     },
