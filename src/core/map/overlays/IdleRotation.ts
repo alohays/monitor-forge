@@ -10,6 +10,7 @@ export class IdleRotation {
   private isRotating = false;
   private boundPause: () => void;
   private boundScheduleResume: () => void;
+  private boundOnWheel: () => void;
 
   constructor(map: MaplibreMap, speed = 0.5, idleTimeoutMs = 30_000) {
     this.map = map;
@@ -17,13 +18,14 @@ export class IdleRotation {
     this.idleTimeout = idleTimeoutMs;
     this.boundPause = this.pause.bind(this);
     this.boundScheduleResume = this.scheduleResume.bind(this);
+    this.boundOnWheel = this.onWheel.bind(this);
   }
 
   enable(): void {
     const canvas = this.map.getCanvas();
     canvas.addEventListener('mousedown', this.boundPause);
     canvas.addEventListener('touchstart', this.boundPause);
-    canvas.addEventListener('wheel', this.boundPause);
+    canvas.addEventListener('wheel', this.boundOnWheel);
     canvas.addEventListener('mouseup', this.boundScheduleResume);
     canvas.addEventListener('touchend', this.boundScheduleResume);
     this.scheduleResume();
@@ -37,6 +39,11 @@ export class IdleRotation {
   private pause(): void {
     if (this.timeoutId) clearTimeout(this.timeoutId);
     this.stopRotation();
+  }
+
+  private onWheel(): void {
+    this.stopRotation();
+    this.scheduleResume();
   }
 
   private startRotation(): void {
@@ -76,7 +83,7 @@ export class IdleRotation {
     const canvas = this.map.getCanvas();
     canvas.removeEventListener('mousedown', this.boundPause);
     canvas.removeEventListener('touchstart', this.boundPause);
-    canvas.removeEventListener('wheel', this.boundPause);
+    canvas.removeEventListener('wheel', this.boundOnWheel);
     canvas.removeEventListener('mouseup', this.boundScheduleResume);
     canvas.removeEventListener('touchend', this.boundScheduleResume);
   }
