@@ -45,6 +45,9 @@ export function createDefaultConfig(overrides?: Partial<MonitorForgeConfig>): Mo
       maxZoom: 18,
       projection: 'mercator',
       dayNightOverlay: false,
+      atmosphericGlow: true,
+      idleRotation: true,
+      idleRotationSpeed: 0.5,
       ...overrides?.map,
     },
     backend: {

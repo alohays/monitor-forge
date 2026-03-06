@@ -35,6 +35,9 @@ describe('createDefaultConfig', () => {
     expect(config.map.center).toEqual([0, 20]);
     expect(config.map.zoom).toBe(3);
     expect(config.map.projection).toBe('mercator');
+    expect(config.map.atmosphericGlow).toBe(true);
+    expect(config.map.idleRotation).toBe(true);
+    expect(config.map.idleRotationSpeed).toBe(0.5);
   });
 
   it('preserves default backend config when not overridden', () => {

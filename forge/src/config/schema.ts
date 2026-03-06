@@ -92,6 +92,9 @@ export const MapSchema = z.object({
   maxZoom: z.number().default(18),
   projection: z.enum(['mercator', 'globe']).default('mercator'),
   dayNightOverlay: z.boolean().default(false),
+  atmosphericGlow: z.boolean().default(true),
+  idleRotation: z.boolean().default(true),
+  idleRotationSpeed: z.number().min(0).max(5).default(0.5),
 });
 
 // ─── Backend Schema ─────────────────────────────────────────
