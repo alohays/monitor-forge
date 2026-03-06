@@ -16,10 +16,10 @@ jobs:
     steps:
       - uses: actions/first-interaction@v3
         with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          issue-message: |
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          issue_message: |
             Thanks for opening your first issue! We'll take a look soon.
             Check out our [Contributing Guide](https://github.com/alohays/monitor-forge/blob/main/CONTRIBUTING.md).
-          pr-message: |
+          pr_message: |
             Thanks for your first PR! A maintainer will review it shortly.
             Make sure `npm test` and `forge validate` pass.

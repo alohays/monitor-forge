@@ -73,7 +73,7 @@ describe('writeConfig', () => {
       monitor: { name: 'Test', slug: 'test', description: '', domain: 'general', tags: [], branding: { primaryColor: '#0052CC' } },
       sources: [], layers: [], panels: [],
       ai: { enabled: false, fallbackChain: [], providers: {}, analysis: { summarization: true, entityExtraction: true, sentimentAnalysis: true, focalPointDetection: false } },
-      map: { style: 'https://example.com/style.json', center: [0, 0] as [number, number], zoom: 3, minZoom: 2, maxZoom: 18, projection: 'mercator' as const, dayNightOverlay: false },
+      map: { style: 'https://example.com/style.json', center: [0, 0] as [number, number], zoom: 3, minZoom: 2, maxZoom: 18, projection: 'mercator' as const, dayNightOverlay: false, atmosphericGlow: true, idleRotation: true, idleRotationSpeed: 0.5 },
       backend: { cache: { provider: 'memory' as const, ttlSeconds: 300 }, rateLimit: { enabled: true, maxRequests: 100, windowSeconds: 60 }, corsProxy: { enabled: true, allowedDomains: ['*'], corsOrigins: ['*'] } },
       build: { target: 'vercel' as const, outDir: 'dist' },
     };
@@ -95,7 +95,7 @@ describe('writeConfig', () => {
       monitor: { name: 'Test', slug: 'test', description: '', domain: 'general', tags: [], branding: { primaryColor: '#0052CC' } },
       sources: [], layers: [], panels: [],
       ai: { enabled: false, fallbackChain: [], providers: {}, analysis: { summarization: true, entityExtraction: true, sentimentAnalysis: true, focalPointDetection: false } },
-      map: { style: 'https://example.com/style.json', center: [0, 0] as [number, number], zoom: 3, minZoom: 2, maxZoom: 18, projection: 'mercator' as const, dayNightOverlay: false },
+      map: { style: 'https://example.com/style.json', center: [0, 0] as [number, number], zoom: 3, minZoom: 2, maxZoom: 18, projection: 'mercator' as const, dayNightOverlay: false, atmosphericGlow: true, idleRotation: true, idleRotationSpeed: 0.5 },
       backend: { cache: { provider: 'memory' as const, ttlSeconds: 300 }, rateLimit: { enabled: true, maxRequests: 100, windowSeconds: 60 }, corsProxy: { enabled: true, allowedDomains: ['*'], corsOrigins: ['*'] } },
       build: { target: 'vercel' as const, outDir: 'dist' },
     };

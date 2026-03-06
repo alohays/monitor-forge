@@ -35,6 +35,9 @@ export function buildConfig(overrides?: Partial<MonitorForgeConfig>): MonitorFor
       maxZoom: 18,
       projection: 'mercator',
       dayNightOverlay: false,
+      atmosphericGlow: true,
+      idleRotation: true,
+      idleRotationSpeed: 0.5,
     },
     backend: {
       cache: { provider: 'memory', ttlSeconds: 300 },

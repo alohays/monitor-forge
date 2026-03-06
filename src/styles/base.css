@@ -304,6 +304,28 @@ html, body {
 .risk-medium .instability-score { color: var(--warning); }
 .risk-low .instability-score { color: var(--success); }
 
+/* Projection Toggle */
+.forge-projection-btn {
+  width: 36px;
+  height: 36px;
+  background: var(--bg-panel);
+  color: var(--fg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  cursor: pointer;
+  font-size: 0.75rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.2s;
+}
+
+.forge-projection-btn:hover {
+  border-color: var(--accent);
+  background: var(--bg-secondary);
+}
+
 /* Scrollbar */
 ::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: transparent; }

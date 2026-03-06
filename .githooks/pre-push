@@ -1,5 +1,16 @@
 #!/bin/sh
+set -e
+
 echo "Pre-push: generating manifests..."
 npx tsx forge/bin/forge.ts build --skip-vite --format json > /dev/null 2>&1
+
 echo "Pre-push: running typecheck..."
-npx tsc --noEmit || exit 1
+npx tsc --noEmit
+
+echo "Pre-push: running tests..."
+npx vitest run
+
+echo "Pre-push: validating config..."
+npx tsx forge/bin/forge.ts validate --format json > /dev/null 2>&1
+
+echo "Pre-push: all checks passed."

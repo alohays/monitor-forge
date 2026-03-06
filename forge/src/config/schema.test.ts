@@ -257,6 +257,29 @@ describe('MapSchema', () => {
     const result = MapSchema.parse({ projection: 'globe' });
     expect(result.projection).toBe('globe');
   });
+
+  it('defaults atmosphericGlow to true', () => {
+    const result = MapSchema.parse({});
+    expect(result.atmosphericGlow).toBe(true);
+  });
+
+  it('defaults idleRotation to true', () => {
+    const result = MapSchema.parse({});
+    expect(result.idleRotation).toBe(true);
+  });
+
+  it('defaults idleRotationSpeed to 0.5', () => {
+    const result = MapSchema.parse({});
+    expect(result.idleRotationSpeed).toBe(0.5);
+  });
+
+  it('rejects idleRotationSpeed below 0', () => {
+    expect(() => MapSchema.parse({ idleRotationSpeed: -1 })).toThrow();
+  });
+
+  it('rejects idleRotationSpeed above 5', () => {
+    expect(() => MapSchema.parse({ idleRotationSpeed: 6 })).toThrow();
+  });
 });
 
 // ─── Backend Schema ────────────────────────────────────────
@@ -512,7 +535,7 @@ describe('defineConfig', () => {
       monitor: { name: 'Test', slug: 'test', description: '', domain: 'test', tags: [], branding: { primaryColor: '#000000' } },
       sources: [], layers: [], panels: [],
       ai: { enabled: false, fallbackChain: [], providers: {}, analysis: { summarization: true, entityExtraction: true, sentimentAnalysis: true, focalPointDetection: false } },
-      map: { style: 'https://example.com/style.json', center: [0, 0], zoom: 3, minZoom: 1, maxZoom: 20, projection: 'mercator', dayNightOverlay: false },
+      map: { style: 'https://example.com/style.json', center: [0, 0], zoom: 3, minZoom: 1, maxZoom: 20, projection: 'mercator', dayNightOverlay: false, atmosphericGlow: true, idleRotation: true, idleRotationSpeed: 0.5 },
       backend: { cache: { provider: 'memory', ttlSeconds: 300 }, rateLimit: { enabled: true, maxRequests: 100, windowSeconds: 60 }, corsProxy: { enabled: true, allowedDomains: ['*'], corsOrigins: ['*'] } },
       build: { target: 'vercel', outDir: 'dist' },
     });
