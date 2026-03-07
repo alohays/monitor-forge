@@ -26,7 +26,9 @@ export class InstabilityIndexPanel extends PanelBase {
 
   update(data: unknown): void {
     if (!Array.isArray(data)) return;
-    const scores = (data as RiskScore[]).sort((a, b) => b.score - a.score);
+    const arr = data as RiskScore[];
+    if (!arr.length || !('country' in arr[0] && 'score' in arr[0])) return;
+    const scores = arr.sort((a, b) => b.score - a.score);
     this.markDataReceived();
     this.diffUpdate(scores);
   }

@@ -3,12 +3,10 @@ import { marked } from 'marked';
 import DOMPurify from 'dompurify';
 
 export class AIBriefPanel extends PanelBase {
-  private refreshInterval: number;
   private typingTimer: ReturnType<typeof setTimeout> | null = null;
 
   constructor(container: HTMLElement, config: import('../PanelBase.js').PanelConfig) {
     super(container, config);
-    this.refreshInterval = (config.config.refreshInterval as number) ?? 300;
   }
 
   render(): void {

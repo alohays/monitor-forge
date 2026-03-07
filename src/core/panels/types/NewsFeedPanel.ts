@@ -1,6 +1,5 @@
 import { PanelBase } from '../PanelBase.js';
 import type { SourceItem } from '../../sources/SourceBase.js';
-import DOMPurify from 'dompurify';
 
 export class NewsFeedPanel extends PanelBase {
   private renderedItems = new Map<string, HTMLElement>();
@@ -71,7 +70,7 @@ export class NewsFeedPanel extends PanelBase {
     }
 
     const link = document.createElement('a');
-    link.href = DOMPurify.sanitize(item.url);
+    link.href = /^https?:\/\//.test(item.url) ? item.url : '#';
     link.target = '_blank';
     link.rel = 'noopener';
 

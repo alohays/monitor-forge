@@ -50,10 +50,12 @@ export abstract class PanelBase {
   protected showSkeleton(lineCount = 3): void {
     const skeleton = document.createElement('div');
     skeleton.className = 'skeleton-container';
-    const widths = ['', 'skeleton-line-medium', 'skeleton-line-short'];
+    const extraWidths = [null, 'skeleton-line-medium', 'skeleton-line-short'];
     for (let i = 0; i < lineCount; i++) {
       const line = document.createElement('div');
-      line.className = `skeleton-block skeleton-line ${widths[i % 3]}`;
+      line.classList.add('skeleton-block', 'skeleton-line');
+      const extra = extraWidths[i % 3];
+      if (extra) line.classList.add(extra);
       skeleton.appendChild(line);
     }
     this.container.prepend(skeleton);

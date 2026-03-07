@@ -19,7 +19,6 @@ interface TickerRow {
 
 export class MarketTickerPanel extends PanelBase {
   private rows = new Map<string, TickerRow>();
-  private priceHistory = new Map<string, number[]>();
   private itemsContainer: HTMLElement | null = null;
 
   render(): void {
@@ -31,6 +30,7 @@ export class MarketTickerPanel extends PanelBase {
   update(data: unknown): void {
     if (!Array.isArray(data)) return;
     const tickers = data as TickerItem[];
+    if (!tickers.length || !('symbol' in tickers[0] && 'price' in tickers[0])) return;
     this.markDataReceived();
     this.diffUpdate(tickers);
   }
@@ -48,7 +48,6 @@ export class MarketTickerPanel extends PanelBase {
         row.changeCounter.destroy();
         row.element.remove();
         this.rows.delete(symbol);
-        this.priceHistory.delete(symbol);
       }
     }
 
@@ -60,12 +59,6 @@ export class MarketTickerPanel extends PanelBase {
       } else {
         this.createRow(ticker);
       }
-
-      // Track price history
-      const history = this.priceHistory.get(ticker.symbol) ?? [];
-      history.push(ticker.price);
-      if (history.length > 20) history.shift();
-      this.priceHistory.set(ticker.symbol, history);
     }
 
     // Reorder DOM to match data order
@@ -135,7 +128,6 @@ export class MarketTickerPanel extends PanelBase {
       row.changeCounter.destroy();
     }
     this.rows.clear();
-    this.priceHistory.clear();
     this.container.innerHTML = '';
   }
 }
