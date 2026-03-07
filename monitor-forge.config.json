@@ -4,7 +4,11 @@
     "slug": "tech-monitor",
     "description": "Minimal tech industry intelligence dashboard",
     "domain": "technology",
-    "tags": ["tech", "ai", "startups"],
+    "tags": [
+      "tech",
+      "ai",
+      "startups"
+    ],
     "branding": {
       "primaryColor": "#0052CC"
     }
@@ -18,7 +22,10 @@
       "tier": 1,
       "interval": 300,
       "language": "en",
-      "tags": ["tech", "startups"]
+      "tags": [
+        "tech",
+        "startups"
+      ]
     },
     {
       "name": "techcrunch-rss",
@@ -28,7 +35,11 @@
       "tier": 1,
       "interval": 600,
       "language": "en",
-      "tags": ["tech", "startups", "vc"]
+      "tags": [
+        "tech",
+        "startups",
+        "vc"
+      ]
     },
     {
       "name": "ars-technica",
@@ -38,7 +49,10 @@
       "tier": 2,
       "interval": 600,
       "language": "en",
-      "tags": ["tech", "science"]
+      "tags": [
+        "tech",
+        "science"
+      ]
     }
   ],
   "layers": [],
@@ -49,7 +63,9 @@
       "displayName": "Tech News",
       "position": 0,
       "config": {
-        "categories": ["tech-news"],
+        "categories": [
+          "tech-news"
+        ],
         "maxItems": 30
       }
     },
@@ -61,11 +77,27 @@
       "config": {
         "refreshInterval": 900
       }
+    },
+    {
+      "name": "market-ticker",
+      "type": "market-ticker",
+      "displayName": "Market Ticker",
+      "position": 2,
+      "config": {}
+    },
+    {
+      "name": "instability-index",
+      "type": "instability-index",
+      "displayName": "Instability Index",
+      "position": 3,
+      "config": {}
     }
   ],
   "ai": {
     "enabled": false,
-    "fallbackChain": ["groq"],
+    "fallbackChain": [
+      "groq"
+    ],
     "providers": {
       "groq": {
         "model": "llama-3.3-70b-versatile",
@@ -81,12 +113,18 @@
   },
   "map": {
     "style": "https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json",
-    "center": [-95, 38],
+    "center": [
+      -95,
+      38
+    ],
     "zoom": 4,
     "minZoom": 2,
     "maxZoom": 18,
     "projection": "mercator",
-    "dayNightOverlay": false
+    "dayNightOverlay": false,
+    "atmosphericGlow": true,
+    "idleRotation": true,
+    "idleRotationSpeed": 0.5
   },
   "backend": {
     "cache": {
@@ -100,7 +138,12 @@
     },
     "corsProxy": {
       "enabled": true,
-      "allowedDomains": ["*"]
+      "allowedDomains": [
+        "*"
+      ],
+      "corsOrigins": [
+        "*"
+      ]
     }
   },
   "build": {

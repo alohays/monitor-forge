@@ -1,6 +1,7 @@
 import { App } from './App.js';
 
 const app = new App(document.getElementById('app')!);
+if (import.meta.env.DEV) (window as any).__app = app;
 app.initialize().catch(err => {
   console.error('Failed to initialize monitor-forge:', err);
   document.getElementById('app')!.innerHTML = `

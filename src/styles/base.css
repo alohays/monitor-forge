@@ -202,10 +202,12 @@ html, body {
 .ticker-item {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: 0.5rem;
   padding: 0.35rem 0;
   font-size: 0.8rem;
 }
+
+.ticker-price { margin-left: auto; }
 
 .ticker-symbol { font-weight: 600; }
 .ticker-up .ticker-change { color: var(--success); }
@@ -295,10 +297,12 @@ html, body {
 .instability-item {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: 0.25rem;
   padding: 0.3rem 0;
   font-size: 0.8rem;
 }
+
+.instability-country { flex-shrink: 0; min-width: 60px; }
 
 .risk-high .instability-score { color: var(--danger); }
 .risk-medium .instability-score { color: var(--warning); }

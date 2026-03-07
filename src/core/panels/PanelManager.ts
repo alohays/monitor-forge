@@ -43,6 +43,7 @@ export class PanelManager {
         this.container.appendChild(panelContainer);
 
         const panel = createPanel(body, config);
+        panel.setPanelElement(panelContainer);
         panel.render();
         this.panels.set(config.name, panel);
       } catch (err) {
