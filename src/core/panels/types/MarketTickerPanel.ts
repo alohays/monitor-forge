@@ -1,5 +1,6 @@
 import { PanelBase } from '../PanelBase.js';
-import DOMPurify from 'dompurify';
+import { AnimatedCounter } from '../../ui/AnimatedCounter.js';
+import { Sparkline } from '../../ui/Sparkline.js';
 
 interface TickerItem {
   symbol: string;
@@ -9,42 +10,124 @@ interface TickerItem {
   changePercent: number;
 }
 
+interface TickerRow {
+  element: HTMLElement;
+  priceCounter: AnimatedCounter;
+  changeCounter: AnimatedCounter;
+  sparkline: Sparkline;
+}
+
 export class MarketTickerPanel extends PanelBase {
-  private tickers: TickerItem[] = [];
+  private rows = new Map<string, TickerRow>();
+  private itemsContainer: HTMLElement | null = null;
 
   render(): void {
-    this.container.innerHTML = `
-      <div class="market-ticker">
-        <div class="market-ticker-items"></div>
-      </div>
-    `;
+    this.container.innerHTML = '<div class="market-ticker"><div class="market-ticker-items"></div></div>';
+    this.showSkeleton(4);
+    this.itemsContainer = this.container.querySelector('.market-ticker-items');
   }
 
   update(data: unknown): void {
     if (!Array.isArray(data)) return;
-    this.tickers = data as TickerItem[];
-    this.renderTickers();
+    const tickers = data as TickerItem[];
+    if (!tickers.length || !('symbol' in tickers[0] && 'price' in tickers[0])) return;
+    this.markDataReceived();
+    this.diffUpdate(tickers);
   }
 
-  private renderTickers(): void {
-    const itemsEl = this.container.querySelector('.market-ticker-items');
-    if (!itemsEl) return;
+  private diffUpdate(tickers: TickerItem[]): void {
+    if (!this.itemsContainer) return;
 
-    itemsEl.innerHTML = this.tickers.map(t => {
-      const isPositive = t.change >= 0;
-      const changeClass = isPositive ? 'ticker-up' : 'ticker-down';
-      const arrow = isPositive ? '&#9650;' : '&#9660;';
-      return `
-        <div class="ticker-item ${changeClass}">
-          <span class="ticker-symbol">${DOMPurify.sanitize(t.symbol)}</span>
-          <span class="ticker-price">${t.price.toFixed(2)}</span>
-          <span class="ticker-change">${arrow} ${Math.abs(t.changePercent).toFixed(2)}%</span>
-        </div>
-      `;
-    }).join('');
+    const newSymbols = new Set(tickers.map(t => t.symbol));
+
+    // Remove rows no longer in data
+    for (const [symbol, row] of this.rows) {
+      if (!newSymbols.has(symbol)) {
+        row.sparkline.destroy();
+        row.priceCounter.destroy();
+        row.changeCounter.destroy();
+        row.element.remove();
+        this.rows.delete(symbol);
+      }
+    }
+
+    // Update or create rows
+    for (const ticker of tickers) {
+      const existing = this.rows.get(ticker.symbol);
+      if (existing) {
+        this.updateRow(existing, ticker);
+      } else {
+        this.createRow(ticker);
+      }
+    }
+
+    // Reorder DOM to match data order
+    for (const ticker of tickers) {
+      const row = this.rows.get(ticker.symbol);
+      if (row) this.itemsContainer.appendChild(row.element);
+    }
+  }
+
+  private createRow(ticker: TickerItem): void {
+    const el = document.createElement('div');
+    el.className = `ticker-item ${ticker.change >= 0 ? 'ticker-up' : 'ticker-down'}`;
+
+    const symbolSpan = document.createElement('span');
+    symbolSpan.className = 'ticker-symbol';
+    symbolSpan.textContent = ticker.symbol;
+
+    const sparkContainer = document.createElement('span');
+    sparkContainer.className = 'ticker-sparkline';
+
+    const priceSpan = document.createElement('span');
+    priceSpan.className = 'ticker-price';
+
+    const changeSpan = document.createElement('span');
+    changeSpan.className = 'ticker-change';
+
+    el.append(symbolSpan, sparkContainer, priceSpan, changeSpan);
+    this.itemsContainer?.appendChild(el);
+
+    const isPositive = ticker.change >= 0;
+
+    const priceCounter = new AnimatedCounter(priceSpan, {
+      format: (n) => n.toFixed(2),
+      initialValue: ticker.price,
+    });
+
+    const changeCounter = new AnimatedCounter(changeSpan, {
+      format: (n) => `${n >= 0 ? '\u25B2' : '\u25BC'} ${Math.abs(n).toFixed(2)}%`,
+      initialValue: ticker.changePercent,
+    });
+
+    const sparkline = new Sparkline(sparkContainer, {
+      width: 60,
+      height: 20,
+      maxPoints: 20,
+      color: isPositive ? 'var(--success)' : 'var(--danger)',
+    });
+    sparkline.pushValue(ticker.price);
+
+    this.rows.set(ticker.symbol, { element: el, priceCounter, changeCounter, sparkline });
+  }
+
+  private updateRow(row: TickerRow, ticker: TickerItem): void {
+    const isPositive = ticker.change >= 0;
+    row.element.className = `ticker-item ${isPositive ? 'ticker-up' : 'ticker-down'}`;
+    row.priceCounter.setValue(ticker.price);
+    row.changeCounter.setValue(ticker.changePercent);
+    row.sparkline.setColor(isPositive ? 'var(--success)' : 'var(--danger)');
+    row.sparkline.pushValue(ticker.price);
   }
 
   destroy(): void {
+    this.cleanupTimers();
+    for (const row of this.rows.values()) {
+      row.sparkline.destroy();
+      row.priceCounter.destroy();
+      row.changeCounter.destroy();
+    }
+    this.rows.clear();
     this.container.innerHTML = '';
   }
 }

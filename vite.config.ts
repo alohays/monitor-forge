@@ -1,9 +1,12 @@
-import { defineConfig } from 'vite';
+import { defineConfig } from 'vitest/config';
 import { resolve } from 'node:path';
 import { apiDevPlugin } from './forge/src/vite/api-dev-plugin.js';
 
 export default defineConfig({
   plugins: [apiDevPlugin()],
+  test: {
+    exclude: ['e2e/**', 'node_modules/**'],
+  },
   resolve: {
     alias: {
       '@': resolve(__dirname, 'src'),
@@ -14,9 +17,9 @@ export default defineConfig({
     sourcemap: true,
     rollupOptions: {
       output: {
-        manualChunks: {
-          maplibre: ['maplibre-gl'],
-          d3: ['d3'],
+        manualChunks(id) {
+          if (id.includes('/node_modules/maplibre-gl/')) return 'maplibre';
+          if (/\/node_modules\/d3[\w-]*\//.test(id)) return 'd3';
         },
       },
     },
