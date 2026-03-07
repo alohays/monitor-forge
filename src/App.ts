@@ -1,11 +1,12 @@
 import { MapEngine, type MapConfig } from './core/map/MapEngine.js';
-import { PanelManager } from './core/panels/PanelManager.js';
+import { PanelManager, type ViewConfig } from './core/panels/PanelManager.js';
 import { SourceManager } from './core/sources/SourceManager.js';
 import type { SourceHealth } from './core/sources/SourceHealth.js';
 import { AIManager, type AIConfig } from './core/ai/AIManager.js';
 import { IdleDetector } from './core/ui/IdleDetector.js';
 import './styles/base.css';
 import './styles/animations.css';
+import './styles/views.css';
 
 export class App {
   private root: HTMLElement;
@@ -60,12 +61,19 @@ export class App {
       await this.mapEngine.addLayer(layerConfig);
     }
 
-    // Initialize panels
+    // Initialize panels and views
     await import('./generated/panel-manifest.js');
     const { panelConfigs } = await import('./generated/panel-manifest.js');
+    const { viewConfigs } = await import('./generated/view-manifest.js');
     const sidebar = document.getElementById('forge-sidebar')!;
     this.panelManager = new PanelManager(sidebar);
-    this.panelManager.initialize(panelConfigs);
+    const views = (viewConfigs as ViewConfig[]).length > 0 ? viewConfigs as ViewConfig[] : undefined;
+    this.panelManager.initialize(panelConfigs, views);
+
+    // Render view tabs if views are defined
+    if (views) {
+      this.renderViewTabs(views);
+    }
 
     // Initialize AI
     this.aiManager = new AIManager(config.ai as AIConfig);
@@ -99,6 +107,35 @@ export class App {
     if (this.aiManager.isEnabled()) {
       this.generateAIBrief();
     }
+  }
+
+  private renderViewTabs(views: ViewConfig[]): void {
+    const headerActions = document.querySelector('.forge-header-actions');
+    if (!headerActions) return;
+
+    const tabContainer = document.createElement('div');
+    tabContainer.className = 'forge-view-tabs';
+
+    for (const view of views) {
+      const tab = document.createElement('button');
+      tab.className = 'forge-view-tab';
+      tab.dataset.view = view.name;
+      tab.textContent = view.icon ? `${view.icon} ${view.displayName}` : view.displayName;
+
+      if (this.panelManager?.getActiveView() === view.name) {
+        tab.classList.add('active');
+      }
+
+      tab.addEventListener('click', () => {
+        this.panelManager?.switchView(view.name);
+        tabContainer.querySelectorAll('.forge-view-tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+      });
+
+      tabContainer.appendChild(tab);
+    }
+
+    headerActions.insertBefore(tabContainer, headerActions.firstChild);
   }
 
   private async generateAIBrief(): Promise<void> {

@@ -1,0 +1,43 @@
+/* View tabs in header */
+.forge-view-tabs {
+  display: flex;
+  gap: 2px;
+  margin-right: 0.75rem;
+}
+
+.forge-view-tab {
+  padding: 0.2rem 0.6rem;
+  background: transparent;
+  color: var(--text-muted);
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  cursor: pointer;
+  font-size: 0.75rem;
+  font-weight: 500;
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
+}
+
+.forge-view-tab:hover {
+  color: var(--fg);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.forge-view-tab.active {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: rgba(0, 82, 204, 0.1);
+}
+
+/* View containers in sidebar */
+.forge-view {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+@media (max-width: 768px) {
+  .forge-view-tabs {
+    overflow-x: auto;
+    flex-shrink: 0;
+  }
+}

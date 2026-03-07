@@ -9,8 +9,9 @@ export function registerPanelType(type: string, cls: PanelConstructor): void {
 }
 
 export function createPanel(container: HTMLElement, config: PanelConfig): PanelBase {
-  const cls = registry.get(config.type);
-  if (!cls) throw new Error(`Unknown panel type: ${config.type}`);
+  const key = config.type === 'custom' ? config.name : config.type;
+  const cls = registry.get(key);
+  if (!cls) throw new Error(`Unknown panel type: ${key}`);
   return new cls(container, config);
 }
 

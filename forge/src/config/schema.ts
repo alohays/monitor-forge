@@ -55,9 +55,22 @@ export const PanelSchema = z.object({
   displayName: z.string().min(1),
   position: z.number().int().min(0),
   config: z.record(z.unknown()).default({}),
+  customModule: z.string().regex(/^[A-Z][a-zA-Z0-9]*$/, 'Must be PascalCase class name').optional(),
 });
 
 export type PanelConfig = z.infer<typeof PanelSchema>;
+
+// ─── View Schema ───────────────────────────────────────────
+
+export const ViewSchema = z.object({
+  name: z.string().regex(/^[a-z0-9-]+$/, 'Name must be lowercase alphanumeric with hyphens'),
+  displayName: z.string().min(1),
+  panels: z.array(z.string().regex(/^[a-z0-9-]+$/)).min(1),
+  icon: z.string().optional(),
+  default: z.boolean().optional(),
+});
+
+export type ViewConfig = z.infer<typeof ViewSchema>;
 
 // ─── AI Schema ──────────────────────────────────────────────
 
@@ -155,6 +168,7 @@ export const MonitorForgeConfigSchema = z.object({
   sources: z.array(SourceSchema).default([]),
   layers: z.array(LayerSchema).default([]),
   panels: z.array(PanelSchema).default([]),
+  views: z.array(ViewSchema).default([]),
   ai: AISchema.default({}),
   map: MapSchema.default({}),
   backend: BackendSchema.default({}),

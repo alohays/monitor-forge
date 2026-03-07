@@ -12,6 +12,7 @@ import { registerDeployCommand } from '../src/commands/deploy.js';
 import { registerEnvCommands } from '../src/commands/env.js';
 import { registerPresetCommands } from '../src/commands/preset.js';
 import { registerSetupCommand } from '../src/commands/setup.js';
+import { registerViewCommands } from '../src/commands/view/index.js';
 
 const program = new Command();
 
@@ -35,5 +36,6 @@ registerDeployCommand(program);
 registerEnvCommands(program);
 registerPresetCommands(program);
 registerSetupCommand(program);
+registerViewCommands(program);
 
 program.parse();
