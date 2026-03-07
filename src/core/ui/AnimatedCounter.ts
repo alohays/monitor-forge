@@ -48,12 +48,12 @@ export class AnimatedCounter {
       const eased = 1 - Math.pow(1 - progress, 3);
       const value = startVal + (endVal - startVal) * eased;
 
+      this.currentValue = value;
       this.element.textContent = this.formatFn(value);
 
       if (progress < 1) {
         this.animationId = requestAnimationFrame(tick);
       } else {
-        this.currentValue = endVal;
         this.animationId = null;
       }
     };

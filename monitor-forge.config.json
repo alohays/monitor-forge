@@ -121,7 +121,10 @@
     "minZoom": 2,
     "maxZoom": 18,
     "projection": "mercator",
-    "dayNightOverlay": false
+    "dayNightOverlay": false,
+    "atmosphericGlow": true,
+    "idleRotation": true,
+    "idleRotationSpeed": 0.5
   },
   "backend": {
     "cache": {

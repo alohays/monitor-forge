@@ -1,5 +1,5 @@
 const IDLE_TIMEOUT_MS = 120_000; // 2 minutes
-const ACTIVITY_EVENTS = ['mousedown', 'keydown', 'scroll', 'touchstart', 'mousemove'] as const;
+const ACTIVITY_EVENTS = ['mousedown', 'keydown', 'scroll', 'touchstart'] as const;
 
 export class IdleDetector {
   private timer: ReturnType<typeof setTimeout> | null = null;
