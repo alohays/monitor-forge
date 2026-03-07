@@ -199,6 +199,20 @@ describe('setup command (non-interactive)', () => {
     expect(output.warnings).toContainEqual(expect.stringContaining('no API keys'));
   });
 
+  it('rejects invalid projection value', async () => {
+    mockNoExistingConfig();
+    mockPresetsDir();
+
+    const program = createProgram();
+    await expect(
+      program.parseAsync(['node', 'forge', 'setup', '--non-interactive', '--projection', 'equirectangular', '--format', 'json']),
+    ).rejects.toThrow('exit:1');
+
+    const output = JSON.parse(logOutput[0]);
+    expect(output.success).toBe(false);
+    expect(output.error).toContain('Invalid projection');
+  });
+
   it('warns about missing preset gracefully', async () => {
     mockedExistsSync.mockImplementation((path: any) => {
       const p = String(path);
@@ -245,8 +259,17 @@ describe('setup command (interactive)', () => {
     const program = createProgram();
     await program.parseAsync(['node', 'forge', 'setup']);
 
-    // Config should be written
+    // Config should be written with correct values
     expect(mockedWriteFileSync).toHaveBeenCalled();
+    const configCall = mockedWriteFileSync.mock.calls.find(
+      ([path]) => String(path).endsWith('config.json')
+    );
+    expect(configCall).toBeDefined();
+    const writtenConfig = JSON.parse(configCall![1] as string);
+    expect(writtenConfig.monitor.name).toBe('Test Monitor');
+    expect(writtenConfig.map.projection).toBe('globe');
+    expect(writtenConfig.map.center).toEqual([126.97, 37.56]);
+    expect(writtenConfig.ai.enabled).toBe(true);
 
     // .env.local should contain the groq key
     const envCall = mockedWriteFileSync.mock.calls.find(

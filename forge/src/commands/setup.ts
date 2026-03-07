@@ -5,7 +5,7 @@ import * as p from '@clack/prompts';
 import pc from 'picocolors';
 import { configExists, writeConfig } from '../config/loader.js';
 import { createDefaultConfig } from '../config/defaults.js';
-import type { MonitorForgeConfig } from '../config/schema.js';
+import { MonitorForgeConfigSchema, type MonitorForgeConfig } from '../config/schema.js';
 import { formatOutput, success, failure, type OutputFormat, type Change } from '../output/format.js';
 import { collectRequiredEnvVars, parseEnvFile } from './env.js';
 
@@ -83,7 +83,7 @@ function buildAndWrite(params: SetupParams, dryRun: boolean): SetupResult {
         analysis: { summarization: false, entityExtraction: false, sentimentAnalysis: false, focalPointDetection: false },
       };
 
-  const config = createDefaultConfig({
+  const config = MonitorForgeConfigSchema.parse(createDefaultConfig({
     ...presetOverrides,
     monitor: {
       name: params.name,
@@ -99,7 +99,7 @@ function buildAndWrite(params: SetupParams, dryRun: boolean): SetupResult {
       dayNightOverlay: params.dayNight,
     }),
     ai: aiConfig,
-  });
+  }));
 
   if (dryRun) {
     changes.push(
@@ -168,7 +168,7 @@ async function runInteractiveWizard(dryRun: boolean): Promise<void> {
   p.intro(pc.bgCyan(pc.black(' monitor-forge setup ')));
 
   // Check existing config
-  if (configExists()) {
+  if (configExists() && !dryRun) {
     const overwrite = await p.confirm({
       message: 'monitor-forge.config.json already exists. Overwrite?',
     });
@@ -364,7 +364,15 @@ function runNonInteractive(
   const center: [number, number] = centerStr
     ? centerStr.split(',').map(s => parseFloat(s.trim())) as [number, number]
     : [0, 20];
-  const projection = (opts.projection as 'mercator' | 'globe') ?? 'mercator';
+  const projectionRaw = (opts.projection as string) ?? 'mercator';
+  if (projectionRaw !== 'mercator' && projectionRaw !== 'globe') {
+    console.log(formatOutput(
+      failure('setup', `Invalid projection "${projectionRaw}". Must be "mercator" or "globe".`),
+      format,
+    ));
+    process.exit(1);
+  }
+  const projection = projectionRaw as 'mercator' | 'globe';
   const dayNight = !!opts.dayNight;
   const aiEnabled = opts.ai !== false;
   const groqKey = (opts.groqKey as string) ?? '';
