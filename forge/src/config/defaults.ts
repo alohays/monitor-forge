@@ -16,6 +16,7 @@ export function createDefaultConfig(overrides?: Partial<MonitorForgeConfig>): Mo
     sources: overrides?.sources ?? [],
     layers: overrides?.layers ?? [],
     panels: overrides?.panels ?? [],
+    views: overrides?.views ?? [],
     ai: {
       enabled: true,
       fallbackChain: ['groq', 'openrouter'],

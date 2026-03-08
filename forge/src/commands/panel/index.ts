@@ -1,10 +1,125 @@
 import type { Command } from 'commander';
+import { existsSync, mkdirSync, writeFileSync } from 'node:fs';
+import { resolve } from 'node:path';
 import { loadConfig, updateConfig } from '../../config/loader.js';
 import { PanelSchema, type PanelConfig } from '../../config/schema.js';
 import { formatOutput, success, failure, type OutputFormat } from '../../output/format.js';
 
+function toPascalCase(kebab: string): string {
+  return kebab.split('-').map(s => s.charAt(0).toUpperCase() + s.slice(1)).join('');
+}
+
+function generatePanelScaffold(className: string, displayName: string): string {
+  return `import { PanelBase } from '../core/panels/PanelBase.js';
+import type { PanelConfig } from '../core/panels/PanelBase.js';
+
+/**
+ * Custom panel: ${displayName}
+ *
+ * Implement render(), update(), and destroy().
+ * PanelBase utilities: triggerPulse(), showSkeleton(), hideSkeleton(),
+ * markDataReceived(), createElement(tag, className?, innerHTML?)
+ */
+export class ${className} extends PanelBase {
+  render(): void {
+    this.container.innerHTML = '<p>${displayName} — edit src/custom-panels/${className}.ts</p>';
+    this.showSkeleton();
+  }
+
+  update(data: unknown): void {
+    this.markDataReceived();
+  }
+
+  destroy(): void {
+    this.cleanupTimers();
+    this.container.innerHTML = '';
+  }
+}
+`;
+}
+
 export function registerPanelCommands(program: Command): void {
   const panel = program.command('panel').description('Manage UI panels');
+
+  panel
+    .command('create <name>')
+    .description('Scaffold a new custom panel in src/custom-panels/')
+    .option('--display-name <displayName>', 'Display name in UI')
+    .option('--position <pos>', 'Panel position (0-based)')
+    .option('--no-register', 'Only scaffold the file, skip config registration')
+    .action((name, opts) => {
+      const format = (program.opts().format ?? 'table') as OutputFormat;
+      const dryRun = program.opts().dryRun ?? false;
+
+      try {
+        const className = toPascalCase(name);
+        const displayName = opts.displayName ?? name.split('-').map((s: string) => s.charAt(0).toUpperCase() + s.slice(1)).join(' ');
+        const customDir = resolve(process.cwd(), 'src/custom-panels');
+        const filePath = resolve(customDir, `${className}.ts`);
+
+        if (existsSync(filePath)) {
+          throw new Error(`Custom panel file already exists: src/custom-panels/${className}.ts`);
+        }
+
+        if (dryRun) {
+          console.log(formatOutput(
+            success('panel create --dry-run', { name, className, filePath: `src/custom-panels/${className}.ts` }, {
+              changes: [
+                { type: 'created', file: `src/custom-panels/${className}.ts`, description: `Would scaffold custom panel "${name}"` },
+                ...(opts.register !== false ? [{ type: 'modified' as const, file: 'monitor-forge.config.json', description: `Would add panel "${name}" to config` }] : []),
+              ],
+            }),
+            format,
+          ));
+          return;
+        }
+
+        // Create directory and scaffold file
+        mkdirSync(customDir, { recursive: true });
+        writeFileSync(filePath, generatePanelScaffold(className, displayName));
+
+        const changes: Array<{ type: 'created' | 'modified' | 'deleted'; file: string; description: string }> = [
+          { type: 'created', file: `src/custom-panels/${className}.ts`, description: `Scaffolded custom panel "${name}"` },
+        ];
+
+        // Register in config unless --no-register
+        if (opts.register !== false) {
+          const config = loadConfig();
+          const position = opts.position != null
+            ? parseInt(opts.position, 10)
+            : Math.max(0, ...config.panels.map(p => p.position)) + 1;
+
+          const panelConfig: PanelConfig = PanelSchema.parse({
+            name,
+            type: 'custom',
+            displayName,
+            position,
+            config: {},
+            customModule: className,
+          });
+
+          const { path } = updateConfig(cfg => {
+            if (cfg.panels.some(p => p.name === name)) {
+              throw new Error(`Panel "${name}" already exists in config`);
+            }
+            return { ...cfg, panels: [...cfg.panels, panelConfig] };
+          });
+
+          changes.push({ type: 'modified' as const, file: path, description: `Added panel "${name}" to config` });
+        }
+
+        console.log(formatOutput(
+          success('panel create', { name, className, file: `src/custom-panels/${className}.ts` }, {
+            changes,
+            next_steps: ['Edit the scaffold file', 'forge validate', 'forge dev'],
+          }),
+          format,
+        ));
+      } catch (err) {
+        console.log(formatOutput(failure('panel create', String(err)), format));
+        process.exit(1);
+      }
+    });
 
   panel
     .command('add <type>')
