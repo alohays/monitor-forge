@@ -1,0 +1,167 @@
+{
+  "_meta": {
+    "category": "climate",
+    "difficulty": "intermediate",
+    "requires_api_keys": ["GROQ_API_KEY"],
+    "optional_api_keys": ["OPENROUTER_API_KEY"],
+    "preview_description": "Comprehensive climate and disaster monitoring with heatmap layers and AI analysis"
+  },
+  "monitor": {
+    "name": "Climate Intelligence",
+    "slug": "climate-intelligence",
+    "description": "Full-featured climate intelligence dashboard with disaster tracking and AI analysis",
+    "domain": "climate",
+    "tags": ["climate", "environment", "sustainability", "disasters"],
+    "branding": {
+      "primaryColor": "#00AA55"
+    }
+  },
+  "sources": [
+    {
+      "name": "carbon-brief",
+      "type": "rss",
+      "url": "https://www.carbonbrief.org/feed/",
+      "category": "climate-news",
+      "tier": 1,
+      "interval": 900,
+      "language": "en",
+      "tags": ["climate", "science"]
+    },
+    {
+      "name": "phys-org-earth",
+      "type": "rss",
+      "url": "https://phys.org/rss-feed/earth-news/",
+      "category": "environment",
+      "tier": 2,
+      "interval": 1800,
+      "language": "en",
+      "tags": ["earth", "science"]
+    },
+    {
+      "name": "guardian-environment",
+      "type": "rss",
+      "url": "https://www.theguardian.com/environment/rss",
+      "category": "climate-news",
+      "tier": 1,
+      "interval": 600,
+      "language": "en",
+      "tags": ["climate", "environment"]
+    },
+    {
+      "name": "reliefweb-disasters",
+      "type": "rss",
+      "url": "https://reliefweb.int/updates/rss.xml",
+      "category": "disasters",
+      "tier": 1,
+      "interval": 600,
+      "language": "en",
+      "tags": ["disasters", "humanitarian"]
+    },
+    {
+      "name": "nasa-earth-observatory",
+      "type": "rss",
+      "url": "https://earthobservatory.nasa.gov/feeds/earth-observatory.rss",
+      "category": "earth-observation",
+      "tier": 2,
+      "interval": 3600,
+      "language": "en",
+      "tags": ["nasa", "satellite"]
+    },
+    {
+      "name": "noaa-climate",
+      "type": "rss",
+      "url": "https://www.climate.gov/news-features/feed",
+      "category": "climate-data",
+      "tier": 2,
+      "interval": 3600,
+      "language": "en",
+      "tags": ["noaa", "climate-data"]
+    }
+  ],
+  "layers": [
+    {
+      "name": "disaster-zones",
+      "type": "heatmap",
+      "displayName": "Disaster Risk Zones",
+      "color": "#FF6600",
+      "data": {
+        "source": "static",
+        "path": "data/geo/natural-disasters.geojson"
+      },
+      "defaultVisible": true,
+      "category": "hazards"
+    }
+  ],
+  "panels": [
+    {
+      "name": "climate-news",
+      "type": "news-feed",
+      "displayName": "Climate News",
+      "position": 0,
+      "config": {
+        "categories": ["climate-news", "environment", "disasters"],
+        "maxItems": 50
+      }
+    },
+    {
+      "name": "ai-brief",
+      "type": "ai-brief",
+      "displayName": "Climate Brief",
+      "position": 1,
+      "config": {
+        "refreshInterval": 600
+      }
+    },
+    {
+      "name": "entity-tracker",
+      "type": "entity-tracker",
+      "displayName": "Key Organizations",
+      "position": 2,
+      "config": {
+        "entities": ["IPCC", "UNFCCC", "NASA", "NOAA", "WHO", "El Nino", "La Nina", "COP"],
+        "maxEntities": 20
+      }
+    },
+    {
+      "name": "service-status",
+      "type": "service-status",
+      "displayName": "Source Status",
+      "position": 3,
+      "config": {}
+    }
+  ],
+  "ai": {
+    "enabled": true,
+    "fallbackChain": ["groq", "openrouter"],
+    "providers": {
+      "groq": {
+        "model": "llama-3.3-70b-versatile",
+        "apiKeyEnv": "GROQ_API_KEY"
+      },
+      "openrouter": {
+        "model": "anthropic/claude-sonnet-4",
+        "apiKeyEnv": "OPENROUTER_API_KEY"
+      }
+    },
+    "analysis": {
+      "summarization": true,
+      "entityExtraction": true,
+      "sentimentAnalysis": true,
+      "focalPointDetection": true,
+      "customPrompt": "Focus on climate change developments, extreme weather events, natural disasters, environmental policy, and emissions data. Highlight escalating climate risks and international climate negotiations."
+    }
+  },
+  "map": {
+    "style": "https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json",
+    "center": [0, 20],
+    "zoom": 3,
+    "projection": "globe",
+    "dayNightOverlay": true,
+    "atmosphericGlow": true,
+    "idleRotation": true,
+    "idleRotationSpeed": 0.3
+  },
+  "theme": {
+    "palette": "forest"
+  }
+}

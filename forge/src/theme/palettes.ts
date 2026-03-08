@@ -1,0 +1,235 @@
+export interface PaletteColors {
+  fg: string;
+  bg: string;
+  bgSecondary: string;
+  bgPanel: string;
+  border: string;
+  accent: string;
+  accentHover: string;
+  success: string;
+  danger: string;
+  warning: string;
+  textMuted: string;
+}
+
+export interface PaletteDefinition {
+  name: string;
+  label: string;
+  dark: PaletteColors;
+  light: PaletteColors;
+}
+
+export const PALETTES: Record<string, PaletteDefinition> = {
+  default: {
+    name: 'default',
+    label: 'Default',
+    dark: {
+      fg: '#e0e0e0',
+      bg: '#0a0a0f',
+      bgSecondary: '#12121a',
+      bgPanel: '#1a1a2e',
+      border: '#2a2a3e',
+      accent: '#0052CC',
+      accentHover: '#0066ff',
+      success: '#00b894',
+      danger: '#ff6b6b',
+      warning: '#ffc107',
+      textMuted: '#888888',
+    },
+    light: {
+      fg: '#1a1a2e',
+      bg: '#f5f5f7',
+      bgSecondary: '#eaeaef',
+      bgPanel: '#ffffff',
+      border: '#d0d0d8',
+      accent: '#0052CC',
+      accentHover: '#003d99',
+      success: '#00a884',
+      danger: '#e04545',
+      warning: '#d49e00',
+      textMuted: '#666666',
+    },
+  },
+  ocean: {
+    name: 'ocean',
+    label: 'Ocean',
+    dark: {
+      fg: '#ccd6f6',
+      bg: '#0a192f',
+      bgSecondary: '#0d1f3c',
+      bgPanel: '#112240',
+      border: '#233554',
+      accent: '#64ffda',
+      accentHover: '#45e6c0',
+      success: '#64ffda',
+      danger: '#ff6b6b',
+      warning: '#ffd166',
+      textMuted: '#8892b0',
+    },
+    light: {
+      fg: '#0a192f',
+      bg: '#f0f4f8',
+      bgSecondary: '#e2e8f0',
+      bgPanel: '#ffffff',
+      border: '#cbd5e1',
+      accent: '#0d9488',
+      accentHover: '#0a7c72',
+      success: '#0d9488',
+      danger: '#e04545',
+      warning: '#d49e00',
+      textMuted: '#64748b',
+    },
+  },
+  forest: {
+    name: 'forest',
+    label: 'Forest',
+    dark: {
+      fg: '#c9d1d9',
+      bg: '#0d1117',
+      bgSecondary: '#111820',
+      bgPanel: '#161b22',
+      border: '#30363d',
+      accent: '#3fb950',
+      accentHover: '#2ea043',
+      success: '#3fb950',
+      danger: '#f85149',
+      warning: '#d29922',
+      textMuted: '#8b949e',
+    },
+    light: {
+      fg: '#1f2328',
+      bg: '#f6f8fa',
+      bgSecondary: '#eef1f3',
+      bgPanel: '#ffffff',
+      border: '#d0d7de',
+      accent: '#1a7f37',
+      accentHover: '#116329',
+      success: '#1a7f37',
+      danger: '#cf222e',
+      warning: '#9a6700',
+      textMuted: '#656d76',
+    },
+  },
+  sunset: {
+    name: 'sunset',
+    label: 'Sunset',
+    dark: {
+      fg: '#f0e6d3',
+      bg: '#1a1020',
+      bgSecondary: '#201428',
+      bgPanel: '#251830',
+      border: '#3d2a4a',
+      accent: '#ff6b6b',
+      accentHover: '#ff5252',
+      success: '#66bb6a',
+      danger: '#ff6b6b',
+      warning: '#ffca28',
+      textMuted: '#a08090',
+    },
+    light: {
+      fg: '#2d1f33',
+      bg: '#fdf6f0',
+      bgSecondary: '#f5ece3',
+      bgPanel: '#ffffff',
+      border: '#e0d0c0',
+      accent: '#d84315',
+      accentHover: '#bf360c',
+      success: '#2e7d32',
+      danger: '#d84315',
+      warning: '#f57f17',
+      textMuted: '#78606e',
+    },
+  },
+  midnight: {
+    name: 'midnight',
+    label: 'Midnight',
+    dark: {
+      fg: '#f8fafc',
+      bg: '#020817',
+      bgSecondary: '#080e1f',
+      bgPanel: '#0f172a',
+      border: '#1e293b',
+      accent: '#818cf8',
+      accentHover: '#6366f1',
+      success: '#34d399',
+      danger: '#f87171',
+      warning: '#fbbf24',
+      textMuted: '#94a3b8',
+    },
+    light: {
+      fg: '#0f172a',
+      bg: '#f8fafc',
+      bgSecondary: '#f1f5f9',
+      bgPanel: '#ffffff',
+      border: '#e2e8f0',
+      accent: '#4f46e5',
+      accentHover: '#4338ca',
+      success: '#059669',
+      danger: '#dc2626',
+      warning: '#d97706',
+      textMuted: '#64748b',
+    },
+  },
+  cyberpunk: {
+    name: 'cyberpunk',
+    label: 'Cyberpunk',
+    dark: {
+      fg: '#00ff41',
+      bg: '#0a0a0a',
+      bgSecondary: '#0f0f0f',
+      bgPanel: '#111111',
+      border: '#1a1a1a',
+      accent: '#ff00ff',
+      accentHover: '#cc00cc',
+      success: '#00ff41',
+      danger: '#ff0040',
+      warning: '#ffff00',
+      textMuted: '#666666',
+    },
+    light: {
+      fg: '#1a0025',
+      bg: '#f5f0ff',
+      bgSecondary: '#ece5f5',
+      bgPanel: '#ffffff',
+      border: '#d0c0e0',
+      accent: '#9900cc',
+      accentHover: '#7700aa',
+      success: '#008020',
+      danger: '#cc0033',
+      warning: '#b38f00',
+      textMuted: '#665577',
+    },
+  },
+  minimal: {
+    name: 'minimal',
+    label: 'Minimal',
+    dark: {
+      fg: '#d4d4d4',
+      bg: '#171717',
+      bgSecondary: '#1c1c1c',
+      bgPanel: '#212121',
+      border: '#333333',
+      accent: '#ffffff',
+      accentHover: '#e0e0e0',
+      success: '#4ade80',
+      danger: '#f87171',
+      warning: '#facc15',
+      textMuted: '#737373',
+    },
+    light: {
+      fg: '#171717',
+      bg: '#ffffff',
+      bgSecondary: '#fafafa',
+      bgPanel: '#ffffff',
+      border: '#e5e5e5',
+      accent: '#000000',
+      accentHover: '#333333',
+      success: '#16a34a',
+      danger: '#dc2626',
+      warning: '#ca8a04',
+      textMuted: '#737373',
+    },
+  },
+};
+
+export const PALETTE_NAMES = Object.keys(PALETTES);

@@ -1,4 +1,11 @@
 {
+  "_meta": {
+    "category": "technology",
+    "difficulty": "intermediate",
+    "requires_api_keys": ["GROQ_API_KEY"],
+    "optional_api_keys": ["OPENROUTER_API_KEY"],
+    "preview_description": "Full tech intelligence with AI research tracking and tech hub mapping"
+  },
   "monitor": {
     "name": "Tech Intelligence",
     "slug": "tech-intelligence",
@@ -88,7 +95,17 @@
       "tags": ["open-source", "github"]
     }
   ],
-  "layers": [],
+  "layers": [
+    {
+      "name": "tech-hubs",
+      "type": "points",
+      "displayName": "Tech Hubs",
+      "color": "#00D4FF",
+      "data": { "source": "static", "path": "data/geo/tech-hubs.geojson" },
+      "defaultVisible": true,
+      "category": "infrastructure"
+    }
+  ],
   "panels": [
     {
       "name": "tech-news",
@@ -152,5 +169,8 @@
     "center": [-95, 38],
     "zoom": 4,
     "projection": "mercator"
+  },
+  "theme": {
+    "palette": "default"
   }
 }

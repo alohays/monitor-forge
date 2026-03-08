@@ -1,69 +1,69 @@
 {
   "_meta": {
-    "category": "geopolitics",
+    "category": "health",
     "difficulty": "beginner",
     "requires_api_keys": ["GROQ_API_KEY"],
     "optional_api_keys": [],
-    "preview_description": "Track global events from BBC, Reuters, and Al Jazeera"
+    "preview_description": "Monitor global health news from WHO, STAT News, and NIH"
   },
   "monitor": {
-    "name": "Geopolitics Monitor",
-    "slug": "geopolitics-monitor",
-    "description": "Minimal geopolitical intelligence dashboard",
-    "domain": "geopolitics",
-    "tags": ["geopolitics", "conflict", "diplomacy"],
+    "name": "Health Monitor",
+    "slug": "health-monitor",
+    "description": "Minimal global health intelligence dashboard",
+    "domain": "health",
+    "tags": ["health", "medicine", "public-health"],
     "branding": {
-      "primaryColor": "#CC0000"
+      "primaryColor": "#0099DD"
     }
   },
   "sources": [
     {
-      "name": "bbc-world",
+      "name": "who-news",
       "type": "rss",
-      "url": "https://feeds.bbci.co.uk/news/world/rss.xml",
-      "category": "world-news",
+      "url": "https://www.who.int/feeds/entity/news/en/rss.xml",
+      "category": "health-news",
       "tier": 1,
-      "interval": 300,
+      "interval": 1800,
       "language": "en",
-      "tags": ["world", "geopolitics"]
+      "tags": ["who", "global-health"]
     },
     {
-      "name": "reuters-world",
+      "name": "stat-news",
       "type": "rss",
-      "url": "https://www.reutersagency.com/feed/?taxonomy=best-topics&post_type=best",
-      "category": "world-news",
+      "url": "https://www.statnews.com/feed/",
+      "category": "health-news",
       "tier": 1,
-      "interval": 300,
-      "language": "en",
-      "tags": ["world", "geopolitics"]
-    },
-    {
-      "name": "aljazeera",
-      "type": "rss",
-      "url": "https://www.aljazeera.com/xml/rss/all.xml",
-      "category": "world-news",
-      "tier": 2,
       "interval": 600,
       "language": "en",
-      "tags": ["world", "middle-east"]
+      "tags": ["medicine", "pharma"]
+    },
+    {
+      "name": "nih-news",
+      "type": "rss",
+      "url": "https://www.nih.gov/news-events/news-releases/feed",
+      "category": "health-news",
+      "tier": 1,
+      "interval": 900,
+      "language": "en",
+      "tags": ["research", "nih"]
     }
   ],
   "layers": [],
   "panels": [
     {
-      "name": "world-news",
+      "name": "health-news",
       "type": "news-feed",
-      "displayName": "World News",
+      "displayName": "Health News",
       "position": 0,
       "config": {
-        "categories": ["world-news"],
+        "categories": ["health-news"],
         "maxItems": 30
       }
     },
     {
       "name": "ai-brief",
       "type": "ai-brief",
-      "displayName": "Situation Brief",
+      "displayName": "Health Brief",
       "position": 1,
       "config": {
         "refreshInterval": 900
@@ -87,11 +87,11 @@
   },
   "map": {
     "style": "https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json",
-    "center": [30, 30],
+    "center": [0, 20],
     "zoom": 3,
     "projection": "globe"
   },
   "theme": {
-    "palette": "midnight"
+    "palette": "ocean"
   }
 }

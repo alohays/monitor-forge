@@ -137,6 +137,22 @@ export const BrandingSchema = z.object({
   favicon: z.string().optional(),
 });
 
+// ─── Theme Schema ───────────────────────────────────────────
+
+export const ThemeColorsSchema = z.object({
+  accent: z.string().regex(/^#[0-9A-Fa-f]{6}$/).optional(),
+  accentHover: z.string().regex(/^#[0-9A-Fa-f]{6}$/).optional(),
+});
+
+export const ThemeSchema = z.object({
+  mode: z.enum(['dark', 'light', 'auto']).default('dark'),
+  palette: z.enum(['default', 'ocean', 'forest', 'sunset', 'midnight', 'cyberpunk', 'minimal']).default('default'),
+  colors: ThemeColorsSchema.default({}),
+  panelPosition: z.enum(['right', 'left']).default('right'),
+  panelWidth: z.number().int().min(200).max(800).default(380),
+  compactMode: z.boolean().default(false),
+});
+
 // ─── Monitor (Identity) Schema ──────────────────────────────
 
 export const MonitorSchema = z.object({
@@ -159,6 +175,7 @@ export const MonitorForgeConfigSchema = z.object({
   map: MapSchema.default({}),
   backend: BackendSchema.default({}),
   build: BuildSchema.default({}),
+  theme: ThemeSchema.default({}),
 });
 
 export type MonitorForgeConfig = z.infer<typeof MonitorForgeConfigSchema>;

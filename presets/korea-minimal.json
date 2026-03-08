@@ -1,66 +1,69 @@
 {
   "_meta": {
-    "category": "technology",
+    "category": "korea",
     "difficulty": "beginner",
     "requires_api_keys": ["GROQ_API_KEY"],
     "optional_api_keys": [],
-    "preview_description": "Track tech news from Hacker News, TechCrunch, and Ars Technica"
+    "preview_description": "Monitor Korean peninsula news from Yonhap, Korea Herald, and BBC Asia"
   },
   "monitor": {
-    "name": "Tech Monitor",
-    "slug": "tech-monitor",
-    "description": "Minimal tech industry intelligence dashboard",
-    "domain": "technology",
-    "tags": ["tech", "ai", "startups"]
+    "name": "Korea Monitor",
+    "slug": "korea-monitor",
+    "description": "Minimal Korean peninsula intelligence dashboard",
+    "domain": "korea",
+    "tags": ["korea", "asia", "geopolitics"],
+    "branding": {
+      "primaryColor": "#003478"
+    }
   },
   "sources": [
     {
-      "name": "hackernews-rss",
+      "name": "yonhap-english",
       "type": "rss",
-      "url": "https://hnrss.org/frontpage",
-      "category": "tech-news",
+      "url": "https://en.yna.co.kr/RSS/news.xml",
+      "category": "korea-news",
       "tier": 1,
       "interval": 300,
       "language": "en",
-      "tags": ["tech", "startups"]
+      "tags": ["korea", "breaking"]
     },
     {
-      "name": "techcrunch-rss",
+      "name": "korea-herald",
       "type": "rss",
-      "url": "https://techcrunch.com/feed/",
-      "category": "tech-news",
+      "url": "https://www.koreaherald.com/common/rss_xml.php?ct=102",
+      "category": "korea-news",
       "tier": 1,
       "interval": 600,
       "language": "en",
-      "tags": ["tech", "startups", "vc"]
+      "tags": ["korea", "politics"]
     },
     {
-      "name": "ars-technica",
+      "name": "bbc-asia",
       "type": "rss",
-      "url": "https://feeds.arstechnica.com/arstechnica/index",
-      "category": "tech-news",
+      "url": "https://feeds.bbci.co.uk/news/world/asia/rss.xml",
+      "category": "regional",
       "tier": 2,
       "interval": 600,
       "language": "en",
-      "tags": ["tech", "science"]
+      "tags": ["asia", "world"]
     }
   ],
   "layers": [],
   "panels": [
     {
-      "name": "tech-news",
+      "name": "korea-news",
       "type": "news-feed",
-      "displayName": "Tech News",
+      "displayName": "Korea News",
       "position": 0,
       "config": {
-        "categories": ["tech-news"],
+        "categories": ["korea-news", "regional"],
         "maxItems": 30
       }
     },
     {
       "name": "ai-brief",
       "type": "ai-brief",
-      "displayName": "AI Brief",
+      "displayName": "Korea Brief",
       "position": 1,
       "config": {
         "refreshInterval": 900
@@ -84,11 +87,11 @@
   },
   "map": {
     "style": "https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json",
-    "center": [-95, 38],
-    "zoom": 4,
+    "center": [127.5, 37],
+    "zoom": 6,
     "projection": "mercator"
   },
   "theme": {
-    "palette": "default"
+    "palette": "midnight"
   }
 }

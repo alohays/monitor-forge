@@ -1,0 +1,173 @@
+{
+  "_meta": {
+    "category": "korea",
+    "difficulty": "intermediate",
+    "requires_api_keys": ["GROQ_API_KEY"],
+    "optional_api_keys": ["OPENROUTER_API_KEY"],
+    "preview_description": "Comprehensive Korean peninsula monitoring with entity tracking, instability index, and AI analysis"
+  },
+  "monitor": {
+    "name": "Korea Intelligence",
+    "slug": "korea-intelligence",
+    "description": "Full-featured Korean peninsula intelligence dashboard with entity tracking and AI analysis",
+    "domain": "korea",
+    "tags": ["korea", "asia", "geopolitics", "dprk", "security"],
+    "branding": {
+      "primaryColor": "#003478"
+    }
+  },
+  "sources": [
+    {
+      "name": "yonhap-english",
+      "type": "rss",
+      "url": "https://en.yna.co.kr/RSS/news.xml",
+      "category": "korea-news",
+      "tier": 1,
+      "interval": 300,
+      "language": "en",
+      "tags": ["korea", "breaking"]
+    },
+    {
+      "name": "korea-herald",
+      "type": "rss",
+      "url": "https://www.koreaherald.com/common/rss_xml.php?ct=102",
+      "category": "korea-news",
+      "tier": 1,
+      "interval": 600,
+      "language": "en",
+      "tags": ["korea", "politics"]
+    },
+    {
+      "name": "bbc-asia",
+      "type": "rss",
+      "url": "https://feeds.bbci.co.uk/news/world/asia/rss.xml",
+      "category": "regional",
+      "tier": 2,
+      "interval": 600,
+      "language": "en",
+      "tags": ["asia", "world"]
+    },
+    {
+      "name": "nk-news",
+      "type": "rss",
+      "url": "https://www.nknews.org/feed/",
+      "category": "north-korea",
+      "tier": 1,
+      "interval": 900,
+      "language": "en",
+      "tags": ["dprk", "north-korea"]
+    },
+    {
+      "name": "hankyoreh-english",
+      "type": "rss",
+      "url": "https://english.hani.co.kr/rss/",
+      "category": "korea-news",
+      "tier": 2,
+      "interval": 600,
+      "language": "en",
+      "tags": ["korea", "progressive"]
+    },
+    {
+      "name": "reuters-asia",
+      "type": "rss",
+      "url": "https://www.reutersagency.com/feed/?taxonomy=best-regions&post_type=best",
+      "category": "regional",
+      "tier": 2,
+      "interval": 600,
+      "language": "en",
+      "tags": ["asia", "world"]
+    },
+    {
+      "name": "korea-times",
+      "type": "rss",
+      "url": "https://www.koreatimes.co.kr/www/rss/nation.xml",
+      "category": "korea-news",
+      "tier": 2,
+      "interval": 600,
+      "language": "en",
+      "tags": ["korea", "nation"]
+    }
+  ],
+  "layers": [
+    {
+      "name": "korean-peninsula",
+      "type": "points",
+      "displayName": "Key Locations",
+      "color": "#00BFFF",
+      "data": {
+        "source": "static",
+        "path": "data/geo/korean-peninsula.geojson"
+      },
+      "defaultVisible": true,
+      "category": "locations"
+    }
+  ],
+  "panels": [
+    {
+      "name": "korea-news",
+      "type": "news-feed",
+      "displayName": "Korea News",
+      "position": 0,
+      "config": {
+        "categories": ["korea-news", "regional", "north-korea"],
+        "maxItems": 50
+      }
+    },
+    {
+      "name": "ai-brief",
+      "type": "ai-brief",
+      "displayName": "Korea Brief",
+      "position": 1,
+      "config": {
+        "refreshInterval": 600
+      }
+    },
+    {
+      "name": "entity-tracker",
+      "type": "entity-tracker",
+      "displayName": "Key Entities",
+      "position": 2,
+      "config": {
+        "entities": ["ROK", "DPRK", "Kim Jong Un", "Yoon Suk-yeol", "USFK", "Samsung", "Hyundai", "KOSPI"],
+        "maxEntities": 20
+      }
+    },
+    {
+      "name": "instability-index",
+      "type": "instability-index",
+      "displayName": "Instability Index",
+      "position": 3,
+      "config": {}
+    }
+  ],
+  "ai": {
+    "enabled": true,
+    "fallbackChain": ["groq", "openrouter"],
+    "providers": {
+      "groq": {
+        "model": "llama-3.3-70b-versatile",
+        "apiKeyEnv": "GROQ_API_KEY"
+      },
+      "openrouter": {
+        "model": "anthropic/claude-sonnet-4",
+        "apiKeyEnv": "OPENROUTER_API_KEY"
+      }
+    },
+    "analysis": {
+      "summarization": true,
+      "entityExtraction": true,
+      "sentimentAnalysis": true,
+      "focalPointDetection": true,
+      "customPrompt": "Focus on inter-Korean relations, DPRK nuclear and missile developments, ROK-US alliance dynamics, Korean economic indicators, and regional security. Highlight escalation signals and diplomatic shifts."
+    }
+  },
+  "map": {
+    "style": "https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json",
+    "center": [127.5, 37],
+    "zoom": 6,
+    "projection": "mercator"
+  },
+  "theme": {
+    "palette": "midnight"
+  }
+}

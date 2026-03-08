@@ -1,10 +1,20 @@
 {
+  "_meta": {
+    "category": "finance",
+    "difficulty": "intermediate",
+    "requires_api_keys": ["GROQ_API_KEY"],
+    "optional_api_keys": ["OPENROUTER_API_KEY"],
+    "preview_description": "Full financial intelligence with entity tracking and global exchange mapping"
+  },
   "monitor": {
     "name": "Finance Intelligence",
     "slug": "finance-intelligence",
     "description": "Full-featured financial intelligence dashboard with market tracking and AI analysis",
     "domain": "finance",
-    "tags": ["finance", "markets", "crypto", "macro", "commodities"]
+    "tags": ["finance", "markets", "crypto", "macro", "commodities"],
+    "branding": {
+      "primaryColor": "#FFD700"
+    }
   },
   "sources": [
     {
@@ -68,7 +78,17 @@
       "tags": ["macro", "fed"]
     }
   ],
-  "layers": [],
+  "layers": [
+    {
+      "name": "financial-centers",
+      "type": "points",
+      "displayName": "Financial Centers",
+      "color": "#FFD700",
+      "data": { "source": "static", "path": "data/geo/financial-centers.geojson" },
+      "defaultVisible": true,
+      "category": "infrastructure"
+    }
+  ],
   "panels": [
     {
       "name": "market-news",
@@ -133,5 +153,8 @@
     "center": [0, 30],
     "zoom": 3,
     "projection": "mercator"
+  },
+  "theme": {
+    "palette": "sunset"
   }
 }
