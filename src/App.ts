@@ -73,6 +73,11 @@ export class App {
     // Render view tabs if views are defined
     if (views) {
       this.renderViewTabs(views);
+      this.panelManager.onViewChange((viewName) => {
+        document.querySelectorAll('.forge-view-tab').forEach(t => {
+          t.classList.toggle('active', (t as HTMLElement).dataset.view === viewName);
+        });
+      });
     }
 
     // Initialize AI
