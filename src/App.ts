@@ -75,7 +75,10 @@ export class App {
       this.renderViewTabs(views);
       this.panelManager.onViewChange((viewName) => {
         document.querySelectorAll('.forge-view-tab').forEach(t => {
-          t.classList.toggle('active', (t as HTMLElement).dataset.view === viewName);
+          const el = t as HTMLElement;
+          const active = el.dataset.view === viewName;
+          el.classList.toggle('active', active);
+          el.setAttribute('aria-selected', String(active));
         });
       });
     }
@@ -120,21 +123,29 @@ export class App {
 
     const tabContainer = document.createElement('div');
     tabContainer.className = 'forge-view-tabs';
+    tabContainer.setAttribute('role', 'tablist');
+    tabContainer.setAttribute('aria-label', 'Dashboard views');
 
-    for (const view of views) {
+    for (let i = 0; i < views.length; i++) {
+      const view = views[i];
+      const isActive = this.panelManager?.getActiveView() === view.name;
+
       const tab = document.createElement('button');
       tab.className = 'forge-view-tab';
       tab.dataset.view = view.name;
+      tab.id = `forge-view-tab-${view.name}`;
       tab.textContent = view.icon ? `${view.icon} ${view.displayName}` : view.displayName;
+      tab.title = `${view.displayName} (press ${i + 1})`;
+      tab.setAttribute('role', 'tab');
+      tab.setAttribute('aria-selected', String(isActive));
+      tab.setAttribute('aria-controls', `forge-view-${view.name}`);
 
-      if (this.panelManager?.getActiveView() === view.name) {
+      if (isActive) {
         tab.classList.add('active');
       }
 
       tab.addEventListener('click', () => {
         this.panelManager?.switchView(view.name);
-        tabContainer.querySelectorAll('.forge-view-tab').forEach(t => t.classList.remove('active'));
-        tab.classList.add('active');
       });
 
       tabContainer.appendChild(tab);

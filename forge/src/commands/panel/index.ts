@@ -1,5 +1,5 @@
 import type { Command } from 'commander';
-import { existsSync, mkdirSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, writeFileSync, unlinkSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { loadConfig, updateConfig } from '../../config/loader.js';
 import { PanelSchema, type PanelConfig } from '../../config/schema.js';
@@ -52,10 +52,20 @@ export function registerPanelCommands(program: Command): void {
       const dryRun = program.opts().dryRun ?? false;
 
       try {
+        // Validate name format early (prevents path traversal and invalid class names)
+        if (!/^[a-z0-9-]+$/.test(name)) {
+          throw new Error('Panel name must be lowercase alphanumeric with hyphens (e.g., "my-panel")');
+        }
+
         const className = toPascalCase(name);
         const displayName = opts.displayName ?? name.split('-').map((s: string) => s.charAt(0).toUpperCase() + s.slice(1)).join(' ');
         const customDir = resolve(process.cwd(), 'src/custom-panels');
         const filePath = resolve(customDir, `${className}.ts`);
+
+        // Defense-in-depth: ensure resolved path stays within custom-panels
+        if (!filePath.startsWith(customDir)) {
+          throw new Error('Invalid panel name: path escapes custom-panels directory');
+        }
 
         if (existsSync(filePath)) {
           throw new Error(`Custom panel file already exists: src/custom-panels/${className}.ts`);
@@ -74,6 +84,27 @@ export function registerPanelCommands(program: Command): void {
           return;
         }
 
+        // Pre-validate config before writing any files
+        let panelConfig: PanelConfig | undefined;
+        if (opts.register !== false) {
+          const config = loadConfig();
+          if (config.panels.some(p => p.name === name)) {
+            throw new Error(`Panel "${name}" already exists in config`);
+          }
+          const position = opts.position != null
+            ? parseInt(opts.position, 10)
+            : Math.max(0, ...config.panels.map(p => p.position)) + 1;
+
+          panelConfig = PanelSchema.parse({
+            name,
+            type: 'custom',
+            displayName,
+            position,
+            config: {},
+            customModule: className,
+          });
+        }
+
         // Create directory and scaffold file
         mkdirSync(customDir, { recursive: true });
         writeFileSync(filePath, generatePanelScaffold(className, displayName));
@@ -82,30 +113,17 @@ export function registerPanelCommands(program: Command): void {
           { type: 'created', file: `src/custom-panels/${className}.ts`, description: `Scaffolded custom panel "${name}"` },
         ];
 
-        // Register in config unless --no-register
-        if (opts.register !== false) {
-          const config = loadConfig();
-          const position = opts.position != null
-            ? parseInt(opts.position, 10)
-            : Math.max(0, ...config.panels.map(p => p.position)) + 1;
-
-          const panelConfig: PanelConfig = PanelSchema.parse({
-            name,
-            type: 'custom',
-            displayName,
-            position,
-            config: {},
-            customModule: className,
-          });
-
-          const { path } = updateConfig(cfg => {
-            if (cfg.panels.some(p => p.name === name)) {
-              throw new Error(`Panel "${name}" already exists in config`);
-            }
-            return { ...cfg, panels: [...cfg.panels, panelConfig] };
-          });
-
-          changes.push({ type: 'modified' as const, file: path, description: `Added panel "${name}" to config` });
+        // Register in config (rollback file on failure)
+        if (panelConfig) {
+          try {
+            const { path } = updateConfig(cfg => {
+              return { ...cfg, panels: [...cfg.panels, panelConfig!] };
+            });
+            changes.push({ type: 'modified' as const, file: path, description: `Added panel "${name}" to config` });
+          } catch (configErr) {
+            unlinkSync(filePath);
+            throw configErr;
+          }
         }
 
         console.log(formatOutput(

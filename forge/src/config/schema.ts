@@ -56,7 +56,10 @@ export const PanelSchema = z.object({
   position: z.number().int().min(0),
   config: z.record(z.unknown()).default({}),
   customModule: z.string().regex(/^[A-Z][a-zA-Z0-9]*$/, 'Must be PascalCase class name').optional(),
-});
+}).refine(
+  (p) => p.type !== 'custom' || !!p.customModule,
+  { message: 'customModule is required for custom panels', path: ['customModule'] },
+);
 
 export type PanelConfig = z.infer<typeof PanelSchema>;
 

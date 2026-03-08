@@ -13,10 +13,14 @@ export class PanelManager {
   private container: HTMLElement;
   private panels = new Map<string, PanelBase[]>();
   private viewContainers = new Map<string, HTMLElement>();
+  private panelToViews = new Map<string, Set<string>>();
   private activeView: string | null = null;
   private keyHandler: ((e: KeyboardEvent) => void) | null = null;
   private hashHandler: (() => void) | null = null;
   private viewChangeCallback: ((viewName: string) => void) | null = null;
+  private lastUpdateData: unknown = undefined;
+  private lastPanelData = new Map<string, unknown>();
+  private transitionTimer: ReturnType<typeof setTimeout> | null = null;
 
   constructor(container: HTMLElement) {
     this.container = container;
@@ -42,10 +46,22 @@ export class PanelManager {
     const defaultView = views.find(v => v.default) ?? views[0];
     const hashView = this.getViewFromHash();
 
+    // Build panel-to-views mapping
+    for (const view of views) {
+      for (const panelName of view.panels) {
+        const existing = this.panelToViews.get(panelName) ?? new Set();
+        existing.add(view.name);
+        this.panelToViews.set(panelName, existing);
+      }
+    }
+
     for (const view of views) {
       const viewEl = document.createElement('div');
       viewEl.className = 'forge-view';
       viewEl.dataset.view = view.name;
+      viewEl.id = `forge-view-${view.name}`;
+      viewEl.setAttribute('role', 'tabpanel');
+      viewEl.setAttribute('aria-labelledby', `forge-view-tab-${view.name}`);
 
       const isActive = hashView
         ? view.name === hashView
@@ -129,12 +145,33 @@ export class PanelManager {
 
   switchView(viewName: string): void {
     if (this.activeView === viewName) return;
-    this.viewContainers.forEach((el, name) => {
-      el.style.display = name === viewName ? 'flex' : 'none';
-    });
+    if (this.transitionTimer) clearTimeout(this.transitionTimer);
+
+    const outgoing = this.activeView ? this.viewContainers.get(this.activeView) : null;
+    const incoming = this.viewContainers.get(viewName);
+
     this.activeView = viewName;
     history.replaceState(null, '', `#view=${viewName}`);
     this.viewChangeCallback?.(viewName);
+
+    // Fade transition
+    if (outgoing && incoming) {
+      outgoing.style.opacity = '0';
+      this.transitionTimer = setTimeout(() => {
+        this.viewContainers.forEach((el, name) => {
+          el.style.display = name === viewName ? 'flex' : 'none';
+          el.style.opacity = name === viewName ? '1' : '0';
+        });
+        this.replayDataToActiveView();
+        this.transitionTimer = null;
+      }, 150);
+    } else {
+      this.viewContainers.forEach((el, name) => {
+        el.style.display = name === viewName ? 'flex' : 'none';
+        el.style.opacity = name === viewName ? '1' : '0';
+      });
+      this.replayDataToActiveView();
+    }
   }
 
   onViewChange(callback: (viewName: string) => void): void {
@@ -156,18 +193,38 @@ export class PanelManager {
   }
 
   updatePanel(name: string, data: unknown): void {
+    this.lastPanelData.set(name, data);
     const instances = this.panels.get(name);
-    if (instances) {
+    if (!instances || !this.isPanelInActiveView(name)) return;
+    for (const panel of instances) {
+      panel.update(data);
+    }
+  }
+
+  updateAll(data: unknown): void {
+    this.lastUpdateData = data;
+    for (const [name, instances] of this.panels.entries()) {
+      if (!this.isPanelInActiveView(name)) continue;
       for (const panel of instances) {
         panel.update(data);
       }
     }
   }
 
-  updateAll(data: unknown): void {
-    for (const instances of this.panels.values()) {
-      for (const panel of instances) {
-        panel.update(data);
+  private isPanelInActiveView(name: string): boolean {
+    if (this.viewContainers.size === 0) return true;
+    const views = this.panelToViews.get(name);
+    return !views || views.has(this.activeView!);
+  }
+
+  private replayDataToActiveView(): void {
+    for (const [name, instances] of this.panels.entries()) {
+      if (!this.isPanelInActiveView(name)) continue;
+      const panelData = this.lastPanelData.get(name);
+      if (panelData !== undefined) {
+        for (const panel of instances) panel.update(panelData);
+      } else if (this.lastUpdateData !== undefined) {
+        for (const panel of instances) panel.update(this.lastUpdateData);
       }
     }
   }
@@ -179,6 +236,9 @@ export class PanelManager {
     if (this.hashHandler) {
       window.removeEventListener('hashchange', this.hashHandler);
     }
+    if (this.transitionTimer) {
+      clearTimeout(this.transitionTimer);
+    }
     for (const instances of this.panels.values()) {
       for (const panel of instances) {
         panel.destroy();
@@ -186,6 +246,9 @@ export class PanelManager {
     }
     this.panels.clear();
     this.viewContainers.clear();
+    this.panelToViews.clear();
+    this.lastPanelData.clear();
+    this.lastUpdateData = undefined;
     this.container.innerHTML = '';
   }
 }
