@@ -1,0 +1,65 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-74.0088, 40.7060] },
+      "properties": { "name": "NYSE / NASDAQ", "category": "exchange", "weight": 10 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-0.0922, 51.5155] },
+      "properties": { "name": "London Stock Exchange", "category": "exchange", "weight": 9 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.7671, 35.6815] },
+      "properties": { "name": "Tokyo Stock Exchange", "category": "exchange", "weight": 8 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [114.1747, 22.2783] },
+      "properties": { "name": "Hong Kong Exchange", "category": "exchange", "weight": 8 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [121.4692, 31.2327] },
+      "properties": { "name": "Shanghai Stock Exchange", "category": "exchange", "weight": 8 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [8.6821, 50.1109] },
+      "properties": { "name": "Deutsche Borse", "category": "exchange", "weight": 6 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [103.8508, 1.2838] },
+      "properties": { "name": "Singapore Exchange", "category": "exchange", "weight": 6 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [8.5417, 47.3769] },
+      "properties": { "name": "SIX Swiss Exchange", "category": "exchange", "weight": 5 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [72.8347, 18.9300] },
+      "properties": { "name": "BSE / NSE India", "category": "exchange", "weight": 7 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [151.2093, -33.8688] },
+      "properties": { "name": "Australian Securities Exchange", "category": "exchange", "weight": 5 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [55.2708, 25.2048] },
+      "properties": { "name": "Dubai Financial Market", "category": "exchange", "weight": 4 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-46.6333, -23.5505] },
+      "properties": { "name": "B3 Brazil Exchange", "category": "exchange", "weight": 5 }
+    }
+  ]
+}

@@ -1,0 +1,65 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [126.9780, 37.5665] },
+      "properties": { "name": "Seoul (Capital, ROK)", "category": "capital", "weight": 10 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [125.7625, 39.0392] },
+      "properties": { "name": "Pyongyang (Capital, DPRK)", "category": "capital", "weight": 10 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [126.6775, 37.9564] },
+      "properties": { "name": "DMZ / Joint Security Area", "category": "military", "weight": 9 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [125.7550, 39.8035] },
+      "properties": { "name": "Yongbyon Nuclear Complex", "category": "nuclear", "weight": 9 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [129.0837, 41.2988] },
+      "properties": { "name": "Punggye-ri Nuclear Test Site", "category": "nuclear", "weight": 8 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [124.7050, 39.6601] },
+      "properties": { "name": "Sohae Satellite Launch Station", "category": "military", "weight": 8 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [129.6652, 40.8560] },
+      "properties": { "name": "Tonghae Missile Launch Site", "category": "military", "weight": 7 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [129.0756, 35.1796] },
+      "properties": { "name": "Busan Major Port", "category": "economic", "weight": 6 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [126.7052, 37.4563] },
+      "properties": { "name": "Incheon Airport / Port Hub", "category": "economic", "weight": 6 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [127.0134, 36.9543] },
+      "properties": { "name": "Camp Humphreys (USFK HQ)", "category": "military", "weight": 7 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [126.5547, 37.9709] },
+      "properties": { "name": "Kaesong Industrial Complex", "category": "economic", "weight": 5 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [126.4983, 33.4890] },
+      "properties": { "name": "Jeju Naval Base", "category": "military", "weight": 4 }
+    }
+  ]
+}

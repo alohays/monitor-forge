@@ -1,0 +1,80 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [30.5234, 50.4501] },
+      "properties": { "name": "Ukraine Conflict", "category": "active-conflict", "weight": 10 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [34.3088, 31.3547] },
+      "properties": { "name": "Gaza Conflict Zone", "category": "active-conflict", "weight": 10 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [32.5599, 15.5007] },
+      "properties": { "name": "Sudan Civil War", "category": "active-conflict", "weight": 8 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [45.3182, 2.0469] },
+      "properties": { "name": "Somalia Instability", "category": "active-conflict", "weight": 6 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-8.0029, 12.6392] },
+      "properties": { "name": "Sahel Crisis", "category": "instability", "weight": 5 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [36.2765, 33.5138] },
+      "properties": { "name": "Syria Post-Conflict", "category": "post-conflict", "weight": 6 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [69.2075, 34.5553] },
+      "properties": { "name": "Afghanistan Instability", "category": "instability", "weight": 7 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [121.5654, 25.0330] },
+      "properties": { "name": "Taiwan Strait Flashpoint", "category": "flashpoint", "weight": 7 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [125.7625, 39.0392] },
+      "properties": { "name": "Korean Peninsula Flashpoint", "category": "flashpoint", "weight": 8 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [51.3890, 35.6892] },
+      "properties": { "name": "Iran Regional Tensions", "category": "flashpoint", "weight": 7 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [96.0785, 19.7633] },
+      "properties": { "name": "Myanmar Civil Conflict", "category": "active-conflict", "weight": 7 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [44.1910, 15.3694] },
+      "properties": { "name": "Yemen Civil War", "category": "active-conflict", "weight": 7 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [38.7468, 9.0246] },
+      "properties": { "name": "Ethiopia Post-Conflict", "category": "post-conflict", "weight": 5 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [13.1801, 32.9023] },
+      "properties": { "name": "Libya Instability", "category": "instability", "weight": 5 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [20.4489, 44.7866] },
+      "properties": { "name": "Serbia-Kosovo Tension", "category": "tension", "weight": 3 }
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [37.6173, 55.7558] },
+      "properties": { "name": "APT28 / APT29 (Russia)", "category": "state-actor", "weight": 10 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [125.7625, 39.0392] },
+      "properties": { "name": "Lazarus Group (DPRK)", "category": "state-actor", "weight": 9 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [116.4074, 39.9042] },
+      "properties": { "name": "APT40 / APT41 (China)", "category": "state-actor", "weight": 9 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [51.3890, 35.6892] },
+      "properties": { "name": "APT33 / APT35 (Iran)", "category": "state-actor", "weight": 7 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [30.3351, 59.9343] },
+      "properties": { "name": "Fancy Bear / IRA (Russia)", "category": "state-actor", "weight": 7 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [104.0668, 30.5728] },
+      "properties": { "name": "APT10 (China)", "category": "state-actor", "weight": 6 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [73.0479, 33.6844] },
+      "properties": { "name": "Emerging Threat Region", "category": "emerging-threat", "weight": 4 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [3.3792, 6.5244] },
+      "properties": { "name": "Cybercrime Hub (Nigeria)", "category": "cybercrime", "weight": 5 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [26.1025, 44.4268] },
+      "properties": { "name": "Cybercrime Hub (Romania)", "category": "cybercrime", "weight": 4 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-46.6333, -23.5505] },
+      "properties": { "name": "Cybercrime Hub (Brazil)", "category": "cybercrime", "weight": 4 }
+    }
+  ]
+}

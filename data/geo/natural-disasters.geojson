@@ -1,0 +1,80 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.6917, 35.6895] },
+      "properties": { "name": "Earthquake / Tsunami Zone", "category": "seismic", "weight": 9 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [120.9842, 14.5995] },
+      "properties": { "name": "Typhoon / Earthquake Zone", "category": "multi-hazard", "weight": 8 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [106.8456, -6.2088] },
+      "properties": { "name": "Earthquake / Flood Zone", "category": "multi-hazard", "weight": 8 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [172.6362, -43.5321] },
+      "properties": { "name": "Earthquake Zone", "category": "seismic", "weight": 6 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-99.1332, 19.4326] },
+      "properties": { "name": "Earthquake Zone", "category": "seismic", "weight": 7 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-70.6693, -33.4489] },
+      "properties": { "name": "Earthquake Zone", "category": "seismic", "weight": 6 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [90.4125, 23.8103] },
+      "properties": { "name": "Flood / Cyclone Zone", "category": "flood", "weight": 9 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-90.0715, 29.9511] },
+      "properties": { "name": "Hurricane Zone", "category": "hurricane", "weight": 7 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [72.8777, 19.0760] },
+      "properties": { "name": "Monsoon Flood Zone", "category": "flood", "weight": 8 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-118.2437, 34.0522] },
+      "properties": { "name": "Wildfire Zone", "category": "wildfire", "weight": 7 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [151.2093, -33.8688] },
+      "properties": { "name": "Bushfire Zone", "category": "wildfire", "weight": 6 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [45.3182, 2.0469] },
+      "properties": { "name": "Drought Zone", "category": "drought", "weight": 8 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [77.1025, 28.7041] },
+      "properties": { "name": "Extreme Heat Zone", "category": "heat", "weight": 7 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [15.6267, 78.2232] },
+      "properties": { "name": "Arctic Melting", "category": "ice-loss", "weight": 6 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-51.7214, 64.1836] },
+      "properties": { "name": "Ice Sheet Loss", "category": "ice-loss", "weight": 7 }
+    }
+  ]
+}

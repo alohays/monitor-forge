@@ -76,6 +76,7 @@ describe('writeConfig', () => {
       map: { style: 'https://example.com/style.json', center: [0, 0] as [number, number], zoom: 3, minZoom: 2, maxZoom: 18, projection: 'mercator' as const, dayNightOverlay: false, atmosphericGlow: true, idleRotation: true, idleRotationSpeed: 0.5 },
       backend: { cache: { provider: 'memory' as const, ttlSeconds: 300 }, rateLimit: { enabled: true, maxRequests: 100, windowSeconds: 60 }, corsProxy: { enabled: true, allowedDomains: ['*'], corsOrigins: ['*'] } },
       build: { target: 'vercel' as const, outDir: 'dist' },
+      theme: { mode: 'dark' as const, palette: 'default' as const, colors: {}, panelPosition: 'right' as const, panelWidth: 380, compactMode: false },
     };
     writeConfig(config, '/test');
 
@@ -98,6 +99,7 @@ describe('writeConfig', () => {
       map: { style: 'https://example.com/style.json', center: [0, 0] as [number, number], zoom: 3, minZoom: 2, maxZoom: 18, projection: 'mercator' as const, dayNightOverlay: false, atmosphericGlow: true, idleRotation: true, idleRotationSpeed: 0.5 },
       backend: { cache: { provider: 'memory' as const, ttlSeconds: 300 }, rateLimit: { enabled: true, maxRequests: 100, windowSeconds: 60 }, corsProxy: { enabled: true, allowedDomains: ['*'], corsOrigins: ['*'] } },
       build: { target: 'vercel' as const, outDir: 'dist' },
+      theme: { mode: 'dark' as const, palette: 'default' as const, colors: {}, panelPosition: 'right' as const, panelWidth: 380, compactMode: false },
     };
     const path = writeConfig(config, '/test');
     expect(path).toContain('monitor-forge.config.json');

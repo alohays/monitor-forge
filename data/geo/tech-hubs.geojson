@@ -1,0 +1,80 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-122.4194, 37.7749] },
+      "properties": { "name": "Silicon Valley", "category": "tech-hub", "weight": 10 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-122.3321, 47.6062] },
+      "properties": { "name": "Seattle Tech Hub", "category": "tech-hub", "weight": 7 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-97.7431, 30.2672] },
+      "properties": { "name": "Austin Tech Scene", "category": "tech-hub", "weight": 5 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-73.9857, 40.7484] },
+      "properties": { "name": "NYC Tech Hub", "category": "tech-hub", "weight": 7 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-71.0589, 42.3601] },
+      "properties": { "name": "Boston Tech Hub", "category": "tech-hub", "weight": 6 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-0.1278, 51.5074] },
+      "properties": { "name": "London Tech City", "category": "tech-hub", "weight": 7 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [13.4050, 52.5200] },
+      "properties": { "name": "Berlin Startup Hub", "category": "tech-hub", "weight": 5 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [34.7818, 32.0853] },
+      "properties": { "name": "Tel Aviv Tech Hub", "category": "tech-hub", "weight": 5 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [77.5946, 12.9716] },
+      "properties": { "name": "Bangalore IT Hub", "category": "tech-hub", "weight": 7 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [121.4737, 31.2304] },
+      "properties": { "name": "Shanghai Tech Center", "category": "tech-hub", "weight": 7 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [114.0579, 22.5431] },
+      "properties": { "name": "Shenzhen Hardware Hub", "category": "tech-hub", "weight": 8 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [139.6917, 35.6895] },
+      "properties": { "name": "Tokyo Tech District", "category": "tech-hub", "weight": 7 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [126.9780, 37.5665] },
+      "properties": { "name": "Seoul Digital City", "category": "tech-hub", "weight": 7 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [103.8198, 1.3521] },
+      "properties": { "name": "Singapore Tech Hub", "category": "tech-hub", "weight": 5 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [121.5654, 25.0330] },
+      "properties": { "name": "Taipei Semiconductor Hub", "category": "semiconductor", "weight": 9 }
+    }
+  ]
+}

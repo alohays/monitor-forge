@@ -541,6 +541,7 @@ describe('defineConfig', () => {
       map: { style: 'https://example.com/style.json', center: [0, 0], zoom: 3, minZoom: 1, maxZoom: 20, projection: 'mercator', dayNightOverlay: false, atmosphericGlow: true, idleRotation: true, idleRotationSpeed: 0.5 },
       backend: { cache: { provider: 'memory', ttlSeconds: 300 }, rateLimit: { enabled: true, maxRequests: 100, windowSeconds: 60 }, corsProxy: { enabled: true, allowedDomains: ['*'], corsOrigins: ['*'] } },
       build: { target: 'vercel', outDir: 'dist' },
+      theme: { mode: 'dark' as const, palette: 'default' as const, colors: {}, panelPosition: 'right' as const, panelWidth: 380, compactMode: false },
     });
     expect(config.monitor.name).toBe('Test');
   });

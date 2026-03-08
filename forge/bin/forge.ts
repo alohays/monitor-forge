@@ -14,6 +14,7 @@ import { registerPresetCommands } from '../src/commands/preset.js';
 import { registerSetupCommand } from '../src/commands/setup.js';
 import { registerViewCommands } from '../src/commands/view/index.js';
 import { registerStatusCommand } from '../src/commands/status.js';
+import { registerThemeCommands } from '../src/commands/theme.js';
 
 // Auto-TTY detection: format based on stdout, interactivity based on stdin
 const isNonTTYOutput = !process.stdout.isTTY;
@@ -53,5 +54,6 @@ registerPresetCommands(program);
 registerSetupCommand(program);
 registerViewCommands(program);
 registerStatusCommand(program);
+registerThemeCommands(program);
 
 program.parse();

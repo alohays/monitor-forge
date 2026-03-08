@@ -10,12 +10,13 @@ function buildConfig(overrides?: Partial<MonitorForgeConfig>): MonitorForgeConfi
     map: { style: 'https://example.com/style.json', center: [0, 0], zoom: 3, minZoom: 2, maxZoom: 18, projection: 'mercator', dayNightOverlay: false, atmosphericGlow: true, idleRotation: true, idleRotationSpeed: 0.5 },
     backend: { cache: { provider: 'memory', ttlSeconds: 300 }, rateLimit: { enabled: true, maxRequests: 100, windowSeconds: 60 }, corsProxy: { enabled: true, allowedDomains: ['*'], corsOrigins: ['*'] } },
     build: { target: 'vercel', outDir: 'dist' },
+    theme: { mode: 'dark' as const, palette: 'default' as const, colors: {}, panelPosition: 'right' as const, panelWidth: 380, compactMode: false },
     ...overrides,
   };
 }
 
 describe('generateManifests', () => {
-  it('returns 5 manifest files', () => {
+  it('returns 6 manifest files', () => {
     const result = generateManifests(buildConfig());
     expect(Object.keys(result)).toEqual([
       'source-manifest.ts',
@@ -23,6 +24,7 @@ describe('generateManifests', () => {
       'panel-manifest.ts',
       'config-resolved.ts',
       'view-manifest.ts',
+      'theme-resolved.ts',
     ]);
   });
 

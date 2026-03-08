@@ -1,0 +1,122 @@
+{
+  "_meta": {
+    "category": "climate",
+    "difficulty": "beginner",
+    "requires_api_keys": [
+      "GROQ_API_KEY"
+    ],
+    "optional_api_keys": [],
+    "preview_description": "Monitor climate news from Carbon Brief, Phys.org, and The Guardian"
+  },
+  "monitor": {
+    "name": "Climate Monitor",
+    "slug": "climate-monitor",
+    "description": "Minimal climate intelligence dashboard",
+    "domain": "climate",
+    "tags": [
+      "climate",
+      "environment",
+      "sustainability"
+    ],
+    "branding": {
+      "primaryColor": "#00AA55"
+    }
+  },
+  "sources": [
+    {
+      "name": "carbon-brief",
+      "type": "rss",
+      "url": "https://www.carbonbrief.org/feed/",
+      "category": "climate-news",
+      "tier": 1,
+      "interval": 900,
+      "language": "en",
+      "tags": [
+        "climate",
+        "science"
+      ]
+    },
+    {
+      "name": "phys-org-earth",
+      "type": "rss",
+      "url": "https://phys.org/rss-feed/earth-news/",
+      "category": "environment",
+      "tier": 2,
+      "interval": 1800,
+      "language": "en",
+      "tags": [
+        "earth",
+        "science"
+      ]
+    },
+    {
+      "name": "guardian-environment",
+      "type": "rss",
+      "url": "https://www.theguardian.com/environment/rss",
+      "category": "climate-news",
+      "tier": 1,
+      "interval": 600,
+      "language": "en",
+      "tags": [
+        "climate",
+        "environment"
+      ]
+    }
+  ],
+  "layers": [],
+  "panels": [
+    {
+      "name": "climate-news",
+      "type": "news-feed",
+      "displayName": "Climate News",
+      "position": 0,
+      "config": {
+        "categories": [
+          "climate-news",
+          "environment"
+        ],
+        "maxItems": 30
+      }
+    },
+    {
+      "name": "ai-brief",
+      "type": "ai-brief",
+      "displayName": "Climate Brief",
+      "position": 1,
+      "config": {
+        "refreshInterval": 900
+      }
+    }
+  ],
+  "ai": {
+    "enabled": true,
+    "fallbackChain": [
+      "groq"
+    ],
+    "providers": {
+      "groq": {
+        "model": "llama-3.3-70b-versatile",
+        "apiKeyEnv": "GROQ_API_KEY"
+      }
+    },
+    "analysis": {
+      "summarization": true,
+      "entityExtraction": true,
+      "sentimentAnalysis": false
+    }
+  },
+  "map": {
+    "style": "https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json",
+    "center": [
+      0,
+      20
+    ],
+    "zoom": 3,
+    "projection": "globe",
+    "atmosphericGlow": true
+  },
+  "theme": {
+    "palette": "forest"
+  },
+  "views": []
+}

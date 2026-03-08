@@ -1,10 +1,20 @@
 {
+  "_meta": {
+    "category": "geopolitics",
+    "difficulty": "beginner",
+    "requires_api_keys": ["GROQ_API_KEY"],
+    "optional_api_keys": [],
+    "preview_description": "Track global events from BBC, Reuters, and Al Jazeera"
+  },
   "monitor": {
     "name": "Geopolitics Monitor",
     "slug": "geopolitics-monitor",
     "description": "Minimal geopolitical intelligence dashboard",
     "domain": "geopolitics",
-    "tags": ["geopolitics", "conflict", "diplomacy"]
+    "tags": ["geopolitics", "conflict", "diplomacy"],
+    "branding": {
+      "primaryColor": "#CC0000"
+    }
   },
   "sources": [
     {
@@ -88,5 +98,8 @@
     "center": [30, 30],
     "zoom": 3,
     "projection": "globe"
+  },
+  "theme": {
+    "palette": "midnight"
   }
 }
