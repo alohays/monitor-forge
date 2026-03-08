@@ -183,7 +183,10 @@ describe('PanelSchema', () => {
     'ai-brief', 'news-feed', 'market-ticker', 'entity-tracker',
     'instability-index', 'service-status', 'custom',
   ] as const)('accepts %s panel type', (type) => {
-    const result = PanelSchema.parse({ ...validPanel, type });
+    const data = type === 'custom'
+      ? { ...validPanel, type, customModule: 'MyPanel' }
+      : { ...validPanel, type };
+    const result = PanelSchema.parse(data);
     expect(result.type).toBe(type);
   });
 
