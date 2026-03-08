@@ -61,5 +61,14 @@ export function createDefaultConfig(overrides?: Partial<MonitorForgeConfig>): Mo
       outDir: 'dist',
       ...overrides?.build,
     },
+    theme: {
+      mode: 'dark' as const,
+      palette: 'default' as const,
+      colors: {},
+      panelPosition: 'right' as const,
+      panelWidth: 380,
+      compactMode: false,
+      ...overrides?.theme,
+    },
   };
 }

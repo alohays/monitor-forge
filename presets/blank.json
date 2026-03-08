@@ -1,4 +1,11 @@
 {
+  "_meta": {
+    "category": "general",
+    "difficulty": "beginner",
+    "requires_api_keys": [],
+    "optional_api_keys": [],
+    "preview_description": "Empty dashboard ready for customization"
+  },
   "monitor": {
     "name": "My Monitor",
     "slug": "my-monitor",

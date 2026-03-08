@@ -1,0 +1,45 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [6.1432, 46.2044] },
+      "properties": { "name": "WHO Headquarters", "category": "headquarters", "weight": 10 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [15.2429, -4.2634] },
+      "properties": { "name": "WHO AFRO", "category": "regional-office", "weight": 7 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-77.0369, 38.9072] },
+      "properties": { "name": "WHO AMRO / PAHO", "category": "regional-office", "weight": 7 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [77.2090, 28.6139] },
+      "properties": { "name": "WHO SEARO", "category": "regional-office", "weight": 7 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [12.5683, 55.6761] },
+      "properties": { "name": "WHO EURO", "category": "regional-office", "weight": 7 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [31.2357, 30.0444] },
+      "properties": { "name": "WHO EMRO", "category": "regional-office", "weight": 7 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [120.9842, 14.5995] },
+      "properties": { "name": "WHO WPRO", "category": "regional-office", "weight": 7 }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [-84.3880, 33.7490] },
+      "properties": { "name": "CDC Headquarters", "category": "surveillance-center", "weight": 8 }
+    }
+  ]
+}

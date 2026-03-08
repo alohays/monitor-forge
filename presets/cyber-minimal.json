@@ -1,66 +1,69 @@
 {
   "_meta": {
-    "category": "technology",
+    "category": "cybersecurity",
     "difficulty": "beginner",
     "requires_api_keys": ["GROQ_API_KEY"],
     "optional_api_keys": [],
-    "preview_description": "Track tech news from Hacker News, TechCrunch, and Ars Technica"
+    "preview_description": "Track cyber threats from Krebs, The Hacker News, and BleepingComputer"
   },
   "monitor": {
-    "name": "Tech Monitor",
-    "slug": "tech-monitor",
-    "description": "Minimal tech industry intelligence dashboard",
-    "domain": "technology",
-    "tags": ["tech", "ai", "startups"]
+    "name": "Cyber Monitor",
+    "slug": "cyber-monitor",
+    "description": "Minimal cybersecurity intelligence dashboard",
+    "domain": "cybersecurity",
+    "tags": ["cyber", "infosec", "threats"],
+    "branding": {
+      "primaryColor": "#00FF41"
+    }
   },
   "sources": [
     {
-      "name": "hackernews-rss",
+      "name": "krebs-on-security",
       "type": "rss",
-      "url": "https://hnrss.org/frontpage",
-      "category": "tech-news",
+      "url": "https://krebsonsecurity.com/feed/",
+      "category": "cyber-news",
+      "tier": 1,
+      "interval": 600,
+      "language": "en",
+      "tags": ["infosec", "breaches"]
+    },
+    {
+      "name": "the-hacker-news",
+      "type": "rss",
+      "url": "https://feeds.feedburner.com/TheHackersNews",
+      "category": "cyber-news",
       "tier": 1,
       "interval": 300,
       "language": "en",
-      "tags": ["tech", "startups"]
+      "tags": ["cyber", "vulnerabilities"]
     },
     {
-      "name": "techcrunch-rss",
+      "name": "bleeping-computer",
       "type": "rss",
-      "url": "https://techcrunch.com/feed/",
-      "category": "tech-news",
-      "tier": 1,
-      "interval": 600,
-      "language": "en",
-      "tags": ["tech", "startups", "vc"]
-    },
-    {
-      "name": "ars-technica",
-      "type": "rss",
-      "url": "https://feeds.arstechnica.com/arstechnica/index",
-      "category": "tech-news",
+      "url": "https://www.bleepingcomputer.com/feed/",
+      "category": "cyber-news",
       "tier": 2,
       "interval": 600,
       "language": "en",
-      "tags": ["tech", "science"]
+      "tags": ["malware", "ransomware"]
     }
   ],
   "layers": [],
   "panels": [
     {
-      "name": "tech-news",
+      "name": "cyber-news",
       "type": "news-feed",
-      "displayName": "Tech News",
+      "displayName": "Cyber News",
       "position": 0,
       "config": {
-        "categories": ["tech-news"],
+        "categories": ["cyber-news"],
         "maxItems": 30
       }
     },
     {
       "name": "ai-brief",
       "type": "ai-brief",
-      "displayName": "AI Brief",
+      "displayName": "Threat Brief",
       "position": 1,
       "config": {
         "refreshInterval": 900
@@ -79,7 +82,8 @@
     "analysis": {
       "summarization": true,
       "entityExtraction": true,
-      "sentimentAnalysis": false
+      "sentimentAnalysis": false,
+      "focalPointDetection": false
     }
   },
   "map": {
@@ -89,6 +93,6 @@
     "projection": "mercator"
   },
   "theme": {
-    "palette": "default"
+    "palette": "cyberpunk"
   }
 }

@@ -23,13 +23,16 @@ export function registerPresetCommands(program: Command): void {
       const files = readdirSync(presetsDir).filter(f => f.endsWith('.json'));
       const presets = files.map(f => {
         const content = JSON.parse(readFileSync(resolve(presetsDir, f), 'utf-8'));
+        const meta = content._meta ?? {};
         return {
           name: basename(f, '.json'),
           domain: content.monitor?.domain ?? 'general',
           sources: content.sources?.length ?? 0,
           layers: content.layers?.length ?? 0,
           panels: content.panels?.length ?? 0,
-          description: content.monitor?.description ?? '',
+          category: meta.category ?? content.monitor?.domain ?? 'general',
+          difficulty: meta.difficulty ?? '-',
+          description: meta.preview_description ?? content.monitor?.description ?? '',
         };
       });
 

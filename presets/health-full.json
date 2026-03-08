@@ -1,0 +1,174 @@
+{
+  "_meta": {
+    "category": "health",
+    "difficulty": "intermediate",
+    "requires_api_keys": ["GROQ_API_KEY"],
+    "optional_api_keys": ["OPENROUTER_API_KEY"],
+    "preview_description": "Comprehensive global health monitoring with disease surveillance, research feeds, and AI analysis"
+  },
+  "monitor": {
+    "name": "Health Intelligence",
+    "slug": "health-intelligence",
+    "description": "Full-featured global health intelligence dashboard with disease tracking and AI analysis",
+    "domain": "health",
+    "tags": ["health", "medicine", "public-health", "surveillance", "research"],
+    "branding": {
+      "primaryColor": "#0099DD"
+    }
+  },
+  "sources": [
+    {
+      "name": "who-news",
+      "type": "rss",
+      "url": "https://www.who.int/feeds/entity/news/en/rss.xml",
+      "category": "health-news",
+      "tier": 1,
+      "interval": 1800,
+      "language": "en",
+      "tags": ["who", "global-health"]
+    },
+    {
+      "name": "stat-news",
+      "type": "rss",
+      "url": "https://www.statnews.com/feed/",
+      "category": "health-news",
+      "tier": 1,
+      "interval": 600,
+      "language": "en",
+      "tags": ["medicine", "pharma"]
+    },
+    {
+      "name": "nih-news",
+      "type": "rss",
+      "url": "https://www.nih.gov/news-events/news-releases/feed",
+      "category": "health-news",
+      "tier": 1,
+      "interval": 900,
+      "language": "en",
+      "tags": ["research", "nih"]
+    },
+    {
+      "name": "lancet-latest",
+      "type": "rss",
+      "url": "https://www.thelancet.com/rssfeed/lancet_current.xml",
+      "category": "research",
+      "tier": 2,
+      "interval": 3600,
+      "language": "en",
+      "tags": ["lancet", "research"]
+    },
+    {
+      "name": "cdc-newsroom",
+      "type": "rss",
+      "url": "https://tools.cdc.gov/api/v2/resources/media/132608.rss",
+      "category": "surveillance",
+      "tier": 1,
+      "interval": 3600,
+      "language": "en",
+      "tags": ["cdc", "surveillance"]
+    },
+    {
+      "name": "biorxiv-microbiology",
+      "type": "rss",
+      "url": "https://connect.biorxiv.org/biorxiv_xml.php?subject=microbiology",
+      "category": "research",
+      "tier": 3,
+      "interval": 3600,
+      "language": "en",
+      "tags": ["preprint", "microbiology"]
+    },
+    {
+      "name": "global-health-now",
+      "type": "rss",
+      "url": "https://www.globalhealthnow.org/rss.xml",
+      "category": "health-news",
+      "tier": 2,
+      "interval": 1800,
+      "language": "en",
+      "tags": ["global-health", "epidemiology"]
+    }
+  ],
+  "layers": [
+    {
+      "name": "who-regions",
+      "type": "points",
+      "displayName": "WHO Regional Offices",
+      "color": "#00AA55",
+      "data": {
+        "source": "static",
+        "path": "data/geo/who-regions.geojson"
+      },
+      "defaultVisible": false,
+      "category": "infrastructure"
+    }
+  ],
+  "panels": [
+    {
+      "name": "health-news",
+      "type": "news-feed",
+      "displayName": "Health News",
+      "position": 0,
+      "config": {
+        "categories": ["health-news", "surveillance"],
+        "maxItems": 50
+      }
+    },
+    {
+      "name": "ai-brief",
+      "type": "ai-brief",
+      "displayName": "Health Brief",
+      "position": 1,
+      "config": {
+        "refreshInterval": 600
+      }
+    },
+    {
+      "name": "entity-tracker",
+      "type": "entity-tracker",
+      "displayName": "Key Entities",
+      "position": 2,
+      "config": {
+        "entities": ["WHO", "CDC", "FDA", "EMA", "Pfizer", "Moderna", "H5N1", "MPOX"],
+        "maxEntities": 20
+      }
+    },
+    {
+      "name": "service-status",
+      "type": "service-status",
+      "displayName": "Source Status",
+      "position": 3,
+      "config": {}
+    }
+  ],
+  "ai": {
+    "enabled": true,
+    "fallbackChain": ["groq", "openrouter"],
+    "providers": {
+      "groq": {
+        "model": "llama-3.3-70b-versatile",
+        "apiKeyEnv": "GROQ_API_KEY"
+      },
+      "openrouter": {
+        "model": "anthropic/claude-sonnet-4",
+        "apiKeyEnv": "OPENROUTER_API_KEY"
+      }
+    },
+    "analysis": {
+      "summarization": true,
+      "entityExtraction": true,
+      "sentimentAnalysis": true,
+      "focalPointDetection": true,
+      "customPrompt": "Focus on disease outbreaks, drug and vaccine approvals, pandemic preparedness, antimicrobial resistance, and public health emergencies. Highlight emerging pathogens and WHO declarations."
+    }
+  },
+  "map": {
+    "style": "https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json",
+    "center": [0, 20],
+    "zoom": 3,
+    "projection": "globe",
+    "dayNightOverlay": true
+  },
+  "theme": {
+    "palette": "ocean"
+  }
+}

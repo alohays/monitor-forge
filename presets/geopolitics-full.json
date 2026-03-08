@@ -1,10 +1,20 @@
 {
+  "_meta": {
+    "category": "geopolitics",
+    "difficulty": "intermediate",
+    "requires_api_keys": ["GROQ_API_KEY"],
+    "optional_api_keys": ["OPENROUTER_API_KEY"],
+    "preview_description": "Full geopolitical intelligence with conflict zone mapping and instability index"
+  },
   "monitor": {
     "name": "Geopolitical Intelligence",
     "slug": "geopolitical-intelligence",
     "description": "Full-featured geopolitical intelligence dashboard with conflict tracking and AI analysis",
     "domain": "geopolitics",
-    "tags": ["geopolitics", "conflict", "diplomacy", "security", "osint"]
+    "tags": ["geopolitics", "conflict", "diplomacy", "security", "osint"],
+    "branding": {
+      "primaryColor": "#CC0000"
+    }
   },
   "sources": [
     {
@@ -88,7 +98,17 @@
       "tags": ["events", "conflict"]
     }
   ],
-  "layers": [],
+  "layers": [
+    {
+      "name": "conflict-zones",
+      "type": "heatmap",
+      "displayName": "Conflict Zones",
+      "color": "#FF4444",
+      "data": { "source": "static", "path": "data/geo/conflict-zones.geojson" },
+      "defaultVisible": true,
+      "category": "security"
+    }
+  ],
   "panels": [
     {
       "name": "world-news",
@@ -164,5 +184,8 @@
     "atmosphericGlow": true,
     "idleRotation": true,
     "idleRotationSpeed": 0.3
+  },
+  "theme": {
+    "palette": "midnight"
   }
 }

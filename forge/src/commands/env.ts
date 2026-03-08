@@ -83,13 +83,13 @@ export function registerEnvCommands(program: Command): void {
     });
 }
 
-interface EnvVarInfo {
+export interface EnvVarInfo {
   key: string;
   description: string;
   required: boolean;
 }
 
-function collectRequiredEnvVars(config: import('../config/schema.js').MonitorForgeConfig): EnvVarInfo[] {
+export function collectRequiredEnvVars(config: import('../config/schema.js').MonitorForgeConfig): EnvVarInfo[] {
   const vars: EnvVarInfo[] = [];
 
   // AI providers
@@ -124,7 +124,7 @@ function collectRequiredEnvVars(config: import('../config/schema.js').MonitorFor
   return vars;
 }
 
-function parseEnvFile(content: string): Record<string, string> {
+export function parseEnvFile(content: string): Record<string, string> {
   const result: Record<string, string> = {};
   for (const line of content.split('\n')) {
     const trimmed = line.trim();
