@@ -1,5 +1,5 @@
 import type { Command } from 'commander';
-import { existsSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
+import { existsSync, readFileSync, readdirSync, writeFileSync, chmodSync } from 'node:fs';
 import { resolve, basename } from 'node:path';
 import * as p from '@clack/prompts';
 import pc from 'picocolors';
@@ -33,15 +33,21 @@ function loadPresets(): Array<{ value: string; label: string; hint: string }> {
   if (!existsSync(presetsDir)) return [];
 
   const files = readdirSync(presetsDir).filter(f => f.endsWith('.json'));
-  return files.map(f => {
-    const content = JSON.parse(readFileSync(resolve(presetsDir, f), 'utf-8'));
-    const name = basename(f, '.json');
-    return {
-      value: name,
-      label: name,
-      hint: `${content.monitor?.domain ?? 'general'} | ${content.sources?.length ?? 0} sources, ${content.panels?.length ?? 0} panels`,
-    };
-  });
+  const results: Array<{ value: string; label: string; hint: string }> = [];
+  for (const f of files) {
+    try {
+      const content = JSON.parse(readFileSync(resolve(presetsDir, f), 'utf-8'));
+      const name = basename(f, '.json');
+      results.push({
+        value: name,
+        label: name,
+        hint: `${content.monitor?.domain ?? 'general'} | ${content.sources?.length ?? 0} sources, ${content.panels?.length ?? 0} panels`,
+      });
+    } catch {
+      console.error(`Warning: skipping malformed preset file "${f}"`);
+    }
+  }
+  return results;
 }
 
 function toSlug(name: string): string {
@@ -57,7 +63,11 @@ function buildAndWrite(params: SetupParams, dryRun: boolean): SetupResult {
   if (params.preset !== 'blank') {
     const presetPath = resolve(process.cwd(), 'presets', `${params.preset}.json`);
     if (existsSync(presetPath)) {
-      presetOverrides = JSON.parse(readFileSync(presetPath, 'utf-8'));
+      try {
+        presetOverrides = JSON.parse(readFileSync(presetPath, 'utf-8'));
+      } catch {
+        warnings.push(`Preset "${params.preset}" has invalid JSON, using blank config.`);
+      }
     } else {
       warnings.push(`Preset "${params.preset}" not found, using blank config.`);
     }
@@ -140,6 +150,7 @@ function buildAndWrite(params: SetupParams, dryRun: boolean): SetupResult {
     }
 
     writeFileSync(envLocalPath, envLines.join('\n'), 'utf-8');
+    chmodSync(envLocalPath, 0o600);
     changes.push({ type: 'created', file: '.env.local', description: 'Created env file with API keys' });
 
     // Write .env.example
@@ -222,7 +233,11 @@ async function runInteractiveWizard(dryRun: boolean): Promise<void> {
   if (selectedPreset !== 'blank') {
     const presetPath = resolve(process.cwd(), 'presets', `${selectedPreset}.json`);
     if (existsSync(presetPath)) {
-      presetData = JSON.parse(readFileSync(presetPath, 'utf-8'));
+      try {
+        presetData = JSON.parse(readFileSync(presetPath, 'utf-8'));
+      } catch {
+        p.log.warn(`Preset "${selectedPreset}" has invalid JSON, using defaults.`);
+      }
     }
   }
 
@@ -361,9 +376,33 @@ function runNonInteractive(
   const desc = (opts.description as string) ?? '';
   const template = (opts.template as string) ?? 'blank';
   const centerStr = opts.center as string | undefined;
-  const center: [number, number] = centerStr
-    ? centerStr.split(',').map(s => parseFloat(s.trim())) as [number, number]
-    : [0, 20];
+  let center: [number, number] = [0, 20];
+  if (centerStr) {
+    const parts = centerStr.split(',').map(s => s.trim());
+    if (parts.length !== 2) {
+      console.log(formatOutput(
+        failure('setup', 'Invalid center format. Expected "lng,lat" (e.g. "-95,38").'),
+        format,
+      ));
+      process.exit(1);
+    }
+    const [lng, lat] = parts.map(s => parseFloat(s));
+    if (isNaN(lng) || isNaN(lat)) {
+      console.log(formatOutput(
+        failure('setup', 'Invalid center coordinates. Both values must be numbers.'),
+        format,
+      ));
+      process.exit(1);
+    }
+    if (lng < -180 || lng > 180 || lat < -90 || lat > 90) {
+      console.log(formatOutput(
+        failure('setup', 'Center coordinates out of range. Longitude: -180..180, Latitude: -90..90.'),
+        format,
+      ));
+      process.exit(1);
+    }
+    center = [lng, lat];
+  }
   const projectionRaw = (opts.projection as string) ?? 'mercator';
   if (projectionRaw !== 'mercator' && projectionRaw !== 'globe') {
     console.log(formatOutput(

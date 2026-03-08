@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { Command } from 'commander';
 import { registerSetupCommand } from '../setup.js';
-import { readFileSync, writeFileSync, existsSync, readdirSync } from 'node:fs';
+import { readFileSync, writeFileSync, existsSync, readdirSync, chmodSync } from 'node:fs';
 
 vi.mock('node:fs', () => ({
   readFileSync: vi.fn(),
@@ -9,6 +9,7 @@ vi.mock('node:fs', () => ({
   existsSync: vi.fn(),
   readdirSync: vi.fn(),
   mkdirSync: vi.fn(),
+  chmodSync: vi.fn(),
 }));
 
 vi.mock('@clack/prompts', () => ({
@@ -57,7 +58,7 @@ function createProgram(): Command {
 let logOutput: string[] = [];
 
 beforeEach(() => {
-  vi.clearAllMocks();
+  vi.resetAllMocks();
   logOutput = [];
   vi.spyOn(console, 'log').mockImplementation((msg: string) => { logOutput.push(msg); });
   vi.spyOn(process, 'exit').mockImplementation((code?: string | number | null | undefined) => {
@@ -230,6 +231,105 @@ describe('setup command (non-interactive)', () => {
     expect(output.success).toBe(true);
     expect(output.warnings).toContainEqual(expect.stringContaining('not found'));
   });
+
+  it('rejects invalid center coordinates (NaN)', async () => {
+    mockNoExistingConfig();
+    mockPresetsDir();
+
+    const program = createProgram();
+    await expect(
+      program.parseAsync(['node', 'forge', 'setup', '--non-interactive', '--center', 'abc,def', '--format', 'json']),
+    ).rejects.toThrow('exit:1');
+
+    const output = JSON.parse(logOutput[0]);
+    expect(output.success).toBe(false);
+    expect(output.error).toContain('must be numbers');
+  });
+
+  it('rejects center coordinates out of range', async () => {
+    mockNoExistingConfig();
+    mockPresetsDir();
+
+    const program = createProgram();
+    await expect(
+      program.parseAsync(['node', 'forge', 'setup', '--non-interactive', '--center', '200,100', '--format', 'json']),
+    ).rejects.toThrow('exit:1');
+
+    const output = JSON.parse(logOutput[0]);
+    expect(output.success).toBe(false);
+    expect(output.error).toContain('out of range');
+  });
+
+  it('rejects center with single value', async () => {
+    mockNoExistingConfig();
+    mockPresetsDir();
+
+    const program = createProgram();
+    await expect(
+      program.parseAsync(['node', 'forge', 'setup', '--non-interactive', '--center', '123', '--format', 'json']),
+    ).rejects.toThrow('exit:1');
+
+    const output = JSON.parse(logOutput[0]);
+    expect(output.success).toBe(false);
+    expect(output.error).toContain('lng,lat');
+  });
+
+  it('dry-run succeeds even when config already exists', async () => {
+    mockedExistsSync.mockImplementation((path: any) => {
+      const p = String(path);
+      if (p.endsWith('config.json')) return true;
+      if (p.endsWith('presets')) return true;
+      if (p.endsWith('.json')) return true;
+      return false;
+    });
+    mockPresetsDir();
+
+    const program = createProgram();
+    await program.parseAsync(['node', 'forge', 'setup', '--non-interactive', '--dry-run', '--format', 'json']);
+
+    const output = JSON.parse(logOutput[0]);
+    expect(output.success).toBe(true);
+    expect(output.changes[0].description).toContain('Would');
+    expect(mockedWriteFileSync).not.toHaveBeenCalled();
+  });
+
+  it('handles malformed preset JSON gracefully', async () => {
+    mockedExistsSync.mockImplementation((path: any) => {
+      const p = String(path);
+      if (p.endsWith('config.json')) return false;
+      if (p.endsWith('.env.local')) return false;
+      if (p.endsWith('presets')) return true;
+      if (p.endsWith('broken.json')) return true;
+      return false;
+    });
+    mockedReaddirSync.mockReturnValue([] as any);
+    mockedReadFileSync.mockImplementation((path: any) => {
+      const p = String(path);
+      if (p.endsWith('broken.json')) return '{invalid json!!!';
+      return '{}';
+    });
+
+    const program = createProgram();
+    await program.parseAsync(['node', 'forge', 'setup', '--non-interactive', '--template', 'broken', '--format', 'json']);
+
+    const output = JSON.parse(logOutput[0]);
+    expect(output.success).toBe(true);
+    expect(output.warnings).toContainEqual(expect.stringContaining('invalid JSON'));
+  });
+
+  it('sets chmod 0600 on .env.local', async () => {
+    mockNoExistingConfig();
+    mockPresetsDir();
+
+    const program = createProgram();
+    await program.parseAsync(['node', 'forge', 'setup', '--non-interactive', '--groq-key', 'gsk_test', '--format', 'json']);
+
+    const chmodCall = vi.mocked(chmodSync).mock.calls.find(
+      ([path]) => String(path).endsWith('.env.local')
+    );
+    expect(chmodCall).toBeDefined();
+    expect(chmodCall![1]).toBe(0o600);
+  });
 });
 
 describe('setup command (interactive)', () => {
@@ -267,9 +367,13 @@ describe('setup command (interactive)', () => {
     expect(configCall).toBeDefined();
     const writtenConfig = JSON.parse(configCall![1] as string);
     expect(writtenConfig.monitor.name).toBe('Test Monitor');
+    expect(writtenConfig.monitor.slug).toBe('test-monitor');
     expect(writtenConfig.map.projection).toBe('globe');
     expect(writtenConfig.map.center).toEqual([126.97, 37.56]);
+    expect(writtenConfig.map.dayNightOverlay).toBe(true);
     expect(writtenConfig.ai.enabled).toBe(true);
+    expect(writtenConfig.sources).toHaveLength(3);
+    expect(writtenConfig.panels).toHaveLength(2);
 
     // .env.local should contain the groq key
     const envCall = mockedWriteFileSync.mock.calls.find(
