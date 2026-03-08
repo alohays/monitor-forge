@@ -234,4 +234,120 @@ describe('validate command', () => {
       expect(output.data.valid).toBe(true);
     });
   });
+
+  // ─── View Validation ─────────────────────────────────────
+
+  describe('view validation', () => {
+    it('errors on duplicate view names', async () => {
+      mockedExistsSync.mockReturnValue(true);
+      mockedReadFileSync.mockReturnValue(makeConfig({
+        sources: [{ name: 'f', type: 'rss', url: 'https://a.com/rss', category: 'n' }],
+        panels: [{ name: 'news', type: 'news-feed', displayName: 'News', position: 0 }],
+        views: [
+          { name: 'main', displayName: 'Main', panels: ['news'] },
+          { name: 'main', displayName: 'Main 2', panels: ['news'] },
+        ],
+      }));
+
+      const program = createProgram();
+      await expect(
+        program.parseAsync(['node', 'forge', 'validate', '--format', 'json']),
+      ).rejects.toThrow('exit:1');
+      const output = JSON.parse(logOutput[0]);
+      expect(output.success).toBe(false);
+    });
+
+    it('errors when view references unknown panel', async () => {
+      mockedExistsSync.mockReturnValue(true);
+      mockedReadFileSync.mockReturnValue(makeConfig({
+        sources: [{ name: 'f', type: 'rss', url: 'https://a.com/rss', category: 'n' }],
+        panels: [{ name: 'news', type: 'news-feed', displayName: 'News', position: 0 }],
+        views: [
+          { name: 'main', displayName: 'Main', panels: ['news', 'nonexistent'] },
+        ],
+      }));
+
+      const program = createProgram();
+      await expect(
+        program.parseAsync(['node', 'forge', 'validate', '--format', 'json']),
+      ).rejects.toThrow('exit:1');
+      const output = JSON.parse(logOutput[0]);
+      expect(output.success).toBe(false);
+    });
+
+    it('errors on multiple default views', async () => {
+      mockedExistsSync.mockReturnValue(true);
+      mockedReadFileSync.mockReturnValue(makeConfig({
+        sources: [{ name: 'f', type: 'rss', url: 'https://a.com/rss', category: 'n' }],
+        panels: [{ name: 'news', type: 'news-feed', displayName: 'News', position: 0 }],
+        views: [
+          { name: 'view-a', displayName: 'A', panels: ['news'], default: true },
+          { name: 'view-b', displayName: 'B', panels: ['news'], default: true },
+        ],
+      }));
+
+      const program = createProgram();
+      await expect(
+        program.parseAsync(['node', 'forge', 'validate', '--format', 'json']),
+      ).rejects.toThrow('exit:1');
+      const output = JSON.parse(logOutput[0]);
+      expect(output.success).toBe(false);
+    });
+
+    it('warns about orphan panels not in any view', async () => {
+      mockedExistsSync.mockReturnValue(true);
+      mockedReadFileSync.mockReturnValue(makeConfig({
+        sources: [{ name: 'f', type: 'rss', url: 'https://a.com/rss', category: 'n' }],
+        panels: [
+          { name: 'news', type: 'news-feed', displayName: 'News', position: 0 },
+          { name: 'orphan', type: 'ai-brief', displayName: 'Orphan', position: 1 },
+        ],
+        views: [
+          { name: 'main', displayName: 'Main', panels: ['news'] },
+        ],
+      }));
+
+      const program = createProgram();
+      await program.parseAsync(['node', 'forge', 'validate', '--format', 'json']);
+      const output = JSON.parse(logOutput[0]);
+      expect(output.success).toBe(true);
+      expect(output.warnings).toContainEqual(
+        expect.stringContaining('orphan'),
+      );
+    });
+
+    it('errors when custom panel missing customModule', async () => {
+      mockedExistsSync.mockReturnValue(true);
+      mockedReadFileSync.mockReturnValue(makeConfig({
+        sources: [{ name: 'f', type: 'rss', url: 'https://a.com/rss', category: 'n' }],
+        panels: [{ name: 'my-widget', type: 'custom', displayName: 'Widget', position: 0, customModule: 'MyWidget' }],
+      }));
+
+      const program = createProgram();
+      await program.parseAsync(['node', 'forge', 'validate', '--format', 'json']);
+      const output = JSON.parse(logOutput[0]);
+      expect(output.success).toBe(true);
+    });
+
+    it('passes with valid views configuration', async () => {
+      mockedExistsSync.mockReturnValue(true);
+      mockedReadFileSync.mockReturnValue(makeConfig({
+        sources: [{ name: 'f', type: 'rss', url: 'https://a.com/rss', category: 'n' }],
+        panels: [
+          { name: 'news', type: 'news-feed', displayName: 'News', position: 0 },
+          { name: 'status', type: 'service-status', displayName: 'Status', position: 1 },
+        ],
+        views: [
+          { name: 'overview', displayName: 'Overview', panels: ['news', 'status'], default: true },
+          { name: 'detail', displayName: 'Detail', panels: ['status'] },
+        ],
+      }));
+
+      const program = createProgram();
+      await program.parseAsync(['node', 'forge', 'validate', '--format', 'json']);
+      const output = JSON.parse(logOutput[0]);
+      expect(output.success).toBe(true);
+      expect(output.data.valid).toBe(true);
+    });
+  });
 });

@@ -183,7 +183,10 @@ describe('PanelSchema', () => {
     'ai-brief', 'news-feed', 'market-ticker', 'entity-tracker',
     'instability-index', 'service-status', 'custom',
   ] as const)('accepts %s panel type', (type) => {
-    const result = PanelSchema.parse({ ...validPanel, type });
+    const data = type === 'custom'
+      ? { ...validPanel, type, customModule: 'MyPanel' }
+      : { ...validPanel, type };
+    const result = PanelSchema.parse(data);
     expect(result.type).toBe(type);
   });
 
@@ -533,7 +536,7 @@ describe('defineConfig', () => {
   it('validates and returns config', () => {
     const config = defineConfig({
       monitor: { name: 'Test', slug: 'test', description: '', domain: 'test', tags: [], branding: { primaryColor: '#000000' } },
-      sources: [], layers: [], panels: [],
+      sources: [], layers: [], panels: [], views: [],
       ai: { enabled: false, fallbackChain: [], providers: {}, analysis: { summarization: true, entityExtraction: true, sentimentAnalysis: true, focalPointDetection: false } },
       map: { style: 'https://example.com/style.json', center: [0, 0], zoom: 3, minZoom: 1, maxZoom: 20, projection: 'mercator', dayNightOverlay: false, atmosphericGlow: true, idleRotation: true, idleRotationSpeed: 0.5 },
       backend: { cache: { provider: 'memory', ttlSeconds: 300 }, rateLimit: { enabled: true, maxRequests: 100, windowSeconds: 60 }, corsProxy: { enabled: true, allowedDomains: ['*'], corsOrigins: ['*'] } },

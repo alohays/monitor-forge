@@ -74,6 +74,43 @@ export function registerValidateCommand(program: Command): void {
           }
         }
 
+        // Check views
+        if (config.views.length > 0) {
+          const viewNames = config.views.map(v => v.name);
+          const viewDupes = viewNames.filter((n, i) => viewNames.indexOf(n) !== i);
+          if (viewDupes.length > 0) {
+            errors.push(`Duplicate view names: ${viewDupes.join(', ')}`);
+          }
+
+          for (const view of config.views) {
+            for (const panelName of view.panels) {
+              if (!panelNames.includes(panelName)) {
+                errors.push(`View "${view.name}" references unknown panel: "${panelName}"`);
+              }
+            }
+          }
+
+          const defaults = config.views.filter(v => v.default);
+          if (defaults.length > 1) {
+            errors.push(`Multiple views marked as default: ${defaults.map(v => v.name).join(', ')}. At most one allowed.`);
+          }
+
+          // Warn about orphan panels not in any view
+          const viewedPanels = new Set(config.views.flatMap(v => v.panels));
+          for (const panel of config.panels) {
+            if (!viewedPanels.has(panel.name)) {
+              warnings.push(`Panel "${panel.name}" is not included in any view`);
+            }
+          }
+        }
+
+        // Check custom panels have customModule
+        for (const panel of config.panels) {
+          if (panel.type === 'custom' && !panel.customModule) {
+            errors.push(`Custom panel "${panel.name}" is missing customModule field — build will fail at runtime`);
+          }
+        }
+
         // Check proxy security
         if (config.backend.corsProxy.enabled) {
           const domains = config.backend.corsProxy.allowedDomains;
@@ -113,6 +150,7 @@ export function registerValidateCommand(program: Command): void {
             sources: config.sources.length,
             layers: config.layers.length,
             panels: config.panels.length,
+            views: config.views.length,
             aiEnabled: config.ai.enabled,
             warnings: warnings.length,
           }, { warnings }),

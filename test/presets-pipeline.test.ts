@@ -58,13 +58,14 @@ describe.each(presetFiles)('preset pipeline: %s', (filename) => {
   const config = createDefaultConfig(raw);
   const validated = MonitorForgeConfigSchema.parse(config);
 
-  it('generates all 4 manifests without error', () => {
+  it('generates all 5 manifests without error', () => {
     const manifests = generateManifests(validated);
     expect(Object.keys(manifests)).toEqual([
       'source-manifest.ts',
       'layer-manifest.ts',
       'panel-manifest.ts',
       'config-resolved.ts',
+      'view-manifest.ts',
     ]);
     // Every manifest should be a non-empty string
     for (const [name, content] of Object.entries(manifests)) {

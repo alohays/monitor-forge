@@ -5,7 +5,7 @@ import type { MonitorForgeConfig } from '../config/schema.js';
 function buildConfig(overrides?: Partial<MonitorForgeConfig>): MonitorForgeConfig {
   return {
     monitor: { name: 'Test', slug: 'test', description: '', domain: 'test', tags: [], branding: { primaryColor: '#0052CC' } },
-    sources: [], layers: [], panels: [],
+    sources: [], layers: [], panels: [], views: [],
     ai: { enabled: false, fallbackChain: [], providers: {}, analysis: { summarization: true, entityExtraction: true, sentimentAnalysis: true, focalPointDetection: false } },
     map: { style: 'https://example.com/style.json', center: [0, 0], zoom: 3, minZoom: 2, maxZoom: 18, projection: 'mercator', dayNightOverlay: false, atmosphericGlow: true, idleRotation: true, idleRotationSpeed: 0.5 },
     backend: { cache: { provider: 'memory', ttlSeconds: 300 }, rateLimit: { enabled: true, maxRequests: 100, windowSeconds: 60 }, corsProxy: { enabled: true, allowedDomains: ['*'], corsOrigins: ['*'] } },
@@ -15,13 +15,14 @@ function buildConfig(overrides?: Partial<MonitorForgeConfig>): MonitorForgeConfi
 }
 
 describe('generateManifests', () => {
-  it('returns 4 manifest files', () => {
+  it('returns 5 manifest files', () => {
     const result = generateManifests(buildConfig());
     expect(Object.keys(result)).toEqual([
       'source-manifest.ts',
       'layer-manifest.ts',
       'panel-manifest.ts',
       'config-resolved.ts',
+      'view-manifest.ts',
     ]);
   });
 
@@ -141,9 +142,36 @@ describe('generateManifests', () => {
       expect(manifest).not.toContain("registerPanelType('custom'");
     });
 
+    it('imports and registers custom panel with customModule', () => {
+      const config = buildConfig({
+        panels: [{ name: 'weather-panel', type: 'custom', displayName: 'Weather', position: 0, config: {}, customModule: 'WeatherPanel' }],
+      });
+      const manifest = generateManifests(config)['panel-manifest.ts'];
+      expect(manifest).toContain("import { WeatherPanel } from '../custom-panels/WeatherPanel.js';");
+      expect(manifest).toContain("registerPanelType('weather-panel', WeatherPanel);");
+    });
+
     it('handles empty panels array', () => {
       const manifest = generateManifests(buildConfig())['panel-manifest.ts'];
       expect(manifest).toContain('export const panelConfigs: PanelConfig[] = []');
+    });
+  });
+
+  describe('view manifest', () => {
+    it('generates empty array when no views', () => {
+      const manifest = generateManifests(buildConfig())['view-manifest.ts'];
+      expect(manifest).toContain('export const viewConfigs = []');
+    });
+
+    it('generates view configs', () => {
+      const config = buildConfig({
+        panels: [{ name: 'news', type: 'news-feed', displayName: 'News', position: 0, config: {} }],
+        views: [{ name: 'main', displayName: 'Main', panels: ['news'], default: true }],
+      });
+      const manifest = generateManifests(config)['view-manifest.ts'];
+      expect(manifest).toContain('"name": "main"');
+      expect(manifest).toContain('"displayName": "Main"');
+      expect(manifest).toContain('"default": true');
     });
   });
 
