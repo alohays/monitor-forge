@@ -93,7 +93,6 @@
       "config": {}
     }
   ],
-  "views": [],
   "ai": {
     "enabled": false,
     "fallbackChain": [

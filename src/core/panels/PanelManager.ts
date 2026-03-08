@@ -16,6 +16,7 @@ export class PanelManager {
   private activeView: string | null = null;
   private keyHandler: ((e: KeyboardEvent) => void) | null = null;
   private hashHandler: (() => void) | null = null;
+  private viewChangeCallback: ((viewName: string) => void) | null = null;
 
   constructor(container: HTMLElement) {
     this.container = container;
@@ -133,6 +134,11 @@ export class PanelManager {
     });
     this.activeView = viewName;
     history.replaceState(null, '', `#view=${viewName}`);
+    this.viewChangeCallback?.(viewName);
+  }
+
+  onViewChange(callback: (viewName: string) => void): void {
+    this.viewChangeCallback = callback;
   }
 
   getActiveView(): string | null {

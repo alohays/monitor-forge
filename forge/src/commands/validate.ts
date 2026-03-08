@@ -107,7 +107,7 @@ export function registerValidateCommand(program: Command): void {
         // Check custom panels have customModule
         for (const panel of config.panels) {
           if (panel.type === 'custom' && !panel.customModule) {
-            warnings.push(`Custom panel "${panel.name}" is missing customModule field`);
+            errors.push(`Custom panel "${panel.name}" is missing customModule field — build will fail at runtime`);
           }
         }
 
