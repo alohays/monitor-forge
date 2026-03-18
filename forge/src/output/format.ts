@@ -1,3 +1,5 @@
+import type { ZodError, ZodIssue } from 'zod';
+
 export interface ForgeOutput<T = unknown> {
   success: boolean;
   command: string;
@@ -5,7 +7,27 @@ export interface ForgeOutput<T = unknown> {
   changes: Change[];
   warnings: string[];
   error?: string;
+  errorCode?: ErrorCode;
+  retryable?: boolean;
+  recovery?: { suggestions: string[] };
+  validationErrors?: FormattedValidationError[];
   next_steps?: string[];
+}
+
+export type ErrorCode =
+  | 'CONFIG_NOT_FOUND'
+  | 'CONFIG_EXISTS'
+  | 'VALIDATION_ERROR'
+  | 'DUPLICATE_NAME'
+  | 'NOT_FOUND'
+  | 'PARSE_ERROR'
+  | 'PERMISSION_ERROR'
+  | 'UNKNOWN_ERROR';
+
+export interface FormattedValidationError {
+  path: string;
+  message: string;
+  code: string;
 }
 
 export interface Change {
@@ -38,6 +60,20 @@ function formatTable<T>(output: ForgeOutput<T>): string {
 
   if (!output.success) {
     lines.push(`Error: ${output.error}`);
+    if (output.validationErrors && output.validationErrors.length > 0) {
+      lines.push('');
+      lines.push('Validation errors:');
+      for (const ve of output.validationErrors) {
+        lines.push(`  ${ve.path}: ${ve.message}`);
+      }
+    }
+    if (output.recovery && output.recovery.suggestions.length > 0) {
+      lines.push('');
+      lines.push('Recovery suggestions:');
+      for (const s of output.recovery.suggestions) {
+        lines.push(`  - ${s}`);
+      }
+    }
     return lines.join('\n');
   }
 
@@ -117,4 +153,88 @@ export function failure(command: string, error: string, warnings?: string[]): Fo
     warnings: warnings ?? [],
     error,
   };
+}
+
+export function formatZodErrors(zodError: ZodError): FormattedValidationError[] {
+  return zodError.issues.map((issue: ZodIssue) => ({
+    path: issue.path.length > 0 ? issue.path.join('.') : '(root)',
+    message: issue.message,
+    code: issue.code,
+  }));
+}
+
+function classifyError(error: string): { errorCode: ErrorCode; retryable: boolean } {
+  if (error.includes('Config file not found')) {
+    return { errorCode: 'CONFIG_NOT_FOUND', retryable: false };
+  }
+  if (error.includes('already exists')) {
+    if (error.includes('config') || error.includes('Config')) {
+      return { errorCode: 'CONFIG_EXISTS', retryable: true };
+    }
+    return { errorCode: 'DUPLICATE_NAME', retryable: true };
+  }
+  if (error.includes('not found')) {
+    return { errorCode: 'NOT_FOUND', retryable: false };
+  }
+  if (error.includes('JSON') || error.includes('parse') || error.includes('Parse')) {
+    return { errorCode: 'PARSE_ERROR', retryable: false };
+  }
+  if (error.includes('permission') || error.includes('EACCES')) {
+    return { errorCode: 'PERMISSION_ERROR', retryable: false };
+  }
+  return { errorCode: 'UNKNOWN_ERROR', retryable: false };
+}
+
+function suggestRecovery(errorCode: ErrorCode, command: string): string[] {
+  switch (errorCode) {
+    case 'CONFIG_NOT_FOUND':
+      return ['Run `forge init` or `forge setup` to create a config file'];
+    case 'CONFIG_EXISTS':
+      return ['Use --force flag to overwrite existing config', 'Use forge commands to modify the existing config'];
+    case 'DUPLICATE_NAME':
+      return ['Choose a different name', `Use --upsert flag to update the existing item`];
+    case 'NOT_FOUND':
+      return [`Run \`forge ${command.split(' ')[0]} list\` to see available items`];
+    case 'VALIDATION_ERROR':
+      return ['Check the field paths above and fix the values', 'Run `forge validate` for full validation report'];
+    case 'PARSE_ERROR':
+      return ['Check JSON syntax in the config file', 'Run `forge validate` to find the issue'];
+    case 'PERMISSION_ERROR':
+      return ['Check file permissions on the config file'];
+    default:
+      return [];
+  }
+}
+
+export function structuredFailure(
+  command: string,
+  error: string | Error,
+  opts?: { warnings?: string[]; zodError?: ZodError },
+): ForgeOutput<null> {
+  const errorMessage = error instanceof Error ? error.message : error;
+  const { errorCode, retryable } = classifyError(errorMessage);
+  const suggestions = suggestRecovery(errorCode, command);
+
+  const output: ForgeOutput<null> = {
+    success: false,
+    command,
+    data: null,
+    changes: [],
+    warnings: opts?.warnings ?? [],
+    error: errorMessage,
+    errorCode,
+    retryable,
+    recovery: suggestions.length > 0 ? { suggestions } : undefined,
+  };
+
+  if (opts?.zodError) {
+    output.errorCode = 'VALIDATION_ERROR';
+    output.retryable = false;
+    output.validationErrors = formatZodErrors(opts.zodError);
+    output.recovery = {
+      suggestions: suggestRecovery('VALIDATION_ERROR', command),
+    };
+  }
+
+  return output;
 }

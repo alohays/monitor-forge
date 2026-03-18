@@ -134,6 +134,24 @@
       "config": {}
     }
   ],
+  "views": [
+    {
+      "name": "overview",
+      "displayName": "Overview",
+      "panels": ["world-news", "situation-brief"],
+      "default": true
+    },
+    {
+      "name": "analysis",
+      "displayName": "Analysis",
+      "panels": ["situation-brief", "entity-tracker", "instability-index"]
+    },
+    {
+      "name": "operations",
+      "displayName": "Operations",
+      "panels": ["world-news", "service-status"]
+    }
+  ],
   "ai": {
     "enabled": true,
     "fallbackChain": ["groq", "openrouter"],

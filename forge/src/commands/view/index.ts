@@ -1,7 +1,7 @@
 import type { Command } from 'commander';
 import { loadConfig, updateConfig } from '../../config/loader.js';
 import { ViewSchema } from '../../config/schema.js';
-import { formatOutput, success, failure, type OutputFormat } from '../../output/format.js';
+import { formatOutput, success, failure, structuredFailure, type OutputFormat } from '../../output/format.js';
 
 export function registerViewCommands(program: Command): void {
   const view = program.command('view').description('Manage dashboard views');
@@ -13,6 +13,7 @@ export function registerViewCommands(program: Command): void {
     .requiredOption('--panels <panels>', 'Comma-separated panel names')
     .option('--icon <icon>', 'Icon or emoji for the tab')
     .option('--default', 'Set as the default view')
+    .option('--upsert', 'Update if view already exists, create if not')
     .action((name, opts) => {
       const format = (program.opts().format ?? 'table') as OutputFormat;
       const dryRun = program.opts().dryRun ?? false;
@@ -46,9 +47,26 @@ export function registerViewCommands(program: Command): void {
           return;
         }
 
+        let action = 'created' as string;
+
         const { path } = updateConfig(cfg => {
-          if (cfg.views.some(v => v.name === name)) {
-            throw new Error(`View "${name}" already exists`);
+          const existingIdx = cfg.views.findIndex(v => v.name === name);
+          if (existingIdx >= 0) {
+            if (!opts.upsert) {
+              throw new Error(`View "${name}" already exists`);
+            }
+            action = 'updated';
+            const views = [...cfg.views];
+
+            // If --default, clear default from other views
+            if (opts.default) {
+              for (const v of views) {
+                delete v.default;
+              }
+            }
+
+            views[existingIdx] = viewConfig;
+            return { ...cfg, views };
           }
 
           const views = [...cfg.views];
@@ -65,14 +83,14 @@ export function registerViewCommands(program: Command): void {
         });
 
         console.log(formatOutput(
-          success('view add', viewConfig, {
-            changes: [{ type: 'modified', file: path, description: `Added view "${name}"` }],
+          success('view add', { ...viewConfig, action }, {
+            changes: [{ type: 'modified', file: path, description: `${action === 'updated' ? 'Updated' : 'Added'} view "${name}"` }],
             next_steps: ['forge validate', 'forge dev'],
           }),
           format,
         ));
       } catch (err) {
-        console.log(formatOutput(failure('view add', String(err)), format));
+        console.log(formatOutput(structuredFailure('view add', err instanceof Error ? err : String(err)), format));
         process.exit(1);
       }
     });

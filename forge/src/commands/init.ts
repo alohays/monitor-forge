@@ -4,7 +4,7 @@ import { resolve } from 'node:path';
 import { configExists, writeConfig } from '../config/loader.js';
 import { createDefaultConfig } from '../config/defaults.js';
 import type { MonitorForgeConfig } from '../config/schema.js';
-import { formatOutput, success, failure, type OutputFormat } from '../output/format.js';
+import { formatOutput, success, failure, structuredFailure, type OutputFormat } from '../output/format.js';
 
 export function registerInitCommand(program: Command): void {
   program
@@ -15,27 +15,43 @@ export function registerInitCommand(program: Command): void {
     .option('--template <preset>', 'Starting preset (tech-minimal, finance-minimal, blank, etc.)')
     .option('--slug <slug>', 'URL-friendly slug')
     .option('--description <desc>', 'Short description')
+    .option('--force', 'Overwrite existing config file')
     .action(async (opts) => {
       const format = (program.opts().format ?? 'table') as OutputFormat;
       const nonInteractive = program.opts().nonInteractive ?? false;
       const dryRun = program.opts().dryRun ?? false;
 
-      if (configExists() && !dryRun) {
+      if (configExists() && !dryRun && !opts.force) {
         console.log(formatOutput(
-          failure('init', 'monitor-forge.config.ts already exists. Delete it first or use forge commands to modify.'),
+          failure('init', 'monitor-forge.config.json already exists. Use --force to overwrite.'),
           format,
         ));
         process.exit(1);
       }
 
-      const name = opts.name ?? (nonInteractive ? 'My Monitor' : 'My Monitor');
+      const name = opts.name ?? 'My Monitor';
       const domain = opts.domain ?? 'general';
       const slug = opts.slug ?? name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 
       // Load preset if specified
       let presetOverrides: Partial<MonitorForgeConfig> = {};
       if (opts.template && opts.template !== 'blank') {
-        const presetPath = resolve(process.cwd(), 'presets', `${opts.template}.json`);
+        if (!/^[a-z0-9-]+$/.test(opts.template)) {
+          console.log(formatOutput(
+            structuredFailure('init', 'Preset name must be lowercase alphanumeric with hyphens'),
+            format,
+          ));
+          process.exit(1);
+        }
+        const presetsDir = resolve(process.cwd(), 'presets');
+        const presetPath = resolve(presetsDir, `${opts.template}.json`);
+        if (!presetPath.startsWith(presetsDir)) {
+          console.log(formatOutput(
+            structuredFailure('init', 'Invalid preset name: path escapes presets directory'),
+            format,
+          ));
+          process.exit(1);
+        }
         if (existsSync(presetPath)) {
           presetOverrides = JSON.parse(readFileSync(presetPath, 'utf-8'));
         } else {

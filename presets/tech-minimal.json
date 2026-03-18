@@ -60,6 +60,14 @@
       }
     }
   ],
+  "views": [
+    {
+      "name": "overview",
+      "displayName": "Overview",
+      "panels": ["tech-news", "ai-brief"],
+      "default": true
+    }
+  ],
   "ai": {
     "enabled": true,
     "fallbackChain": ["groq"],

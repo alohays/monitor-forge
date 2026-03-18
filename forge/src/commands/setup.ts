@@ -61,7 +61,18 @@ function buildAndWrite(params: SetupParams, dryRun: boolean): SetupResult {
   // Load preset
   let presetOverrides: Partial<MonitorForgeConfig> = {};
   if (params.preset !== 'blank') {
-    const presetPath = resolve(process.cwd(), 'presets', `${params.preset}.json`);
+    const presetsDir = resolve(process.cwd(), 'presets');
+    const presetPath = resolve(presetsDir, `${params.preset}.json`);
+    if (!/^[a-z0-9-]+$/.test(params.preset) || !presetPath.startsWith(presetsDir)) {
+      warnings.push(`Invalid preset name "${params.preset}", using blank config.`);
+      return { config: MonitorForgeConfigSchema.parse(createDefaultConfig({
+        monitor: {
+          name: params.name, slug: params.slug,
+          description: params.description || 'A custom real-time intelligence dashboard',
+          domain: 'general', tags: [], branding: { primaryColor: '#0052CC' },
+        },
+      })), changes, warnings };
+    }
     if (existsSync(presetPath)) {
       try {
         presetOverrides = JSON.parse(readFileSync(presetPath, 'utf-8'));
@@ -175,11 +186,11 @@ function buildAndWrite(params: SetupParams, dryRun: boolean): SetupResult {
   return { config, changes, warnings };
 }
 
-async function runInteractiveWizard(dryRun: boolean): Promise<void> {
+async function runInteractiveWizard(dryRun: boolean, force?: boolean): Promise<void> {
   p.intro(pc.bgCyan(pc.black(' monitor-forge setup ')));
 
   // Check existing config
-  if (configExists() && !dryRun) {
+  if (configExists() && !dryRun && !force) {
     const overwrite = await p.confirm({
       message: 'monitor-forge.config.json already exists. Overwrite?',
     });
@@ -364,9 +375,9 @@ function runNonInteractive(
   format: OutputFormat,
   dryRun: boolean,
 ): void {
-  if (configExists() && !dryRun) {
+  if (configExists() && !dryRun && !opts.force) {
     console.log(formatOutput(
-      failure('setup', 'monitor-forge.config.json already exists. Delete it first or use --dry-run.'),
+      failure('setup', 'monitor-forge.config.json already exists. Use --force to overwrite.'),
       format,
     ));
     process.exit(1);
@@ -466,6 +477,7 @@ export function registerSetupCommand(program: Command): void {
     .option('--no-ai', 'Disable AI analysis')
     .option('--groq-key <key>', 'Groq API key')
     .option('--openrouter-key <key>', 'OpenRouter API key')
+    .option('--force', 'Overwrite existing config file')
     .action(async (opts) => {
       const format = (program.opts().format ?? 'table') as OutputFormat;
       const nonInteractive = program.opts().nonInteractive ?? false;
@@ -474,7 +486,7 @@ export function registerSetupCommand(program: Command): void {
       if (format === 'json' || nonInteractive) {
         runNonInteractive(opts, format, dryRun);
       } else {
-        await runInteractiveWizard(dryRun);
+        await runInteractiveWizard(dryRun, opts.force);
       }
     });
 }
