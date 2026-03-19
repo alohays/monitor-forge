@@ -28,7 +28,9 @@ export class AIBriefPanel extends PanelBase {
 
     const maybeDegraded = data as { type?: string; message?: string };
     if (maybeDegraded.type === 'degraded' && maybeDegraded.message) {
+      this.hideSkeleton();
       this.renderDegraded(maybeDegraded.message);
+      this.hasReceivedData = true;
       return;
     }
 

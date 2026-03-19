@@ -41,6 +41,7 @@ export class ServiceStatusPanel extends PanelBase {
   }
 
   private renderStatus(): void {
+    this.markDataReceived();
     const itemsEl = this.container.querySelector('.service-status-items');
     if (!itemsEl) return;
 
@@ -60,5 +61,8 @@ export class ServiceStatusPanel extends PanelBase {
     }).join('');
   }
 
-  destroy(): void { this.container.innerHTML = ''; }
+  destroy(): void {
+    this.cleanupTimers();
+    this.container.innerHTML = '';
+  }
 }

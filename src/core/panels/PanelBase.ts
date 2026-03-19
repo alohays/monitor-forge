@@ -1,3 +1,5 @@
+import DOMPurify from 'dompurify';
+
 export interface PanelConfig {
   name: string;
   type: string;
@@ -83,7 +85,8 @@ export abstract class PanelBase {
     this.clearDegraded();
     const el = document.createElement('div');
     el.className = 'panel-degraded';
-    el.innerHTML = message.replace(
+    const sanitized = DOMPurify.sanitize(message, { ALLOWED_TAGS: [], ALLOWED_ATTR: [] });
+    el.innerHTML = sanitized.replace(
       /(`[^`]+`)/g,
       '<span class="panel-configure-hint">$1</span>',
     );

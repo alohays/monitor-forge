@@ -120,11 +120,9 @@ export class App {
 
     // Initial-load timeout: degrade panels that haven't received data
     this.initialLoadTimer = setTimeout(() => {
-      if (this.panelManager && !this.panelManager.hasAnyDataReceived()) {
-        this.panelManager.degradeUnreceivedPanels(
-          'No data sources responding. Check your source configuration.',
-        );
-      }
+      this.panelManager?.degradeUnreceivedPanels(
+        'No data sources responding. Check your source configuration.',
+      );
       this.initialLoadTimer = null;
     }, App.INITIAL_LOAD_TIMEOUT_MS);
 
