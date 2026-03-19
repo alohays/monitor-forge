@@ -16,6 +16,7 @@ import { registerViewCommands } from '../src/commands/view/index.js';
 import { registerStatusCommand } from '../src/commands/status.js';
 import { registerThemeCommands } from '../src/commands/theme.js';
 import { registerConfigCommands } from '../src/commands/config.js';
+import { registerSchemaCommand } from '../src/commands/schema.js';
 import { createRequire } from 'node:module';
 const require = createRequire(import.meta.url);
 const pkg = require('../../package.json') as { version: string };
@@ -60,5 +61,6 @@ registerViewCommands(program);
 registerStatusCommand(program);
 registerThemeCommands(program);
 registerConfigCommands(program);
+registerSchemaCommand(program);
 
 program.parse();
