@@ -174,6 +174,33 @@ describe('forge config set', () => {
   });
 });
 
+// ─── prototype pollution guard ───────────────────────────────
+
+describe('prototype pollution guard', () => {
+  it('rejects __proto__ path segment', async () => {
+    const output = await runCommand(['config', 'set', '__proto__.polluted', 'true']);
+    const result = JSON.parse(output);
+    expect(result.success).toBe(false);
+    expect(result.error).toContain('reserved key segment');
+    // Verify no pollution occurred
+    expect(({} as Record<string, unknown>).polluted).toBeUndefined();
+  });
+
+  it('rejects constructor.prototype path segment', async () => {
+    const output = await runCommand(['config', 'set', 'constructor.prototype.evil', 'true']);
+    const result = JSON.parse(output);
+    expect(result.success).toBe(false);
+    expect(result.error).toContain('reserved key segment');
+  });
+
+  it('rejects __proto__ in get path', async () => {
+    const output = await runCommand(['config', 'get', '__proto__.toString']);
+    const result = JSON.parse(output);
+    expect(result.success).toBe(false);
+    expect(result.error).toContain('reserved key segment');
+  });
+});
+
 // ─── version backfill ───────────────────────────────────────
 
 describe('version backfill', () => {

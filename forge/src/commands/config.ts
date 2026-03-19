@@ -4,8 +4,18 @@ import { loadConfig, updateConfig } from '../config/loader.js';
 import { MonitorForgeConfigSchema } from '../config/schema.js';
 import { formatOutput, success, structuredFailure, type OutputFormat } from '../output/format.js';
 
-function getByPath(obj: unknown, path: string): unknown {
+const FORBIDDEN_KEYS = new Set(['__proto__', 'constructor', 'prototype']);
+
+function validatePathSegments(path: string): string[] {
   const keys = path.split('.');
+  if (keys.some(k => FORBIDDEN_KEYS.has(k))) {
+    throw new Error(`Invalid path "${path}": contains reserved key segment`);
+  }
+  return keys;
+}
+
+function getByPath(obj: unknown, path: string): unknown {
+  const keys = validatePathSegments(path);
   let current: unknown = obj;
   for (const key of keys) {
     if (current === null || current === undefined || typeof current !== 'object') {
@@ -17,7 +27,7 @@ function getByPath(obj: unknown, path: string): unknown {
 }
 
 function setByPath(obj: Record<string, unknown>, path: string, value: unknown): Record<string, unknown> {
-  const keys = path.split('.');
+  const keys = validatePathSegments(path);
   const result = structuredClone(obj);
   let current: Record<string, unknown> = result;
   for (let i = 0; i < keys.length - 1; i++) {
@@ -105,8 +115,7 @@ export function registerConfigCommands(program: Command): void {
       try {
         const value = parseValue(rawValue);
         const config = loadConfig();
-        const configObj = JSON.parse(JSON.stringify(config)) as Record<string, unknown>;
-        const updated = setByPath(configObj, dotPath, value);
+        const updated = setByPath(config as unknown as Record<string, unknown>, dotPath, value);
 
         // Validate through Zod
         let validated;
