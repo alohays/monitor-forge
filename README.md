@@ -31,10 +31,6 @@ The first agent-native dashboard framework — designed for [Claude Code](https:
 >
 > That's it. Tell an AI agent, and monitor-forge builds it.
 
-<p align="center">
-  <img src=".github/assets/concept-diagram.jpg" alt="monitor-forge concept: CLI command drives data sources through the forge into a real-time dashboard" width="800" />
-</p>
-
 ## 🔍 Why monitor-forge?
 
 [WorldMonitor](https://github.com/koala73/worldmonitor) proved the demand — 25K+ stars and 4,100+ forks. But every fork requires manual customization: editing source code, rebuilding, and redeploying.
@@ -167,6 +163,10 @@ Vercel Edge Functions with security headers, CSP, and proxy domain allowlist. RS
 | `health-full` | health | 7 | 4 | + Lancet, CDC Newsroom, bioRxiv, Global Health Now |
 | `korea-minimal` | korea | 3 | 2 | Yonhap English, Korea Herald, BBC Asia |
 | `korea-full` | korea | 7 | 4 | + NK News, Hankyoreh, Reuters Asia, Korea Times |
+
+<p align="center">
+  <img src=".github/assets/concept-diagram.jpg" alt="monitor-forge concept: CLI command drives data sources through the forge into a real-time dashboard" width="800" />
+</p>
 
 ## 📡 Workflow & Data Flow
 
