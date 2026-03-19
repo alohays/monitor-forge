@@ -10,6 +10,7 @@ vi.mock('node:fs', () => ({
   readdirSync: vi.fn(),
   mkdirSync: vi.fn(),
   chmodSync: vi.fn(),
+  realpathSync: vi.fn((p: string) => p),
 }));
 
 vi.mock('@clack/prompts', () => ({

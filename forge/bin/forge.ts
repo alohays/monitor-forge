@@ -15,8 +15,9 @@ import { registerSetupCommand } from '../src/commands/setup.js';
 import { registerViewCommands } from '../src/commands/view/index.js';
 import { registerStatusCommand } from '../src/commands/status.js';
 
-// Auto-TTY detection: when stdin is not a terminal (piped/agent), default to JSON + non-interactive
-const isNonTTY = !process.stdout.isTTY;
+// Auto-TTY detection: format based on stdout, interactivity based on stdin
+const isNonTTYOutput = !process.stdout.isTTY;
+const isNonTTYInput = !process.stdin.isTTY;
 const envFormat = process.env.FORGE_FORMAT;
 
 function resolveDefaultFormat(): string {
@@ -25,7 +26,7 @@ function resolveDefaultFormat(): string {
     return envFormat === 'human' ? 'table' : 'json';
   }
   // Auto-detect: non-TTY defaults to JSON
-  return isNonTTY ? 'json' : 'table';
+  return isNonTTYOutput ? 'json' : 'table';
 }
 
 const program = new Command();
@@ -35,7 +36,7 @@ program
   .description('monitor-forge CLI - Create your own real-time intelligence dashboard')
   .version('0.2.0')
   .option('--format <format>', 'Output format: json, table, minimal', resolveDefaultFormat())
-  .option('--non-interactive', 'Disable interactive prompts', isNonTTY)
+  .option('--non-interactive', 'Disable interactive prompts', isNonTTYInput)
   .option('--dry-run', 'Show what would change without modifying anything');
 
 registerInitCommand(program);

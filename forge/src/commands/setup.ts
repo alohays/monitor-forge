@@ -1,12 +1,12 @@
 import type { Command } from 'commander';
-import { existsSync, readFileSync, readdirSync, writeFileSync, chmodSync } from 'node:fs';
+import { existsSync, readFileSync, readdirSync, writeFileSync, chmodSync, realpathSync } from 'node:fs';
 import { resolve, basename } from 'node:path';
 import * as p from '@clack/prompts';
 import pc from 'picocolors';
 import { configExists, writeConfig } from '../config/loader.js';
 import { createDefaultConfig } from '../config/defaults.js';
 import { MonitorForgeConfigSchema, type MonitorForgeConfig } from '../config/schema.js';
-import { formatOutput, success, failure, type OutputFormat, type Change } from '../output/format.js';
+import { formatOutput, success, failure, structuredFailure, type OutputFormat, type Change } from '../output/format.js';
 import { collectRequiredEnvVars, parseEnvFile } from './env.js';
 
 interface SetupParams {
@@ -64,20 +64,19 @@ function buildAndWrite(params: SetupParams, dryRun: boolean): SetupResult {
     const presetsDir = resolve(process.cwd(), 'presets');
     const presetPath = resolve(presetsDir, `${params.preset}.json`);
     if (!/^[a-z0-9-]+$/.test(params.preset) || !presetPath.startsWith(presetsDir)) {
-      warnings.push(`Invalid preset name "${params.preset}", using blank config.`);
-      return { config: MonitorForgeConfigSchema.parse(createDefaultConfig({
-        monitor: {
-          name: params.name, slug: params.slug,
-          description: params.description || 'A custom real-time intelligence dashboard',
-          domain: 'general', tags: [], branding: { primaryColor: '#0052CC' },
-        },
-      })), changes, warnings };
+      throw new Error(`Invalid preset name "${params.preset}". Preset names must be lowercase alphanumeric with hyphens.`);
     }
     if (existsSync(presetPath)) {
-      try {
-        presetOverrides = JSON.parse(readFileSync(presetPath, 'utf-8'));
-      } catch {
-        warnings.push(`Preset "${params.preset}" has invalid JSON, using blank config.`);
+      const realPresetPath = realpathSync(presetPath);
+      const realPresetsDir = realpathSync(presetsDir);
+      if (!realPresetPath.startsWith(realPresetsDir + '/')) {
+        warnings.push(`Preset "${params.preset}" resolves outside presets directory, using blank config.`);
+      } else {
+        try {
+          presetOverrides = JSON.parse(readFileSync(presetPath, 'utf-8'));
+        } catch {
+          warnings.push(`Preset "${params.preset}" has invalid JSON, using blank config.`);
+        }
       }
     } else {
       warnings.push(`Preset "${params.preset}" not found, using blank config.`);
@@ -377,7 +376,7 @@ function runNonInteractive(
 ): void {
   if (configExists() && !dryRun && !opts.force) {
     console.log(formatOutput(
-      failure('setup', 'monitor-forge.config.json already exists. Use --force to overwrite.'),
+      structuredFailure('setup', 'monitor-forge.config.json already exists. Use --force to overwrite.'),
       format,
     ));
     process.exit(1);
@@ -428,18 +427,27 @@ function runNonInteractive(
   const groqKey = (opts.groqKey as string) ?? '';
   const openrouterKey = (opts.openrouterKey as string) ?? '';
 
-  const result = buildAndWrite({
-    name,
-    description: desc,
-    slug: toSlug(name),
-    preset: template,
-    center,
-    projection,
-    dayNight,
-    aiEnabled,
-    groqKey,
-    openrouterKey,
-  }, dryRun);
+  let result: SetupResult;
+  try {
+    result = buildAndWrite({
+      name,
+      description: desc,
+      slug: toSlug(name),
+      preset: template,
+      center,
+      projection,
+      dayNight,
+      aiEnabled,
+      groqKey,
+      openrouterKey,
+    }, dryRun);
+  } catch (err) {
+    console.log(formatOutput(
+      structuredFailure('setup', err instanceof Error ? err : String(err)),
+      format,
+    ));
+    process.exit(1);
+  }
 
   console.log(formatOutput(
     success('setup', {

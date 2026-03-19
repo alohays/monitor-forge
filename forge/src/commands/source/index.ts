@@ -38,9 +38,18 @@ export function registerSourceCommands(program: Command): void {
         });
 
         if (dryRun) {
+          let dryRunAction = 'add';
+          try {
+            const existingConfig = loadConfig();
+            if (existingConfig.sources.some(s => s.name === opts.name)) {
+              dryRunAction = opts.upsert ? 'update' : 'fail (duplicate, use --upsert)';
+            }
+          } catch {
+            // Config may not exist in dry-run context
+          }
           console.log(formatOutput(
-            success('source add --dry-run', sourceConfig, {
-              changes: [{ type: 'modified', file: 'monitor-forge.config.json', description: `Would add source "${opts.name}"` }],
+            success('source add --dry-run', { ...sourceConfig, action: dryRunAction }, {
+              changes: [{ type: 'modified', file: 'monitor-forge.config.json', description: `Would ${dryRunAction} source "${opts.name}"` }],
             }),
             format,
           ));
@@ -87,7 +96,7 @@ export function registerSourceCommands(program: Command): void {
         if (dryRun) {
           console.log(formatOutput(
             success('source remove --dry-run', { name }, {
-              changes: [{ type: 'modified', file: 'monitor-forge.config.ts', description: `Would remove source "${name}"` }],
+              changes: [{ type: 'modified', file: 'monitor-forge.config.json', description: `Would remove source "${name}"` }],
             }),
             format,
           ));
@@ -129,7 +138,7 @@ export function registerSourceCommands(program: Command): void {
         }));
         console.log(formatOutput(success('source list', sources), format));
       } catch (err) {
-        console.log(formatOutput(failure('source list', String(err)), format));
+        console.log(formatOutput(structuredFailure('source list', err instanceof Error ? err : String(err)), format));
         process.exit(1);
       }
     });

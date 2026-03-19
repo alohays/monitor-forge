@@ -38,9 +38,13 @@ export function registerViewCommands(program: Command): void {
         }
 
         if (dryRun) {
+          let dryRunAction = 'add';
+          if (config.views.some(v => v.name === name)) {
+            dryRunAction = opts.upsert ? 'update' : 'fail (duplicate, use --upsert)';
+          }
           console.log(formatOutput(
-            success('view add --dry-run', viewConfig, {
-              changes: [{ type: 'modified', file: 'monitor-forge.config.json', description: `Would add view "${name}"` }],
+            success('view add --dry-run', { ...viewConfig, action: dryRunAction }, {
+              changes: [{ type: 'modified', file: 'monitor-forge.config.json', description: `Would ${dryRunAction} view "${name}"` }],
             }),
             format,
           ));
@@ -58,6 +62,12 @@ export function registerViewCommands(program: Command): void {
             action = 'updated';
             const views = [...cfg.views];
 
+            // Preserve default flag from existing view if not explicitly set
+            let updatedView = viewConfig;
+            if (!opts.default && views[existingIdx].default) {
+              updatedView = { ...viewConfig, default: true };
+            }
+
             // If --default, clear default from other views
             if (opts.default) {
               for (const v of views) {
@@ -65,7 +75,7 @@ export function registerViewCommands(program: Command): void {
               }
             }
 
-            views[existingIdx] = viewConfig;
+            views[existingIdx] = updatedView;
             return { ...cfg, views };
           }
 
@@ -126,7 +136,7 @@ export function registerViewCommands(program: Command): void {
           format,
         ));
       } catch (err) {
-        console.log(formatOutput(failure('view remove', String(err)), format));
+        console.log(formatOutput(structuredFailure('view remove', err instanceof Error ? err : String(err)), format));
         process.exit(1);
       }
     });

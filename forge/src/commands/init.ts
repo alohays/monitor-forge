@@ -1,5 +1,5 @@
 import type { Command } from 'commander';
-import { existsSync, readFileSync } from 'node:fs';
+import { existsSync, readFileSync, realpathSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { configExists, writeConfig } from '../config/loader.js';
 import { createDefaultConfig } from '../config/defaults.js';
@@ -23,7 +23,7 @@ export function registerInitCommand(program: Command): void {
 
       if (configExists() && !dryRun && !opts.force) {
         console.log(formatOutput(
-          failure('init', 'monitor-forge.config.json already exists. Use --force to overwrite.'),
+          structuredFailure('init', 'monitor-forge.config.json already exists. Use --force to overwrite.'),
           format,
         ));
         process.exit(1);
@@ -53,6 +53,15 @@ export function registerInitCommand(program: Command): void {
           process.exit(1);
         }
         if (existsSync(presetPath)) {
+          const realPresetPath = realpathSync(presetPath);
+          const realPresetsDir = realpathSync(presetsDir);
+          if (!realPresetPath.startsWith(realPresetsDir + '/')) {
+            console.log(formatOutput(
+              structuredFailure('init', 'Invalid preset: resolved path escapes presets directory'),
+              format,
+            ));
+            process.exit(1);
+          }
           presetOverrides = JSON.parse(readFileSync(presetPath, 'utf-8'));
         } else {
           console.log(formatOutput(
@@ -79,7 +88,7 @@ export function registerInitCommand(program: Command): void {
         console.log(formatOutput(
           success('init --dry-run', config, {
             changes: [
-              { type: 'created', file: 'monitor-forge.config.ts', description: 'Would create config file' },
+              { type: 'created', file: 'monitor-forge.config.json', description: 'Would create config file' },
               { type: 'created', file: '.env.example', description: 'Would generate env template' },
             ],
           }),

@@ -170,9 +170,18 @@ export function registerPanelCommands(program: Command): void {
         });
 
         if (dryRun) {
+          let dryRunAction = 'add';
+          try {
+            const existingConfig = loadConfig();
+            if (existingConfig.panels.some(p => p.name === opts.name)) {
+              dryRunAction = opts.upsert ? 'update' : 'fail (duplicate, use --upsert)';
+            }
+          } catch {
+            // Config may not exist in dry-run context
+          }
           console.log(formatOutput(
-            success('panel add --dry-run', panelConfig, {
-              changes: [{ type: 'modified', file: 'monitor-forge.config.json', description: `Would add panel "${opts.name}"` }],
+            success('panel add --dry-run', { ...panelConfig, action: dryRunAction }, {
+              changes: [{ type: 'modified', file: 'monitor-forge.config.json', description: `Would ${dryRunAction} panel "${opts.name}"` }],
             }),
             format,
           ));

@@ -1,4 +1,4 @@
-import type { ZodError, ZodIssue } from 'zod';
+import { ZodError, type ZodIssue } from 'zod';
 
 export interface ForgeOutput<T = unknown> {
   success: boolean;
@@ -168,7 +168,7 @@ function classifyError(error: string): { errorCode: ErrorCode; retryable: boolea
     return { errorCode: 'CONFIG_NOT_FOUND', retryable: false };
   }
   if (error.includes('already exists')) {
-    if (error.includes('config') || error.includes('Config')) {
+    if (error.includes('monitor-forge.config') || error.includes('Config file')) {
       return { errorCode: 'CONFIG_EXISTS', retryable: true };
     }
     return { errorCode: 'DUPLICATE_NAME', retryable: true };
@@ -226,6 +226,18 @@ export function structuredFailure(
     retryable,
     recovery: suggestions.length > 0 ? { suggestions } : undefined,
   };
+
+  // Auto-detect ZodError passed as the error argument
+  if (error instanceof ZodError) {
+    output.errorCode = 'VALIDATION_ERROR';
+    output.retryable = false;
+    output.error = 'Validation failed';
+    output.validationErrors = formatZodErrors(error);
+    output.recovery = {
+      suggestions: suggestRecovery('VALIDATION_ERROR', command),
+    };
+    return output;
+  }
 
   if (opts?.zodError) {
     output.errorCode = 'VALIDATION_ERROR';

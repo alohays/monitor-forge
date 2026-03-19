@@ -15,6 +15,7 @@ vi.mock('node:fs', () => ({
   mkdirSync: vi.fn(),
   chmodSync: vi.fn(),
   unlinkSync: vi.fn(),
+  realpathSync: vi.fn((p: string) => p),
 }));
 
 const mockedReadFileSync = vi.mocked(readFileSync);
