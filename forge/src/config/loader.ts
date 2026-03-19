@@ -24,6 +24,13 @@ export function loadConfig(cwd?: string): MonitorForgeConfig {
   }
   const raw = readFileSync(jsonPath, 'utf-8');
   const parsed = JSON.parse(raw);
+
+  // Backfill version for pre-v0.3.0 configs
+  if (!parsed.version) {
+    console.warn('Warning: Config file has no "version" field. Backfilling to "1". Run `forge validate` to check your config.');
+    parsed.version = '1';
+  }
+
   return MonitorForgeConfigSchema.parse(parsed);
 }
 

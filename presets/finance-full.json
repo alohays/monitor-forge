@@ -1,9 +1,14 @@
 {
+  "version": "1",
   "_meta": {
     "category": "finance",
     "difficulty": "intermediate",
-    "requires_api_keys": ["GROQ_API_KEY"],
-    "optional_api_keys": ["OPENROUTER_API_KEY"],
+    "requires_api_keys": [
+      "GROQ_API_KEY"
+    ],
+    "optional_api_keys": [
+      "OPENROUTER_API_KEY"
+    ],
     "preview_description": "Full financial intelligence with entity tracking and global exchange mapping"
   },
   "monitor": {
@@ -11,7 +16,13 @@
     "slug": "finance-intelligence",
     "description": "Full-featured financial intelligence dashboard with market tracking and AI analysis",
     "domain": "finance",
-    "tags": ["finance", "markets", "crypto", "macro", "commodities"],
+    "tags": [
+      "finance",
+      "markets",
+      "crypto",
+      "macro",
+      "commodities"
+    ],
     "branding": {
       "primaryColor": "#FFD700"
     }
@@ -25,7 +36,9 @@
       "tier": 1,
       "interval": 300,
       "language": "en",
-      "tags": ["finance"]
+      "tags": [
+        "finance"
+      ]
     },
     {
       "name": "cnbc-top",
@@ -35,7 +48,10 @@
       "tier": 1,
       "interval": 300,
       "language": "en",
-      "tags": ["finance", "markets"]
+      "tags": [
+        "finance",
+        "markets"
+      ]
     },
     {
       "name": "ft-markets",
@@ -45,7 +61,10 @@
       "tier": 1,
       "interval": 600,
       "language": "en",
-      "tags": ["finance", "markets"]
+      "tags": [
+        "finance",
+        "markets"
+      ]
     },
     {
       "name": "bloomberg-markets",
@@ -55,7 +74,10 @@
       "tier": 1,
       "interval": 600,
       "language": "en",
-      "tags": ["finance", "markets"]
+      "tags": [
+        "finance",
+        "markets"
+      ]
     },
     {
       "name": "coindesk",
@@ -65,7 +87,9 @@
       "tier": 2,
       "interval": 600,
       "language": "en",
-      "tags": ["crypto"]
+      "tags": [
+        "crypto"
+      ]
     },
     {
       "name": "fed-rss",
@@ -75,7 +99,10 @@
       "tier": 1,
       "interval": 1800,
       "language": "en",
-      "tags": ["macro", "fed"]
+      "tags": [
+        "macro",
+        "fed"
+      ]
     }
   ],
   "layers": [
@@ -84,7 +111,10 @@
       "type": "points",
       "displayName": "Financial Centers",
       "color": "#FFD700",
-      "data": { "source": "static", "path": "data/geo/financial-centers.geojson" },
+      "data": {
+        "source": "static",
+        "path": "data/geo/financial-centers.geojson"
+      },
       "defaultVisible": true,
       "category": "infrastructure"
     }
@@ -96,7 +126,9 @@
       "displayName": "Market News",
       "position": 0,
       "config": {
-        "categories": ["market-news"],
+        "categories": [
+          "market-news"
+        ],
         "maxItems": 50
       }
     },
@@ -115,7 +147,15 @@
       "displayName": "Key Movers",
       "position": 2,
       "config": {
-        "entities": ["S&P 500", "NASDAQ", "Bitcoin", "Gold", "USD", "EUR", "JPY"],
+        "entities": [
+          "S&P 500",
+          "NASDAQ",
+          "Bitcoin",
+          "Gold",
+          "USD",
+          "EUR",
+          "JPY"
+        ],
         "maxEntities": 20
       }
     },
@@ -131,23 +171,35 @@
     {
       "name": "overview",
       "displayName": "Overview",
-      "panels": ["market-news", "market-brief"],
+      "panels": [
+        "market-news",
+        "market-brief"
+      ],
       "default": true
     },
     {
       "name": "analysis",
       "displayName": "Analysis",
-      "panels": ["market-brief", "entity-tracker"]
+      "panels": [
+        "market-brief",
+        "entity-tracker"
+      ]
     },
     {
       "name": "operations",
       "displayName": "Operations",
-      "panels": ["market-news", "service-status"]
+      "panels": [
+        "market-news",
+        "service-status"
+      ]
     }
   ],
   "ai": {
     "enabled": true,
-    "fallbackChain": ["groq", "openrouter"],
+    "fallbackChain": [
+      "groq",
+      "openrouter"
+    ],
     "providers": {
       "groq": {
         "model": "llama-3.3-70b-versatile",
@@ -168,7 +220,10 @@
   },
   "map": {
     "style": "https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json",
-    "center": [0, 30],
+    "center": [
+      0,
+      30
+    ],
     "zoom": 3,
     "projection": "mercator"
   },

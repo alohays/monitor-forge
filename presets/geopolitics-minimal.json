@@ -1,8 +1,11 @@
 {
+  "version": "1",
   "_meta": {
     "category": "geopolitics",
     "difficulty": "beginner",
-    "requires_api_keys": ["GROQ_API_KEY"],
+    "requires_api_keys": [
+      "GROQ_API_KEY"
+    ],
     "optional_api_keys": [],
     "preview_description": "Track global events from BBC, Reuters, and Al Jazeera"
   },
@@ -11,7 +14,11 @@
     "slug": "geopolitics-monitor",
     "description": "Minimal geopolitical intelligence dashboard",
     "domain": "geopolitics",
-    "tags": ["geopolitics", "conflict", "diplomacy"],
+    "tags": [
+      "geopolitics",
+      "conflict",
+      "diplomacy"
+    ],
     "branding": {
       "primaryColor": "#CC0000"
     }
@@ -25,7 +32,10 @@
       "tier": 1,
       "interval": 300,
       "language": "en",
-      "tags": ["world", "geopolitics"]
+      "tags": [
+        "world",
+        "geopolitics"
+      ]
     },
     {
       "name": "reuters-world",
@@ -35,7 +45,10 @@
       "tier": 1,
       "interval": 300,
       "language": "en",
-      "tags": ["world", "geopolitics"]
+      "tags": [
+        "world",
+        "geopolitics"
+      ]
     },
     {
       "name": "aljazeera",
@@ -45,7 +58,10 @@
       "tier": 2,
       "interval": 600,
       "language": "en",
-      "tags": ["world", "middle-east"]
+      "tags": [
+        "world",
+        "middle-east"
+      ]
     }
   ],
   "layers": [],
@@ -56,7 +72,9 @@
       "displayName": "World News",
       "position": 0,
       "config": {
-        "categories": ["world-news"],
+        "categories": [
+          "world-news"
+        ],
         "maxItems": 30
       }
     },
@@ -74,13 +92,18 @@
     {
       "name": "overview",
       "displayName": "Overview",
-      "panels": ["world-news", "ai-brief"],
+      "panels": [
+        "world-news",
+        "ai-brief"
+      ],
       "default": true
     }
   ],
   "ai": {
     "enabled": true,
-    "fallbackChain": ["groq"],
+    "fallbackChain": [
+      "groq"
+    ],
     "providers": {
       "groq": {
         "model": "llama-3.3-70b-versatile",
@@ -95,7 +118,10 @@
   },
   "map": {
     "style": "https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json",
-    "center": [30, 30],
+    "center": [
+      30,
+      30
+    ],
     "zoom": 3,
     "projection": "globe"
   },

@@ -1,9 +1,14 @@
 {
+  "version": "1",
   "_meta": {
     "category": "geopolitics",
     "difficulty": "intermediate",
-    "requires_api_keys": ["GROQ_API_KEY"],
-    "optional_api_keys": ["OPENROUTER_API_KEY"],
+    "requires_api_keys": [
+      "GROQ_API_KEY"
+    ],
+    "optional_api_keys": [
+      "OPENROUTER_API_KEY"
+    ],
     "preview_description": "Full geopolitical intelligence with conflict zone mapping and instability index"
   },
   "monitor": {
@@ -11,7 +16,13 @@
     "slug": "geopolitical-intelligence",
     "description": "Full-featured geopolitical intelligence dashboard with conflict tracking and AI analysis",
     "domain": "geopolitics",
-    "tags": ["geopolitics", "conflict", "diplomacy", "security", "osint"],
+    "tags": [
+      "geopolitics",
+      "conflict",
+      "diplomacy",
+      "security",
+      "osint"
+    ],
     "branding": {
       "primaryColor": "#CC0000"
     }
@@ -25,7 +36,9 @@
       "tier": 1,
       "interval": 300,
       "language": "en",
-      "tags": ["world"]
+      "tags": [
+        "world"
+      ]
     },
     {
       "name": "reuters-world",
@@ -35,7 +48,9 @@
       "tier": 1,
       "interval": 300,
       "language": "en",
-      "tags": ["world"]
+      "tags": [
+        "world"
+      ]
     },
     {
       "name": "aljazeera",
@@ -45,7 +60,10 @@
       "tier": 1,
       "interval": 600,
       "language": "en",
-      "tags": ["world", "middle-east"]
+      "tags": [
+        "world",
+        "middle-east"
+      ]
     },
     {
       "name": "guardian-world",
@@ -55,7 +73,9 @@
       "tier": 2,
       "interval": 600,
       "language": "en",
-      "tags": ["world"]
+      "tags": [
+        "world"
+      ]
     },
     {
       "name": "ap-news-world",
@@ -65,7 +85,9 @@
       "tier": 2,
       "interval": 600,
       "language": "en",
-      "tags": ["world"]
+      "tags": [
+        "world"
+      ]
     },
     {
       "name": "foreign-affairs",
@@ -75,7 +97,10 @@
       "tier": 1,
       "interval": 3600,
       "language": "en",
-      "tags": ["analysis", "policy"]
+      "tags": [
+        "analysis",
+        "policy"
+      ]
     },
     {
       "name": "war-on-rocks",
@@ -85,7 +110,10 @@
       "tier": 2,
       "interval": 3600,
       "language": "en",
-      "tags": ["defense", "security"]
+      "tags": [
+        "defense",
+        "security"
+      ]
     },
     {
       "name": "gdelt-events",
@@ -95,7 +123,10 @@
       "tier": 2,
       "interval": 900,
       "language": "en",
-      "tags": ["events", "conflict"]
+      "tags": [
+        "events",
+        "conflict"
+      ]
     }
   ],
   "layers": [
@@ -104,7 +135,10 @@
       "type": "heatmap",
       "displayName": "Conflict Zones",
       "color": "#FF4444",
-      "data": { "source": "static", "path": "data/geo/conflict-zones.geojson" },
+      "data": {
+        "source": "static",
+        "path": "data/geo/conflict-zones.geojson"
+      },
       "defaultVisible": true,
       "category": "security"
     }
@@ -116,7 +150,10 @@
       "displayName": "World News Feed",
       "position": 0,
       "config": {
-        "categories": ["world-news", "security"],
+        "categories": [
+          "world-news",
+          "security"
+        ],
         "maxItems": 50
       }
     },
@@ -135,7 +172,16 @@
       "displayName": "Key Actors",
       "position": 2,
       "config": {
-        "entities": ["NATO", "UN", "EU", "China", "Russia", "USA", "Iran", "North Korea"],
+        "entities": [
+          "NATO",
+          "UN",
+          "EU",
+          "China",
+          "Russia",
+          "USA",
+          "Iran",
+          "North Korea"
+        ],
         "maxEntities": 20
       }
     },
@@ -158,23 +204,36 @@
     {
       "name": "overview",
       "displayName": "Overview",
-      "panels": ["world-news", "situation-brief"],
+      "panels": [
+        "world-news",
+        "situation-brief"
+      ],
       "default": true
     },
     {
       "name": "analysis",
       "displayName": "Analysis",
-      "panels": ["situation-brief", "entity-tracker", "instability-index"]
+      "panels": [
+        "situation-brief",
+        "entity-tracker",
+        "instability-index"
+      ]
     },
     {
       "name": "operations",
       "displayName": "Operations",
-      "panels": ["world-news", "service-status"]
+      "panels": [
+        "world-news",
+        "service-status"
+      ]
     }
   ],
   "ai": {
     "enabled": true,
-    "fallbackChain": ["groq", "openrouter"],
+    "fallbackChain": [
+      "groq",
+      "openrouter"
+    ],
     "providers": {
       "groq": {
         "model": "llama-3.3-70b-versatile",
@@ -195,7 +254,10 @@
   },
   "map": {
     "style": "https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json",
-    "center": [30, 30],
+    "center": [
+      30,
+      30
+    ],
     "zoom": 3,
     "projection": "globe",
     "dayNightOverlay": true,

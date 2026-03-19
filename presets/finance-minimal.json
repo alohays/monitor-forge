@@ -1,8 +1,11 @@
 {
+  "version": "1",
   "_meta": {
     "category": "finance",
     "difficulty": "beginner",
-    "requires_api_keys": ["GROQ_API_KEY"],
+    "requires_api_keys": [
+      "GROQ_API_KEY"
+    ],
     "optional_api_keys": [],
     "preview_description": "Track financial markets from Reuters, CNBC, and CoinDesk"
   },
@@ -11,7 +14,11 @@
     "slug": "finance-monitor",
     "description": "Minimal financial market intelligence dashboard",
     "domain": "finance",
-    "tags": ["finance", "markets", "crypto"],
+    "tags": [
+      "finance",
+      "markets",
+      "crypto"
+    ],
     "branding": {
       "primaryColor": "#FFD700"
     }
@@ -25,7 +32,10 @@
       "tier": 1,
       "interval": 300,
       "language": "en",
-      "tags": ["finance", "markets"]
+      "tags": [
+        "finance",
+        "markets"
+      ]
     },
     {
       "name": "cnbc-top",
@@ -35,7 +45,10 @@
       "tier": 1,
       "interval": 300,
       "language": "en",
-      "tags": ["finance", "markets"]
+      "tags": [
+        "finance",
+        "markets"
+      ]
     },
     {
       "name": "coindesk",
@@ -45,7 +58,10 @@
       "tier": 2,
       "interval": 600,
       "language": "en",
-      "tags": ["crypto", "blockchain"]
+      "tags": [
+        "crypto",
+        "blockchain"
+      ]
     }
   ],
   "layers": [],
@@ -56,7 +72,10 @@
       "displayName": "Market News",
       "position": 0,
       "config": {
-        "categories": ["market-news", "crypto"],
+        "categories": [
+          "market-news",
+          "crypto"
+        ],
         "maxItems": 30
       }
     },
@@ -74,13 +93,18 @@
     {
       "name": "overview",
       "displayName": "Overview",
-      "panels": ["market-news", "ai-brief"],
+      "panels": [
+        "market-news",
+        "ai-brief"
+      ],
       "default": true
     }
   ],
   "ai": {
     "enabled": true,
-    "fallbackChain": ["groq"],
+    "fallbackChain": [
+      "groq"
+    ],
     "providers": {
       "groq": {
         "model": "llama-3.3-70b-versatile",
@@ -95,7 +119,10 @@
   },
   "map": {
     "style": "https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json",
-    "center": [-74, 40.7],
+    "center": [
+      -74,
+      40.7
+    ],
     "zoom": 5,
     "projection": "mercator"
   },
