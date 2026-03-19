@@ -151,6 +151,7 @@ export const BrandingSchema = z.object({
   primaryColor: z.string().regex(/^#[0-9A-Fa-f]{6}$/).default('#0052CC'),
   logo: z.string().optional(),
   favicon: z.string().optional(),
+  ogImage: z.string().url().optional(),
 });
 
 // ─── Theme Schema ───────────────────────────────────────────

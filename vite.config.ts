@@ -1,9 +1,10 @@
 import { defineConfig } from 'vitest/config';
 import { resolve } from 'node:path';
 import { apiDevPlugin } from './forge/src/vite/api-dev-plugin.js';
+import { ogMetaPlugin } from './forge/src/vite/og-meta-plugin.js';
 
 export default defineConfig({
-  plugins: [apiDevPlugin()],
+  plugins: [apiDevPlugin(), ogMetaPlugin()],
   test: {
     exclude: ['e2e/**', 'node_modules/**'],
   },
