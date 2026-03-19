@@ -155,6 +155,7 @@ export function registerConfigCommands(program: Command): void {
           success('config set', { path: dotPath, value }, {
             changes: [{ type: 'modified', file: 'monitor-forge.config.json', description: `Set ${dotPath} = ${JSON.stringify(value)}` }],
             warnings,
+            next_steps: ['forge validate', 'forge dev'],
           }),
           format,
         ));
