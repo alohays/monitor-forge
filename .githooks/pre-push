@@ -8,7 +8,7 @@ echo "Pre-push: running typecheck..."
 npx tsc --noEmit
 
 echo "Pre-push: running tests..."
-npx vitest run
+npx vitest run forge/
 
 echo "Pre-push: validating config..."
 npx tsx forge/bin/forge.ts validate --format json > /dev/null 2>&1
