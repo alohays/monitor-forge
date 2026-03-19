@@ -15,6 +15,7 @@ class MockSource extends SourceBase {
 const makeConfig = (name: string, interval = 3600): SourceConfig => ({
   name, type: 'mock-mgr', url: 'https://example.com',
   interval, category: 'test', tier: 3, tags: [], language: 'en',
+  authHeader: 'Authorization', cacheTtl: 300,
 });
 
 beforeEach(() => {

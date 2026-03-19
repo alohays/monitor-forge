@@ -55,6 +55,9 @@ function collectEnvVars(config: MonitorForgeConfig): EnvVarDef[] {
         }
       }
     }
+    if (source.authEnvVar) {
+      vars.push({ key: source.authEnvVar, description: `Proxy auth key for source "${source.name}"`, required: true });
+    }
   }
 
   return vars;

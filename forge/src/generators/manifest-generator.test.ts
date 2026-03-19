@@ -1,18 +1,31 @@
 import { describe, it, expect } from 'vitest';
-import { generateManifests, generateProxyAllowlist } from './manifest-generator.js';
-import type { MonitorForgeConfig } from '../config/schema.js';
+import { generateManifests, generateProxyAllowlist, generateProxyConfig } from './manifest-generator.js';
+import type { MonitorForgeConfig, SourceConfig } from '../config/schema.js';
 
-function buildConfig(overrides?: Partial<MonitorForgeConfig>): MonitorForgeConfig {
+/** Source config with authHeader/cacheTtl optional (filled in by buildConfig) */
+type TestSource = Omit<SourceConfig, 'authHeader' | 'cacheTtl'> & Partial<Pick<SourceConfig, 'authHeader' | 'cacheTtl'>>;
+
+interface TestConfigOverrides extends Omit<Partial<MonitorForgeConfig>, 'sources'> {
+  sources?: TestSource[];
+}
+
+function buildConfig(overrides?: TestConfigOverrides): MonitorForgeConfig {
+  const sources: SourceConfig[] = (overrides?.sources ?? []).map(s => ({
+    authHeader: 'Authorization',
+    cacheTtl: 300,
+    ...s,
+  }));
+  const { sources: _sources, ...rest } = overrides ?? {};
   return {
     version: '1',
     monitor: { name: 'Test', slug: 'test', description: '', domain: 'test', tags: [], branding: { primaryColor: '#0052CC' } },
-    sources: [], layers: [], panels: [], views: [],
+    sources, layers: [], panels: [], views: [],
     ai: { enabled: false, fallbackChain: [], providers: {}, analysis: { summarization: true, entityExtraction: true, sentimentAnalysis: true, focalPointDetection: false } },
     map: { style: 'https://example.com/style.json', center: [0, 0], zoom: 3, minZoom: 2, maxZoom: 18, projection: 'mercator', dayNightOverlay: false, atmosphericGlow: true, idleRotation: true, idleRotationSpeed: 0.5 },
     backend: { cache: { provider: 'memory', ttlSeconds: 300 }, rateLimit: { enabled: true, maxRequests: 100, windowSeconds: 60 }, corsProxy: { enabled: true, allowedDomains: ['*'], corsOrigins: ['*'] } },
     build: { target: 'vercel', outDir: 'dist' },
     theme: { mode: 'dark' as const, palette: 'default' as const, colors: {}, panelPosition: 'right' as const, panelWidth: 380, compactMode: false },
-    ...overrides,
+    ...rest,
   };
 }
 
@@ -608,5 +621,59 @@ describe('generateProxyAllowlist', () => {
     const config = buildConfig();
     const output = generateProxyAllowlist(config);
     expect(output).toContain('"*"');
+  });
+});
+
+describe('generateProxyConfig', () => {
+  it('generates proxyConfig with domain-to-auth mapping for sources with authEnvVar', () => {
+    const config = buildConfig({
+      sources: [
+        { name: 'authed', type: 'rest-api', url: 'https://api.example.com/v1', category: 'data', tier: 3, interval: 300, language: 'en', tags: [], authEnvVar: 'EXAMPLE_KEY', authHeader: 'Authorization', cacheTtl: 300 },
+        { name: 'plain', type: 'rss', url: 'https://feeds.example.com/rss', category: 'news', tier: 3, interval: 300, language: 'en', tags: [] },
+      ],
+    });
+    const output = generateProxyConfig(config);
+    expect(output).toContain('"api.example.com"');
+    expect(output).toContain('"EXAMPLE_KEY"');
+    expect(output).toContain('"bearer"');
+    // Source without authEnvVar should not appear in proxyConfig
+    expect(output).not.toContain('"feeds.example.com"');
+  });
+
+  it('uses plain scheme when authHeader is not Authorization', () => {
+    const config = buildConfig({
+      sources: [
+        { name: 'custom-auth', type: 'rest-api', url: 'https://custom.api.com/v1', category: 'data', tier: 3, interval: 300, language: 'en', tags: [], authEnvVar: 'CUSTOM_KEY', authHeader: 'X-API-Key', cacheTtl: 60 },
+      ],
+    });
+    const output = generateProxyConfig(config);
+    expect(output).toContain('"custom.api.com"');
+    expect(output).toContain('"plain"');
+    expect(output).toContain('"X-API-Key"');
+  });
+
+  it('generates sourceTtl for all sources', () => {
+    const config = buildConfig({
+      sources: [
+        { name: 'fast', type: 'rss', url: 'https://a.com/rss', category: 'n', tier: 3, interval: 300, language: 'en', tags: [], authHeader: 'Authorization', cacheTtl: 60 },
+        { name: 'slow', type: 'rss', url: 'https://b.com/rss', category: 'n', tier: 3, interval: 300, language: 'en', tags: [], authHeader: 'Authorization', cacheTtl: 600 },
+      ],
+    });
+    const output = generateProxyConfig(config);
+    expect(output).toContain('"fast": 60');
+    expect(output).toContain('"slow": 600');
+  });
+
+  it('generates empty objects when no sources configured', () => {
+    const config = buildConfig();
+    const output = generateProxyConfig(config);
+    expect(output).toContain('proxyConfig: Record<string, ProxyAuthConfig> = {}');
+    expect(output).toContain('sourceTtl: Record<string, number> = {}');
+  });
+
+  it('includes import for ProxyAuthConfig type', () => {
+    const config = buildConfig();
+    const output = generateProxyConfig(config);
+    expect(output).toContain("import type { ProxyAuthConfig } from './key-injection.js';");
   });
 });

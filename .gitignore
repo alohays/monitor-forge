@@ -6,6 +6,7 @@ dist/
 .env.*.local
 src/generated/
 api/_shared/proxy-allowlist.ts
+api/_shared/proxy-config.ts
 *.log
 .DS_Store
 2026-*.txt

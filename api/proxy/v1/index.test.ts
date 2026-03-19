@@ -5,6 +5,16 @@ vi.mock('../../_shared/proxy-allowlist.js', () => ({
   CORS_ALLOWED_ORIGINS: ['*'],
 }));
 
+vi.mock('../../_shared/proxy-config.js', () => ({
+  proxyConfig: {
+    'api.authed.com': { envVar: 'AUTHED_API_KEY', header: 'Authorization', scheme: 'bearer' },
+    'custom.api.com': { envVar: 'CUSTOM_KEY', header: 'X-API-Key', scheme: 'plain' },
+  },
+  sourceTtl: {
+    'my-source': 60,
+  },
+}));
+
 import handler from './index.js';
 
 beforeEach(() => {
@@ -182,6 +192,114 @@ describe('proxy/v1 handler', () => {
       const request = new Request(`https://example.com/api/proxy/v1?url=http://[${ip}]/`);
       const response = await handler(request);
       expect(response.status).toBe(403);
+    });
+  });
+
+  // ─── API Key Injection ──────────────────────────────────────
+
+  describe('API key injection', () => {
+    afterEach(() => {
+      delete process.env.PROXY_ALLOW_ALL;
+      delete process.env.AUTHED_API_KEY;
+      delete process.env.CUSTOM_KEY;
+    });
+
+    it('injects Bearer Authorization header when env var is set', async () => {
+      process.env.PROXY_ALLOW_ALL = 'true';
+      process.env.AUTHED_API_KEY = 'secret-bearer-key';
+      const fetchSpy = vi.spyOn(globalThis, 'fetch').mockResolvedValueOnce(
+        new Response(JSON.stringify({ ok: true }), {
+          status: 200,
+          headers: { 'Content-Type': 'application/json' },
+        }),
+      );
+      const request = new Request('https://example.com/api/proxy/v1?url=https://api.authed.com/data');
+      const response = await handler(request);
+      expect(response.status).toBe(200);
+      const calledHeaders = fetchSpy.mock.calls[0][1]?.headers as Record<string, string>;
+      expect(calledHeaders['Authorization']).toBe('Bearer secret-bearer-key');
+    });
+
+    it('injects plain X-API-Key header when scheme is plain', async () => {
+      process.env.PROXY_ALLOW_ALL = 'true';
+      process.env.CUSTOM_KEY = 'plain-key-value';
+      const fetchSpy = vi.spyOn(globalThis, 'fetch').mockResolvedValueOnce(
+        new Response(JSON.stringify({ ok: true }), {
+          status: 200,
+          headers: { 'Content-Type': 'application/json' },
+        }),
+      );
+      const request = new Request('https://example.com/api/proxy/v1?url=https://custom.api.com/data');
+      const response = await handler(request);
+      expect(response.status).toBe(200);
+      const calledHeaders = fetchSpy.mock.calls[0][1]?.headers as Record<string, string>;
+      expect(calledHeaders['X-API-Key']).toBe('plain-key-value');
+    });
+
+    it('passes through without auth when env var is not set', async () => {
+      process.env.PROXY_ALLOW_ALL = 'true';
+      delete process.env.AUTHED_API_KEY;
+      const fetchSpy = vi.spyOn(globalThis, 'fetch').mockResolvedValueOnce(
+        new Response(JSON.stringify({ ok: true }), {
+          status: 200,
+          headers: { 'Content-Type': 'application/json' },
+        }),
+      );
+      const request = new Request('https://example.com/api/proxy/v1?url=https://api.authed.com/no-key');
+      const response = await handler(request);
+      expect(response.status).toBe(200);
+      const calledHeaders = fetchSpy.mock.calls[0][1]?.headers as Record<string, string>;
+      expect(calledHeaders['Authorization']).toBeUndefined();
+    });
+
+    it('passes through unchanged for domains not in proxyConfig', async () => {
+      process.env.PROXY_ALLOW_ALL = 'true';
+      const fetchSpy = vi.spyOn(globalThis, 'fetch').mockResolvedValueOnce(
+        new Response(JSON.stringify({ ok: true }), {
+          status: 200,
+          headers: { 'Content-Type': 'application/json' },
+        }),
+      );
+      const request = new Request('https://example.com/api/proxy/v1?url=https://unknown-domain.com/data');
+      const response = await handler(request);
+      expect(response.status).toBe(200);
+      const calledHeaders = fetchSpy.mock.calls[0][1]?.headers as Record<string, string>;
+      expect(calledHeaders['User-Agent']).toBe('MonitorForge/1.0');
+      expect(calledHeaders['Authorization']).toBeUndefined();
+    });
+  });
+
+  // ─── TTL Override ───────────────────────────────────────────
+
+  describe('TTL override', () => {
+    afterEach(() => {
+      delete process.env.PROXY_ALLOW_ALL;
+    });
+
+    it('uses ?ttl= query param when provided', async () => {
+      process.env.PROXY_ALLOW_ALL = 'true';
+      vi.spyOn(globalThis, 'fetch').mockResolvedValueOnce(
+        new Response(JSON.stringify({ ok: true }), {
+          status: 200,
+          headers: { 'Content-Type': 'application/json' },
+        }),
+      );
+      const request = new Request('https://example.com/api/proxy/v1?url=https://api.external.com/ttl-test&ttl=60');
+      const response = await handler(request);
+      expect(response.status).toBe(200);
+    });
+
+    it('falls back to source TTL when no ?ttl= param', async () => {
+      process.env.PROXY_ALLOW_ALL = 'true';
+      vi.spyOn(globalThis, 'fetch').mockResolvedValueOnce(
+        new Response(JSON.stringify({ ok: true }), {
+          status: 200,
+          headers: { 'Content-Type': 'application/json' },
+        }),
+      );
+      const request = new Request('https://example.com/api/proxy/v1?url=https://api.external.com/source-ttl-test&source=my-source');
+      const response = await handler(request);
+      expect(response.status).toBe(200);
     });
   });
 });

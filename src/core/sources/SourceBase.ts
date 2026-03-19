@@ -9,6 +9,9 @@ export interface SourceConfig {
   language: string;
   headers?: Record<string, string>;
   transform?: string;
+  authEnvVar?: string;
+  authHeader: string;
+  cacheTtl: number;
 }
 
 export interface SourceItem {

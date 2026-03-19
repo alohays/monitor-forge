@@ -10,6 +10,8 @@ const testConfig: SourceConfig = {
   tier: 3,
   tags: ['a'],
   language: 'en',
+  authHeader: 'Authorization',
+  cacheTtl: 300,
 };
 
 class TestSource extends SourceBase {

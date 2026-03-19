@@ -2,7 +2,9 @@ import { corsHeaders, handleCors } from '../../_shared/cors.js';
 import { getCached } from '../../_shared/cache.js';
 import { jsonResponse, errorResponse } from '../../_shared/error.js';
 import { isDomainAllowed } from '../../_shared/domain-match.js';
+import { injectAuthHeader } from '../../_shared/key-injection.js';
 import { PROXY_ALLOWED_DOMAINS, CORS_ALLOWED_ORIGINS } from '../../_shared/proxy-allowlist.js';
+import { proxyConfig, sourceTtl } from '../../_shared/proxy-config.js';
 
 export const config = { runtime: 'edge' };
 
@@ -36,11 +38,21 @@ export default async function handler(request: Request): Promise<Response> {
       return errorResponse(403, 'Domain not in proxy allowlist', cors);
     }
 
-    const cacheTtl = parseInt(url.searchParams.get('ttl') ?? '300', 10);
+    // Resolve TTL: ?ttl= query param > source-level cacheTtl > default 300
+    const sourceName = url.searchParams.get('source');
+    const ttlParam = url.searchParams.get('ttl');
+    const rawTtl = ttlParam != null ? parseInt(ttlParam, 10) : null;
+    const cacheTtl = (rawTtl != null && Number.isFinite(rawTtl) && rawTtl > 0)
+      ? Math.min(rawTtl, 86400)  // cap at 24 hours
+      : (sourceName && sourceTtl[sourceName] != null ? sourceTtl[sourceName] : 300);
+
+    // Inject server-side API key if configured for this domain
+    const baseHeaders: Record<string, string> = { 'User-Agent': 'MonitorForge/1.0' };
+    const fetchHeaders = injectAuthHeader(baseHeaders, targetParsed.hostname, proxyConfig);
 
     const data = await getCached(`proxy:${targetUrl}`, cacheTtl, async () => {
       const response = await fetch(targetUrl, {
-        headers: { 'User-Agent': 'MonitorForge/1.0' },
+        headers: fetchHeaders,
         signal: AbortSignal.timeout(15000),
       });
 
