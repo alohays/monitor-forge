@@ -192,6 +192,25 @@ export class PanelManager {
     return match ? match[1] : null;
   }
 
+  degradeUnreceivedPanels(message: string): void {
+    for (const instances of this.panels.values()) {
+      for (const panel of instances) {
+        if (!panel.getHasReceivedData()) {
+          panel.renderDegraded(message);
+        }
+      }
+    }
+  }
+
+  hasAnyDataReceived(): boolean {
+    for (const instances of this.panels.values()) {
+      for (const panel of instances) {
+        if (panel.getHasReceivedData()) return true;
+      }
+    }
+    return false;
+  }
+
   updatePanel(name: string, data: unknown): void {
     this.lastPanelData.set(name, data);
     const instances = this.panels.get(name);

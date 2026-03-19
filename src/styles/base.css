@@ -330,6 +330,39 @@ html, body {
   background: var(--bg-secondary);
 }
 
+/* Panel Degraded State */
+.panel-degraded {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 1.5rem 1rem;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  line-height: 1.5;
+  margin: 0.25rem 0;
+}
+
+.panel-configure-hint {
+  font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 0.1rem 0.35rem;
+  border-radius: 3px;
+  color: var(--accent);
+  font-size: 0.75rem;
+}
+
+[data-theme="light"] .panel-degraded {
+  background: rgba(0, 0, 0, 0.02);
+}
+
+[data-theme="light"] .panel-configure-hint {
+  background: rgba(0, 0, 0, 0.05);
+}
+
 /* Scrollbar */
 ::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: transparent; }

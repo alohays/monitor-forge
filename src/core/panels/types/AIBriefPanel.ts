@@ -25,7 +25,17 @@ export class AIBriefPanel extends PanelBase {
 
   update(data: unknown): void {
     if (!data || typeof data !== 'object') return;
+
+    const maybeDegraded = data as { type?: string; message?: string };
+    if (maybeDegraded.type === 'degraded' && maybeDegraded.message) {
+      this.hideSkeleton();
+      this.renderDegraded(maybeDegraded.message);
+      this.hasReceivedData = true;
+      return;
+    }
+
     const briefData = data as { summary?: string; timestamp?: string };
+    if (!briefData.summary) return; // Not AI brief data (e.g., source items from updateAll)
 
     this.markDataReceived();
 

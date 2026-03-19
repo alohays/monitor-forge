@@ -18,11 +18,14 @@ export class EntityTrackerPanel extends PanelBase {
         <div class="entity-tracker-items"></div>
       </div>
     `;
+    this.showSkeleton(3);
   }
 
   update(data: unknown): void {
     if (!Array.isArray(data)) return;
     this.entities = data as TrackedEntity[];
+
+    this.markDataReceived();
     this.renderEntities();
   }
 
@@ -43,6 +46,7 @@ export class EntityTrackerPanel extends PanelBase {
   }
 
   destroy(): void {
+    this.cleanupTimers();
     this.container.innerHTML = '';
   }
 }

@@ -9,6 +9,8 @@ import './styles/animations.css';
 import './styles/views.css';
 
 export class App {
+  private static readonly INITIAL_LOAD_TIMEOUT_MS = 15_000;
+
   private root: HTMLElement;
   private mapEngine: MapEngine | null = null;
   private panelManager: PanelManager | null = null;
@@ -16,6 +18,7 @@ export class App {
   private aiManager: AIManager | null = null;
   private idleDetector: IdleDetector | null = null;
   private mediaQueryCleanup: (() => void) | null = null;
+  private initialLoadTimer: ReturnType<typeof setTimeout> | null = null;
 
   constructor(root: HTMLElement) {
     this.root = root;
@@ -115,6 +118,14 @@ export class App {
     // Start fetching data
     this.sourceManager.startAll();
 
+    // Initial-load timeout: degrade panels that haven't received data
+    this.initialLoadTimer = setTimeout(() => {
+      this.panelManager?.degradeUnreceivedPanels(
+        'No data sources responding. Check your source configuration.',
+      );
+      this.initialLoadTimer = null;
+    }, App.INITIAL_LOAD_TIMEOUT_MS);
+
     // Initial AI brief
     if (this.aiManager.isEnabled()) {
       this.generateAIBrief();
@@ -169,6 +180,10 @@ export class App {
       });
     } catch (err) {
       console.warn('AI brief generation failed:', err);
+      this.panelManager?.updatePanel('ai-insights', {
+        type: 'degraded',
+        message: 'AI analysis requires API keys. Run `forge ai configure` to set up a provider.',
+      });
     }
   }
 
@@ -275,6 +290,10 @@ export class App {
   }
 
   destroy(): void {
+    if (this.initialLoadTimer !== null) {
+      clearTimeout(this.initialLoadTimer);
+      this.initialLoadTimer = null;
+    }
     this.mediaQueryCleanup?.();
     this.mediaQueryCleanup = null;
     this.sourceManager?.stopAll();
