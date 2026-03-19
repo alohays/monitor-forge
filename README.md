@@ -98,6 +98,10 @@ The agent reads CLAUDE.md/AGENTS.md, uses the forge CLI, and builds your dashboa
 
 ## ✨ Key Features
 
+<p align="center">
+  <img src=".github/assets/concept-diagram.jpg" alt="monitor-forge concept: CLI command drives data sources through the forge into a real-time dashboard" width="800" />
+</p>
+
 <table>
 <tr>
 <td width="33%" valign="top">
@@ -163,10 +167,6 @@ Vercel Edge Functions with security headers, CSP, and proxy domain allowlist. RS
 | `health-full` | health | 7 | 4 | + Lancet, CDC Newsroom, bioRxiv, Global Health Now |
 | `korea-minimal` | korea | 3 | 2 | Yonhap English, Korea Herald, BBC Asia |
 | `korea-full` | korea | 7 | 4 | + NK News, Hankyoreh, Reuters Asia, Korea Times |
-
-<p align="center">
-  <img src=".github/assets/concept-diagram.jpg" alt="monitor-forge concept: CLI command drives data sources through the forge into a real-time dashboard" width="800" />
-</p>
 
 ## 📡 Workflow & Data Flow
 
