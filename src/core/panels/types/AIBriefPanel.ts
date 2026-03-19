@@ -35,6 +35,7 @@ export class AIBriefPanel extends PanelBase {
     }
 
     const briefData = data as { summary?: string; timestamp?: string };
+    if (!briefData.summary) return; // Not AI brief data (e.g., source items from updateAll)
 
     this.markDataReceived();
 
