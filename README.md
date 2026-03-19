@@ -6,6 +6,8 @@
 
 The first agent-native dashboard framework — designed for [Claude Code](https://docs.anthropic.com/en/docs/claude-code), [Gemini CLI](https://github.com/google-gemini/gemini-cli), and other AI coding agents to build customized dashboards through conversation.
 
+<img src=".github/assets/hero-banner.jpg" alt="MonitorForge: From complex WorldMonitor to simple config-driven personalized dashboards" width="800" />
+
 [![CI](https://github.com/alohays/monitor-forge/actions/workflows/ci.yml/badge.svg)](https://github.com/alohays/monitor-forge/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Node.js](https://img.shields.io/badge/Node.js-%3E%3D18-green.svg)](https://nodejs.org/)
