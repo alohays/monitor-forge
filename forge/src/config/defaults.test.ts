@@ -17,7 +17,7 @@ describe('createDefaultConfig', () => {
 
   it('applies sources override', () => {
     const config = createDefaultConfig({
-      sources: [{ name: 'test', type: 'rss', url: 'https://example.com/rss', category: 'news', tier: 3, interval: 300, language: 'en', tags: [] }],
+      sources: [{ name: 'test', type: 'rss', url: 'https://example.com/rss', category: 'news', tier: 3, interval: 300, language: 'en', tags: [], authHeader: 'Authorization', cacheTtl: 300 }],
     });
     expect(config.sources).toHaveLength(1);
   });
@@ -54,7 +54,7 @@ describe('createDefaultConfig', () => {
   it('output with overrides passes schema validation', () => {
     const config = createDefaultConfig({
       monitor: { name: 'Overridden', slug: 'overridden', description: '', domain: 'finance', tags: [], branding: { primaryColor: '#00FF00' } },
-      sources: [{ name: 'feed', type: 'rss', url: 'https://example.com/rss', category: 'finance', tier: 1, interval: 60, language: 'ko', tags: ['crypto'] }],
+      sources: [{ name: 'feed', type: 'rss', url: 'https://example.com/rss', category: 'finance', tier: 1, interval: 60, language: 'ko', tags: ['crypto'], authHeader: 'Authorization', cacheTtl: 300 }],
     });
     expect(() => MonitorForgeConfigSchema.parse(config)).not.toThrow();
   });

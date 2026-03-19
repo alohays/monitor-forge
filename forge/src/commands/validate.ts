@@ -123,6 +123,14 @@ export function registerValidateCommand(program: Command): void {
           }
         }
 
+        // Check rate-limit config on stateless Edge Functions
+        if (config.backend.rateLimit.enabled) {
+          warnings.push(
+            'Rate limiting is configured but has no effect on stateless Edge Functions without external state (Upstash Redis). ' +
+            'Set backend.rateLimit.enabled to false or configure Upstash.',
+          );
+        }
+
         // Check AI providers
         if (config.ai.enabled) {
           if (Object.keys(config.ai.providers).length === 0) {

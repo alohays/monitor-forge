@@ -140,6 +140,49 @@ describe('validate command', () => {
     ).rejects.toThrow('exit:1');
   });
 
+  // ─── Rate Limit Warning ──────────────────────────────────
+
+  it('warns when rate limiting is enabled', async () => {
+    mockedExistsSync.mockReturnValue(true);
+    mockedReadFileSync.mockReturnValue(makeConfig({
+      sources: [{ name: 'f', type: 'rss', url: 'https://a.com/rss', category: 'n' }],
+      panels: [{ name: 'p', type: 'news-feed', displayName: 'P', position: 0 }],
+      backend: {
+        cache: { provider: 'memory', ttlSeconds: 300 },
+        rateLimit: { enabled: true, maxRequests: 100, windowSeconds: 60 },
+        corsProxy: { enabled: true, allowedDomains: ['*'], corsOrigins: ['*'] },
+      },
+    }));
+
+    const program = createProgram();
+    await program.parseAsync(['node', 'forge', 'validate', '--format', 'json']);
+    const output = JSON.parse(logOutput[0]);
+    expect(output.success).toBe(true);
+    expect(output.warnings).toContainEqual(
+      expect.stringContaining('Rate limiting is configured but has no effect'),
+    );
+  });
+
+  it('does not warn about rate limiting when disabled', async () => {
+    mockedExistsSync.mockReturnValue(true);
+    mockedReadFileSync.mockReturnValue(makeConfig({
+      sources: [{ name: 'f', type: 'rss', url: 'https://a.com/rss', category: 'n' }],
+      panels: [{ name: 'p', type: 'news-feed', displayName: 'P', position: 0 }],
+      backend: {
+        cache: { provider: 'memory', ttlSeconds: 300 },
+        rateLimit: { enabled: false, maxRequests: 100, windowSeconds: 60 },
+        corsProxy: { enabled: true, allowedDomains: ['*'], corsOrigins: ['*'] },
+      },
+    }));
+
+    const program = createProgram();
+    await program.parseAsync(['node', 'forge', 'validate', '--format', 'json']);
+    const output = JSON.parse(logOutput[0]);
+    expect(output.success).toBe(true);
+    const rateLimitWarnings = output.warnings.filter((w: string) => w.includes('Rate limiting'));
+    expect(rateLimitWarnings).toHaveLength(0);
+  });
+
   // ─── Cross-Field Validation ───────────────────────────────
 
   describe('cross-field validation', () => {

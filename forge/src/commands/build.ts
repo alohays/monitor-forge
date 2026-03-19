@@ -3,7 +3,7 @@ import { writeFileSync, mkdirSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { loadConfig } from '../config/loader.js';
 import { formatOutput, success, failure, type OutputFormat, type Change } from '../output/format.js';
-import { generateManifests, generateProxyAllowlist } from '../generators/manifest-generator.js';
+import { generateManifests, generateProxyAllowlist, generateProxyConfig } from '../generators/manifest-generator.js';
 import { generateVercelConfig } from '../generators/vercel-generator.js';
 import { generateEnvExample } from '../generators/env-generator.js';
 
@@ -43,21 +43,29 @@ export function registerBuildCommand(program: Command): void {
           writeFileSync(allowlistPath, allowlistContent, 'utf-8');
         }
 
-        // 3. Generate vercel.json
+        // 3. Generate proxy config (auth + TTL) for edge functions
+        const proxyConfigContent = generateProxyConfig(config);
+        changes.push({ type: 'created', file: 'api/_shared/proxy-config.ts', description: 'Generated proxy auth and TTL config' });
+        if (!dryRun) {
+          const proxyConfigPath = resolve(process.cwd(), 'api/_shared/proxy-config.ts');
+          writeFileSync(proxyConfigPath, proxyConfigContent, 'utf-8');
+        }
+
+        // 4. Generate vercel.json
         const vercelConfig = generateVercelConfig(config);
         if (!dryRun) {
           writeFileSync(resolve(process.cwd(), 'vercel.json'), JSON.stringify(vercelConfig, null, 2), 'utf-8');
           changes.push({ type: 'created', file: 'vercel.json', description: 'Generated Vercel config' });
         }
 
-        // 4. Generate .env.example
+        // 5. Generate .env.example
         const envContent = generateEnvExample(config);
         if (!dryRun) {
           writeFileSync(resolve(process.cwd(), '.env.example'), envContent, 'utf-8');
           changes.push({ type: 'created', file: '.env.example', description: 'Generated env template' });
         }
 
-        // 5. Run Vite build
+        // 6. Run Vite build
         if (!opts.skipVite && !dryRun) {
           const { execSync } = await import('node:child_process');
           console.log('Running Vite build...');

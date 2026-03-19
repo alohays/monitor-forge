@@ -10,6 +10,8 @@ const testConfig = {
   tier: 3,
   tags: [],
   language: 'en',
+  authHeader: 'Authorization',
+  cacheTtl: 300,
 };
 
 beforeEach(() => {

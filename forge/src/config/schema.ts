@@ -13,6 +13,9 @@ export const SourceSchema = z.object({
   tags: z.array(z.string()).default([]),
   headers: z.record(z.string()).optional(),
   transform: z.string().optional(),
+  authEnvVar: z.string().optional(),
+  authHeader: z.string().default('Authorization'),
+  cacheTtl: z.number().min(0).default(300),
 });
 
 export type SourceConfig = z.infer<typeof SourceSchema>;

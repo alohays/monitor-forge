@@ -1,18 +1,30 @@
 import { describe, it, expect } from 'vitest';
 import { generateEnvExample } from './env-generator.js';
-import type { MonitorForgeConfig } from '../config/schema.js';
+import type { MonitorForgeConfig, SourceConfig } from '../config/schema.js';
 
-function buildConfig(overrides?: Partial<MonitorForgeConfig>): MonitorForgeConfig {
+type TestSource = Omit<SourceConfig, 'authHeader' | 'cacheTtl'> & Partial<Pick<SourceConfig, 'authHeader' | 'cacheTtl'>>;
+
+interface TestConfigOverrides extends Omit<Partial<MonitorForgeConfig>, 'sources'> {
+  sources?: TestSource[];
+}
+
+function buildConfig(overrides?: TestConfigOverrides): MonitorForgeConfig {
+  const sources: SourceConfig[] = (overrides?.sources ?? []).map(s => ({
+    authHeader: 'Authorization',
+    cacheTtl: 300,
+    ...s,
+  }));
+  const { sources: _sources, ...rest } = overrides ?? {};
   return {
     version: '1',
     monitor: { name: 'Test', slug: 'test', description: '', domain: 'test', tags: [], branding: { primaryColor: '#0052CC' } },
-    sources: [], layers: [], panels: [], views: [],
+    sources, layers: [], panels: [], views: [],
     ai: { enabled: false, fallbackChain: [], providers: {}, analysis: { summarization: true, entityExtraction: true, sentimentAnalysis: true, focalPointDetection: false } },
     map: { style: 'https://example.com/style.json', center: [0, 0], zoom: 3, minZoom: 2, maxZoom: 18, projection: 'mercator', dayNightOverlay: false, atmosphericGlow: true, idleRotation: true, idleRotationSpeed: 0.5 },
     backend: { cache: { provider: 'memory', ttlSeconds: 300 }, rateLimit: { enabled: true, maxRequests: 100, windowSeconds: 60 }, corsProxy: { enabled: true, allowedDomains: ['*'], corsOrigins: ['*'] } },
     build: { target: 'vercel', outDir: 'dist' },
     theme: { mode: 'dark' as const, palette: 'default' as const, colors: {}, panelPosition: 'right' as const, panelWidth: 380, compactMode: false },
-    ...overrides,
+    ...rest,
   };
 }
 

@@ -11,6 +11,7 @@ class MockSource extends SourceBase {
 const testConfig: SourceConfig = {
   name: 'test', type: 'mock', url: 'https://example.com',
   interval: 300, category: 'test', tier: 3, tags: [], language: 'en',
+  authHeader: 'Authorization', cacheTtl: 300,
 };
 
 describe('source-registry', () => {
