@@ -46,20 +46,18 @@ export function registerSchemaCommand(program: Command): void {
             ));
             process.exit(1);
           }
-          const jsonSchema = zodToJsonSchema(schema, { name: section, target: 'jsonSchema7' });
-          (jsonSchema as Record<string, unknown>)._note =
-            'Zod .refine() validators are not represented in JSON Schema output';
-          console.log(formatOutput(success('schema', jsonSchema), format));
+          const rawSchema = zodToJsonSchema(schema, { name: section, target: 'jsonSchema7' });
+          const output = { ...rawSchema, _note: 'Zod .refine() validators are not represented in JSON Schema output' };
+          console.log(formatOutput(success('schema', output), format));
           return;
         }
 
-        const jsonSchema = zodToJsonSchema(MonitorForgeConfigSchema, {
+        const rawSchema = zodToJsonSchema(MonitorForgeConfigSchema, {
           name: 'MonitorForgeConfig',
           target: 'jsonSchema7',
         });
-        (jsonSchema as Record<string, unknown>)._note =
-          'Zod .refine() validators are not represented in JSON Schema output';
-        console.log(formatOutput(success('schema', jsonSchema), format));
+        const output = { ...rawSchema, _note: 'Zod .refine() validators are not represented in JSON Schema output' };
+        console.log(formatOutput(success('schema', output), format));
       } catch (err) {
         console.log(formatOutput(
           structuredFailure('schema', err instanceof Error ? err : String(err)),
