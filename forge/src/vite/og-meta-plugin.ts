@@ -36,7 +36,7 @@ export function ogMetaPlugin(): Plugin {
 
         // Handle og:image
         if (ogImage) {
-          // Add og:image if not present, or replace existing
+          // Replace or inject og:image
           if (html.includes('og:image')) {
             html = html.replace(
               /<meta property="og:image" content="[^"]*">/,
@@ -45,7 +45,19 @@ export function ogMetaPlugin(): Plugin {
           } else {
             html = html.replace(
               '</head>',
-              `  <meta property="og:image" content="${escapeHtml(ogImage)}">\n  <meta name="twitter:image" content="${escapeHtml(ogImage)}">\n</head>`,
+              `  <meta property="og:image" content="${escapeHtml(ogImage)}">\n</head>`,
+            );
+          }
+          // Replace or inject twitter:image independently
+          if (html.includes('twitter:image')) {
+            html = html.replace(
+              /<meta name="twitter:image" content="[^"]*">/,
+              `<meta name="twitter:image" content="${escapeHtml(ogImage)}">`,
+            );
+          } else {
+            html = html.replace(
+              '</head>',
+              `  <meta name="twitter:image" content="${escapeHtml(ogImage)}">\n</head>`,
             );
           }
         } else {
@@ -67,6 +79,7 @@ function escapeHtml(str: string): string {
   return str
     .replace(/&/g, '&amp;')
     .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#x27;')
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;');
 }
