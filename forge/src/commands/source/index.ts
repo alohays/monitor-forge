@@ -1,7 +1,7 @@
 import type { Command } from 'commander';
 import { loadConfig, updateConfig } from '../../config/loader.js';
 import { SourceSchema, type SourceConfig } from '../../config/schema.js';
-import { formatOutput, success, failure, type OutputFormat } from '../../output/format.js';
+import { formatOutput, success, failure, structuredFailure, type OutputFormat } from '../../output/format.js';
 
 export function registerSourceCommands(program: Command): void {
   const source = program.command('source').description('Manage data sources');
@@ -18,6 +18,7 @@ export function registerSourceCommands(program: Command): void {
     .option('--tags <tags...>', 'Tags for filtering')
     .option('--headers <json>', 'JSON object of HTTP headers')
     .option('--transform <path>', 'JSONPath-like transform expression')
+    .option('--upsert', 'Update if source already exists, create if not')
     .action((type, opts) => {
       const format = (program.opts().format ?? 'table') as OutputFormat;
       const dryRun = program.opts().dryRun ?? false;
@@ -37,31 +38,49 @@ export function registerSourceCommands(program: Command): void {
         });
 
         if (dryRun) {
+          let dryRunAction = 'add';
+          try {
+            const existingConfig = loadConfig();
+            if (existingConfig.sources.some(s => s.name === opts.name)) {
+              dryRunAction = opts.upsert ? 'update' : 'fail (duplicate, use --upsert)';
+            }
+          } catch {
+            // Config may not exist in dry-run context
+          }
           console.log(formatOutput(
-            success('source add --dry-run', sourceConfig, {
-              changes: [{ type: 'modified', file: 'monitor-forge.config.ts', description: `Would add source "${opts.name}"` }],
+            success('source add --dry-run', { ...sourceConfig, action: dryRunAction }, {
+              changes: [{ type: 'modified', file: 'monitor-forge.config.json', description: `Would ${dryRunAction} source "${opts.name}"` }],
             }),
             format,
           ));
           return;
         }
 
+        let action = 'created' as string;
+
         const { config, path } = updateConfig(cfg => {
-          if (cfg.sources.some(s => s.name === opts.name)) {
-            throw new Error(`Source "${opts.name}" already exists`);
+          const existingIdx = cfg.sources.findIndex(s => s.name === opts.name);
+          if (existingIdx >= 0) {
+            if (!opts.upsert) {
+              throw new Error(`Source "${opts.name}" already exists`);
+            }
+            action = 'updated';
+            const sources = [...cfg.sources];
+            sources[existingIdx] = sourceConfig;
+            return { ...cfg, sources };
           }
           return { ...cfg, sources: [...cfg.sources, sourceConfig] };
         });
 
         console.log(formatOutput(
-          success('source add', sourceConfig, {
-            changes: [{ type: 'modified', file: path, description: `Added source "${opts.name}"` }],
+          success('source add', { ...sourceConfig, action }, {
+            changes: [{ type: 'modified', file: path, description: `${action === 'updated' ? 'Updated' : 'Added'} source "${opts.name}"` }],
             next_steps: ['forge validate', 'forge dev'],
           }),
           format,
         ));
       } catch (err) {
-        console.log(formatOutput(failure('source add', String(err)), format));
+        console.log(formatOutput(structuredFailure('source add', err instanceof Error ? err : String(err)), format));
         process.exit(1);
       }
     });
@@ -77,7 +96,7 @@ export function registerSourceCommands(program: Command): void {
         if (dryRun) {
           console.log(formatOutput(
             success('source remove --dry-run', { name }, {
-              changes: [{ type: 'modified', file: 'monitor-forge.config.ts', description: `Would remove source "${name}"` }],
+              changes: [{ type: 'modified', file: 'monitor-forge.config.json', description: `Would remove source "${name}"` }],
             }),
             format,
           ));
@@ -97,7 +116,7 @@ export function registerSourceCommands(program: Command): void {
           format,
         ));
       } catch (err) {
-        console.log(formatOutput(failure('source remove', String(err)), format));
+        console.log(formatOutput(structuredFailure('source remove', err instanceof Error ? err : String(err)), format));
         process.exit(1);
       }
     });
@@ -119,7 +138,7 @@ export function registerSourceCommands(program: Command): void {
         }));
         console.log(formatOutput(success('source list', sources), format));
       } catch (err) {
-        console.log(formatOutput(failure('source list', String(err)), format));
+        console.log(formatOutput(structuredFailure('source list', err instanceof Error ? err : String(err)), format));
         process.exit(1);
       }
     });

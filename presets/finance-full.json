@@ -107,6 +107,24 @@
       "config": {}
     }
   ],
+  "views": [
+    {
+      "name": "overview",
+      "displayName": "Overview",
+      "panels": ["market-news", "market-brief"],
+      "default": true
+    },
+    {
+      "name": "analysis",
+      "displayName": "Analysis",
+      "panels": ["market-brief", "entity-tracker"]
+    },
+    {
+      "name": "operations",
+      "displayName": "Operations",
+      "panels": ["market-news", "service-status"]
+    }
+  ],
   "ai": {
     "enabled": true,
     "fallbackChain": ["groq", "openrouter"],

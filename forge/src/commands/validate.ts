@@ -2,7 +2,8 @@ import type { Command } from 'commander';
 import { existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { loadConfig } from '../config/loader.js';
-import { formatOutput, success, failure, type OutputFormat } from '../output/format.js';
+import { ZodError } from 'zod';
+import { formatOutput, success, failure, structuredFailure, type OutputFormat } from '../output/format.js';
 
 export function registerValidateCommand(program: Command): void {
   program
@@ -157,7 +158,17 @@ export function registerValidateCommand(program: Command): void {
           format,
         ));
       } catch (err) {
-        console.log(formatOutput(failure('validate', String(err)), format));
+        if (err instanceof ZodError) {
+          console.log(formatOutput(
+            structuredFailure('validate', 'Config validation failed', { zodError: err }),
+            format,
+          ));
+        } else {
+          console.log(formatOutput(
+            structuredFailure('validate', err instanceof Error ? err : String(err)),
+            format,
+          ));
+        }
         process.exit(1);
       }
     });

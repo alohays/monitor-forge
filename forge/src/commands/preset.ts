@@ -57,7 +57,7 @@ export function registerPresetCommands(program: Command): void {
         if (dryRun) {
           console.log(formatOutput(
             success('preset apply --dry-run', config, {
-              changes: [{ type: 'modified', file: 'monitor-forge.config.ts', description: `Would apply preset "${name}"` }],
+              changes: [{ type: 'modified', file: 'monitor-forge.config.json', description: `Would apply preset "${name}"` }],
             }),
             format,
           ));

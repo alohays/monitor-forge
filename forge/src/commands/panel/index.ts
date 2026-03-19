@@ -3,7 +3,7 @@ import { existsSync, mkdirSync, writeFileSync, unlinkSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { loadConfig, updateConfig } from '../../config/loader.js';
 import { PanelSchema, type PanelConfig } from '../../config/schema.js';
-import { formatOutput, success, failure, type OutputFormat } from '../../output/format.js';
+import { formatOutput, success, failure, structuredFailure, type OutputFormat } from '../../output/format.js';
 
 function toPascalCase(kebab: string): string {
   return kebab.split('-').map(s => s.charAt(0).toUpperCase() + s.slice(1)).join('');
@@ -147,6 +147,7 @@ export function registerPanelCommands(program: Command): void {
     .option('--position <pos>', 'Panel position (0-based)', '0')
     .option('--source <source>', 'Data source reference')
     .option('--config-json <json>', 'Panel-specific config as JSON')
+    .option('--upsert', 'Update if panel already exists, create if not')
     .action((type, opts) => {
       const format = (program.opts().format ?? 'table') as OutputFormat;
       const dryRun = program.opts().dryRun ?? false;
@@ -169,31 +170,49 @@ export function registerPanelCommands(program: Command): void {
         });
 
         if (dryRun) {
+          let dryRunAction = 'add';
+          try {
+            const existingConfig = loadConfig();
+            if (existingConfig.panels.some(p => p.name === opts.name)) {
+              dryRunAction = opts.upsert ? 'update' : 'fail (duplicate, use --upsert)';
+            }
+          } catch {
+            // Config may not exist in dry-run context
+          }
           console.log(formatOutput(
-            success('panel add --dry-run', panelConfig, {
-              changes: [{ type: 'modified', file: 'monitor-forge.config.ts', description: `Would add panel "${opts.name}"` }],
+            success('panel add --dry-run', { ...panelConfig, action: dryRunAction }, {
+              changes: [{ type: 'modified', file: 'monitor-forge.config.json', description: `Would ${dryRunAction} panel "${opts.name}"` }],
             }),
             format,
           ));
           return;
         }
 
+        let action = 'created' as string;
+
         const { config, path } = updateConfig(cfg => {
-          if (cfg.panels.some(p => p.name === opts.name)) {
-            throw new Error(`Panel "${opts.name}" already exists`);
+          const existingIdx = cfg.panels.findIndex(p => p.name === opts.name);
+          if (existingIdx >= 0) {
+            if (!opts.upsert) {
+              throw new Error(`Panel "${opts.name}" already exists`);
+            }
+            action = 'updated';
+            const panels = [...cfg.panels];
+            panels[existingIdx] = panelConfig;
+            return { ...cfg, panels };
           }
           return { ...cfg, panels: [...cfg.panels, panelConfig] };
         });
 
         console.log(formatOutput(
-          success('panel add', panelConfig, {
-            changes: [{ type: 'modified', file: path, description: `Added panel "${opts.name}"` }],
+          success('panel add', { ...panelConfig, action }, {
+            changes: [{ type: 'modified', file: path, description: `${action === 'updated' ? 'Updated' : 'Added'} panel "${opts.name}"` }],
             next_steps: ['forge validate', 'forge dev'],
           }),
           format,
         ));
       } catch (err) {
-        console.log(formatOutput(failure('panel add', String(err)), format));
+        console.log(formatOutput(structuredFailure('panel add', err instanceof Error ? err : String(err)), format));
         process.exit(1);
       }
     });
@@ -209,7 +228,7 @@ export function registerPanelCommands(program: Command): void {
         if (dryRun) {
           console.log(formatOutput(
             success('panel remove --dry-run', { name }, {
-              changes: [{ type: 'modified', file: 'monitor-forge.config.ts', description: `Would remove panel "${name}"` }],
+              changes: [{ type: 'modified', file: 'monitor-forge.config.json', description: `Would remove panel "${name}"` }],
             }),
             format,
           ));

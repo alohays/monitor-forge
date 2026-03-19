@@ -127,6 +127,24 @@
       "config": {}
     }
   ],
+  "views": [
+    {
+      "name": "overview",
+      "displayName": "Overview",
+      "panels": ["tech-news", "ai-brief"],
+      "default": true
+    },
+    {
+      "name": "analysis",
+      "displayName": "Analysis",
+      "panels": ["ai-brief", "entity-tracker"]
+    },
+    {
+      "name": "operations",
+      "displayName": "Operations",
+      "panels": ["tech-news", "service-status"]
+    }
+  ],
   "ai": {
     "enabled": true,
     "fallbackChain": ["groq", "openrouter"],
