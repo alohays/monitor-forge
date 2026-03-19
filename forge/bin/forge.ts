@@ -15,6 +15,10 @@ import { registerSetupCommand } from '../src/commands/setup.js';
 import { registerViewCommands } from '../src/commands/view/index.js';
 import { registerStatusCommand } from '../src/commands/status.js';
 import { registerThemeCommands } from '../src/commands/theme.js';
+import { registerConfigCommands } from '../src/commands/config.js';
+import { createRequire } from 'node:module';
+const require = createRequire(import.meta.url);
+const pkg = require('../../package.json') as { version: string };
 
 // Auto-TTY detection: format based on stdout, interactivity based on stdin
 const isNonTTYOutput = !process.stdout.isTTY;
@@ -35,7 +39,7 @@ const program = new Command();
 program
   .name('forge')
   .description('monitor-forge CLI - Create your own real-time intelligence dashboard')
-  .version('0.2.0')
+  .version(pkg.version)
   .option('--format <format>', 'Output format: json, table, minimal', resolveDefaultFormat())
   .option('--non-interactive', 'Disable interactive prompts', isNonTTYInput)
   .option('--dry-run', 'Show what would change without modifying anything');
@@ -55,5 +59,6 @@ registerSetupCommand(program);
 registerViewCommands(program);
 registerStatusCommand(program);
 registerThemeCommands(program);
+registerConfigCommands(program);
 
 program.parse();

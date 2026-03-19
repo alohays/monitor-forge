@@ -2,6 +2,7 @@ import type { MonitorForgeConfig } from './schema.js';
 
 export function createDefaultConfig(overrides?: Partial<MonitorForgeConfig>): MonitorForgeConfig {
   return {
+    version: overrides?.version ?? '1',
     monitor: {
       name: overrides?.monitor?.name ?? 'My Monitor',
       slug: overrides?.monitor?.slug ?? 'my-monitor',

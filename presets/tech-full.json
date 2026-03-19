@@ -1,9 +1,14 @@
 {
+  "version": "1",
   "_meta": {
     "category": "technology",
     "difficulty": "intermediate",
-    "requires_api_keys": ["GROQ_API_KEY"],
-    "optional_api_keys": ["OPENROUTER_API_KEY"],
+    "requires_api_keys": [
+      "GROQ_API_KEY"
+    ],
+    "optional_api_keys": [
+      "OPENROUTER_API_KEY"
+    ],
     "preview_description": "Full tech intelligence with AI research tracking and tech hub mapping"
   },
   "monitor": {
@@ -11,7 +16,13 @@
     "slug": "tech-intelligence",
     "description": "Full-featured tech industry intelligence dashboard with AI analysis",
     "domain": "technology",
-    "tags": ["tech", "ai", "startups", "open-source", "semiconductors"]
+    "tags": [
+      "tech",
+      "ai",
+      "startups",
+      "open-source",
+      "semiconductors"
+    ]
   },
   "sources": [
     {
@@ -22,7 +33,10 @@
       "tier": 1,
       "interval": 300,
       "language": "en",
-      "tags": ["tech", "startups"]
+      "tags": [
+        "tech",
+        "startups"
+      ]
     },
     {
       "name": "techcrunch-rss",
@@ -32,7 +46,10 @@
       "tier": 1,
       "interval": 600,
       "language": "en",
-      "tags": ["tech", "vc"]
+      "tags": [
+        "tech",
+        "vc"
+      ]
     },
     {
       "name": "ars-technica",
@@ -42,7 +59,10 @@
       "tier": 2,
       "interval": 600,
       "language": "en",
-      "tags": ["tech", "science"]
+      "tags": [
+        "tech",
+        "science"
+      ]
     },
     {
       "name": "the-verge",
@@ -52,7 +72,10 @@
       "tier": 2,
       "interval": 600,
       "language": "en",
-      "tags": ["tech", "consumer"]
+      "tags": [
+        "tech",
+        "consumer"
+      ]
     },
     {
       "name": "wired",
@@ -62,7 +85,10 @@
       "tier": 2,
       "interval": 900,
       "language": "en",
-      "tags": ["tech", "culture"]
+      "tags": [
+        "tech",
+        "culture"
+      ]
     },
     {
       "name": "mit-tech-review",
@@ -72,7 +98,10 @@
       "tier": 1,
       "interval": 900,
       "language": "en",
-      "tags": ["ai", "research"]
+      "tags": [
+        "ai",
+        "research"
+      ]
     },
     {
       "name": "arxiv-cs-ai",
@@ -82,7 +111,11 @@
       "tier": 2,
       "interval": 3600,
       "language": "en",
-      "tags": ["ai", "research", "papers"]
+      "tags": [
+        "ai",
+        "research",
+        "papers"
+      ]
     },
     {
       "name": "github-trending",
@@ -92,7 +125,10 @@
       "tier": 2,
       "interval": 3600,
       "language": "en",
-      "tags": ["open-source", "github"]
+      "tags": [
+        "open-source",
+        "github"
+      ]
     }
   ],
   "layers": [
@@ -101,7 +137,10 @@
       "type": "points",
       "displayName": "Tech Hubs",
       "color": "#00D4FF",
-      "data": { "source": "static", "path": "data/geo/tech-hubs.geojson" },
+      "data": {
+        "source": "static",
+        "path": "data/geo/tech-hubs.geojson"
+      },
       "defaultVisible": true,
       "category": "infrastructure"
     }
@@ -113,7 +152,9 @@
       "displayName": "Tech News",
       "position": 0,
       "config": {
-        "categories": ["tech-news"],
+        "categories": [
+          "tech-news"
+        ],
         "maxItems": 50
       }
     },
@@ -132,7 +173,16 @@
       "displayName": "Key Players",
       "position": 2,
       "config": {
-        "entities": ["OpenAI", "Google", "Meta", "Anthropic", "NVIDIA", "Apple", "Microsoft", "xAI"],
+        "entities": [
+          "OpenAI",
+          "Google",
+          "Meta",
+          "Anthropic",
+          "NVIDIA",
+          "Apple",
+          "Microsoft",
+          "xAI"
+        ],
         "maxEntities": 20
       }
     },
@@ -148,23 +198,35 @@
     {
       "name": "overview",
       "displayName": "Overview",
-      "panels": ["tech-news", "ai-brief"],
+      "panels": [
+        "tech-news",
+        "ai-brief"
+      ],
       "default": true
     },
     {
       "name": "analysis",
       "displayName": "Analysis",
-      "panels": ["ai-brief", "entity-tracker"]
+      "panels": [
+        "ai-brief",
+        "entity-tracker"
+      ]
     },
     {
       "name": "operations",
       "displayName": "Operations",
-      "panels": ["tech-news", "service-status"]
+      "panels": [
+        "tech-news",
+        "service-status"
+      ]
     }
   ],
   "ai": {
     "enabled": true,
-    "fallbackChain": ["groq", "openrouter"],
+    "fallbackChain": [
+      "groq",
+      "openrouter"
+    ],
     "providers": {
       "groq": {
         "model": "llama-3.3-70b-versatile",
@@ -184,7 +246,10 @@
   },
   "map": {
     "style": "https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json",
-    "center": [-95, 38],
+    "center": [
+      -95,
+      38
+    ],
     "zoom": 4,
     "projection": "mercator"
   },

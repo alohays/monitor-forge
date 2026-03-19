@@ -183,6 +183,7 @@ export const MonitorSchema = z.object({
 // ─── Root Config Schema ─────────────────────────────────────
 
 export const MonitorForgeConfigSchema = z.object({
+  version: z.string().default('1'),
   monitor: MonitorSchema,
   sources: z.array(SourceSchema).default([]),
   layers: z.array(LayerSchema).default([]),

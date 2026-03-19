@@ -1,6 +1,6 @@
 {
   "name": "monitor-forge",
-  "version": "0.1.0",
+  "version": "0.3.0",
   "description": "Create your own real-time intelligence dashboard. A meta-level template for building customized worldmonitor-style dashboards.",
   "type": "module",
   "license": "MIT",

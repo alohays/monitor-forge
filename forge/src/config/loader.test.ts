@@ -70,6 +70,7 @@ describe('loadConfig', () => {
 describe('writeConfig', () => {
   it('writes JSON file with pretty formatting', () => {
     const config = {
+      version: '1',
       monitor: { name: 'Test', slug: 'test', description: '', domain: 'general', tags: [], branding: { primaryColor: '#0052CC' } },
       sources: [], layers: [], panels: [], views: [],
       ai: { enabled: false, fallbackChain: [], providers: {}, analysis: { summarization: true, entityExtraction: true, sentimentAnalysis: true, focalPointDetection: false } },
@@ -93,6 +94,7 @@ describe('writeConfig', () => {
 
   it('returns the JSON file path', () => {
     const config = {
+      version: '1',
       monitor: { name: 'Test', slug: 'test', description: '', domain: 'general', tags: [], branding: { primaryColor: '#0052CC' } },
       sources: [], layers: [], panels: [], views: [],
       ai: { enabled: false, fallbackChain: [], providers: {}, analysis: { summarization: true, entityExtraction: true, sentimentAnalysis: true, focalPointDetection: false } },

@@ -535,6 +535,7 @@ describe('boundary values', () => {
 describe('defineConfig', () => {
   it('validates and returns config', () => {
     const config = defineConfig({
+      version: '1',
       monitor: { name: 'Test', slug: 'test', description: '', domain: 'test', tags: [], branding: { primaryColor: '#000000' } },
       sources: [], layers: [], panels: [], views: [],
       ai: { enabled: false, fallbackChain: [], providers: {}, analysis: { summarization: true, entityExtraction: true, sentimentAnalysis: true, focalPointDetection: false } },

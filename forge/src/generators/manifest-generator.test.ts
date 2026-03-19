@@ -4,6 +4,7 @@ import type { MonitorForgeConfig } from '../config/schema.js';
 
 function buildConfig(overrides?: Partial<MonitorForgeConfig>): MonitorForgeConfig {
   return {
+    version: '1',
     monitor: { name: 'Test', slug: 'test', description: '', domain: 'test', tags: [], branding: { primaryColor: '#0052CC' } },
     sources: [], layers: [], panels: [], views: [],
     ai: { enabled: false, fallbackChain: [], providers: {}, analysis: { summarization: true, entityExtraction: true, sentimentAnalysis: true, focalPointDetection: false } },

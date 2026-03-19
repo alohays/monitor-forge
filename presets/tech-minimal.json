@@ -1,8 +1,11 @@
 {
+  "version": "1",
   "_meta": {
     "category": "technology",
     "difficulty": "beginner",
-    "requires_api_keys": ["GROQ_API_KEY"],
+    "requires_api_keys": [
+      "GROQ_API_KEY"
+    ],
     "optional_api_keys": [],
     "preview_description": "Track tech news from Hacker News, TechCrunch, and Ars Technica"
   },
@@ -11,7 +14,11 @@
     "slug": "tech-monitor",
     "description": "Minimal tech industry intelligence dashboard",
     "domain": "technology",
-    "tags": ["tech", "ai", "startups"]
+    "tags": [
+      "tech",
+      "ai",
+      "startups"
+    ]
   },
   "sources": [
     {
@@ -22,7 +29,10 @@
       "tier": 1,
       "interval": 300,
       "language": "en",
-      "tags": ["tech", "startups"]
+      "tags": [
+        "tech",
+        "startups"
+      ]
     },
     {
       "name": "techcrunch-rss",
@@ -32,7 +42,11 @@
       "tier": 1,
       "interval": 600,
       "language": "en",
-      "tags": ["tech", "startups", "vc"]
+      "tags": [
+        "tech",
+        "startups",
+        "vc"
+      ]
     },
     {
       "name": "ars-technica",
@@ -42,7 +56,10 @@
       "tier": 2,
       "interval": 600,
       "language": "en",
-      "tags": ["tech", "science"]
+      "tags": [
+        "tech",
+        "science"
+      ]
     }
   ],
   "layers": [],
@@ -53,7 +70,9 @@
       "displayName": "Tech News",
       "position": 0,
       "config": {
-        "categories": ["tech-news"],
+        "categories": [
+          "tech-news"
+        ],
         "maxItems": 30
       }
     },
@@ -71,13 +90,18 @@
     {
       "name": "overview",
       "displayName": "Overview",
-      "panels": ["tech-news", "ai-brief"],
+      "panels": [
+        "tech-news",
+        "ai-brief"
+      ],
       "default": true
     }
   ],
   "ai": {
     "enabled": true,
-    "fallbackChain": ["groq"],
+    "fallbackChain": [
+      "groq"
+    ],
     "providers": {
       "groq": {
         "model": "llama-3.3-70b-versatile",
@@ -92,7 +116,10 @@
   },
   "map": {
     "style": "https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json",
-    "center": [-95, 38],
+    "center": [
+      -95,
+      38
+    ],
     "zoom": 4,
     "projection": "mercator"
   },
