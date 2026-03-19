@@ -13,6 +13,7 @@ export abstract class PanelBase {
   private panelElement: HTMLElement | null = null;
   private pulseTimer: ReturnType<typeof setTimeout> | null = null;
   private skeletonTimer: ReturnType<typeof setTimeout> | null = null;
+  private degradedElement: HTMLElement | null = null;
 
   constructor(container: HTMLElement, config: PanelConfig) {
     this.container = container;
@@ -26,6 +27,7 @@ export abstract class PanelBase {
   getName(): string { return this.config.name; }
   getDisplayName(): string { return this.config.displayName; }
   getPosition(): number { return this.config.position; }
+  getHasReceivedData(): boolean { return this.hasReceivedData; }
 
   setPanelElement(el: HTMLElement): void {
     this.panelElement = el;
@@ -77,11 +79,31 @@ export abstract class PanelBase {
     if (this.skeletonTimer !== null) { clearTimeout(this.skeletonTimer); this.skeletonTimer = null; }
   }
 
+  renderDegraded(message: string): void {
+    this.clearDegraded();
+    const el = document.createElement('div');
+    el.className = 'panel-degraded';
+    el.innerHTML = message.replace(
+      /(`[^`]+`)/g,
+      '<span class="panel-configure-hint">$1</span>',
+    );
+    this.container.appendChild(el);
+    this.degradedElement = el;
+  }
+
+  clearDegraded(): void {
+    if (this.degradedElement) {
+      this.degradedElement.remove();
+      this.degradedElement = null;
+    }
+  }
+
   protected markDataReceived(): void {
     if (!this.hasReceivedData) {
       this.hasReceivedData = true;
       this.hideSkeleton();
     }
+    this.clearDegraded();
     this.triggerPulse();
   }
 
