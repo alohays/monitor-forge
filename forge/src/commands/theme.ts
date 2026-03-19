@@ -3,7 +3,7 @@ import { loadConfig, updateConfig } from '../config/loader.js';
 import { ThemeSchema } from '../config/schema.js';
 import { PALETTES, PALETTE_NAMES } from '../theme/palettes.js';
 import { resolveTheme } from '../theme/resolver.js';
-import { formatOutput, success, failure, type OutputFormat } from '../output/format.js';
+import { formatOutput, success, structuredFailure, type OutputFormat } from '../output/format.js';
 
 export function registerThemeCommands(program: Command): void {
   const theme = program.command('theme').description('Manage dashboard visual theme');
@@ -29,7 +29,14 @@ export function registerThemeCommands(program: Command): void {
         if (opts.mode) updates.mode = opts.mode;
         if (opts.palette) updates.palette = opts.palette;
         if (opts.panelPosition) updates.panelPosition = opts.panelPosition;
-        if (opts.panelWidth) updates.panelWidth = parseInt(opts.panelWidth, 10);
+        if (opts.panelWidth !== undefined) {
+          const pw = parseInt(opts.panelWidth, 10);
+          if (Number.isNaN(pw)) {
+            console.log(formatOutput(structuredFailure('theme set', `Invalid panel width: "${opts.panelWidth}" is not a number`), format));
+            process.exit(1);
+          }
+          updates.panelWidth = pw;
+        }
         if (opts.compact !== undefined) updates.compactMode = opts.compact;
 
         const colors: Record<string, string> = {};
@@ -38,7 +45,7 @@ export function registerThemeCommands(program: Command): void {
         if (Object.keys(colors).length > 0) updates.colors = colors;
 
         if (Object.keys(updates).length === 0) {
-          console.log(formatOutput(failure('theme set', 'No options provided. Use --mode, --palette, --accent, etc.'), format));
+          console.log(formatOutput(structuredFailure('theme set', 'No options provided. Use --mode, --palette, --accent, etc.'), format));
           process.exit(1);
         }
 
@@ -72,7 +79,7 @@ export function registerThemeCommands(program: Command): void {
           format,
         ));
       } catch (err) {
-        console.log(formatOutput(failure('theme set', String(err)), format));
+        console.log(formatOutput(structuredFailure('theme set', err instanceof Error ? err : String(err)), format));
         process.exit(1);
       }
     });
@@ -101,7 +108,7 @@ export function registerThemeCommands(program: Command): void {
           format,
         ));
       } catch (err) {
-        console.log(formatOutput(failure('theme status', String(err)), format));
+        console.log(formatOutput(structuredFailure('theme status', err instanceof Error ? err : String(err)), format));
         process.exit(1);
       }
     });

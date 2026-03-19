@@ -15,6 +15,7 @@ export class App {
   private sourceManager: SourceManager | null = null;
   private aiManager: AIManager | null = null;
   private idleDetector: IdleDetector | null = null;
+  private mediaQueryCleanup: (() => void) | null = null;
 
   constructor(root: HTMLElement) {
     this.root = root;
@@ -255,18 +256,27 @@ export class App {
       applyColors(effectiveMode === 'light' ? theme.light : theme.dark);
       root.style.setProperty('--panel-width', `${theme.panelWidth}px`);
 
+      // Clean up any previous listener before registering a new one (idempotency guard)
+      this.mediaQueryCleanup?.();
+      this.mediaQueryCleanup = null;
+
       // Listen for OS theme changes when in auto mode
       if (theme.mode === 'auto') {
-        window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', (e) => {
+        const mql = window.matchMedia('(prefers-color-scheme: light)');
+        const handler = (e: MediaQueryListEvent) => {
           applyColors(e.matches ? theme.light : theme.dark);
-        });
+        };
+        mql.addEventListener('change', handler);
+        this.mediaQueryCleanup = () => mql.removeEventListener('change', handler);
       }
-    } catch {
-      // theme-resolved.js may not exist in older builds — use CSS defaults
+    } catch (err) {
+      console.warn('[monitor-forge] Failed to load theme-resolved.js, using CSS defaults:', err);
     }
   }
 
   destroy(): void {
+    this.mediaQueryCleanup?.();
+    this.mediaQueryCleanup = null;
     this.sourceManager?.stopAll();
     this.panelManager?.destroy();
     this.mapEngine?.destroy();
