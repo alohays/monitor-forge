@@ -47,7 +47,7 @@ export function registerLayerCommands(program: Command): void {
         if (dryRun) {
           console.log(formatOutput(
             success('layer add --dry-run', layerConfig, {
-              changes: [{ type: 'modified', file: 'monitor-forge.config.ts', description: `Would add layer "${opts.name}"` }],
+              changes: [{ type: 'modified', file: 'monitor-forge.config.json', description: `Would add layer "${opts.name}"` }],
             }),
             format,
           ));
@@ -85,7 +85,7 @@ export function registerLayerCommands(program: Command): void {
         if (dryRun) {
           console.log(formatOutput(
             success('layer remove --dry-run', { name }, {
-              changes: [{ type: 'modified', file: 'monitor-forge.config.ts', description: `Would remove layer "${name}"` }],
+              changes: [{ type: 'modified', file: 'monitor-forge.config.json', description: `Would remove layer "${name}"` }],
             }),
             format,
           ));

@@ -27,7 +27,7 @@ export function registerAICommands(program: Command): void {
         if (dryRun) {
           console.log(formatOutput(
             success('ai configure --dry-run', opts, {
-              changes: [{ type: 'modified', file: 'monitor-forge.config.ts', description: 'Would update AI configuration' }],
+              changes: [{ type: 'modified', file: 'monitor-forge.config.json', description: 'Would update AI configuration' }],
             }),
             format,
           ));

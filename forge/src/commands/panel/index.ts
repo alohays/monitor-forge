@@ -228,7 +228,7 @@ export function registerPanelCommands(program: Command): void {
         if (dryRun) {
           console.log(formatOutput(
             success('panel remove --dry-run', { name }, {
-              changes: [{ type: 'modified', file: 'monitor-forge.config.ts', description: `Would remove panel "${name}"` }],
+              changes: [{ type: 'modified', file: 'monitor-forge.config.json', description: `Would remove panel "${name}"` }],
             }),
             format,
           ));
