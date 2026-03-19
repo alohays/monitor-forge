@@ -1,0 +1,121 @@
+{
+  "_meta": {
+    "category": "korea",
+    "difficulty": "beginner",
+    "requires_api_keys": [
+      "GROQ_API_KEY"
+    ],
+    "optional_api_keys": [],
+    "preview_description": "Monitor Korean peninsula news from Yonhap, Korea Herald, and BBC Asia"
+  },
+  "monitor": {
+    "name": "Korea Monitor",
+    "slug": "korea-monitor",
+    "description": "Minimal Korean peninsula intelligence dashboard",
+    "domain": "korea",
+    "tags": [
+      "korea",
+      "asia",
+      "geopolitics"
+    ],
+    "branding": {
+      "primaryColor": "#003478"
+    }
+  },
+  "sources": [
+    {
+      "name": "yonhap-english",
+      "type": "rss",
+      "url": "https://en.yna.co.kr/RSS/news.xml",
+      "category": "korea-news",
+      "tier": 1,
+      "interval": 300,
+      "language": "en",
+      "tags": [
+        "korea",
+        "breaking"
+      ]
+    },
+    {
+      "name": "korea-herald",
+      "type": "rss",
+      "url": "https://www.koreaherald.com/common/rss_xml.php?ct=102",
+      "category": "korea-news",
+      "tier": 1,
+      "interval": 600,
+      "language": "en",
+      "tags": [
+        "korea",
+        "politics"
+      ]
+    },
+    {
+      "name": "bbc-asia",
+      "type": "rss",
+      "url": "https://feeds.bbci.co.uk/news/world/asia/rss.xml",
+      "category": "regional",
+      "tier": 2,
+      "interval": 600,
+      "language": "en",
+      "tags": [
+        "asia",
+        "world"
+      ]
+    }
+  ],
+  "layers": [],
+  "panels": [
+    {
+      "name": "korea-news",
+      "type": "news-feed",
+      "displayName": "Korea News",
+      "position": 0,
+      "config": {
+        "categories": [
+          "korea-news",
+          "regional"
+        ],
+        "maxItems": 30
+      }
+    },
+    {
+      "name": "ai-brief",
+      "type": "ai-brief",
+      "displayName": "Korea Brief",
+      "position": 1,
+      "config": {
+        "refreshInterval": 900
+      }
+    }
+  ],
+  "ai": {
+    "enabled": true,
+    "fallbackChain": [
+      "groq"
+    ],
+    "providers": {
+      "groq": {
+        "model": "llama-3.3-70b-versatile",
+        "apiKeyEnv": "GROQ_API_KEY"
+      }
+    },
+    "analysis": {
+      "summarization": true,
+      "entityExtraction": true,
+      "sentimentAnalysis": false
+    }
+  },
+  "map": {
+    "style": "https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json",
+    "center": [
+      127.5,
+      37
+    ],
+    "zoom": 6,
+    "projection": "mercator"
+  },
+  "theme": {
+    "palette": "midnight"
+  },
+  "views": []
+}

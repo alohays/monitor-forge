@@ -1,10 +1,20 @@
 {
+  "_meta": {
+    "category": "finance",
+    "difficulty": "beginner",
+    "requires_api_keys": ["GROQ_API_KEY"],
+    "optional_api_keys": [],
+    "preview_description": "Track financial markets from Reuters, CNBC, and CoinDesk"
+  },
   "monitor": {
     "name": "Finance Monitor",
     "slug": "finance-monitor",
     "description": "Minimal financial market intelligence dashboard",
     "domain": "finance",
-    "tags": ["finance", "markets", "crypto"]
+    "tags": ["finance", "markets", "crypto"],
+    "branding": {
+      "primaryColor": "#FFD700"
+    }
   },
   "sources": [
     {
@@ -88,5 +98,8 @@
     "center": [-74, 40.7],
     "zoom": 5,
     "projection": "mercator"
+  },
+  "theme": {
+    "palette": "sunset"
   }
 }

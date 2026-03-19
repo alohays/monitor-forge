@@ -1,4 +1,11 @@
 {
+  "_meta": {
+    "category": "general",
+    "difficulty": "beginner",
+    "requires_api_keys": [],
+    "optional_api_keys": [],
+    "preview_description": "Empty dashboard ready for customization"
+  },
   "monitor": {
     "name": "My Monitor",
     "slug": "my-monitor",
@@ -14,8 +21,16 @@
   },
   "map": {
     "style": "https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json",
-    "center": [0, 20],
+    "center": [
+      0,
+      20
+    ],
     "zoom": 3,
     "projection": "mercator"
+  },
+  "views": [],
+  "theme": {
+    "mode": "dark",
+    "palette": "default"
   }
 }

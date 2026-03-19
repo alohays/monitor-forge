@@ -335,8 +335,49 @@ html, body {
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
 
+/* Light-mode component overrides (palette-agnostic) */
+[data-theme="light"] .forge-panel-header,
+[data-theme="auto"] .forge-panel-header {
+  background: rgba(0, 0, 0, 0.02);
+}
+
+[data-theme="light"] .forge-health-indicator {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+/* Compact mode */
+[data-compact="true"] .forge-panel-body {
+  padding: 0.25rem 0.5rem;
+  max-height: 250px;
+}
+
+[data-compact="true"] .forge-header {
+  height: 36px;
+  padding: 0.25rem 0.75rem;
+}
+
+[data-compact="true"] .forge-title {
+  font-size: 0.85rem;
+}
+
+/* Left panel position */
+[data-panel-position="left"] .forge-main {
+  flex-direction: row-reverse;
+}
+
+[data-panel-position="left"] .forge-sidebar {
+  border-left: none;
+  border-right: 1px solid var(--border);
+}
+
+[data-panel-position="left"] .forge-layer-panel {
+  right: auto;
+  left: var(--panel-width);
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .forge-sidebar { width: 100%; position: absolute; bottom: 0; height: 40vh; z-index: 150; }
   .forge-layer-panel { right: 0; }
+  [data-panel-position="left"] .forge-layer-panel { left: 0; right: auto; }
 }

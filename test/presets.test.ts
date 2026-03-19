@@ -10,11 +10,15 @@ const presetDir = resolve(__dirname, '../presets');
 const presetFiles = readdirSync(presetDir).filter(f => f.endsWith('.json'));
 
 describe('presets', () => {
-  it('has all 7 expected preset files', () => {
+  it('has all 15 expected preset files', () => {
     const expectedNames = [
       'blank.json', 'tech-minimal.json', 'tech-full.json',
       'finance-minimal.json', 'finance-full.json',
       'geopolitics-minimal.json', 'geopolitics-full.json',
+      'cyber-minimal.json', 'cyber-full.json',
+      'climate-minimal.json', 'climate-full.json',
+      'korea-minimal.json', 'korea-full.json',
+      'health-minimal.json', 'health-full.json',
     ];
     for (const name of expectedNames) {
       expect(presetFiles).toContain(name);
@@ -56,6 +60,15 @@ describe('presets', () => {
     it('has unique panel names', () => {
       const names = (raw.panels ?? []).map((p: { name: string }) => p.name);
       expect(new Set(names).size).toBe(names.length);
+    });
+
+    it('has valid _meta block', () => {
+      expect(raw._meta).toBeDefined();
+      expect(raw._meta.category).toBeDefined();
+      expect(raw._meta.difficulty).toMatch(/^(beginner|intermediate|advanced)$/);
+      expect(Array.isArray(raw._meta.requires_api_keys)).toBe(true);
+      expect(Array.isArray(raw._meta.optional_api_keys)).toBe(true);
+      expect(typeof raw._meta.preview_description).toBe('string');
     });
   });
 });

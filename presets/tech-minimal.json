@@ -1,4 +1,11 @@
 {
+  "_meta": {
+    "category": "technology",
+    "difficulty": "beginner",
+    "requires_api_keys": ["GROQ_API_KEY"],
+    "optional_api_keys": [],
+    "preview_description": "Track tech news from Hacker News, TechCrunch, and Ars Technica"
+  },
   "monitor": {
     "name": "Tech Monitor",
     "slug": "tech-monitor",
@@ -88,5 +95,8 @@
     "center": [-95, 38],
     "zoom": 4,
     "projection": "mercator"
+  },
+  "theme": {
+    "palette": "default"
   }
 }

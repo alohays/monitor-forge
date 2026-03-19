@@ -1,0 +1,120 @@
+{
+  "_meta": {
+    "category": "health",
+    "difficulty": "beginner",
+    "requires_api_keys": [
+      "GROQ_API_KEY"
+    ],
+    "optional_api_keys": [],
+    "preview_description": "Monitor global health news from WHO, STAT News, and NIH"
+  },
+  "monitor": {
+    "name": "Health Monitor",
+    "slug": "health-monitor",
+    "description": "Minimal global health intelligence dashboard",
+    "domain": "health",
+    "tags": [
+      "health",
+      "medicine",
+      "public-health"
+    ],
+    "branding": {
+      "primaryColor": "#0099DD"
+    }
+  },
+  "sources": [
+    {
+      "name": "who-news",
+      "type": "rss",
+      "url": "https://www.who.int/feeds/entity/news/en/rss.xml",
+      "category": "health-news",
+      "tier": 1,
+      "interval": 1800,
+      "language": "en",
+      "tags": [
+        "who",
+        "global-health"
+      ]
+    },
+    {
+      "name": "stat-news",
+      "type": "rss",
+      "url": "https://www.statnews.com/feed/",
+      "category": "health-news",
+      "tier": 1,
+      "interval": 600,
+      "language": "en",
+      "tags": [
+        "medicine",
+        "pharma"
+      ]
+    },
+    {
+      "name": "nih-news",
+      "type": "rss",
+      "url": "https://www.nih.gov/news-events/news-releases/feed",
+      "category": "health-news",
+      "tier": 1,
+      "interval": 900,
+      "language": "en",
+      "tags": [
+        "research",
+        "nih"
+      ]
+    }
+  ],
+  "layers": [],
+  "panels": [
+    {
+      "name": "health-news",
+      "type": "news-feed",
+      "displayName": "Health News",
+      "position": 0,
+      "config": {
+        "categories": [
+          "health-news"
+        ],
+        "maxItems": 30
+      }
+    },
+    {
+      "name": "ai-brief",
+      "type": "ai-brief",
+      "displayName": "Health Brief",
+      "position": 1,
+      "config": {
+        "refreshInterval": 900
+      }
+    }
+  ],
+  "ai": {
+    "enabled": true,
+    "fallbackChain": [
+      "groq"
+    ],
+    "providers": {
+      "groq": {
+        "model": "llama-3.3-70b-versatile",
+        "apiKeyEnv": "GROQ_API_KEY"
+      }
+    },
+    "analysis": {
+      "summarization": true,
+      "entityExtraction": true,
+      "sentimentAnalysis": false
+    }
+  },
+  "map": {
+    "style": "https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json",
+    "center": [
+      0,
+      20
+    ],
+    "zoom": 3,
+    "projection": "globe"
+  },
+  "theme": {
+    "palette": "ocean"
+  },
+  "views": []
+}

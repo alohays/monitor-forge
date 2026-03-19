@@ -1,0 +1,222 @@
+{
+  "_meta": {
+    "category": "cybersecurity",
+    "difficulty": "intermediate",
+    "requires_api_keys": [
+      "GROQ_API_KEY"
+    ],
+    "optional_api_keys": [
+      "OPENROUTER_API_KEY"
+    ],
+    "preview_description": "Comprehensive cybersecurity dashboard with threat actor tracking, advisories, and AI analysis"
+  },
+  "monitor": {
+    "name": "Cyber Monitor",
+    "slug": "cyber-monitor",
+    "description": "Full-featured cybersecurity intelligence dashboard with threat tracking and AI analysis",
+    "domain": "cybersecurity",
+    "tags": [
+      "cyber",
+      "infosec",
+      "threats"
+    ],
+    "branding": {
+      "primaryColor": "#00FF41"
+    }
+  },
+  "sources": [
+    {
+      "name": "krebs-on-security",
+      "type": "rss",
+      "url": "https://krebsonsecurity.com/feed/",
+      "category": "cyber-news",
+      "tier": 1,
+      "interval": 600,
+      "language": "en",
+      "tags": [
+        "infosec",
+        "breaches"
+      ]
+    },
+    {
+      "name": "the-hacker-news",
+      "type": "rss",
+      "url": "https://feeds.feedburner.com/TheHackersNews",
+      "category": "cyber-news",
+      "tier": 1,
+      "interval": 300,
+      "language": "en",
+      "tags": [
+        "cyber",
+        "vulnerabilities"
+      ]
+    },
+    {
+      "name": "bleeping-computer",
+      "type": "rss",
+      "url": "https://www.bleepingcomputer.com/feed/",
+      "category": "cyber-news",
+      "tier": 2,
+      "interval": 600,
+      "language": "en",
+      "tags": [
+        "malware",
+        "ransomware"
+      ]
+    },
+    {
+      "name": "cisa-alerts",
+      "type": "rss",
+      "url": "https://www.cisa.gov/cybersecurity-advisories/all.xml",
+      "category": "advisories",
+      "tier": 1,
+      "interval": 1800,
+      "language": "en",
+      "tags": [
+        "advisories",
+        "government"
+      ]
+    },
+    {
+      "name": "dark-reading",
+      "type": "rss",
+      "url": "https://www.darkreading.com/rss_feed.asp",
+      "category": "cyber-news",
+      "tier": 2,
+      "interval": 600,
+      "language": "en",
+      "tags": [
+        "cyber",
+        "enterprise"
+      ]
+    },
+    {
+      "name": "schneier-blog",
+      "type": "rss",
+      "url": "https://www.schneier.com/feed/",
+      "category": "analysis",
+      "tier": 2,
+      "interval": 3600,
+      "language": "en",
+      "tags": [
+        "analysis",
+        "cryptography"
+      ]
+    },
+    {
+      "name": "ars-security",
+      "type": "rss",
+      "url": "https://feeds.arstechnica.com/arstechnica/security",
+      "category": "cyber-news",
+      "tier": 2,
+      "interval": 600,
+      "language": "en",
+      "tags": [
+        "security",
+        "tech"
+      ]
+    }
+  ],
+  "layers": [
+    {
+      "name": "threat-origins",
+      "type": "points",
+      "displayName": "Threat Actor Origins",
+      "color": "#FF0040",
+      "data": {
+        "source": "static",
+        "path": "data/geo/threat-origins.geojson"
+      },
+      "defaultVisible": true,
+      "category": "threats"
+    }
+  ],
+  "panels": [
+    {
+      "name": "cyber-news",
+      "type": "news-feed",
+      "displayName": "Cyber News",
+      "position": 0,
+      "config": {
+        "categories": [
+          "cyber-news",
+          "advisories"
+        ],
+        "maxItems": 50
+      }
+    },
+    {
+      "name": "ai-brief",
+      "type": "ai-brief",
+      "displayName": "Threat Brief",
+      "position": 1,
+      "config": {
+        "refreshInterval": 600
+      }
+    },
+    {
+      "name": "entity-tracker",
+      "type": "entity-tracker",
+      "displayName": "Threat Actors",
+      "position": 2,
+      "config": {
+        "entities": [
+          "APT28",
+          "APT29",
+          "Lazarus Group",
+          "LockBit",
+          "CISA",
+          "Mandiant",
+          "CrowdStrike",
+          "RANSOMWARE"
+        ],
+        "maxEntities": 20
+      }
+    },
+    {
+      "name": "service-status",
+      "type": "service-status",
+      "displayName": "Source Status",
+      "position": 3,
+      "config": {}
+    }
+  ],
+  "ai": {
+    "enabled": true,
+    "fallbackChain": [
+      "groq",
+      "openrouter"
+    ],
+    "providers": {
+      "groq": {
+        "model": "llama-3.3-70b-versatile",
+        "apiKeyEnv": "GROQ_API_KEY"
+      },
+      "openrouter": {
+        "model": "anthropic/claude-sonnet-4",
+        "apiKeyEnv": "OPENROUTER_API_KEY"
+      }
+    },
+    "analysis": {
+      "summarization": true,
+      "entityExtraction": true,
+      "sentimentAnalysis": true,
+      "focalPointDetection": true,
+      "customPrompt": "Focus on cyber threats, vulnerability disclosures, ransomware campaigns, APT activity, and critical infrastructure attacks. Highlight emerging threat actors and zero-day exploits."
+    }
+  },
+  "map": {
+    "style": "https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json",
+    "center": [
+      0,
+      30
+    ],
+    "zoom": 3,
+    "projection": "globe",
+    "dayNightOverlay": true
+  },
+  "theme": {
+    "palette": "cyberpunk"
+  },
+  "views": []
+}

@@ -1,0 +1,121 @@
+{
+  "_meta": {
+    "category": "cybersecurity",
+    "difficulty": "beginner",
+    "requires_api_keys": [
+      "GROQ_API_KEY"
+    ],
+    "optional_api_keys": [],
+    "preview_description": "Track cyber threats from Krebs, The Hacker News, and BleepingComputer"
+  },
+  "monitor": {
+    "name": "Cyber Monitor",
+    "slug": "cyber-monitor",
+    "description": "Minimal cybersecurity intelligence dashboard",
+    "domain": "cybersecurity",
+    "tags": [
+      "cyber",
+      "infosec",
+      "threats"
+    ],
+    "branding": {
+      "primaryColor": "#00FF41"
+    }
+  },
+  "sources": [
+    {
+      "name": "krebs-on-security",
+      "type": "rss",
+      "url": "https://krebsonsecurity.com/feed/",
+      "category": "cyber-news",
+      "tier": 1,
+      "interval": 600,
+      "language": "en",
+      "tags": [
+        "infosec",
+        "breaches"
+      ]
+    },
+    {
+      "name": "the-hacker-news",
+      "type": "rss",
+      "url": "https://feeds.feedburner.com/TheHackersNews",
+      "category": "cyber-news",
+      "tier": 1,
+      "interval": 300,
+      "language": "en",
+      "tags": [
+        "cyber",
+        "vulnerabilities"
+      ]
+    },
+    {
+      "name": "bleeping-computer",
+      "type": "rss",
+      "url": "https://www.bleepingcomputer.com/feed/",
+      "category": "cyber-news",
+      "tier": 2,
+      "interval": 600,
+      "language": "en",
+      "tags": [
+        "malware",
+        "ransomware"
+      ]
+    }
+  ],
+  "layers": [],
+  "panels": [
+    {
+      "name": "cyber-news",
+      "type": "news-feed",
+      "displayName": "Cyber News",
+      "position": 0,
+      "config": {
+        "categories": [
+          "cyber-news"
+        ],
+        "maxItems": 30
+      }
+    },
+    {
+      "name": "ai-brief",
+      "type": "ai-brief",
+      "displayName": "Threat Brief",
+      "position": 1,
+      "config": {
+        "refreshInterval": 900
+      }
+    }
+  ],
+  "ai": {
+    "enabled": true,
+    "fallbackChain": [
+      "groq"
+    ],
+    "providers": {
+      "groq": {
+        "model": "llama-3.3-70b-versatile",
+        "apiKeyEnv": "GROQ_API_KEY"
+      }
+    },
+    "analysis": {
+      "summarization": true,
+      "entityExtraction": true,
+      "sentimentAnalysis": false,
+      "focalPointDetection": false
+    }
+  },
+  "map": {
+    "style": "https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json",
+    "center": [
+      -95,
+      38
+    ],
+    "zoom": 4,
+    "projection": "mercator"
+  },
+  "theme": {
+    "palette": "cyberpunk"
+  },
+  "views": []
+}
