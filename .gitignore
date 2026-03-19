@@ -11,3 +11,4 @@ api/_shared/proxy-allowlist.ts
 2026-*.txt
 test-results/
 e2e/screenshots/
+qa-evidence/
