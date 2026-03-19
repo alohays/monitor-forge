@@ -13,7 +13,7 @@ export const SourceSchema = z.object({
   tags: z.array(z.string()).default([]),
   headers: z.record(z.string()).optional(),
   transform: z.string().optional(),
-  authEnvVar: z.string().optional(),
+  authEnvVar: z.string().regex(/^[A-Z_][A-Z0-9_]*$/, 'Must be a valid env var name (UPPER_SNAKE_CASE)').optional(),
   authHeader: z.string().default('Authorization'),
   cacheTtl: z.number().min(0).default(300),
 });

@@ -41,8 +41,9 @@ export default async function handler(request: Request): Promise<Response> {
     // Resolve TTL: ?ttl= query param > source-level cacheTtl > default 300
     const sourceName = url.searchParams.get('source');
     const ttlParam = url.searchParams.get('ttl');
-    const cacheTtl = ttlParam != null
-      ? parseInt(ttlParam, 10)
+    const rawTtl = ttlParam != null ? parseInt(ttlParam, 10) : null;
+    const cacheTtl = (rawTtl != null && Number.isFinite(rawTtl) && rawTtl > 0)
+      ? Math.min(rawTtl, 86400)  // cap at 24 hours
       : (sourceName && sourceTtl[sourceName] != null ? sourceTtl[sourceName] : 300);
 
     // Inject server-side API key if configured for this domain
