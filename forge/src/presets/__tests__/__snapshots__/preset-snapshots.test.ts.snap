@@ -1,0 +1,3006 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`preset snapshot validation > blank.json > passes MonitorForgeConfigSchema.parse() and matches snapshot 1`] = `
+{
+  "ai": {
+    "analysis": {
+      "entityExtraction": true,
+      "focalPointDetection": false,
+      "sentimentAnalysis": true,
+      "summarization": true,
+    },
+    "enabled": false,
+    "fallbackChain": [
+      "groq",
+      "openrouter",
+    ],
+    "providers": {},
+  },
+  "backend": {
+    "cache": {
+      "provider": "memory",
+      "ttlSeconds": 300,
+    },
+    "corsProxy": {
+      "allowedDomains": [
+        "*",
+      ],
+      "corsOrigins": [
+        "*",
+      ],
+      "enabled": true,
+    },
+    "rateLimit": {
+      "enabled": true,
+      "maxRequests": 100,
+      "windowSeconds": 60,
+    },
+  },
+  "build": {
+    "outDir": "dist",
+    "target": "vercel",
+  },
+  "layers": [],
+  "map": {
+    "atmosphericGlow": true,
+    "center": [
+      0,
+      20,
+    ],
+    "dayNightOverlay": false,
+    "idleRotation": true,
+    "idleRotationSpeed": 0.5,
+    "maxZoom": 18,
+    "minZoom": 2,
+    "projection": "mercator",
+    "style": "https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json",
+    "zoom": 3,
+  },
+  "monitor": {
+    "branding": {
+      "primaryColor": "#0052CC",
+    },
+    "description": "A blank dashboard ready for customization",
+    "domain": "general",
+    "name": "My Monitor",
+    "slug": "my-monitor",
+    "tags": [],
+  },
+  "panels": [],
+  "sources": [],
+  "theme": {
+    "colors": {},
+    "compactMode": false,
+    "mode": "dark",
+    "palette": "default",
+    "panelPosition": "right",
+    "panelWidth": 380,
+  },
+  "version": "1",
+  "views": [],
+}
+`;
+
+exports[`preset snapshot validation > climate-full.json > passes MonitorForgeConfigSchema.parse() and matches snapshot 1`] = `
+{
+  "ai": {
+    "analysis": {
+      "customPrompt": "Focus on climate change developments, extreme weather events, natural disasters, environmental policy, and emissions data. Highlight escalating climate risks and international climate negotiations.",
+      "entityExtraction": true,
+      "focalPointDetection": true,
+      "sentimentAnalysis": true,
+      "summarization": true,
+    },
+    "enabled": true,
+    "fallbackChain": [
+      "groq",
+      "openrouter",
+    ],
+    "providers": {
+      "groq": {
+        "apiKeyEnv": "GROQ_API_KEY",
+        "model": "llama-3.3-70b-versatile",
+      },
+      "openrouter": {
+        "apiKeyEnv": "OPENROUTER_API_KEY",
+        "model": "anthropic/claude-sonnet-4",
+      },
+    },
+  },
+  "backend": {
+    "cache": {
+      "provider": "memory",
+      "ttlSeconds": 300,
+    },
+    "corsProxy": {
+      "allowedDomains": [
+        "*",
+      ],
+      "corsOrigins": [
+        "*",
+      ],
+      "enabled": true,
+    },
+    "rateLimit": {
+      "enabled": true,
+      "maxRequests": 100,
+      "windowSeconds": 60,
+    },
+  },
+  "build": {
+    "outDir": "dist",
+    "target": "vercel",
+  },
+  "layers": [
+    {
+      "category": "hazards",
+      "color": "#FF6600",
+      "data": {
+        "path": "data/geo/natural-disasters.geojson",
+        "source": "static",
+      },
+      "defaultVisible": true,
+      "displayName": "Disaster Risk Zones",
+      "name": "disaster-zones",
+      "type": "heatmap",
+    },
+  ],
+  "map": {
+    "atmosphericGlow": true,
+    "center": [
+      0,
+      20,
+    ],
+    "dayNightOverlay": true,
+    "idleRotation": true,
+    "idleRotationSpeed": 0.3,
+    "maxZoom": 18,
+    "minZoom": 2,
+    "projection": "globe",
+    "style": "https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json",
+    "zoom": 3,
+  },
+  "monitor": {
+    "branding": {
+      "primaryColor": "#00AA55",
+    },
+    "description": "Full-featured climate intelligence dashboard with disaster tracking and AI analysis",
+    "domain": "climate",
+    "name": "Climate Intelligence",
+    "slug": "climate-intelligence",
+    "tags": [
+      "climate",
+      "environment",
+      "sustainability",
+      "disasters",
+    ],
+  },
+  "panels": [
+    {
+      "config": {
+        "categories": [
+          "climate-news",
+          "environment",
+          "disasters",
+        ],
+        "maxItems": 50,
+      },
+      "displayName": "Climate News",
+      "name": "climate-news",
+      "position": 0,
+      "type": "news-feed",
+    },
+    {
+      "config": {
+        "refreshInterval": 600,
+      },
+      "displayName": "Climate Brief",
+      "name": "ai-brief",
+      "position": 1,
+      "type": "ai-brief",
+    },
+    {
+      "config": {
+        "entities": [
+          "IPCC",
+          "UNFCCC",
+          "NASA",
+          "NOAA",
+          "WHO",
+          "El Nino",
+          "La Nina",
+          "COP",
+        ],
+        "maxEntities": 20,
+      },
+      "displayName": "Key Organizations",
+      "name": "entity-tracker",
+      "position": 2,
+      "type": "entity-tracker",
+    },
+    {
+      "config": {},
+      "displayName": "Source Status",
+      "name": "service-status",
+      "position": 3,
+      "type": "service-status",
+    },
+  ],
+  "sources": [
+    {
+      "category": "climate-news",
+      "interval": 900,
+      "language": "en",
+      "name": "carbon-brief",
+      "tags": [
+        "climate",
+        "science",
+      ],
+      "tier": 1,
+      "type": "rss",
+      "url": "https://www.carbonbrief.org/feed/",
+    },
+    {
+      "category": "environment",
+      "interval": 1800,
+      "language": "en",
+      "name": "phys-org-earth",
+      "tags": [
+        "earth",
+        "science",
+      ],
+      "tier": 2,
+      "type": "rss",
+      "url": "https://phys.org/rss-feed/earth-news/",
+    },
+    {
+      "category": "climate-news",
+      "interval": 600,
+      "language": "en",
+      "name": "guardian-environment",
+      "tags": [
+        "climate",
+        "environment",
+      ],
+      "tier": 1,
+      "type": "rss",
+      "url": "https://www.theguardian.com/environment/rss",
+    },
+    {
+      "category": "disasters",
+      "interval": 600,
+      "language": "en",
+      "name": "reliefweb-disasters",
+      "tags": [
+        "disasters",
+        "humanitarian",
+      ],
+      "tier": 1,
+      "type": "rss",
+      "url": "https://reliefweb.int/updates/rss.xml",
+    },
+    {
+      "category": "earth-observation",
+      "interval": 3600,
+      "language": "en",
+      "name": "nasa-earth-observatory",
+      "tags": [
+        "nasa",
+        "satellite",
+      ],
+      "tier": 2,
+      "type": "rss",
+      "url": "https://earthobservatory.nasa.gov/feeds/earth-observatory.rss",
+    },
+    {
+      "category": "climate-data",
+      "interval": 3600,
+      "language": "en",
+      "name": "noaa-climate",
+      "tags": [
+        "noaa",
+        "climate-data",
+      ],
+      "tier": 2,
+      "type": "rss",
+      "url": "https://www.climate.gov/news-features/feed",
+    },
+  ],
+  "theme": {
+    "colors": {},
+    "compactMode": false,
+    "mode": "dark",
+    "palette": "forest",
+    "panelPosition": "right",
+    "panelWidth": 380,
+  },
+  "version": "1",
+  "views": [],
+}
+`;
+
+exports[`preset snapshot validation > climate-minimal.json > passes MonitorForgeConfigSchema.parse() and matches snapshot 1`] = `
+{
+  "ai": {
+    "analysis": {
+      "entityExtraction": true,
+      "focalPointDetection": false,
+      "sentimentAnalysis": false,
+      "summarization": true,
+    },
+    "enabled": true,
+    "fallbackChain": [
+      "groq",
+    ],
+    "providers": {
+      "groq": {
+        "apiKeyEnv": "GROQ_API_KEY",
+        "model": "llama-3.3-70b-versatile",
+      },
+    },
+  },
+  "backend": {
+    "cache": {
+      "provider": "memory",
+      "ttlSeconds": 300,
+    },
+    "corsProxy": {
+      "allowedDomains": [
+        "*",
+      ],
+      "corsOrigins": [
+        "*",
+      ],
+      "enabled": true,
+    },
+    "rateLimit": {
+      "enabled": true,
+      "maxRequests": 100,
+      "windowSeconds": 60,
+    },
+  },
+  "build": {
+    "outDir": "dist",
+    "target": "vercel",
+  },
+  "layers": [],
+  "map": {
+    "atmosphericGlow": true,
+    "center": [
+      0,
+      20,
+    ],
+    "dayNightOverlay": false,
+    "idleRotation": true,
+    "idleRotationSpeed": 0.5,
+    "maxZoom": 18,
+    "minZoom": 2,
+    "projection": "globe",
+    "style": "https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json",
+    "zoom": 3,
+  },
+  "monitor": {
+    "branding": {
+      "primaryColor": "#00AA55",
+    },
+    "description": "Minimal climate intelligence dashboard",
+    "domain": "climate",
+    "name": "Climate Monitor",
+    "slug": "climate-monitor",
+    "tags": [
+      "climate",
+      "environment",
+      "sustainability",
+    ],
+  },
+  "panels": [
+    {
+      "config": {
+        "categories": [
+          "climate-news",
+          "environment",
+        ],
+        "maxItems": 30,
+      },
+      "displayName": "Climate News",
+      "name": "climate-news",
+      "position": 0,
+      "type": "news-feed",
+    },
+    {
+      "config": {
+        "refreshInterval": 900,
+      },
+      "displayName": "Climate Brief",
+      "name": "ai-brief",
+      "position": 1,
+      "type": "ai-brief",
+    },
+  ],
+  "sources": [
+    {
+      "category": "climate-news",
+      "interval": 900,
+      "language": "en",
+      "name": "carbon-brief",
+      "tags": [
+        "climate",
+        "science",
+      ],
+      "tier": 1,
+      "type": "rss",
+      "url": "https://www.carbonbrief.org/feed/",
+    },
+    {
+      "category": "environment",
+      "interval": 1800,
+      "language": "en",
+      "name": "phys-org-earth",
+      "tags": [
+        "earth",
+        "science",
+      ],
+      "tier": 2,
+      "type": "rss",
+      "url": "https://phys.org/rss-feed/earth-news/",
+    },
+    {
+      "category": "climate-news",
+      "interval": 600,
+      "language": "en",
+      "name": "guardian-environment",
+      "tags": [
+        "climate",
+        "environment",
+      ],
+      "tier": 1,
+      "type": "rss",
+      "url": "https://www.theguardian.com/environment/rss",
+    },
+  ],
+  "theme": {
+    "colors": {},
+    "compactMode": false,
+    "mode": "dark",
+    "palette": "forest",
+    "panelPosition": "right",
+    "panelWidth": 380,
+  },
+  "version": "1",
+  "views": [],
+}
+`;
+
+exports[`preset snapshot validation > cyber-full.json > passes MonitorForgeConfigSchema.parse() and matches snapshot 1`] = `
+{
+  "ai": {
+    "analysis": {
+      "customPrompt": "Focus on cyber threats, vulnerability disclosures, ransomware campaigns, APT activity, and critical infrastructure attacks. Highlight emerging threat actors and zero-day exploits.",
+      "entityExtraction": true,
+      "focalPointDetection": true,
+      "sentimentAnalysis": true,
+      "summarization": true,
+    },
+    "enabled": true,
+    "fallbackChain": [
+      "groq",
+      "openrouter",
+    ],
+    "providers": {
+      "groq": {
+        "apiKeyEnv": "GROQ_API_KEY",
+        "model": "llama-3.3-70b-versatile",
+      },
+      "openrouter": {
+        "apiKeyEnv": "OPENROUTER_API_KEY",
+        "model": "anthropic/claude-sonnet-4",
+      },
+    },
+  },
+  "backend": {
+    "cache": {
+      "provider": "memory",
+      "ttlSeconds": 300,
+    },
+    "corsProxy": {
+      "allowedDomains": [
+        "*",
+      ],
+      "corsOrigins": [
+        "*",
+      ],
+      "enabled": true,
+    },
+    "rateLimit": {
+      "enabled": true,
+      "maxRequests": 100,
+      "windowSeconds": 60,
+    },
+  },
+  "build": {
+    "outDir": "dist",
+    "target": "vercel",
+  },
+  "layers": [
+    {
+      "category": "threats",
+      "color": "#FF0040",
+      "data": {
+        "path": "data/geo/threat-origins.geojson",
+        "source": "static",
+      },
+      "defaultVisible": true,
+      "displayName": "Threat Actor Origins",
+      "name": "threat-origins",
+      "type": "points",
+    },
+  ],
+  "map": {
+    "atmosphericGlow": true,
+    "center": [
+      0,
+      30,
+    ],
+    "dayNightOverlay": true,
+    "idleRotation": true,
+    "idleRotationSpeed": 0.5,
+    "maxZoom": 18,
+    "minZoom": 2,
+    "projection": "globe",
+    "style": "https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json",
+    "zoom": 3,
+  },
+  "monitor": {
+    "branding": {
+      "primaryColor": "#00FF41",
+    },
+    "description": "Full-featured cybersecurity intelligence dashboard with threat tracking and AI analysis",
+    "domain": "cybersecurity",
+    "name": "Cyber Monitor",
+    "slug": "cyber-monitor",
+    "tags": [
+      "cyber",
+      "infosec",
+      "threats",
+    ],
+  },
+  "panels": [
+    {
+      "config": {
+        "categories": [
+          "cyber-news",
+          "advisories",
+        ],
+        "maxItems": 50,
+      },
+      "displayName": "Cyber News",
+      "name": "cyber-news",
+      "position": 0,
+      "type": "news-feed",
+    },
+    {
+      "config": {
+        "refreshInterval": 600,
+      },
+      "displayName": "Threat Brief",
+      "name": "ai-brief",
+      "position": 1,
+      "type": "ai-brief",
+    },
+    {
+      "config": {
+        "entities": [
+          "APT28",
+          "APT29",
+          "Lazarus Group",
+          "LockBit",
+          "CISA",
+          "Mandiant",
+          "CrowdStrike",
+          "RANSOMWARE",
+        ],
+        "maxEntities": 20,
+      },
+      "displayName": "Threat Actors",
+      "name": "entity-tracker",
+      "position": 2,
+      "type": "entity-tracker",
+    },
+    {
+      "config": {},
+      "displayName": "Source Status",
+      "name": "service-status",
+      "position": 3,
+      "type": "service-status",
+    },
+  ],
+  "sources": [
+    {
+      "category": "cyber-news",
+      "interval": 600,
+      "language": "en",
+      "name": "krebs-on-security",
+      "tags": [
+        "infosec",
+        "breaches",
+      ],
+      "tier": 1,
+      "type": "rss",
+      "url": "https://krebsonsecurity.com/feed/",
+    },
+    {
+      "category": "cyber-news",
+      "interval": 300,
+      "language": "en",
+      "name": "the-hacker-news",
+      "tags": [
+        "cyber",
+        "vulnerabilities",
+      ],
+      "tier": 1,
+      "type": "rss",
+      "url": "https://feeds.feedburner.com/TheHackersNews",
+    },
+    {
+      "category": "cyber-news",
+      "interval": 600,
+      "language": "en",
+      "name": "bleeping-computer",
+      "tags": [
+        "malware",
+        "ransomware",
+      ],
+      "tier": 2,
+      "type": "rss",
+      "url": "https://www.bleepingcomputer.com/feed/",
+    },
+    {
+      "category": "advisories",
+      "interval": 1800,
+      "language": "en",
+      "name": "cisa-alerts",
+      "tags": [
+        "advisories",
+        "government",
+      ],
+      "tier": 1,
+      "type": "rss",
+      "url": "https://www.cisa.gov/cybersecurity-advisories/all.xml",
+    },
+    {
+      "category": "cyber-news",
+      "interval": 600,
+      "language": "en",
+      "name": "dark-reading",
+      "tags": [
+        "cyber",
+        "enterprise",
+      ],
+      "tier": 2,
+      "type": "rss",
+      "url": "https://www.darkreading.com/rss_feed.asp",
+    },
+    {
+      "category": "analysis",
+      "interval": 3600,
+      "language": "en",
+      "name": "schneier-blog",
+      "tags": [
+        "analysis",
+        "cryptography",
+      ],
+      "tier": 2,
+      "type": "rss",
+      "url": "https://www.schneier.com/feed/",
+    },
+    {
+      "category": "cyber-news",
+      "interval": 600,
+      "language": "en",
+      "name": "ars-security",
+      "tags": [
+        "security",
+        "tech",
+      ],
+      "tier": 2,
+      "type": "rss",
+      "url": "https://feeds.arstechnica.com/arstechnica/security",
+    },
+  ],
+  "theme": {
+    "colors": {},
+    "compactMode": false,
+    "mode": "dark",
+    "palette": "cyberpunk",
+    "panelPosition": "right",
+    "panelWidth": 380,
+  },
+  "version": "1",
+  "views": [],
+}
+`;
+
+exports[`preset snapshot validation > cyber-minimal.json > passes MonitorForgeConfigSchema.parse() and matches snapshot 1`] = `
+{
+  "ai": {
+    "analysis": {
+      "entityExtraction": true,
+      "focalPointDetection": false,
+      "sentimentAnalysis": false,
+      "summarization": true,
+    },
+    "enabled": true,
+    "fallbackChain": [
+      "groq",
+    ],
+    "providers": {
+      "groq": {
+        "apiKeyEnv": "GROQ_API_KEY",
+        "model": "llama-3.3-70b-versatile",
+      },
+    },
+  },
+  "backend": {
+    "cache": {
+      "provider": "memory",
+      "ttlSeconds": 300,
+    },
+    "corsProxy": {
+      "allowedDomains": [
+        "*",
+      ],
+      "corsOrigins": [
+        "*",
+      ],
+      "enabled": true,
+    },
+    "rateLimit": {
+      "enabled": true,
+      "maxRequests": 100,
+      "windowSeconds": 60,
+    },
+  },
+  "build": {
+    "outDir": "dist",
+    "target": "vercel",
+  },
+  "layers": [],
+  "map": {
+    "atmosphericGlow": true,
+    "center": [
+      -95,
+      38,
+    ],
+    "dayNightOverlay": false,
+    "idleRotation": true,
+    "idleRotationSpeed": 0.5,
+    "maxZoom": 18,
+    "minZoom": 2,
+    "projection": "mercator",
+    "style": "https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json",
+    "zoom": 4,
+  },
+  "monitor": {
+    "branding": {
+      "primaryColor": "#00FF41",
+    },
+    "description": "Minimal cybersecurity intelligence dashboard",
+    "domain": "cybersecurity",
+    "name": "Cyber Monitor",
+    "slug": "cyber-monitor",
+    "tags": [
+      "cyber",
+      "infosec",
+      "threats",
+    ],
+  },
+  "panels": [
+    {
+      "config": {
+        "categories": [
+          "cyber-news",
+        ],
+        "maxItems": 30,
+      },
+      "displayName": "Cyber News",
+      "name": "cyber-news",
+      "position": 0,
+      "type": "news-feed",
+    },
+    {
+      "config": {
+        "refreshInterval": 900,
+      },
+      "displayName": "Threat Brief",
+      "name": "ai-brief",
+      "position": 1,
+      "type": "ai-brief",
+    },
+  ],
+  "sources": [
+    {
+      "category": "cyber-news",
+      "interval": 600,
+      "language": "en",
+      "name": "krebs-on-security",
+      "tags": [
+        "infosec",
+        "breaches",
+      ],
+      "tier": 1,
+      "type": "rss",
+      "url": "https://krebsonsecurity.com/feed/",
+    },
+    {
+      "category": "cyber-news",
+      "interval": 300,
+      "language": "en",
+      "name": "the-hacker-news",
+      "tags": [
+        "cyber",
+        "vulnerabilities",
+      ],
+      "tier": 1,
+      "type": "rss",
+      "url": "https://feeds.feedburner.com/TheHackersNews",
+    },
+    {
+      "category": "cyber-news",
+      "interval": 600,
+      "language": "en",
+      "name": "bleeping-computer",
+      "tags": [
+        "malware",
+        "ransomware",
+      ],
+      "tier": 2,
+      "type": "rss",
+      "url": "https://www.bleepingcomputer.com/feed/",
+    },
+  ],
+  "theme": {
+    "colors": {},
+    "compactMode": false,
+    "mode": "dark",
+    "palette": "cyberpunk",
+    "panelPosition": "right",
+    "panelWidth": 380,
+  },
+  "version": "1",
+  "views": [],
+}
+`;
+
+exports[`preset snapshot validation > finance-full.json > passes MonitorForgeConfigSchema.parse() and matches snapshot 1`] = `
+{
+  "ai": {
+    "analysis": {
+      "customPrompt": "Focus on market-moving events, central bank decisions, earnings surprises, and geopolitical risks affecting markets.",
+      "entityExtraction": true,
+      "focalPointDetection": true,
+      "sentimentAnalysis": true,
+      "summarization": true,
+    },
+    "enabled": true,
+    "fallbackChain": [
+      "groq",
+      "openrouter",
+    ],
+    "providers": {
+      "groq": {
+        "apiKeyEnv": "GROQ_API_KEY",
+        "model": "llama-3.3-70b-versatile",
+      },
+      "openrouter": {
+        "apiKeyEnv": "OPENROUTER_API_KEY",
+        "model": "anthropic/claude-sonnet-4",
+      },
+    },
+  },
+  "backend": {
+    "cache": {
+      "provider": "memory",
+      "ttlSeconds": 300,
+    },
+    "corsProxy": {
+      "allowedDomains": [
+        "*",
+      ],
+      "corsOrigins": [
+        "*",
+      ],
+      "enabled": true,
+    },
+    "rateLimit": {
+      "enabled": true,
+      "maxRequests": 100,
+      "windowSeconds": 60,
+    },
+  },
+  "build": {
+    "outDir": "dist",
+    "target": "vercel",
+  },
+  "layers": [
+    {
+      "category": "infrastructure",
+      "color": "#FFD700",
+      "data": {
+        "path": "data/geo/financial-centers.geojson",
+        "source": "static",
+      },
+      "defaultVisible": true,
+      "displayName": "Financial Centers",
+      "name": "financial-centers",
+      "type": "points",
+    },
+  ],
+  "map": {
+    "atmosphericGlow": true,
+    "center": [
+      0,
+      30,
+    ],
+    "dayNightOverlay": false,
+    "idleRotation": true,
+    "idleRotationSpeed": 0.5,
+    "maxZoom": 18,
+    "minZoom": 2,
+    "projection": "mercator",
+    "style": "https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json",
+    "zoom": 3,
+  },
+  "monitor": {
+    "branding": {
+      "primaryColor": "#FFD700",
+    },
+    "description": "Full-featured financial intelligence dashboard with market tracking and AI analysis",
+    "domain": "finance",
+    "name": "Finance Intelligence",
+    "slug": "finance-intelligence",
+    "tags": [
+      "finance",
+      "markets",
+      "crypto",
+      "macro",
+      "commodities",
+    ],
+  },
+  "panels": [
+    {
+      "config": {
+        "categories": [
+          "market-news",
+        ],
+        "maxItems": 50,
+      },
+      "displayName": "Market News",
+      "name": "market-news",
+      "position": 0,
+      "type": "news-feed",
+    },
+    {
+      "config": {
+        "refreshInterval": 600,
+      },
+      "displayName": "Market Intelligence Brief",
+      "name": "market-brief",
+      "position": 1,
+      "type": "ai-brief",
+    },
+    {
+      "config": {
+        "entities": [
+          "S&P 500",
+          "NASDAQ",
+          "Bitcoin",
+          "Gold",
+          "USD",
+          "EUR",
+          "JPY",
+        ],
+        "maxEntities": 20,
+      },
+      "displayName": "Key Movers",
+      "name": "entity-tracker",
+      "position": 2,
+      "type": "entity-tracker",
+    },
+    {
+      "config": {},
+      "displayName": "Feed Status",
+      "name": "service-status",
+      "position": 3,
+      "type": "service-status",
+    },
+  ],
+  "sources": [
+    {
+      "category": "market-news",
+      "interval": 300,
+      "language": "en",
+      "name": "reuters-business",
+      "tags": [
+        "finance",
+      ],
+      "tier": 1,
+      "type": "rss",
+      "url": "https://www.reutersagency.com/feed/?taxonomy=best-topics&post_type=best",
+    },
+    {
+      "category": "market-news",
+      "interval": 300,
+      "language": "en",
+      "name": "cnbc-top",
+      "tags": [
+        "finance",
+        "markets",
+      ],
+      "tier": 1,
+      "type": "rss",
+      "url": "https://search.cnbc.com/rs/search/combinedcms/view.xml?partnerId=wrss01&id=100003114",
+    },
+    {
+      "category": "market-news",
+      "interval": 600,
+      "language": "en",
+      "name": "ft-markets",
+      "tags": [
+        "finance",
+        "markets",
+      ],
+      "tier": 1,
+      "type": "rss",
+      "url": "https://www.ft.com/markets?format=rss",
+    },
+    {
+      "category": "market-news",
+      "interval": 600,
+      "language": "en",
+      "name": "bloomberg-markets",
+      "tags": [
+        "finance",
+        "markets",
+      ],
+      "tier": 1,
+      "type": "rss",
+      "url": "https://feeds.bloomberg.com/markets/news.rss",
+    },
+    {
+      "category": "crypto",
+      "interval": 600,
+      "language": "en",
+      "name": "coindesk",
+      "tags": [
+        "crypto",
+      ],
+      "tier": 2,
+      "type": "rss",
+      "url": "https://www.coindesk.com/arc/outboundfeeds/rss/",
+    },
+    {
+      "category": "central-bank",
+      "interval": 1800,
+      "language": "en",
+      "name": "fed-rss",
+      "tags": [
+        "macro",
+        "fed",
+      ],
+      "tier": 1,
+      "type": "rss",
+      "url": "https://www.federalreserve.gov/feeds/press_all.xml",
+    },
+  ],
+  "theme": {
+    "colors": {},
+    "compactMode": false,
+    "mode": "dark",
+    "palette": "sunset",
+    "panelPosition": "right",
+    "panelWidth": 380,
+  },
+  "version": "1",
+  "views": [
+    {
+      "default": true,
+      "displayName": "Overview",
+      "name": "overview",
+      "panels": [
+        "market-news",
+        "market-brief",
+      ],
+    },
+    {
+      "displayName": "Analysis",
+      "name": "analysis",
+      "panels": [
+        "market-brief",
+        "entity-tracker",
+      ],
+    },
+    {
+      "displayName": "Operations",
+      "name": "operations",
+      "panels": [
+        "market-news",
+        "service-status",
+      ],
+    },
+  ],
+}
+`;
+
+exports[`preset snapshot validation > finance-minimal.json > passes MonitorForgeConfigSchema.parse() and matches snapshot 1`] = `
+{
+  "ai": {
+    "analysis": {
+      "entityExtraction": true,
+      "focalPointDetection": false,
+      "sentimentAnalysis": true,
+      "summarization": true,
+    },
+    "enabled": true,
+    "fallbackChain": [
+      "groq",
+    ],
+    "providers": {
+      "groq": {
+        "apiKeyEnv": "GROQ_API_KEY",
+        "model": "llama-3.3-70b-versatile",
+      },
+    },
+  },
+  "backend": {
+    "cache": {
+      "provider": "memory",
+      "ttlSeconds": 300,
+    },
+    "corsProxy": {
+      "allowedDomains": [
+        "*",
+      ],
+      "corsOrigins": [
+        "*",
+      ],
+      "enabled": true,
+    },
+    "rateLimit": {
+      "enabled": true,
+      "maxRequests": 100,
+      "windowSeconds": 60,
+    },
+  },
+  "build": {
+    "outDir": "dist",
+    "target": "vercel",
+  },
+  "layers": [],
+  "map": {
+    "atmosphericGlow": true,
+    "center": [
+      -74,
+      40.7,
+    ],
+    "dayNightOverlay": false,
+    "idleRotation": true,
+    "idleRotationSpeed": 0.5,
+    "maxZoom": 18,
+    "minZoom": 2,
+    "projection": "mercator",
+    "style": "https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json",
+    "zoom": 5,
+  },
+  "monitor": {
+    "branding": {
+      "primaryColor": "#FFD700",
+    },
+    "description": "Minimal financial market intelligence dashboard",
+    "domain": "finance",
+    "name": "Finance Monitor",
+    "slug": "finance-monitor",
+    "tags": [
+      "finance",
+      "markets",
+      "crypto",
+    ],
+  },
+  "panels": [
+    {
+      "config": {
+        "categories": [
+          "market-news",
+          "crypto",
+        ],
+        "maxItems": 30,
+      },
+      "displayName": "Market News",
+      "name": "market-news",
+      "position": 0,
+      "type": "news-feed",
+    },
+    {
+      "config": {
+        "refreshInterval": 900,
+      },
+      "displayName": "Market Brief",
+      "name": "ai-brief",
+      "position": 1,
+      "type": "ai-brief",
+    },
+  ],
+  "sources": [
+    {
+      "category": "market-news",
+      "interval": 300,
+      "language": "en",
+      "name": "reuters-business",
+      "tags": [
+        "finance",
+        "markets",
+      ],
+      "tier": 1,
+      "type": "rss",
+      "url": "https://www.reutersagency.com/feed/?taxonomy=best-topics&post_type=best",
+    },
+    {
+      "category": "market-news",
+      "interval": 300,
+      "language": "en",
+      "name": "cnbc-top",
+      "tags": [
+        "finance",
+        "markets",
+      ],
+      "tier": 1,
+      "type": "rss",
+      "url": "https://search.cnbc.com/rs/search/combinedcms/view.xml?partnerId=wrss01&id=100003114",
+    },
+    {
+      "category": "crypto",
+      "interval": 600,
+      "language": "en",
+      "name": "coindesk",
+      "tags": [
+        "crypto",
+        "blockchain",
+      ],
+      "tier": 2,
+      "type": "rss",
+      "url": "https://www.coindesk.com/arc/outboundfeeds/rss/",
+    },
+  ],
+  "theme": {
+    "colors": {},
+    "compactMode": false,
+    "mode": "dark",
+    "palette": "sunset",
+    "panelPosition": "right",
+    "panelWidth": 380,
+  },
+  "version": "1",
+  "views": [
+    {
+      "default": true,
+      "displayName": "Overview",
+      "name": "overview",
+      "panels": [
+        "market-news",
+        "ai-brief",
+      ],
+    },
+  ],
+}
+`;
+
+exports[`preset snapshot validation > geopolitics-full.json > passes MonitorForgeConfigSchema.parse() and matches snapshot 1`] = `
+{
+  "ai": {
+    "analysis": {
+      "customPrompt": "Focus on geopolitical tensions, military movements, diplomatic developments, sanctions, and territorial disputes. Highlight escalation/de-escalation signals.",
+      "entityExtraction": true,
+      "focalPointDetection": true,
+      "sentimentAnalysis": true,
+      "summarization": true,
+    },
+    "enabled": true,
+    "fallbackChain": [
+      "groq",
+      "openrouter",
+    ],
+    "providers": {
+      "groq": {
+        "apiKeyEnv": "GROQ_API_KEY",
+        "model": "llama-3.3-70b-versatile",
+      },
+      "openrouter": {
+        "apiKeyEnv": "OPENROUTER_API_KEY",
+        "model": "anthropic/claude-sonnet-4",
+      },
+    },
+  },
+  "backend": {
+    "cache": {
+      "provider": "memory",
+      "ttlSeconds": 300,
+    },
+    "corsProxy": {
+      "allowedDomains": [
+        "*",
+      ],
+      "corsOrigins": [
+        "*",
+      ],
+      "enabled": true,
+    },
+    "rateLimit": {
+      "enabled": true,
+      "maxRequests": 100,
+      "windowSeconds": 60,
+    },
+  },
+  "build": {
+    "outDir": "dist",
+    "target": "vercel",
+  },
+  "layers": [
+    {
+      "category": "security",
+      "color": "#FF4444",
+      "data": {
+        "path": "data/geo/conflict-zones.geojson",
+        "source": "static",
+      },
+      "defaultVisible": true,
+      "displayName": "Conflict Zones",
+      "name": "conflict-zones",
+      "type": "heatmap",
+    },
+  ],
+  "map": {
+    "atmosphericGlow": true,
+    "center": [
+      30,
+      30,
+    ],
+    "dayNightOverlay": true,
+    "idleRotation": true,
+    "idleRotationSpeed": 0.3,
+    "maxZoom": 18,
+    "minZoom": 2,
+    "projection": "globe",
+    "style": "https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json",
+    "zoom": 3,
+  },
+  "monitor": {
+    "branding": {
+      "primaryColor": "#CC0000",
+    },
+    "description": "Full-featured geopolitical intelligence dashboard with conflict tracking and AI analysis",
+    "domain": "geopolitics",
+    "name": "Geopolitical Intelligence",
+    "slug": "geopolitical-intelligence",
+    "tags": [
+      "geopolitics",
+      "conflict",
+      "diplomacy",
+      "security",
+      "osint",
+    ],
+  },
+  "panels": [
+    {
+      "config": {
+        "categories": [
+          "world-news",
+          "security",
+        ],
+        "maxItems": 50,
+      },
+      "displayName": "World News Feed",
+      "name": "world-news",
+      "position": 0,
+      "type": "news-feed",
+    },
+    {
+      "config": {
+        "refreshInterval": 600,
+      },
+      "displayName": "Situation Brief",
+      "name": "situation-brief",
+      "position": 1,
+      "type": "ai-brief",
+    },
+    {
+      "config": {
+        "entities": [
+          "NATO",
+          "UN",
+          "EU",
+          "China",
+          "Russia",
+          "USA",
+          "Iran",
+          "North Korea",
+        ],
+        "maxEntities": 20,
+      },
+      "displayName": "Key Actors",
+      "name": "entity-tracker",
+      "position": 2,
+      "type": "entity-tracker",
+    },
+    {
+      "config": {},
+      "displayName": "Instability Index",
+      "name": "instability-index",
+      "position": 3,
+      "type": "instability-index",
+    },
+    {
+      "config": {},
+      "displayName": "Source Status",
+      "name": "service-status",
+      "position": 4,
+      "type": "service-status",
+    },
+  ],
+  "sources": [
+    {
+      "category": "world-news",
+      "interval": 300,
+      "language": "en",
+      "name": "bbc-world",
+      "tags": [
+        "world",
+      ],
+      "tier": 1,
+      "type": "rss",
+      "url": "https://feeds.bbci.co.uk/news/world/rss.xml",
+    },
+    {
+      "category": "world-news",
+      "interval": 300,
+      "language": "en",
+      "name": "reuters-world",
+      "tags": [
+        "world",
+      ],
+      "tier": 1,
+      "type": "rss",
+      "url": "https://www.reutersagency.com/feed/?taxonomy=best-topics&post_type=best",
+    },
+    {
+      "category": "world-news",
+      "interval": 600,
+      "language": "en",
+      "name": "aljazeera",
+      "tags": [
+        "world",
+        "middle-east",
+      ],
+      "tier": 1,
+      "type": "rss",
+      "url": "https://www.aljazeera.com/xml/rss/all.xml",
+    },
+    {
+      "category": "world-news",
+      "interval": 600,
+      "language": "en",
+      "name": "guardian-world",
+      "tags": [
+        "world",
+      ],
+      "tier": 2,
+      "type": "rss",
+      "url": "https://www.theguardian.com/world/rss",
+    },
+    {
+      "category": "world-news",
+      "interval": 600,
+      "language": "en",
+      "name": "ap-news-world",
+      "tags": [
+        "world",
+      ],
+      "tier": 2,
+      "type": "rss",
+      "url": "https://rsshub.app/apnews/topics/world-news",
+    },
+    {
+      "category": "analysis",
+      "interval": 3600,
+      "language": "en",
+      "name": "foreign-affairs",
+      "tags": [
+        "analysis",
+        "policy",
+      ],
+      "tier": 1,
+      "type": "rss",
+      "url": "https://www.foreignaffairs.com/rss.xml",
+    },
+    {
+      "category": "security",
+      "interval": 3600,
+      "language": "en",
+      "name": "war-on-rocks",
+      "tags": [
+        "defense",
+        "security",
+      ],
+      "tier": 2,
+      "type": "rss",
+      "url": "https://warontherocks.com/feed/",
+    },
+    {
+      "category": "events",
+      "interval": 900,
+      "language": "en",
+      "name": "gdelt-events",
+      "tags": [
+        "events",
+        "conflict",
+      ],
+      "tier": 2,
+      "type": "rest-api",
+      "url": "https://api.gdeltproject.org/api/v2/doc/doc?query=conflict&mode=artlist&maxrecords=50&format=json",
+    },
+  ],
+  "theme": {
+    "colors": {},
+    "compactMode": false,
+    "mode": "dark",
+    "palette": "midnight",
+    "panelPosition": "right",
+    "panelWidth": 380,
+  },
+  "version": "1",
+  "views": [
+    {
+      "default": true,
+      "displayName": "Overview",
+      "name": "overview",
+      "panels": [
+        "world-news",
+        "situation-brief",
+      ],
+    },
+    {
+      "displayName": "Analysis",
+      "name": "analysis",
+      "panels": [
+        "situation-brief",
+        "entity-tracker",
+        "instability-index",
+      ],
+    },
+    {
+      "displayName": "Operations",
+      "name": "operations",
+      "panels": [
+        "world-news",
+        "service-status",
+      ],
+    },
+  ],
+}
+`;
+
+exports[`preset snapshot validation > geopolitics-minimal.json > passes MonitorForgeConfigSchema.parse() and matches snapshot 1`] = `
+{
+  "ai": {
+    "analysis": {
+      "entityExtraction": true,
+      "focalPointDetection": false,
+      "sentimentAnalysis": false,
+      "summarization": true,
+    },
+    "enabled": true,
+    "fallbackChain": [
+      "groq",
+    ],
+    "providers": {
+      "groq": {
+        "apiKeyEnv": "GROQ_API_KEY",
+        "model": "llama-3.3-70b-versatile",
+      },
+    },
+  },
+  "backend": {
+    "cache": {
+      "provider": "memory",
+      "ttlSeconds": 300,
+    },
+    "corsProxy": {
+      "allowedDomains": [
+        "*",
+      ],
+      "corsOrigins": [
+        "*",
+      ],
+      "enabled": true,
+    },
+    "rateLimit": {
+      "enabled": true,
+      "maxRequests": 100,
+      "windowSeconds": 60,
+    },
+  },
+  "build": {
+    "outDir": "dist",
+    "target": "vercel",
+  },
+  "layers": [],
+  "map": {
+    "atmosphericGlow": true,
+    "center": [
+      30,
+      30,
+    ],
+    "dayNightOverlay": false,
+    "idleRotation": true,
+    "idleRotationSpeed": 0.5,
+    "maxZoom": 18,
+    "minZoom": 2,
+    "projection": "globe",
+    "style": "https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json",
+    "zoom": 3,
+  },
+  "monitor": {
+    "branding": {
+      "primaryColor": "#CC0000",
+    },
+    "description": "Minimal geopolitical intelligence dashboard",
+    "domain": "geopolitics",
+    "name": "Geopolitics Monitor",
+    "slug": "geopolitics-monitor",
+    "tags": [
+      "geopolitics",
+      "conflict",
+      "diplomacy",
+    ],
+  },
+  "panels": [
+    {
+      "config": {
+        "categories": [
+          "world-news",
+        ],
+        "maxItems": 30,
+      },
+      "displayName": "World News",
+      "name": "world-news",
+      "position": 0,
+      "type": "news-feed",
+    },
+    {
+      "config": {
+        "refreshInterval": 900,
+      },
+      "displayName": "Situation Brief",
+      "name": "ai-brief",
+      "position": 1,
+      "type": "ai-brief",
+    },
+  ],
+  "sources": [
+    {
+      "category": "world-news",
+      "interval": 300,
+      "language": "en",
+      "name": "bbc-world",
+      "tags": [
+        "world",
+        "geopolitics",
+      ],
+      "tier": 1,
+      "type": "rss",
+      "url": "https://feeds.bbci.co.uk/news/world/rss.xml",
+    },
+    {
+      "category": "world-news",
+      "interval": 300,
+      "language": "en",
+      "name": "reuters-world",
+      "tags": [
+        "world",
+        "geopolitics",
+      ],
+      "tier": 1,
+      "type": "rss",
+      "url": "https://www.reutersagency.com/feed/?taxonomy=best-topics&post_type=best",
+    },
+    {
+      "category": "world-news",
+      "interval": 600,
+      "language": "en",
+      "name": "aljazeera",
+      "tags": [
+        "world",
+        "middle-east",
+      ],
+      "tier": 2,
+      "type": "rss",
+      "url": "https://www.aljazeera.com/xml/rss/all.xml",
+    },
+  ],
+  "theme": {
+    "colors": {},
+    "compactMode": false,
+    "mode": "dark",
+    "palette": "midnight",
+    "panelPosition": "right",
+    "panelWidth": 380,
+  },
+  "version": "1",
+  "views": [
+    {
+      "default": true,
+      "displayName": "Overview",
+      "name": "overview",
+      "panels": [
+        "world-news",
+        "ai-brief",
+      ],
+    },
+  ],
+}
+`;
+
+exports[`preset snapshot validation > health-full.json > passes MonitorForgeConfigSchema.parse() and matches snapshot 1`] = `
+{
+  "ai": {
+    "analysis": {
+      "customPrompt": "Focus on disease outbreaks, drug and vaccine approvals, pandemic preparedness, antimicrobial resistance, and public health emergencies. Highlight emerging pathogens and WHO declarations.",
+      "entityExtraction": true,
+      "focalPointDetection": true,
+      "sentimentAnalysis": true,
+      "summarization": true,
+    },
+    "enabled": true,
+    "fallbackChain": [
+      "groq",
+      "openrouter",
+    ],
+    "providers": {
+      "groq": {
+        "apiKeyEnv": "GROQ_API_KEY",
+        "model": "llama-3.3-70b-versatile",
+      },
+      "openrouter": {
+        "apiKeyEnv": "OPENROUTER_API_KEY",
+        "model": "anthropic/claude-sonnet-4",
+      },
+    },
+  },
+  "backend": {
+    "cache": {
+      "provider": "memory",
+      "ttlSeconds": 300,
+    },
+    "corsProxy": {
+      "allowedDomains": [
+        "*",
+      ],
+      "corsOrigins": [
+        "*",
+      ],
+      "enabled": true,
+    },
+    "rateLimit": {
+      "enabled": true,
+      "maxRequests": 100,
+      "windowSeconds": 60,
+    },
+  },
+  "build": {
+    "outDir": "dist",
+    "target": "vercel",
+  },
+  "layers": [
+    {
+      "category": "infrastructure",
+      "color": "#00AA55",
+      "data": {
+        "path": "data/geo/who-regions.geojson",
+        "source": "static",
+      },
+      "defaultVisible": false,
+      "displayName": "WHO Regional Offices",
+      "name": "who-regions",
+      "type": "points",
+    },
+  ],
+  "map": {
+    "atmosphericGlow": true,
+    "center": [
+      0,
+      20,
+    ],
+    "dayNightOverlay": true,
+    "idleRotation": true,
+    "idleRotationSpeed": 0.5,
+    "maxZoom": 18,
+    "minZoom": 2,
+    "projection": "globe",
+    "style": "https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json",
+    "zoom": 3,
+  },
+  "monitor": {
+    "branding": {
+      "primaryColor": "#0099DD",
+    },
+    "description": "Full-featured global health intelligence dashboard with disease tracking and AI analysis",
+    "domain": "health",
+    "name": "Health Intelligence",
+    "slug": "health-intelligence",
+    "tags": [
+      "health",
+      "medicine",
+      "public-health",
+      "surveillance",
+      "research",
+    ],
+  },
+  "panels": [
+    {
+      "config": {
+        "categories": [
+          "health-news",
+          "surveillance",
+        ],
+        "maxItems": 50,
+      },
+      "displayName": "Health News",
+      "name": "health-news",
+      "position": 0,
+      "type": "news-feed",
+    },
+    {
+      "config": {
+        "refreshInterval": 600,
+      },
+      "displayName": "Health Brief",
+      "name": "ai-brief",
+      "position": 1,
+      "type": "ai-brief",
+    },
+    {
+      "config": {
+        "entities": [
+          "WHO",
+          "CDC",
+          "FDA",
+          "EMA",
+          "Pfizer",
+          "Moderna",
+          "H5N1",
+          "MPOX",
+        ],
+        "maxEntities": 20,
+      },
+      "displayName": "Key Entities",
+      "name": "entity-tracker",
+      "position": 2,
+      "type": "entity-tracker",
+    },
+    {
+      "config": {},
+      "displayName": "Source Status",
+      "name": "service-status",
+      "position": 3,
+      "type": "service-status",
+    },
+  ],
+  "sources": [
+    {
+      "category": "health-news",
+      "interval": 1800,
+      "language": "en",
+      "name": "who-news",
+      "tags": [
+        "who",
+        "global-health",
+      ],
+      "tier": 1,
+      "type": "rss",
+      "url": "https://www.who.int/feeds/entity/news/en/rss.xml",
+    },
+    {
+      "category": "health-news",
+      "interval": 600,
+      "language": "en",
+      "name": "stat-news",
+      "tags": [
+        "medicine",
+        "pharma",
+      ],
+      "tier": 1,
+      "type": "rss",
+      "url": "https://www.statnews.com/feed/",
+    },
+    {
+      "category": "health-news",
+      "interval": 900,
+      "language": "en",
+      "name": "nih-news",
+      "tags": [
+        "research",
+        "nih",
+      ],
+      "tier": 1,
+      "type": "rss",
+      "url": "https://www.nih.gov/news-events/news-releases/feed",
+    },
+    {
+      "category": "research",
+      "interval": 3600,
+      "language": "en",
+      "name": "lancet-latest",
+      "tags": [
+        "lancet",
+        "research",
+      ],
+      "tier": 2,
+      "type": "rss",
+      "url": "https://www.thelancet.com/rssfeed/lancet_current.xml",
+    },
+    {
+      "category": "surveillance",
+      "interval": 3600,
+      "language": "en",
+      "name": "cdc-newsroom",
+      "tags": [
+        "cdc",
+        "surveillance",
+      ],
+      "tier": 1,
+      "type": "rss",
+      "url": "https://tools.cdc.gov/api/v2/resources/media/132608.rss",
+    },
+    {
+      "category": "research",
+      "interval": 3600,
+      "language": "en",
+      "name": "biorxiv-microbiology",
+      "tags": [
+        "preprint",
+        "microbiology",
+      ],
+      "tier": 3,
+      "type": "rss",
+      "url": "https://connect.biorxiv.org/biorxiv_xml.php?subject=microbiology",
+    },
+    {
+      "category": "health-news",
+      "interval": 1800,
+      "language": "en",
+      "name": "global-health-now",
+      "tags": [
+        "global-health",
+        "epidemiology",
+      ],
+      "tier": 2,
+      "type": "rss",
+      "url": "https://www.globalhealthnow.org/rss.xml",
+    },
+  ],
+  "theme": {
+    "colors": {},
+    "compactMode": false,
+    "mode": "dark",
+    "palette": "ocean",
+    "panelPosition": "right",
+    "panelWidth": 380,
+  },
+  "version": "1",
+  "views": [],
+}
+`;
+
+exports[`preset snapshot validation > health-minimal.json > passes MonitorForgeConfigSchema.parse() and matches snapshot 1`] = `
+{
+  "ai": {
+    "analysis": {
+      "entityExtraction": true,
+      "focalPointDetection": false,
+      "sentimentAnalysis": false,
+      "summarization": true,
+    },
+    "enabled": true,
+    "fallbackChain": [
+      "groq",
+    ],
+    "providers": {
+      "groq": {
+        "apiKeyEnv": "GROQ_API_KEY",
+        "model": "llama-3.3-70b-versatile",
+      },
+    },
+  },
+  "backend": {
+    "cache": {
+      "provider": "memory",
+      "ttlSeconds": 300,
+    },
+    "corsProxy": {
+      "allowedDomains": [
+        "*",
+      ],
+      "corsOrigins": [
+        "*",
+      ],
+      "enabled": true,
+    },
+    "rateLimit": {
+      "enabled": true,
+      "maxRequests": 100,
+      "windowSeconds": 60,
+    },
+  },
+  "build": {
+    "outDir": "dist",
+    "target": "vercel",
+  },
+  "layers": [],
+  "map": {
+    "atmosphericGlow": true,
+    "center": [
+      0,
+      20,
+    ],
+    "dayNightOverlay": false,
+    "idleRotation": true,
+    "idleRotationSpeed": 0.5,
+    "maxZoom": 18,
+    "minZoom": 2,
+    "projection": "globe",
+    "style": "https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json",
+    "zoom": 3,
+  },
+  "monitor": {
+    "branding": {
+      "primaryColor": "#0099DD",
+    },
+    "description": "Minimal global health intelligence dashboard",
+    "domain": "health",
+    "name": "Health Monitor",
+    "slug": "health-monitor",
+    "tags": [
+      "health",
+      "medicine",
+      "public-health",
+    ],
+  },
+  "panels": [
+    {
+      "config": {
+        "categories": [
+          "health-news",
+        ],
+        "maxItems": 30,
+      },
+      "displayName": "Health News",
+      "name": "health-news",
+      "position": 0,
+      "type": "news-feed",
+    },
+    {
+      "config": {
+        "refreshInterval": 900,
+      },
+      "displayName": "Health Brief",
+      "name": "ai-brief",
+      "position": 1,
+      "type": "ai-brief",
+    },
+  ],
+  "sources": [
+    {
+      "category": "health-news",
+      "interval": 1800,
+      "language": "en",
+      "name": "who-news",
+      "tags": [
+        "who",
+        "global-health",
+      ],
+      "tier": 1,
+      "type": "rss",
+      "url": "https://www.who.int/feeds/entity/news/en/rss.xml",
+    },
+    {
+      "category": "health-news",
+      "interval": 600,
+      "language": "en",
+      "name": "stat-news",
+      "tags": [
+        "medicine",
+        "pharma",
+      ],
+      "tier": 1,
+      "type": "rss",
+      "url": "https://www.statnews.com/feed/",
+    },
+    {
+      "category": "health-news",
+      "interval": 900,
+      "language": "en",
+      "name": "nih-news",
+      "tags": [
+        "research",
+        "nih",
+      ],
+      "tier": 1,
+      "type": "rss",
+      "url": "https://www.nih.gov/news-events/news-releases/feed",
+    },
+  ],
+  "theme": {
+    "colors": {},
+    "compactMode": false,
+    "mode": "dark",
+    "palette": "ocean",
+    "panelPosition": "right",
+    "panelWidth": 380,
+  },
+  "version": "1",
+  "views": [],
+}
+`;
+
+exports[`preset snapshot validation > korea-full.json > passes MonitorForgeConfigSchema.parse() and matches snapshot 1`] = `
+{
+  "ai": {
+    "analysis": {
+      "customPrompt": "Focus on inter-Korean relations, DPRK nuclear and missile developments, ROK-US alliance dynamics, Korean economic indicators, and regional security. Highlight escalation signals and diplomatic shifts.",
+      "entityExtraction": true,
+      "focalPointDetection": true,
+      "sentimentAnalysis": true,
+      "summarization": true,
+    },
+    "enabled": true,
+    "fallbackChain": [
+      "groq",
+      "openrouter",
+    ],
+    "providers": {
+      "groq": {
+        "apiKeyEnv": "GROQ_API_KEY",
+        "model": "llama-3.3-70b-versatile",
+      },
+      "openrouter": {
+        "apiKeyEnv": "OPENROUTER_API_KEY",
+        "model": "anthropic/claude-sonnet-4",
+      },
+    },
+  },
+  "backend": {
+    "cache": {
+      "provider": "memory",
+      "ttlSeconds": 300,
+    },
+    "corsProxy": {
+      "allowedDomains": [
+        "*",
+      ],
+      "corsOrigins": [
+        "*",
+      ],
+      "enabled": true,
+    },
+    "rateLimit": {
+      "enabled": true,
+      "maxRequests": 100,
+      "windowSeconds": 60,
+    },
+  },
+  "build": {
+    "outDir": "dist",
+    "target": "vercel",
+  },
+  "layers": [
+    {
+      "category": "locations",
+      "color": "#00BFFF",
+      "data": {
+        "path": "data/geo/korean-peninsula.geojson",
+        "source": "static",
+      },
+      "defaultVisible": true,
+      "displayName": "Key Locations",
+      "name": "korean-peninsula",
+      "type": "points",
+    },
+  ],
+  "map": {
+    "atmosphericGlow": true,
+    "center": [
+      127.5,
+      37,
+    ],
+    "dayNightOverlay": false,
+    "idleRotation": true,
+    "idleRotationSpeed": 0.5,
+    "maxZoom": 18,
+    "minZoom": 2,
+    "projection": "mercator",
+    "style": "https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json",
+    "zoom": 6,
+  },
+  "monitor": {
+    "branding": {
+      "primaryColor": "#003478",
+    },
+    "description": "Full-featured Korean peninsula intelligence dashboard with entity tracking and AI analysis",
+    "domain": "korea",
+    "name": "Korea Intelligence",
+    "slug": "korea-intelligence",
+    "tags": [
+      "korea",
+      "asia",
+      "geopolitics",
+      "dprk",
+      "security",
+    ],
+  },
+  "panels": [
+    {
+      "config": {
+        "categories": [
+          "korea-news",
+          "regional",
+          "north-korea",
+        ],
+        "maxItems": 50,
+      },
+      "displayName": "Korea News",
+      "name": "korea-news",
+      "position": 0,
+      "type": "news-feed",
+    },
+    {
+      "config": {
+        "refreshInterval": 600,
+      },
+      "displayName": "Korea Brief",
+      "name": "ai-brief",
+      "position": 1,
+      "type": "ai-brief",
+    },
+    {
+      "config": {
+        "entities": [
+          "ROK",
+          "DPRK",
+          "Kim Jong Un",
+          "Yoon Suk-yeol",
+          "USFK",
+          "Samsung",
+          "Hyundai",
+          "KOSPI",
+        ],
+        "maxEntities": 20,
+      },
+      "displayName": "Key Entities",
+      "name": "entity-tracker",
+      "position": 2,
+      "type": "entity-tracker",
+    },
+    {
+      "config": {},
+      "displayName": "Instability Index",
+      "name": "instability-index",
+      "position": 3,
+      "type": "instability-index",
+    },
+  ],
+  "sources": [
+    {
+      "category": "korea-news",
+      "interval": 300,
+      "language": "en",
+      "name": "yonhap-english",
+      "tags": [
+        "korea",
+        "breaking",
+      ],
+      "tier": 1,
+      "type": "rss",
+      "url": "https://en.yna.co.kr/RSS/news.xml",
+    },
+    {
+      "category": "korea-news",
+      "interval": 600,
+      "language": "en",
+      "name": "korea-herald",
+      "tags": [
+        "korea",
+        "politics",
+      ],
+      "tier": 1,
+      "type": "rss",
+      "url": "https://www.koreaherald.com/common/rss_xml.php?ct=102",
+    },
+    {
+      "category": "regional",
+      "interval": 600,
+      "language": "en",
+      "name": "bbc-asia",
+      "tags": [
+        "asia",
+        "world",
+      ],
+      "tier": 2,
+      "type": "rss",
+      "url": "https://feeds.bbci.co.uk/news/world/asia/rss.xml",
+    },
+    {
+      "category": "north-korea",
+      "interval": 900,
+      "language": "en",
+      "name": "nk-news",
+      "tags": [
+        "dprk",
+        "north-korea",
+      ],
+      "tier": 1,
+      "type": "rss",
+      "url": "https://www.nknews.org/feed/",
+    },
+    {
+      "category": "korea-news",
+      "interval": 600,
+      "language": "en",
+      "name": "hankyoreh-english",
+      "tags": [
+        "korea",
+        "progressive",
+      ],
+      "tier": 2,
+      "type": "rss",
+      "url": "https://english.hani.co.kr/rss/",
+    },
+    {
+      "category": "regional",
+      "interval": 600,
+      "language": "en",
+      "name": "reuters-asia",
+      "tags": [
+        "asia",
+        "world",
+      ],
+      "tier": 2,
+      "type": "rss",
+      "url": "https://www.reutersagency.com/feed/?taxonomy=best-regions&post_type=best",
+    },
+    {
+      "category": "korea-news",
+      "interval": 600,
+      "language": "en",
+      "name": "korea-times",
+      "tags": [
+        "korea",
+        "nation",
+      ],
+      "tier": 2,
+      "type": "rss",
+      "url": "https://www.koreatimes.co.kr/www/rss/nation.xml",
+    },
+  ],
+  "theme": {
+    "colors": {},
+    "compactMode": false,
+    "mode": "dark",
+    "palette": "midnight",
+    "panelPosition": "right",
+    "panelWidth": 380,
+  },
+  "version": "1",
+  "views": [],
+}
+`;
+
+exports[`preset snapshot validation > korea-minimal.json > passes MonitorForgeConfigSchema.parse() and matches snapshot 1`] = `
+{
+  "ai": {
+    "analysis": {
+      "entityExtraction": true,
+      "focalPointDetection": false,
+      "sentimentAnalysis": false,
+      "summarization": true,
+    },
+    "enabled": true,
+    "fallbackChain": [
+      "groq",
+    ],
+    "providers": {
+      "groq": {
+        "apiKeyEnv": "GROQ_API_KEY",
+        "model": "llama-3.3-70b-versatile",
+      },
+    },
+  },
+  "backend": {
+    "cache": {
+      "provider": "memory",
+      "ttlSeconds": 300,
+    },
+    "corsProxy": {
+      "allowedDomains": [
+        "*",
+      ],
+      "corsOrigins": [
+        "*",
+      ],
+      "enabled": true,
+    },
+    "rateLimit": {
+      "enabled": true,
+      "maxRequests": 100,
+      "windowSeconds": 60,
+    },
+  },
+  "build": {
+    "outDir": "dist",
+    "target": "vercel",
+  },
+  "layers": [],
+  "map": {
+    "atmosphericGlow": true,
+    "center": [
+      127.5,
+      37,
+    ],
+    "dayNightOverlay": false,
+    "idleRotation": true,
+    "idleRotationSpeed": 0.5,
+    "maxZoom": 18,
+    "minZoom": 2,
+    "projection": "mercator",
+    "style": "https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json",
+    "zoom": 6,
+  },
+  "monitor": {
+    "branding": {
+      "primaryColor": "#003478",
+    },
+    "description": "Minimal Korean peninsula intelligence dashboard",
+    "domain": "korea",
+    "name": "Korea Monitor",
+    "slug": "korea-monitor",
+    "tags": [
+      "korea",
+      "asia",
+      "geopolitics",
+    ],
+  },
+  "panels": [
+    {
+      "config": {
+        "categories": [
+          "korea-news",
+          "regional",
+        ],
+        "maxItems": 30,
+      },
+      "displayName": "Korea News",
+      "name": "korea-news",
+      "position": 0,
+      "type": "news-feed",
+    },
+    {
+      "config": {
+        "refreshInterval": 900,
+      },
+      "displayName": "Korea Brief",
+      "name": "ai-brief",
+      "position": 1,
+      "type": "ai-brief",
+    },
+  ],
+  "sources": [
+    {
+      "category": "korea-news",
+      "interval": 300,
+      "language": "en",
+      "name": "yonhap-english",
+      "tags": [
+        "korea",
+        "breaking",
+      ],
+      "tier": 1,
+      "type": "rss",
+      "url": "https://en.yna.co.kr/RSS/news.xml",
+    },
+    {
+      "category": "korea-news",
+      "interval": 600,
+      "language": "en",
+      "name": "korea-herald",
+      "tags": [
+        "korea",
+        "politics",
+      ],
+      "tier": 1,
+      "type": "rss",
+      "url": "https://www.koreaherald.com/common/rss_xml.php?ct=102",
+    },
+    {
+      "category": "regional",
+      "interval": 600,
+      "language": "en",
+      "name": "bbc-asia",
+      "tags": [
+        "asia",
+        "world",
+      ],
+      "tier": 2,
+      "type": "rss",
+      "url": "https://feeds.bbci.co.uk/news/world/asia/rss.xml",
+    },
+  ],
+  "theme": {
+    "colors": {},
+    "compactMode": false,
+    "mode": "dark",
+    "palette": "midnight",
+    "panelPosition": "right",
+    "panelWidth": 380,
+  },
+  "version": "1",
+  "views": [],
+}
+`;
+
+exports[`preset snapshot validation > tech-full.json > passes MonitorForgeConfigSchema.parse() and matches snapshot 1`] = `
+{
+  "ai": {
+    "analysis": {
+      "entityExtraction": true,
+      "focalPointDetection": true,
+      "sentimentAnalysis": true,
+      "summarization": true,
+    },
+    "enabled": true,
+    "fallbackChain": [
+      "groq",
+      "openrouter",
+    ],
+    "providers": {
+      "groq": {
+        "apiKeyEnv": "GROQ_API_KEY",
+        "model": "llama-3.3-70b-versatile",
+      },
+      "openrouter": {
+        "apiKeyEnv": "OPENROUTER_API_KEY",
+        "model": "anthropic/claude-sonnet-4",
+      },
+    },
+  },
+  "backend": {
+    "cache": {
+      "provider": "memory",
+      "ttlSeconds": 300,
+    },
+    "corsProxy": {
+      "allowedDomains": [
+        "*",
+      ],
+      "corsOrigins": [
+        "*",
+      ],
+      "enabled": true,
+    },
+    "rateLimit": {
+      "enabled": true,
+      "maxRequests": 100,
+      "windowSeconds": 60,
+    },
+  },
+  "build": {
+    "outDir": "dist",
+    "target": "vercel",
+  },
+  "layers": [
+    {
+      "category": "infrastructure",
+      "color": "#00D4FF",
+      "data": {
+        "path": "data/geo/tech-hubs.geojson",
+        "source": "static",
+      },
+      "defaultVisible": true,
+      "displayName": "Tech Hubs",
+      "name": "tech-hubs",
+      "type": "points",
+    },
+  ],
+  "map": {
+    "atmosphericGlow": true,
+    "center": [
+      -95,
+      38,
+    ],
+    "dayNightOverlay": false,
+    "idleRotation": true,
+    "idleRotationSpeed": 0.5,
+    "maxZoom": 18,
+    "minZoom": 2,
+    "projection": "mercator",
+    "style": "https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json",
+    "zoom": 4,
+  },
+  "monitor": {
+    "branding": {
+      "primaryColor": "#0052CC",
+    },
+    "description": "Full-featured tech industry intelligence dashboard with AI analysis",
+    "domain": "technology",
+    "name": "Tech Intelligence",
+    "slug": "tech-intelligence",
+    "tags": [
+      "tech",
+      "ai",
+      "startups",
+      "open-source",
+      "semiconductors",
+    ],
+  },
+  "panels": [
+    {
+      "config": {
+        "categories": [
+          "tech-news",
+        ],
+        "maxItems": 50,
+      },
+      "displayName": "Tech News",
+      "name": "tech-news",
+      "position": 0,
+      "type": "news-feed",
+    },
+    {
+      "config": {
+        "refreshInterval": 600,
+      },
+      "displayName": "AI Intelligence Brief",
+      "name": "ai-brief",
+      "position": 1,
+      "type": "ai-brief",
+    },
+    {
+      "config": {
+        "entities": [
+          "OpenAI",
+          "Google",
+          "Meta",
+          "Anthropic",
+          "NVIDIA",
+          "Apple",
+          "Microsoft",
+          "xAI",
+        ],
+        "maxEntities": 20,
+      },
+      "displayName": "Key Players",
+      "name": "entity-tracker",
+      "position": 2,
+      "type": "entity-tracker",
+    },
+    {
+      "config": {},
+      "displayName": "Feed Status",
+      "name": "service-status",
+      "position": 3,
+      "type": "service-status",
+    },
+  ],
+  "sources": [
+    {
+      "category": "tech-news",
+      "interval": 300,
+      "language": "en",
+      "name": "hackernews-rss",
+      "tags": [
+        "tech",
+        "startups",
+      ],
+      "tier": 1,
+      "type": "rss",
+      "url": "https://hnrss.org/frontpage",
+    },
+    {
+      "category": "tech-news",
+      "interval": 600,
+      "language": "en",
+      "name": "techcrunch-rss",
+      "tags": [
+        "tech",
+        "vc",
+      ],
+      "tier": 1,
+      "type": "rss",
+      "url": "https://techcrunch.com/feed/",
+    },
+    {
+      "category": "tech-news",
+      "interval": 600,
+      "language": "en",
+      "name": "ars-technica",
+      "tags": [
+        "tech",
+        "science",
+      ],
+      "tier": 2,
+      "type": "rss",
+      "url": "https://feeds.arstechnica.com/arstechnica/index",
+    },
+    {
+      "category": "tech-news",
+      "interval": 600,
+      "language": "en",
+      "name": "the-verge",
+      "tags": [
+        "tech",
+        "consumer",
+      ],
+      "tier": 2,
+      "type": "rss",
+      "url": "https://www.theverge.com/rss/index.xml",
+    },
+    {
+      "category": "tech-news",
+      "interval": 900,
+      "language": "en",
+      "name": "wired",
+      "tags": [
+        "tech",
+        "culture",
+      ],
+      "tier": 2,
+      "type": "rss",
+      "url": "https://www.wired.com/feed/rss",
+    },
+    {
+      "category": "research",
+      "interval": 900,
+      "language": "en",
+      "name": "mit-tech-review",
+      "tags": [
+        "ai",
+        "research",
+      ],
+      "tier": 1,
+      "type": "rss",
+      "url": "https://www.technologyreview.com/feed/",
+    },
+    {
+      "category": "research",
+      "interval": 3600,
+      "language": "en",
+      "name": "arxiv-cs-ai",
+      "tags": [
+        "ai",
+        "research",
+        "papers",
+      ],
+      "tier": 2,
+      "type": "rss",
+      "url": "https://rss.arxiv.org/rss/cs.AI",
+    },
+    {
+      "category": "open-source",
+      "interval": 3600,
+      "language": "en",
+      "name": "github-trending",
+      "tags": [
+        "open-source",
+        "github",
+      ],
+      "tier": 2,
+      "type": "rss",
+      "url": "https://mshibanami.github.io/GitHubTrendingRSS/daily/all.xml",
+    },
+  ],
+  "theme": {
+    "colors": {},
+    "compactMode": false,
+    "mode": "dark",
+    "palette": "default",
+    "panelPosition": "right",
+    "panelWidth": 380,
+  },
+  "version": "1",
+  "views": [
+    {
+      "default": true,
+      "displayName": "Overview",
+      "name": "overview",
+      "panels": [
+        "tech-news",
+        "ai-brief",
+      ],
+    },
+    {
+      "displayName": "Analysis",
+      "name": "analysis",
+      "panels": [
+        "ai-brief",
+        "entity-tracker",
+      ],
+    },
+    {
+      "displayName": "Operations",
+      "name": "operations",
+      "panels": [
+        "tech-news",
+        "service-status",
+      ],
+    },
+  ],
+}
+`;
+
+exports[`preset snapshot validation > tech-minimal.json > passes MonitorForgeConfigSchema.parse() and matches snapshot 1`] = `
+{
+  "ai": {
+    "analysis": {
+      "entityExtraction": true,
+      "focalPointDetection": false,
+      "sentimentAnalysis": false,
+      "summarization": true,
+    },
+    "enabled": true,
+    "fallbackChain": [
+      "groq",
+    ],
+    "providers": {
+      "groq": {
+        "apiKeyEnv": "GROQ_API_KEY",
+        "model": "llama-3.3-70b-versatile",
+      },
+    },
+  },
+  "backend": {
+    "cache": {
+      "provider": "memory",
+      "ttlSeconds": 300,
+    },
+    "corsProxy": {
+      "allowedDomains": [
+        "*",
+      ],
+      "corsOrigins": [
+        "*",
+      ],
+      "enabled": true,
+    },
+    "rateLimit": {
+      "enabled": true,
+      "maxRequests": 100,
+      "windowSeconds": 60,
+    },
+  },
+  "build": {
+    "outDir": "dist",
+    "target": "vercel",
+  },
+  "layers": [],
+  "map": {
+    "atmosphericGlow": true,
+    "center": [
+      -95,
+      38,
+    ],
+    "dayNightOverlay": false,
+    "idleRotation": true,
+    "idleRotationSpeed": 0.5,
+    "maxZoom": 18,
+    "minZoom": 2,
+    "projection": "mercator",
+    "style": "https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json",
+    "zoom": 4,
+  },
+  "monitor": {
+    "branding": {
+      "primaryColor": "#0052CC",
+    },
+    "description": "Minimal tech industry intelligence dashboard",
+    "domain": "technology",
+    "name": "Tech Monitor",
+    "slug": "tech-monitor",
+    "tags": [
+      "tech",
+      "ai",
+      "startups",
+    ],
+  },
+  "panels": [
+    {
+      "config": {
+        "categories": [
+          "tech-news",
+        ],
+        "maxItems": 30,
+      },
+      "displayName": "Tech News",
+      "name": "tech-news",
+      "position": 0,
+      "type": "news-feed",
+    },
+    {
+      "config": {
+        "refreshInterval": 900,
+      },
+      "displayName": "AI Brief",
+      "name": "ai-brief",
+      "position": 1,
+      "type": "ai-brief",
+    },
+  ],
+  "sources": [
+    {
+      "category": "tech-news",
+      "interval": 300,
+      "language": "en",
+      "name": "hackernews-rss",
+      "tags": [
+        "tech",
+        "startups",
+      ],
+      "tier": 1,
+      "type": "rss",
+      "url": "https://hnrss.org/frontpage",
+    },
+    {
+      "category": "tech-news",
+      "interval": 600,
+      "language": "en",
+      "name": "techcrunch-rss",
+      "tags": [
+        "tech",
+        "startups",
+        "vc",
+      ],
+      "tier": 1,
+      "type": "rss",
+      "url": "https://techcrunch.com/feed/",
+    },
+    {
+      "category": "tech-news",
+      "interval": 600,
+      "language": "en",
+      "name": "ars-technica",
+      "tags": [
+        "tech",
+        "science",
+      ],
+      "tier": 2,
+      "type": "rss",
+      "url": "https://feeds.arstechnica.com/arstechnica/index",
+    },
+  ],
+  "theme": {
+    "colors": {},
+    "compactMode": false,
+    "mode": "dark",
+    "palette": "default",
+    "panelPosition": "right",
+    "panelWidth": 380,
+  },
+  "version": "1",
+  "views": [
+    {
+      "default": true,
+      "displayName": "Overview",
+      "name": "overview",
+      "panels": [
+        "tech-news",
+        "ai-brief",
+      ],
+    },
+  ],
+}
+`;
