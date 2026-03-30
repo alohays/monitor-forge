@@ -1,0 +1,126 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`api-templates.json > snapshot stability 1`] = `
+[
+  {
+    "authType": "none",
+    "category": "geospatial",
+    "id": "usgs-earthquakes",
+    "proxyRequired": false,
+  },
+  {
+    "authType": "none",
+    "category": "geospatial",
+    "id": "nasa-eonet",
+    "proxyRequired": false,
+  },
+  {
+    "authType": "none",
+    "category": "geospatial",
+    "id": "gdacs-alerts",
+    "proxyRequired": false,
+  },
+  {
+    "authType": "none",
+    "category": "geospatial",
+    "id": "nws-alerts",
+    "proxyRequired": false,
+  },
+  {
+    "authType": "none",
+    "category": "financial",
+    "id": "coingecko-markets",
+    "proxyRequired": false,
+  },
+  {
+    "authType": "none",
+    "category": "financial",
+    "id": "polymarket-events",
+    "proxyRequired": false,
+  },
+  {
+    "authType": "none",
+    "category": "financial",
+    "id": "ecb-exchange-rates",
+    "proxyRequired": false,
+  },
+  {
+    "authType": "api-key",
+    "category": "financial",
+    "id": "fred-economic",
+    "proxyRequired": true,
+  },
+  {
+    "authType": "none",
+    "category": "intelligence",
+    "id": "gdelt-events",
+    "proxyRequired": false,
+  },
+  {
+    "authType": "api-key",
+    "category": "intelligence",
+    "id": "mediastack-news",
+    "proxyRequired": true,
+  },
+  {
+    "authType": "api-key",
+    "category": "intelligence",
+    "id": "newsdata-latest",
+    "proxyRequired": true,
+  },
+  {
+    "authType": "api-key",
+    "category": "science",
+    "id": "nasa-apod",
+    "proxyRequired": true,
+  },
+  {
+    "authType": "none",
+    "category": "science",
+    "id": "spacex-launches",
+    "proxyRequired": false,
+  },
+  {
+    "authType": "none",
+    "category": "science",
+    "id": "iss-location",
+    "proxyRequired": false,
+  },
+  {
+    "authType": "api-key",
+    "category": "science",
+    "id": "noaa-climate",
+    "proxyRequired": true,
+  },
+  {
+    "authType": "none",
+    "category": "social",
+    "id": "reddit-worldnews",
+    "proxyRequired": false,
+  },
+  {
+    "authType": "none",
+    "category": "social",
+    "id": "wikipedia-current",
+    "proxyRequired": false,
+  },
+  {
+    "authType": "none",
+    "category": "infrastructure",
+    "id": "github-status",
+    "proxyRequired": false,
+  },
+  {
+    "authType": "bearer",
+    "category": "infrastructure",
+    "id": "cloudflare-radar",
+    "proxyRequired": true,
+  },
+  {
+    "authType": "none",
+    "category": "infrastructure",
+    "id": "internet-outages",
+    "proxyRequired": false,
+  },
+]
+`;
