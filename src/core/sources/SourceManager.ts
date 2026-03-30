@@ -1,15 +1,18 @@
 import type { SourceBase, SourceItem, SourceConfig } from './SourceBase.js';
 import type { SourceHealth } from './SourceHealth.js';
 import { createSource } from './source-registry.js';
-
-const MAX_BACKOFF_SECONDS = 300;
+import { SourceScheduler, Semaphore, type SchedulerOptions } from './scheduler.js';
 
 export class SourceManager {
   private sources = new Map<string, SourceBase>();
-  private timers = new Map<string, ReturnType<typeof setTimeout>>();
   private listeners: Array<(items: SourceItem[], sourceName: string) => void> = [];
   private health = new Map<string, SourceHealth>();
   private healthListeners: Array<(health: Map<string, SourceHealth>) => void> = [];
+  private scheduler: SourceScheduler;
+
+  constructor(schedulerOptions?: SchedulerOptions) {
+    this.scheduler = new SourceScheduler(schedulerOptions);
+  }
 
   initialize(configs: SourceConfig[]): void {
     for (const config of configs) {
@@ -29,16 +32,23 @@ export class SourceManager {
   }
 
   startAll(): void {
-    for (const [name, source] of this.sources) {
-      this.startSource(name, source);
-    }
+    this.scheduler.start(this.sources, {
+      onFetchStart: () => {
+        // Intentionally empty; reserved for future metrics/logging
+      },
+      onFetchComplete: (sourceName, items) => {
+        this.notifyListeners(items, sourceName);
+        this.recordSuccess(sourceName);
+      },
+      onFetchError: (sourceName, error) => {
+        console.warn(`Fetch failed for "${sourceName}":`, error);
+        this.recordFailure(sourceName, error);
+      },
+    });
   }
 
   stopAll(): void {
-    for (const timer of this.timers.values()) {
-      clearTimeout(timer);
-    }
-    this.timers.clear();
+    this.scheduler.stop();
   }
 
   onItems(listener: (items: SourceItem[], sourceName: string) => void): void {
@@ -55,7 +65,9 @@ export class SourceManager {
 
   async fetchAll(): Promise<SourceItem[]> {
     const allItems: SourceItem[] = [];
+    const semaphore = new Semaphore(5);
     const promises = Array.from(this.sources.entries()).map(async ([name, source]) => {
+      await semaphore.acquire();
       try {
         const items = await source.fetchWithCache();
         allItems.push(...items);
@@ -65,6 +77,8 @@ export class SourceManager {
         const errMsg = err instanceof Error ? err.message : String(err);
         console.warn(`Error fetching source "${name}":`, errMsg);
         this.recordFailure(name, errMsg);
+      } finally {
+        semaphore.release();
       }
     });
     await Promise.allSettled(promises);
@@ -77,31 +91,6 @@ export class SourceManager {
 
   getSourceNames(): string[] {
     return Array.from(this.sources.keys());
-  }
-
-  private startSource(name: string, source: SourceBase): void {
-    const poll = async () => {
-      try {
-        const items = await source.fetchWithCache();
-        this.notifyListeners(items, name);
-        this.recordSuccess(name);
-        const timer = setTimeout(poll, source.getInterval() * 1000);
-        this.timers.set(name, timer);
-      } catch (err) {
-        const errMsg = err instanceof Error ? err.message : String(err);
-        console.warn(`Fetch failed for "${name}":`, errMsg);
-        this.recordFailure(name, errMsg);
-        const health = this.health.get(name)!;
-        const backoffSeconds = Math.min(
-          source.getInterval() * Math.pow(2, health.consecutiveFailures),
-          MAX_BACKOFF_SECONDS,
-        );
-        const timer = setTimeout(poll, backoffSeconds * 1000);
-        this.timers.set(name, timer);
-      }
-    };
-
-    poll();
   }
 
   private recordSuccess(name: string): void {

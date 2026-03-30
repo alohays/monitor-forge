@@ -1,0 +1,4053 @@
+{
+  "schemaVersion": "1",
+  "entries": [
+    {
+      "id": "ap-news-top",
+      "name": "AP News - Top Stories",
+      "url": "https://rsshub.app/apnews/topics/apf-topnews",
+      "category": "politics",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "wire-service",
+        "global"
+      ],
+      "region": "global",
+      "propagandaRisk": "none",
+      "description": "Associated Press top stories covering global politics and current affairs.",
+      "verified": false,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "reuters-world",
+      "name": "Reuters - World News",
+      "url": "https://www.reutersagency.com/feed/",
+      "category": "politics",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "wire-service",
+        "global"
+      ],
+      "region": "global",
+      "propagandaRisk": "none",
+      "description": "Reuters wire service covering international news and politics.",
+      "verified": false,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "bbc-politics",
+      "name": "BBC - Politics",
+      "url": "https://feeds.bbci.co.uk/news/politics/rss.xml",
+      "category": "politics",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "uk",
+        "parliament"
+      ],
+      "region": "uk",
+      "propagandaRisk": "low",
+      "description": "BBC News coverage of UK and international politics.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "politico-politics",
+      "name": "Politico",
+      "url": "https://rss.politico.com/politics-news.xml",
+      "category": "politics",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "us-politics",
+        "congress"
+      ],
+      "region": "us",
+      "propagandaRisk": "none",
+      "description": "Politico coverage of US political news, Congress, and the White House.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "the-hill",
+      "name": "The Hill",
+      "url": "https://thehill.com/feed/",
+      "category": "politics",
+      "language": "en",
+      "tier": 2,
+      "tags": [
+        "us-politics",
+        "congress"
+      ],
+      "region": "us",
+      "propagandaRisk": "none",
+      "description": "The Hill covers US congressional politics, policy, and campaigns.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "foreign-affairs",
+      "name": "Foreign Affairs",
+      "url": "https://www.foreignaffairs.com/rss.xml",
+      "category": "politics",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "foreign-policy",
+        "analysis"
+      ],
+      "region": "global",
+      "propagandaRisk": "none",
+      "description": "Foreign Affairs magazine covering international relations and US foreign policy.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "foreign-policy",
+      "name": "Foreign Policy",
+      "url": "https://foreignpolicy.com/feed/",
+      "category": "politics",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "foreign-policy",
+        "geopolitics"
+      ],
+      "region": "global",
+      "propagandaRisk": "none",
+      "description": "Foreign Policy magazine with global politics analysis and commentary.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "cnn-politics",
+      "name": "CNN - Politics",
+      "url": "http://rss.cnn.com/rss/cnn_allpolitics.rss",
+      "category": "politics",
+      "language": "en",
+      "tier": 2,
+      "tags": [
+        "us-politics",
+        "tv-news"
+      ],
+      "region": "us",
+      "propagandaRisk": "none",
+      "description": "CNN political news and analysis covering US government and elections.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "guardian-politics",
+      "name": "The Guardian - World Politics",
+      "url": "https://www.theguardian.com/politics/rss",
+      "category": "politics",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "uk",
+        "global"
+      ],
+      "region": "uk",
+      "propagandaRisk": "none",
+      "description": "The Guardian coverage of UK and world politics.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "economist-politics",
+      "name": "The Economist - Politics",
+      "url": "https://www.economist.com/international/rss.xml",
+      "category": "politics",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "analysis",
+        "global"
+      ],
+      "region": "global",
+      "propagandaRisk": "none",
+      "description": "The Economist international politics coverage and analysis.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "aljazeera-politics",
+      "name": "Al Jazeera - News",
+      "url": "https://www.aljazeera.com/xml/rss/all.xml",
+      "category": "politics",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "global",
+        "middle-east"
+      ],
+      "region": "global",
+      "propagandaRisk": "none",
+      "description": "Al Jazeera English global news and political coverage.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "google-news-politics",
+      "name": "Google News - World Politics",
+      "url": "https://news.google.com/rss/search?q=world+politics&hl=en-US&gl=US&ceid=US:en",
+      "category": "politics",
+      "language": "en",
+      "tier": 4,
+      "tags": [
+        "aggregator"
+      ],
+      "region": "global",
+      "fallbackUrl": "https://news.google.com/rss/search?q=world+politics&hl=en-US&gl=US&ceid=US:en",
+      "propagandaRisk": "none",
+      "description": "Google News aggregation of world politics stories.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "nyt-homepage",
+      "name": "The New York Times - Homepage",
+      "url": "https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml",
+      "category": "us",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "newspaper",
+        "national"
+      ],
+      "region": "us",
+      "propagandaRisk": "none",
+      "description": "New York Times homepage feed with top US and world news.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "nyt-us",
+      "name": "The New York Times - US",
+      "url": "https://rss.nytimes.com/services/xml/rss/nyt/US.xml",
+      "category": "us",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "newspaper",
+        "national"
+      ],
+      "region": "us",
+      "propagandaRisk": "none",
+      "description": "New York Times US domestic news coverage.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "washpost-national",
+      "name": "The Washington Post - National",
+      "url": "https://feeds.washingtonpost.com/rss/national",
+      "category": "us",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "newspaper",
+        "national"
+      ],
+      "region": "us",
+      "propagandaRisk": "none",
+      "description": "Washington Post national news from the US capital.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "npr-news",
+      "name": "NPR - News",
+      "url": "https://feeds.npr.org/1001/rss.xml",
+      "category": "us",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "radio",
+        "national"
+      ],
+      "region": "us",
+      "propagandaRisk": "low",
+      "description": "NPR national news and top stories from public radio.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "cnn-top",
+      "name": "CNN - Top Stories",
+      "url": "http://rss.cnn.com/rss/cnn_topstories.rss",
+      "category": "us",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "tv-news",
+        "national"
+      ],
+      "region": "us",
+      "propagandaRisk": "none",
+      "description": "CNN top stories covering US and world news.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "foxnews-national",
+      "name": "Fox News - National",
+      "url": "https://moxie.foxnews.com/google-publisher/national.xml",
+      "category": "us",
+      "language": "en",
+      "tier": 2,
+      "tags": [
+        "tv-news",
+        "national"
+      ],
+      "region": "us",
+      "propagandaRisk": "none",
+      "description": "Fox News national US news feed.",
+      "verified": false,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "pbs-newshour",
+      "name": "PBS NewsHour",
+      "url": "https://www.pbs.org/newshour/feeds/rss/headlines",
+      "category": "us",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "tv-news",
+        "national"
+      ],
+      "region": "us",
+      "propagandaRisk": "low",
+      "description": "PBS NewsHour headlines covering US and international news.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "abcnews-top",
+      "name": "ABC News - Top Stories",
+      "url": "https://abcnews.go.com/abcnews/topstories",
+      "category": "us",
+      "language": "en",
+      "tier": 2,
+      "tags": [
+        "tv-news",
+        "national"
+      ],
+      "region": "us",
+      "propagandaRisk": "none",
+      "description": "ABC News top stories covering US news and events.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "cbsnews-top",
+      "name": "CBS News - Latest",
+      "url": "https://www.cbsnews.com/latest/rss/main",
+      "category": "us",
+      "language": "en",
+      "tier": 2,
+      "tags": [
+        "tv-news",
+        "national"
+      ],
+      "region": "us",
+      "propagandaRisk": "none",
+      "description": "CBS News latest stories on US and world news.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "usatoday-news",
+      "name": "USA Today - News",
+      "url": "http://rssfeeds.usatoday.com/usatoday-NewsTopStories",
+      "category": "us",
+      "language": "en",
+      "tier": 2,
+      "tags": [
+        "newspaper",
+        "national"
+      ],
+      "region": "us",
+      "propagandaRisk": "none",
+      "description": "USA Today top news stories across the United States.",
+      "verified": false,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "bbc-news",
+      "name": "BBC News - Top Stories",
+      "url": "https://feeds.bbci.co.uk/news/rss.xml",
+      "category": "europe",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "uk",
+        "national"
+      ],
+      "region": "uk",
+      "propagandaRisk": "low",
+      "description": "BBC News top stories with UK and international focus.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "dw-news",
+      "name": "Deutsche Welle - Top Stories",
+      "url": "https://rss.dw.com/rdf/rss-en-all",
+      "category": "europe",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "germany",
+        "international"
+      ],
+      "region": "europe",
+      "propagandaRisk": "low",
+      "description": "Deutsche Welle English-language news covering Europe and world affairs.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "france24-en",
+      "name": "France 24 - English",
+      "url": "https://www.france24.com/en/rss",
+      "category": "europe",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "france",
+        "international"
+      ],
+      "region": "europe",
+      "propagandaRisk": "low",
+      "description": "France 24 English-language international news from Paris.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "euronews",
+      "name": "Euronews",
+      "url": "https://www.euronews.com/rss",
+      "category": "europe",
+      "language": "en",
+      "tier": 2,
+      "tags": [
+        "eu",
+        "pan-european"
+      ],
+      "region": "europe",
+      "propagandaRisk": "none",
+      "description": "Euronews pan-European news and current affairs.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "guardian-europe",
+      "name": "The Guardian - Europe",
+      "url": "https://www.theguardian.com/world/europe-news/rss",
+      "category": "europe",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "uk",
+        "eu"
+      ],
+      "region": "europe",
+      "propagandaRisk": "none",
+      "description": "The Guardian coverage of European news and affairs.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "le-monde-en",
+      "name": "Le Monde - International",
+      "url": "https://www.lemonde.fr/international/rss_full.xml",
+      "category": "europe",
+      "language": "fr",
+      "tier": 1,
+      "tags": [
+        "france",
+        "francophone"
+      ],
+      "region": "france",
+      "propagandaRisk": "none",
+      "description": "Le Monde international news in French from France's leading newspaper.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "spiegel-international",
+      "name": "Der Spiegel - International",
+      "url": "https://www.spiegel.de/international/index.rss",
+      "category": "europe",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "germany",
+        "investigative"
+      ],
+      "region": "germany",
+      "propagandaRisk": "none",
+      "description": "Der Spiegel international English edition covering German and European affairs.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "bbc-europe",
+      "name": "BBC News - Europe",
+      "url": "https://feeds.bbci.co.uk/news/world/europe/rss.xml",
+      "category": "europe",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "uk",
+        "europe"
+      ],
+      "region": "europe",
+      "propagandaRisk": "low",
+      "description": "BBC News coverage of European news and events.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "politico-europe",
+      "name": "Politico Europe",
+      "url": "https://www.politico.eu/feed/",
+      "category": "europe",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "eu",
+        "brussels"
+      ],
+      "region": "europe",
+      "propagandaRisk": "none",
+      "description": "Politico Europe covering EU politics, policy, and Brussels affairs.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "aljazeera-middleeast",
+      "name": "Al Jazeera - Middle East",
+      "url": "https://www.aljazeera.com/xml/rss/all.xml?id=middleeast",
+      "category": "middleeast",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "qatar",
+        "pan-arab"
+      ],
+      "region": "middle-east",
+      "propagandaRisk": "none",
+      "description": "Al Jazeera English comprehensive Middle East and world news.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "middle-east-eye",
+      "name": "Middle East Eye",
+      "url": "https://www.middleeasteye.net/rss",
+      "category": "middleeast",
+      "language": "en",
+      "tier": 2,
+      "tags": [
+        "independent",
+        "analysis"
+      ],
+      "region": "middle-east",
+      "propagandaRisk": "none",
+      "description": "Middle East Eye independent news and analysis from the region.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "times-of-israel",
+      "name": "The Times of Israel",
+      "url": "https://www.timesofisrael.com/feed/",
+      "category": "middleeast",
+      "language": "en",
+      "tier": 2,
+      "tags": [
+        "israel"
+      ],
+      "region": "israel",
+      "propagandaRisk": "none",
+      "description": "The Times of Israel covering Israeli and Middle Eastern news.",
+      "verified": false,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "al-monitor",
+      "name": "Al-Monitor",
+      "url": "https://www.al-monitor.com/rss",
+      "category": "middleeast",
+      "language": "en",
+      "tier": 2,
+      "tags": [
+        "analysis",
+        "policy"
+      ],
+      "region": "middle-east",
+      "propagandaRisk": "none",
+      "description": "Al-Monitor covering Middle East politics, policy, and diplomacy.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "arab-news",
+      "name": "Arab News",
+      "url": "https://www.arabnews.com/rss.xml",
+      "category": "middleeast",
+      "language": "en",
+      "tier": 2,
+      "tags": [
+        "saudi-arabia"
+      ],
+      "region": "saudi-arabia",
+      "propagandaRisk": "medium",
+      "description": "Arab News English-language newspaper from Saudi Arabia.",
+      "verified": false,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "bbc-middleeast",
+      "name": "BBC News - Middle East",
+      "url": "https://feeds.bbci.co.uk/news/world/middle_east/rss.xml",
+      "category": "middleeast",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "bbc",
+        "region"
+      ],
+      "region": "middle-east",
+      "propagandaRisk": "low",
+      "description": "BBC News coverage of Middle Eastern events and politics.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "haaretz",
+      "name": "Haaretz",
+      "url": "https://www.haaretz.com/cmlink/1.628765",
+      "category": "middleeast",
+      "language": "en",
+      "tier": 2,
+      "tags": [
+        "israel",
+        "liberal"
+      ],
+      "region": "israel",
+      "propagandaRisk": "none",
+      "description": "Haaretz English edition covering Israeli news and opinion.",
+      "verified": false,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "google-news-middleeast",
+      "name": "Google News - Middle East",
+      "url": "https://news.google.com/rss/search?q=middle+east+news&hl=en-US&gl=US&ceid=US:en",
+      "category": "middleeast",
+      "language": "en",
+      "tier": 4,
+      "tags": [
+        "aggregator"
+      ],
+      "region": "middle-east",
+      "fallbackUrl": "https://news.google.com/rss/search?q=middle+east+news&hl=en-US&gl=US&ceid=US:en",
+      "propagandaRisk": "none",
+      "description": "Google News aggregation of Middle East news.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "africanews",
+      "name": "Africanews",
+      "url": "https://www.africanews.com/feed/",
+      "category": "africa",
+      "language": "en",
+      "tier": 2,
+      "tags": [
+        "pan-african"
+      ],
+      "region": "africa",
+      "propagandaRisk": "none",
+      "description": "Africanews pan-African news from across the continent.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "allafrica",
+      "name": "AllAfrica",
+      "url": "https://allafrica.com/tools/headlines/rdf/latest/headlines.rdf",
+      "category": "africa",
+      "language": "en",
+      "tier": 2,
+      "tags": [
+        "aggregator",
+        "pan-african"
+      ],
+      "region": "africa",
+      "propagandaRisk": "none",
+      "description": "AllAfrica aggregated news from across the African continent.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "africa-report",
+      "name": "The Africa Report",
+      "url": "https://www.theafricareport.com/feed/",
+      "category": "africa",
+      "language": "en",
+      "tier": 2,
+      "tags": [
+        "analysis",
+        "business"
+      ],
+      "region": "africa",
+      "propagandaRisk": "none",
+      "description": "The Africa Report covering African politics, business, and economics.",
+      "verified": false,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "bbc-africa",
+      "name": "BBC News - Africa",
+      "url": "https://feeds.bbci.co.uk/news/world/africa/rss.xml",
+      "category": "africa",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "bbc",
+        "region"
+      ],
+      "region": "africa",
+      "propagandaRisk": "low",
+      "description": "BBC News Africa section covering continent-wide events.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "daily-maverick",
+      "name": "Daily Maverick",
+      "url": "https://www.dailymaverick.co.za/feed/",
+      "category": "africa",
+      "language": "en",
+      "tier": 2,
+      "tags": [
+        "south-africa",
+        "investigative"
+      ],
+      "region": "south-africa",
+      "propagandaRisk": "none",
+      "description": "Daily Maverick South African investigative journalism and analysis.",
+      "verified": false,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "google-news-africa",
+      "name": "Google News - Africa",
+      "url": "https://news.google.com/rss/search?q=africa+news&hl=en-US&gl=US&ceid=US:en",
+      "category": "africa",
+      "language": "en",
+      "tier": 4,
+      "tags": [
+        "aggregator"
+      ],
+      "region": "africa",
+      "fallbackUrl": "https://news.google.com/rss/search?q=africa+news&hl=en-US&gl=US&ceid=US:en",
+      "propagandaRisk": "none",
+      "description": "Google News aggregation of African news stories.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "guardian-africa",
+      "name": "The Guardian - Africa",
+      "url": "https://www.theguardian.com/world/africa/rss",
+      "category": "africa",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "uk",
+        "africa"
+      ],
+      "region": "africa",
+      "propagandaRisk": "none",
+      "description": "The Guardian coverage of African news and affairs.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "reuters-latam",
+      "name": "Reuters - Latin America",
+      "url": "https://news.google.com/rss/search?q=latin+america+reuters&hl=en-US&gl=US&ceid=US:en",
+      "category": "latam",
+      "language": "en",
+      "tier": 2,
+      "tags": [
+        "wire-service",
+        "region"
+      ],
+      "region": "latam",
+      "fallbackUrl": "https://news.google.com/rss/search?q=latin+america+news&hl=en-US&gl=US&ceid=US:en",
+      "propagandaRisk": "none",
+      "description": "Reuters coverage of Latin American news via Google News.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "bbc-mundo",
+      "name": "BBC Mundo",
+      "url": "https://feeds.bbci.co.uk/mundo/rss.xml",
+      "category": "latam",
+      "language": "es",
+      "tier": 1,
+      "tags": [
+        "bbc",
+        "spanish"
+      ],
+      "region": "latam",
+      "propagandaRisk": "low",
+      "description": "BBC Mundo Spanish-language news for Latin America.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "buenos-aires-times",
+      "name": "Buenos Aires Times",
+      "url": "https://www.batimes.com.ar/feed",
+      "category": "latam",
+      "language": "en",
+      "tier": 3,
+      "tags": [
+        "argentina"
+      ],
+      "region": "argentina",
+      "propagandaRisk": "none",
+      "description": "Buenos Aires Times English-language Argentine news.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "guardian-americas",
+      "name": "The Guardian - Americas",
+      "url": "https://www.theguardian.com/world/americas/rss",
+      "category": "latam",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "uk",
+        "americas"
+      ],
+      "region": "latam",
+      "propagandaRisk": "none",
+      "description": "The Guardian coverage of North and South American news.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "bbc-latin-america",
+      "name": "BBC News - Latin America",
+      "url": "https://feeds.bbci.co.uk/news/world/latin_america/rss.xml",
+      "category": "latam",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "bbc",
+        "region"
+      ],
+      "region": "latam",
+      "propagandaRisk": "low",
+      "description": "BBC News coverage of Latin American events and politics.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "google-news-latam",
+      "name": "Google News - Latin America",
+      "url": "https://news.google.com/rss/search?q=latin+america+news&hl=en-US&gl=US&ceid=US:en",
+      "category": "latam",
+      "language": "en",
+      "tier": 4,
+      "tags": [
+        "aggregator"
+      ],
+      "region": "latam",
+      "fallbackUrl": "https://news.google.com/rss/search?q=latin+america+news&hl=en-US&gl=US&ceid=US:en",
+      "propagandaRisk": "none",
+      "description": "Google News aggregation of Latin American stories.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "brazil-wire",
+      "name": "The Brazil Report",
+      "url": "https://brazilian.report/feed/",
+      "category": "latam",
+      "language": "en",
+      "tier": 3,
+      "tags": [
+        "brazil"
+      ],
+      "region": "brazil",
+      "propagandaRisk": "none",
+      "description": "The Brazilian Report covering Brazilian politics and economy in English.",
+      "verified": false,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "scmp",
+      "name": "South China Morning Post",
+      "url": "https://www.scmp.com/rss/91/feed",
+      "category": "asia",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "hong-kong",
+        "china"
+      ],
+      "region": "east-asia",
+      "propagandaRisk": "none",
+      "description": "South China Morning Post covering Asia with focus on China and Hong Kong.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "nikkei-asia",
+      "name": "Nikkei Asia",
+      "url": "https://asia.nikkei.com/rss",
+      "category": "asia",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "japan",
+        "business"
+      ],
+      "region": "east-asia",
+      "propagandaRisk": "none",
+      "description": "Nikkei Asia covering Asian business, politics, and economics.",
+      "verified": false,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "channel-news-asia",
+      "name": "Channel News Asia",
+      "url": "https://www.channelnewsasia.com/api/v1/rss-outbound-feed?_format=xml",
+      "category": "asia",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "singapore",
+        "southeast-asia"
+      ],
+      "region": "southeast-asia",
+      "propagandaRisk": "none",
+      "description": "Channel News Asia covering Southeast Asian and international news.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "bangkok-post",
+      "name": "Bangkok Post",
+      "url": "https://www.bangkokpost.com/rss/data/topstories.xml",
+      "category": "asia",
+      "language": "en",
+      "tier": 2,
+      "tags": [
+        "thailand"
+      ],
+      "region": "southeast-asia",
+      "propagandaRisk": "none",
+      "description": "Bangkok Post English-language Thai news and regional coverage.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "yonhap-en",
+      "name": "Yonhap News Agency",
+      "url": "https://en.yna.co.kr/RSS/news.xml",
+      "category": "asia",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "south-korea",
+        "wire-service"
+      ],
+      "region": "east-asia",
+      "propagandaRisk": "none",
+      "description": "Yonhap News Agency English feed covering South Korean news.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "nhk-world",
+      "name": "NHK World - Japan",
+      "url": "https://www3.nhk.or.jp/rss/news/cat0.xml",
+      "category": "asia",
+      "language": "ja",
+      "tier": 1,
+      "tags": [
+        "japan",
+        "public-broadcaster"
+      ],
+      "region": "japan",
+      "propagandaRisk": "low",
+      "description": "NHK Japanese-language news from Japan's public broadcaster.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "bbc-asia",
+      "name": "BBC News - Asia",
+      "url": "https://feeds.bbci.co.uk/news/world/asia/rss.xml",
+      "category": "asia",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "bbc",
+        "region"
+      ],
+      "region": "asia",
+      "propagandaRisk": "low",
+      "description": "BBC News coverage of Asian events and politics.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "india-today",
+      "name": "India Today",
+      "url": "https://www.indiatoday.in/rss/home",
+      "category": "asia",
+      "language": "en",
+      "tier": 2,
+      "tags": [
+        "india"
+      ],
+      "region": "south-asia",
+      "propagandaRisk": "none",
+      "description": "India Today national Indian news and current affairs.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "straits-times",
+      "name": "The Straits Times - Asia",
+      "url": "https://www.straitstimes.com/news/asia/rss.xml",
+      "category": "asia",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "singapore",
+        "southeast-asia"
+      ],
+      "region": "southeast-asia",
+      "propagandaRisk": "none",
+      "description": "The Straits Times Asian news from Singapore.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "korea-herald",
+      "name": "The Korea Herald",
+      "url": "http://www.koreaherald.com/common/rss_xml.php",
+      "category": "asia",
+      "language": "en",
+      "tier": 2,
+      "tags": [
+        "south-korea"
+      ],
+      "region": "east-asia",
+      "propagandaRisk": "none",
+      "description": "The Korea Herald English-language South Korean news.",
+      "verified": false,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "techcrunch",
+      "name": "TechCrunch",
+      "url": "https://techcrunch.com/feed/",
+      "category": "tech",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "startups",
+        "silicon-valley"
+      ],
+      "propagandaRisk": "none",
+      "description": "TechCrunch covering tech startups, venture capital, and Silicon Valley.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "ars-technica",
+      "name": "Ars Technica",
+      "url": "https://feeds.arstechnica.com/arstechnica/index",
+      "category": "tech",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "deep-tech",
+        "analysis"
+      ],
+      "propagandaRisk": "none",
+      "description": "Ars Technica in-depth technology news and analysis.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "the-verge",
+      "name": "The Verge",
+      "url": "https://www.theverge.com/rss/index.xml",
+      "category": "tech",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "consumer-tech",
+        "culture"
+      ],
+      "propagandaRisk": "none",
+      "description": "The Verge covering technology, science, art, and culture.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "wired",
+      "name": "Wired",
+      "url": "https://www.wired.com/feed/rss",
+      "category": "tech",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "technology",
+        "culture"
+      ],
+      "propagandaRisk": "none",
+      "description": "Wired magazine covering how technology changes culture and the economy.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "hacker-news",
+      "name": "Hacker News - Best",
+      "url": "https://hnrss.org/best",
+      "category": "tech",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "community",
+        "developer"
+      ],
+      "propagandaRisk": "none",
+      "description": "Hacker News best-ranked stories from the developer community.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "engadget",
+      "name": "Engadget",
+      "url": "https://www.engadget.com/rss.xml",
+      "category": "tech",
+      "language": "en",
+      "tier": 2,
+      "tags": [
+        "consumer-tech",
+        "gadgets"
+      ],
+      "propagandaRisk": "none",
+      "description": "Engadget technology news, reviews, and gadget coverage.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "zdnet",
+      "name": "ZDNet",
+      "url": "https://www.zdnet.com/news/rss.xml",
+      "category": "tech",
+      "language": "en",
+      "tier": 2,
+      "tags": [
+        "enterprise",
+        "business-tech"
+      ],
+      "propagandaRisk": "none",
+      "description": "ZDNet enterprise technology news and business IT coverage.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "thenextweb",
+      "name": "The Next Web",
+      "url": "https://thenextweb.com/feed/",
+      "category": "tech",
+      "language": "en",
+      "tier": 2,
+      "tags": [
+        "startups",
+        "europe-tech"
+      ],
+      "propagandaRisk": "none",
+      "description": "The Next Web covering startups, gadgets, and web technology.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "mit-tech-review",
+      "name": "MIT Technology Review",
+      "url": "https://www.technologyreview.com/feed/",
+      "category": "tech",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "research",
+        "emerging-tech"
+      ],
+      "propagandaRisk": "none",
+      "description": "MIT Technology Review covering emerging technologies and their impact.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "anandtech",
+      "name": "Tom's Hardware",
+      "url": "https://www.tomshardware.com/feeds/all",
+      "category": "tech",
+      "language": "en",
+      "tier": 2,
+      "tags": [
+        "hardware",
+        "reviews"
+      ],
+      "propagandaRisk": "none",
+      "description": "Tom's Hardware covering PC hardware, reviews, and benchmarks.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "techradar",
+      "name": "TechRadar",
+      "url": "https://www.techradar.com/rss",
+      "category": "tech",
+      "language": "en",
+      "tier": 2,
+      "tags": [
+        "consumer-tech",
+        "reviews"
+      ],
+      "propagandaRisk": "none",
+      "description": "TechRadar technology news, reviews, and buying guides.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "venturebeat",
+      "name": "VentureBeat",
+      "url": "https://venturebeat.com/feed/",
+      "category": "tech",
+      "language": "en",
+      "tier": 2,
+      "tags": [
+        "enterprise-ai",
+        "gaming"
+      ],
+      "propagandaRisk": "none",
+      "description": "VentureBeat covering transformative technology and AI enterprise adoption.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "mit-ai",
+      "name": "MIT Technology Review - AI",
+      "url": "https://www.technologyreview.com/topic/artificial-intelligence/feed",
+      "category": "ai",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "research",
+        "analysis"
+      ],
+      "propagandaRisk": "none",
+      "description": "MIT Technology Review AI section covering artificial intelligence research and impact.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "openai-blog",
+      "name": "OpenAI Blog",
+      "url": "https://openai.com/blog/rss.xml",
+      "category": "ai",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "openai",
+        "research"
+      ],
+      "propagandaRisk": "none",
+      "description": "OpenAI official blog posts on research, products, and safety.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "deepmind-blog",
+      "name": "Google DeepMind Blog",
+      "url": "https://deepmind.google/blog/rss.xml",
+      "category": "ai",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "deepmind",
+        "research"
+      ],
+      "propagandaRisk": "none",
+      "description": "Google DeepMind research blog on AI breakthroughs and publications.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "ai-news",
+      "name": "Artificial Intelligence News",
+      "url": "https://www.artificialintelligence-news.com/feed/",
+      "category": "ai",
+      "language": "en",
+      "tier": 2,
+      "tags": [
+        "industry",
+        "news"
+      ],
+      "propagandaRisk": "none",
+      "description": "AI News covering artificial intelligence industry developments.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "the-decoder",
+      "name": "The Decoder",
+      "url": "https://the-decoder.com/feed/",
+      "category": "ai",
+      "language": "en",
+      "tier": 2,
+      "tags": [
+        "llm",
+        "generative-ai"
+      ],
+      "propagandaRisk": "none",
+      "description": "The Decoder covering AI developments with focus on large language models.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "jack-clark-import-ai",
+      "name": "Import AI Newsletter",
+      "url": "https://jack-clark.net/feed/",
+      "category": "ai",
+      "language": "en",
+      "tier": 2,
+      "tags": [
+        "newsletter",
+        "policy"
+      ],
+      "propagandaRisk": "none",
+      "description": "Import AI weekly newsletter by Jack Clark covering AI research and policy.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "synced-review",
+      "name": "Synced Review",
+      "url": "https://syncedreview.com/feed/",
+      "category": "ai",
+      "language": "en",
+      "tier": 3,
+      "tags": [
+        "research",
+        "china-ai"
+      ],
+      "propagandaRisk": "none",
+      "description": "Synced Review covering AI and machine learning research globally.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "marktechpost",
+      "name": "MarkTechPost",
+      "url": "https://www.marktechpost.com/feed/",
+      "category": "ai",
+      "language": "en",
+      "tier": 3,
+      "tags": [
+        "research",
+        "papers"
+      ],
+      "propagandaRisk": "none",
+      "description": "MarkTechPost covering AI research papers and machine learning advances.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "google-ai-blog",
+      "name": "Google AI Blog",
+      "url": "https://blog.research.google/feeds/posts/default?alt=rss",
+      "category": "ai",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "google",
+        "research"
+      ],
+      "propagandaRisk": "none",
+      "description": "Google AI Blog covering research across AI and machine learning.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "google-news-ai",
+      "name": "Google News - Artificial Intelligence",
+      "url": "https://news.google.com/rss/search?q=artificial+intelligence&hl=en-US&gl=US&ceid=US:en",
+      "category": "ai",
+      "language": "en",
+      "tier": 4,
+      "tags": [
+        "aggregator"
+      ],
+      "fallbackUrl": "https://news.google.com/rss/search?q=artificial+intelligence&hl=en-US&gl=US&ceid=US:en",
+      "propagandaRisk": "none",
+      "description": "Google News aggregation of AI-related stories.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "techcrunch-startups",
+      "name": "TechCrunch - Startups",
+      "url": "https://techcrunch.com/category/startups/feed/",
+      "category": "startups",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "funding",
+        "silicon-valley"
+      ],
+      "propagandaRisk": "none",
+      "description": "TechCrunch startup news covering fundraising, launches, and acquisitions.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "crunchbase-news",
+      "name": "Crunchbase News",
+      "url": "https://news.crunchbase.com/feed/",
+      "category": "startups",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "funding",
+        "data"
+      ],
+      "propagandaRisk": "none",
+      "description": "Crunchbase News covering startup funding rounds and venture capital data.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "saastr",
+      "name": "SaaStr",
+      "url": "https://www.saastr.com/feed/",
+      "category": "startups",
+      "language": "en",
+      "tier": 2,
+      "tags": [
+        "saas",
+        "growth"
+      ],
+      "propagandaRisk": "none",
+      "description": "SaaStr covering SaaS startups, growth strategies, and venture capital.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "ycombinator-blog",
+      "name": "Y Combinator Blog",
+      "url": "https://www.ycombinator.com/blog/rss/",
+      "category": "startups",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "accelerator",
+        "vc"
+      ],
+      "propagandaRisk": "none",
+      "description": "Y Combinator official blog on startups, technology, and the ecosystem.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "techeu",
+      "name": "Tech.eu",
+      "url": "https://tech.eu/feed/",
+      "category": "startups",
+      "language": "en",
+      "tier": 2,
+      "tags": [
+        "europe-startups"
+      ],
+      "region": "europe",
+      "propagandaRisk": "none",
+      "description": "Tech.eu covering European technology startups and innovation.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "eu-startups",
+      "name": "EU-Startups",
+      "url": "https://www.eu-startups.com/feed/",
+      "category": "startups",
+      "language": "en",
+      "tier": 3,
+      "tags": [
+        "europe-startups",
+        "funding"
+      ],
+      "region": "europe",
+      "propagandaRisk": "none",
+      "description": "EU-Startups covering European startup ecosystem and funding news.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "the-information",
+      "name": "The Information",
+      "url": "https://www.theinformation.com/feed",
+      "category": "startups",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "insider",
+        "silicon-valley"
+      ],
+      "propagandaRisk": "none",
+      "description": "The Information covering technology business with insider reporting.",
+      "verified": false,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "google-news-startups",
+      "name": "Google News - Startups",
+      "url": "https://news.google.com/rss/search?q=startup+funding&hl=en-US&gl=US&ceid=US:en",
+      "category": "startups",
+      "language": "en",
+      "tier": 4,
+      "tags": [
+        "aggregator"
+      ],
+      "fallbackUrl": "https://news.google.com/rss/search?q=startup+funding&hl=en-US&gl=US&ceid=US:en",
+      "propagandaRisk": "none",
+      "description": "Google News aggregation of startup and funding news.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "krebs-on-security",
+      "name": "Krebs on Security",
+      "url": "https://krebsonsecurity.com/feed/",
+      "category": "security",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "cybersecurity",
+        "investigative"
+      ],
+      "propagandaRisk": "none",
+      "description": "Brian Krebs investigative journalism on cybersecurity and cybercrime.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "dark-reading",
+      "name": "Dark Reading",
+      "url": "https://www.darkreading.com/rss.xml",
+      "category": "security",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "enterprise",
+        "threats"
+      ],
+      "propagandaRisk": "none",
+      "description": "Dark Reading enterprise cybersecurity news, analysis, and research.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "the-hacker-news",
+      "name": "The Hacker News",
+      "url": "https://feeds.feedburner.com/TheHackersNews",
+      "category": "security",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "vulnerabilities",
+        "threats"
+      ],
+      "propagandaRisk": "none",
+      "description": "The Hacker News covering cybersecurity vulnerabilities, hacking, and data breaches.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "schneier-security",
+      "name": "Schneier on Security",
+      "url": "https://www.schneier.com/feed/atom/",
+      "category": "security",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "analysis",
+        "cryptography"
+      ],
+      "propagandaRisk": "none",
+      "description": "Bruce Schneier's blog on security, technology, and cryptography policy.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "threatpost",
+      "name": "SC Media",
+      "url": "https://www.scmagazine.com/feed",
+      "category": "security",
+      "language": "en",
+      "tier": 2,
+      "tags": [
+        "enterprise",
+        "threats"
+      ],
+      "propagandaRisk": "none",
+      "description": "SC Media covering cybersecurity for enterprise security professionals.",
+      "verified": false,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "bleeping-computer",
+      "name": "BleepingComputer",
+      "url": "https://www.bleepingcomputer.com/feed/",
+      "category": "security",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "malware",
+        "vulnerabilities"
+      ],
+      "propagandaRisk": "none",
+      "description": "BleepingComputer covering cybersecurity news, virus removal, and tech support.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "security-week",
+      "name": "SecurityWeek",
+      "url": "https://feeds.feedburner.com/securityweek",
+      "category": "security",
+      "language": "en",
+      "tier": 2,
+      "tags": [
+        "enterprise",
+        "industry"
+      ],
+      "propagandaRisk": "none",
+      "description": "SecurityWeek covering cybersecurity news for security professionals.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "cisa-alerts",
+      "name": "CISA - Cybersecurity Alerts",
+      "url": "https://www.cisa.gov/cybersecurity-advisories/all.xml",
+      "category": "security",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "government",
+        "alerts"
+      ],
+      "region": "us",
+      "propagandaRisk": "medium",
+      "description": "US CISA cybersecurity alerts and advisories for critical infrastructure.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "nist-cybersecurity",
+      "name": "NIST - Cybersecurity",
+      "url": "https://www.nist.gov/blogs/cybersecurity-insights/rss.xml",
+      "category": "security",
+      "language": "en",
+      "tier": 2,
+      "tags": [
+        "government",
+        "standards"
+      ],
+      "region": "us",
+      "propagandaRisk": "medium",
+      "description": "NIST cybersecurity insights blog covering standards and frameworks.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "the-record",
+      "name": "The Record by Recorded Future",
+      "url": "https://therecord.media/feed/",
+      "category": "security",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "threat-intel",
+        "nation-state"
+      ],
+      "propagandaRisk": "none",
+      "description": "The Record covering cybersecurity news, threat intelligence, and nation-state attacks.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "bloomberg-markets",
+      "name": "Bloomberg - Markets",
+      "url": "https://news.google.com/rss/search?q=site:bloomberg.com+markets&hl=en-US&gl=US&ceid=US:en",
+      "category": "finance",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "markets",
+        "global-finance"
+      ],
+      "propagandaRisk": "none",
+      "description": "Bloomberg markets coverage via Google News (direct RSS requires subscription).",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "ft-world",
+      "name": "Financial Times - World",
+      "url": "https://www.ft.com/rss/home",
+      "category": "finance",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "global-finance",
+        "markets"
+      ],
+      "region": "global",
+      "propagandaRisk": "none",
+      "description": "Financial Times world news and financial markets coverage.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "wsj-markets",
+      "name": "Wall Street Journal - Markets",
+      "url": "https://feeds.a.dj.com/rss/RSSMarketsMain.xml",
+      "category": "finance",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "wall-street",
+        "markets"
+      ],
+      "region": "us",
+      "propagandaRisk": "none",
+      "description": "Wall Street Journal markets section covering stocks, bonds, and commodities.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "marketwatch",
+      "name": "MarketWatch - Top Stories",
+      "url": "https://feeds.marketwatch.com/marketwatch/topstories/",
+      "category": "finance",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "markets",
+        "investing"
+      ],
+      "region": "us",
+      "propagandaRisk": "none",
+      "description": "MarketWatch top financial news and market data.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "cnbc-finance",
+      "name": "CNBC - Finance",
+      "url": "https://search.cnbc.com/rs/search/combinedcms/view.xml?partnerId=wrss01&id=10000664",
+      "category": "finance",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "tv-finance",
+        "markets"
+      ],
+      "region": "us",
+      "propagandaRisk": "none",
+      "description": "CNBC financial news and market coverage.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "reuters-business",
+      "name": "Reuters - Business",
+      "url": "https://news.google.com/rss/search?q=site:reuters.com+business&hl=en-US&gl=US&ceid=US:en",
+      "category": "finance",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "wire-service",
+        "business"
+      ],
+      "region": "global",
+      "propagandaRisk": "none",
+      "description": "Reuters business news via Google News aggregation.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "investing-com",
+      "name": "Investing.com - News",
+      "url": "https://www.investing.com/rss/news.rss",
+      "category": "finance",
+      "language": "en",
+      "tier": 2,
+      "tags": [
+        "markets",
+        "data"
+      ],
+      "propagandaRisk": "none",
+      "description": "Investing.com financial news and market data updates.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "yahoo-finance",
+      "name": "Yahoo Finance",
+      "url": "https://finance.yahoo.com/news/rssindex",
+      "category": "finance",
+      "language": "en",
+      "tier": 2,
+      "tags": [
+        "markets",
+        "personal-finance"
+      ],
+      "region": "us",
+      "propagandaRisk": "none",
+      "description": "Yahoo Finance news feed covering markets and personal finance.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "nikkei-finance",
+      "name": "Nikkei - Markets",
+      "url": "https://asia.nikkei.com/rss/feed/markets",
+      "category": "finance",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "japan",
+        "asian-markets"
+      ],
+      "region": "east-asia",
+      "propagandaRisk": "none",
+      "description": "Nikkei Asian financial markets and business coverage.",
+      "verified": false,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "economist-finance",
+      "name": "The Economist - Finance",
+      "url": "https://www.economist.com/finance-and-economics/rss.xml",
+      "category": "finance",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "analysis",
+        "global"
+      ],
+      "region": "global",
+      "propagandaRisk": "none",
+      "description": "The Economist finance and economics analysis.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "financial-news-london",
+      "name": "Financial News London",
+      "url": "https://www.fnlondon.com/rss",
+      "category": "finance",
+      "language": "en",
+      "tier": 2,
+      "tags": [
+        "london",
+        "city"
+      ],
+      "region": "uk",
+      "propagandaRisk": "none",
+      "description": "Financial News London covering City of London and European finance.",
+      "verified": false,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "wsj-business",
+      "name": "Wall Street Journal - Business",
+      "url": "https://feeds.a.dj.com/rss/WSJcomUSBusiness.xml",
+      "category": "finance",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "business",
+        "corporate"
+      ],
+      "region": "us",
+      "propagandaRisk": "none",
+      "description": "Wall Street Journal US business news and corporate reporting.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "coindesk",
+      "name": "CoinDesk",
+      "url": "https://www.coindesk.com/arc/outboundfeeds/rss/",
+      "category": "crypto",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "bitcoin",
+        "ethereum"
+      ],
+      "propagandaRisk": "none",
+      "description": "CoinDesk covering cryptocurrency news, Bitcoin, and blockchain technology.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "the-block",
+      "name": "The Block",
+      "url": "https://www.theblock.co/rss.xml",
+      "category": "crypto",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "institutional",
+        "defi"
+      ],
+      "propagandaRisk": "none",
+      "description": "The Block covering cryptocurrency with focus on institutional and DeFi.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "decrypt",
+      "name": "Decrypt",
+      "url": "https://decrypt.co/feed",
+      "category": "crypto",
+      "language": "en",
+      "tier": 2,
+      "tags": [
+        "web3",
+        "defi"
+      ],
+      "propagandaRisk": "none",
+      "description": "Decrypt covering cryptocurrency, Web3, and decentralized technologies.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "cointelegraph",
+      "name": "CoinTelegraph",
+      "url": "https://cointelegraph.com/rss",
+      "category": "crypto",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "crypto-news",
+        "analysis"
+      ],
+      "propagandaRisk": "none",
+      "description": "CoinTelegraph covering blockchain and cryptocurrency news and analysis.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "bitcoin-magazine",
+      "name": "Bitcoin Magazine",
+      "url": "https://bitcoinmagazine.com/.rss/full/",
+      "category": "crypto",
+      "language": "en",
+      "tier": 2,
+      "tags": [
+        "bitcoin",
+        "maximalist"
+      ],
+      "propagandaRisk": "none",
+      "description": "Bitcoin Magazine covering Bitcoin news, technology, and culture.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "blockworks",
+      "name": "Blockworks",
+      "url": "https://blockworks.co/feed",
+      "category": "crypto",
+      "language": "en",
+      "tier": 2,
+      "tags": [
+        "institutional",
+        "defi"
+      ],
+      "propagandaRisk": "none",
+      "description": "Blockworks covering crypto markets and institutional adoption.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "defiant",
+      "name": "The Defiant",
+      "url": "https://thedefiant.io/feed",
+      "category": "crypto",
+      "language": "en",
+      "tier": 2,
+      "tags": [
+        "defi",
+        "web3"
+      ],
+      "propagandaRisk": "none",
+      "description": "The Defiant covering DeFi, Web3, and decentralized finance.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "google-news-crypto",
+      "name": "Google News - Cryptocurrency",
+      "url": "https://news.google.com/rss/search?q=cryptocurrency&hl=en-US&gl=US&ceid=US:en",
+      "category": "crypto",
+      "language": "en",
+      "tier": 4,
+      "tags": [
+        "aggregator"
+      ],
+      "fallbackUrl": "https://news.google.com/rss/search?q=cryptocurrency&hl=en-US&gl=US&ceid=US:en",
+      "propagandaRisk": "none",
+      "description": "Google News aggregation of cryptocurrency stories.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "sp-global-commodities",
+      "name": "S&P Global Commodity Insights",
+      "url": "https://www.spglobal.com/commodityinsights/en/rss-feed",
+      "category": "commodities",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "oil",
+        "metals",
+        "agriculture"
+      ],
+      "propagandaRisk": "none",
+      "description": "S&P Global Commodity Insights covering energy, metals, and agriculture markets.",
+      "verified": false,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "mining-com",
+      "name": "Mining.com",
+      "url": "https://www.mining.com/feed/",
+      "category": "commodities",
+      "language": "en",
+      "tier": 2,
+      "tags": [
+        "mining",
+        "metals"
+      ],
+      "propagandaRisk": "none",
+      "description": "Mining.com covering global mining industry news and commodity markets.",
+      "verified": false,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "oilprice-com",
+      "name": "OilPrice.com",
+      "url": "https://oilprice.com/rss/main",
+      "category": "commodities",
+      "language": "en",
+      "tier": 2,
+      "tags": [
+        "oil",
+        "gas",
+        "energy"
+      ],
+      "propagandaRisk": "none",
+      "description": "OilPrice.com covering crude oil, natural gas, and energy commodity markets.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "agrimoney",
+      "name": "Agrimoney",
+      "url": "https://www.agrimoney.com/rss",
+      "category": "commodities",
+      "language": "en",
+      "tier": 3,
+      "tags": [
+        "agriculture",
+        "grains"
+      ],
+      "propagandaRisk": "none",
+      "description": "Agrimoney covering agricultural commodity markets and farming economics.",
+      "verified": false,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "kitco-gold",
+      "name": "Kitco News - Gold",
+      "url": "https://www.kitco.com/feed/",
+      "category": "commodities",
+      "language": "en",
+      "tier": 2,
+      "tags": [
+        "gold",
+        "precious-metals"
+      ],
+      "propagandaRisk": "none",
+      "description": "Kitco News covering gold, silver, and precious metals markets.",
+      "verified": false,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "fastmarkets",
+      "name": "Fastmarkets",
+      "url": "https://www.fastmarkets.com/rss",
+      "category": "commodities",
+      "language": "en",
+      "tier": 2,
+      "tags": [
+        "metals",
+        "pricing"
+      ],
+      "propagandaRisk": "none",
+      "description": "Fastmarkets covering industrial metals pricing and commodity data.",
+      "verified": false,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "reuters-commodities",
+      "name": "Reuters - Commodities",
+      "url": "https://news.google.com/rss/search?q=site:reuters.com+commodities&hl=en-US&gl=US&ceid=US:en",
+      "category": "commodities",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "wire-service",
+        "markets"
+      ],
+      "propagandaRisk": "none",
+      "description": "Reuters commodity news via Google News aggregation.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "google-news-commodities",
+      "name": "Google News - Commodities",
+      "url": "https://news.google.com/rss/search?q=commodity+markets&hl=en-US&gl=US&ceid=US:en",
+      "category": "commodities",
+      "language": "en",
+      "tier": 4,
+      "tags": [
+        "aggregator"
+      ],
+      "fallbackUrl": "https://news.google.com/rss/search?q=commodity+markets&hl=en-US&gl=US&ceid=US:en",
+      "propagandaRisk": "none",
+      "description": "Google News aggregation of commodity market stories.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "defense-one",
+      "name": "Defense One",
+      "url": "https://www.defenseone.com/rss/",
+      "category": "defense",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "us-defense",
+        "policy"
+      ],
+      "region": "us",
+      "propagandaRisk": "none",
+      "description": "Defense One covering US defense policy, technology, and military affairs.",
+      "verified": false,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "janes",
+      "name": "Janes",
+      "url": "https://www.janes.com/feeds/news",
+      "category": "defense",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "intelligence",
+        "military"
+      ],
+      "region": "global",
+      "propagandaRisk": "none",
+      "description": "Janes defence and security intelligence news and analysis.",
+      "verified": false,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "war-on-the-rocks",
+      "name": "War on the Rocks",
+      "url": "https://warontherocks.com/feed/",
+      "category": "defense",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "analysis",
+        "strategy"
+      ],
+      "propagandaRisk": "none",
+      "description": "War on the Rocks platform for analysis and debate on national security issues.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "defense-news",
+      "name": "Defense News",
+      "url": "https://www.defensenews.com/arc/outboundfeeds/rss/?outputType=xml",
+      "category": "defense",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "procurement",
+        "military"
+      ],
+      "region": "us",
+      "propagandaRisk": "none",
+      "description": "Defense News covering military procurement, policy, and industry news.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "breaking-defense",
+      "name": "Breaking Defense",
+      "url": "https://breakingdefense.com/feed/",
+      "category": "defense",
+      "language": "en",
+      "tier": 2,
+      "tags": [
+        "procurement",
+        "technology"
+      ],
+      "region": "us",
+      "propagandaRisk": "none",
+      "description": "Breaking Defense covering defense technology and military procurement.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "the-drive-warzone",
+      "name": "The War Zone",
+      "url": "https://www.thedrive.com/the-war-zone/rss",
+      "category": "defense",
+      "language": "en",
+      "tier": 2,
+      "tags": [
+        "military-tech",
+        "osint"
+      ],
+      "propagandaRisk": "none",
+      "description": "The War Zone covering military aviation, naval, and ground technology.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "small-wars-journal",
+      "name": "Small Wars Journal",
+      "url": "https://smallwarsjournal.com/feed",
+      "category": "defense",
+      "language": "en",
+      "tier": 3,
+      "tags": [
+        "counterinsurgency",
+        "irregular-warfare"
+      ],
+      "propagandaRisk": "none",
+      "description": "Small Wars Journal covering counterinsurgency and irregular warfare.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "google-news-defense",
+      "name": "Google News - Defense",
+      "url": "https://news.google.com/rss/search?q=defense+military+news&hl=en-US&gl=US&ceid=US:en",
+      "category": "defense",
+      "language": "en",
+      "tier": 4,
+      "tags": [
+        "aggregator"
+      ],
+      "fallbackUrl": "https://news.google.com/rss/search?q=defense+military+news&hl=en-US&gl=US&ceid=US:en",
+      "propagandaRisk": "none",
+      "description": "Google News aggregation of defense and military news.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "rand-blog",
+      "name": "RAND Corporation - Blog",
+      "url": "https://www.rand.org/blog.xml",
+      "category": "thinktanks",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "research",
+        "policy"
+      ],
+      "region": "us",
+      "propagandaRisk": "none",
+      "description": "RAND Corporation research blog covering defense, health, and public policy.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "brookings",
+      "name": "Brookings Institution",
+      "url": "https://www.brookings.edu/feed/",
+      "category": "thinktanks",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "policy",
+        "center-left"
+      ],
+      "region": "us",
+      "propagandaRisk": "none",
+      "description": "Brookings Institution policy research and analysis.",
+      "verified": false,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "cfr",
+      "name": "Council on Foreign Relations",
+      "url": "https://www.cfr.org/rss.xml",
+      "category": "thinktanks",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "foreign-policy",
+        "analysis"
+      ],
+      "region": "us",
+      "propagandaRisk": "none",
+      "description": "Council on Foreign Relations commentary on international affairs and US foreign policy.",
+      "verified": false,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "csis",
+      "name": "CSIS - Center for Strategic and International Studies",
+      "url": "https://www.csis.org/feeds",
+      "category": "thinktanks",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "strategy",
+        "bipartisan"
+      ],
+      "region": "us",
+      "propagandaRisk": "none",
+      "description": "CSIS covering strategic and international studies with bipartisan analysis.",
+      "verified": false,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "chatham-house",
+      "name": "Chatham House",
+      "url": "https://www.chathamhouse.org/feed",
+      "category": "thinktanks",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "uk",
+        "international-affairs"
+      ],
+      "region": "uk",
+      "propagandaRisk": "none",
+      "description": "Chatham House (Royal Institute of International Affairs) research and analysis.",
+      "verified": false,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "carnegie-endowment",
+      "name": "Carnegie Endowment for International Peace",
+      "url": "https://carnegieendowment.org/rss/solr.xml",
+      "category": "thinktanks",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "peace",
+        "global-policy"
+      ],
+      "region": "global",
+      "propagandaRisk": "none",
+      "description": "Carnegie Endowment for International Peace research and analysis.",
+      "verified": false,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "heritage-foundation",
+      "name": "Heritage Foundation",
+      "url": "https://www.heritage.org/rss/all-research-and-commentary",
+      "category": "thinktanks",
+      "language": "en",
+      "tier": 2,
+      "tags": [
+        "conservative",
+        "policy"
+      ],
+      "region": "us",
+      "propagandaRisk": "none",
+      "description": "Heritage Foundation conservative policy research and commentary.",
+      "verified": false,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "iiss",
+      "name": "IISS - International Institute for Strategic Studies",
+      "url": "https://www.iiss.org/rss",
+      "category": "thinktanks",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "defense",
+        "geopolitics"
+      ],
+      "region": "uk",
+      "propagandaRisk": "none",
+      "description": "IISS covering global security, geopolitics, and military strategy.",
+      "verified": false,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "reliefweb",
+      "name": "ReliefWeb",
+      "url": "https://reliefweb.int/updates/rss.xml",
+      "category": "crisis",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "un",
+        "humanitarian"
+      ],
+      "region": "global",
+      "propagandaRisk": "none",
+      "description": "ReliefWeb UN OCHA humanitarian news service covering global crises.",
+      "verified": false,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "gdacs",
+      "name": "GDACS - Global Disaster Alert",
+      "url": "https://www.gdacs.org/xml/rss.xml",
+      "category": "crisis",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "disasters",
+        "alerts"
+      ],
+      "region": "global",
+      "propagandaRisk": "none",
+      "description": "Global Disaster Alerting Coordination System alerts for earthquakes, floods, and storms.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "unhcr-news",
+      "name": "UNHCR News",
+      "url": "https://www.unhcr.org/rss/news.xml",
+      "category": "crisis",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "refugees",
+        "un"
+      ],
+      "region": "global",
+      "propagandaRisk": "none",
+      "description": "UNHCR news on global refugee situations and humanitarian operations.",
+      "verified": false,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "icrc-news",
+      "name": "ICRC - International Committee of the Red Cross",
+      "url": "https://www.icrc.org/en/rss",
+      "category": "crisis",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "humanitarian",
+        "conflict"
+      ],
+      "region": "global",
+      "propagandaRisk": "none",
+      "description": "ICRC news on humanitarian operations in armed conflict zones worldwide.",
+      "verified": false,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "who-disease-outbreaks",
+      "name": "WHO - Disease Outbreak News",
+      "url": "https://www.who.int/feeds/entity/don/en/rss.xml",
+      "category": "crisis",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "health",
+        "epidemics"
+      ],
+      "region": "global",
+      "propagandaRisk": "none",
+      "description": "WHO disease outbreak news covering global health emergencies and epidemics.",
+      "verified": false,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "crisis-group",
+      "name": "International Crisis Group",
+      "url": "https://www.crisisgroup.org/feed",
+      "category": "crisis",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "conflict-prevention",
+        "analysis"
+      ],
+      "region": "global",
+      "propagandaRisk": "none",
+      "description": "International Crisis Group analysis on conflict prevention and resolution.",
+      "verified": false,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "devex-news",
+      "name": "Devex",
+      "url": "https://www.devex.com/news/rss",
+      "category": "crisis",
+      "language": "en",
+      "tier": 2,
+      "tags": [
+        "development",
+        "aid"
+      ],
+      "region": "global",
+      "propagandaRisk": "none",
+      "description": "Devex global development news and humanitarian aid coverage.",
+      "verified": false,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "google-news-crisis",
+      "name": "Google News - Humanitarian Crisis",
+      "url": "https://news.google.com/rss/search?q=humanitarian+crisis&hl=en-US&gl=US&ceid=US:en",
+      "category": "crisis",
+      "language": "en",
+      "tier": 4,
+      "tags": [
+        "aggregator"
+      ],
+      "region": "global",
+      "fallbackUrl": "https://news.google.com/rss/search?q=humanitarian+crisis&hl=en-US&gl=US&ceid=US:en",
+      "propagandaRisk": "none",
+      "description": "Google News aggregation of humanitarian crisis stories.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "energy-monitor",
+      "name": "Energy Monitor",
+      "url": "https://www.energymonitor.ai/feed/",
+      "category": "energy",
+      "language": "en",
+      "tier": 2,
+      "tags": [
+        "transition",
+        "analysis"
+      ],
+      "propagandaRisk": "none",
+      "description": "Energy Monitor covering the global energy transition and market analysis.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "utility-dive",
+      "name": "Utility Dive",
+      "url": "https://www.utilitydive.com/feeds/news/",
+      "category": "energy",
+      "language": "en",
+      "tier": 2,
+      "tags": [
+        "utilities",
+        "grid"
+      ],
+      "region": "us",
+      "propagandaRisk": "none",
+      "description": "Utility Dive covering the electric utility industry and power grid.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "renewables-now",
+      "name": "Renewables Now",
+      "url": "https://renewablesnow.com/rss/feed.xml",
+      "category": "energy",
+      "language": "en",
+      "tier": 2,
+      "tags": [
+        "renewables",
+        "solar",
+        "wind"
+      ],
+      "propagandaRisk": "none",
+      "description": "Renewables Now covering solar, wind, and renewable energy industry news.",
+      "verified": false,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "iea-news",
+      "name": "IEA - International Energy Agency",
+      "url": "https://www.iea.org/rss/news.xml",
+      "category": "energy",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "policy",
+        "data"
+      ],
+      "region": "global",
+      "propagandaRisk": "none",
+      "description": "International Energy Agency news on global energy policy and data.",
+      "verified": false,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "energy-voice",
+      "name": "Energy Voice",
+      "url": "https://www.energyvoice.com/feed/",
+      "category": "energy",
+      "language": "en",
+      "tier": 3,
+      "tags": [
+        "oil-gas",
+        "uk"
+      ],
+      "region": "uk",
+      "propagandaRisk": "none",
+      "description": "Energy Voice covering oil, gas, and energy industry from Aberdeen.",
+      "verified": false,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "greentech-media",
+      "name": "Canary Media",
+      "url": "https://www.canarymedia.com/feed",
+      "category": "energy",
+      "language": "en",
+      "tier": 2,
+      "tags": [
+        "cleantech",
+        "climate"
+      ],
+      "propagandaRisk": "none",
+      "description": "Canary Media covering clean energy transition and climate solutions.",
+      "verified": false,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "world-nuclear-news",
+      "name": "World Nuclear News",
+      "url": "https://world-nuclear-news.org/feed",
+      "category": "energy",
+      "language": "en",
+      "tier": 2,
+      "tags": [
+        "nuclear",
+        "power"
+      ],
+      "propagandaRisk": "none",
+      "description": "World Nuclear News covering nuclear energy and power industry.",
+      "verified": false,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "google-news-energy",
+      "name": "Google News - Energy",
+      "url": "https://news.google.com/rss/search?q=energy+transition&hl=en-US&gl=US&ceid=US:en",
+      "category": "energy",
+      "language": "en",
+      "tier": 4,
+      "tags": [
+        "aggregator"
+      ],
+      "fallbackUrl": "https://news.google.com/rss/search?q=energy+transition&hl=en-US&gl=US&ceid=US:en",
+      "propagandaRisk": "none",
+      "description": "Google News aggregation of energy transition stories.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "carbon-brief",
+      "name": "Carbon Brief",
+      "url": "https://www.carbonbrief.org/feed/",
+      "category": "climate",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "science",
+        "policy",
+        "data"
+      ],
+      "region": "uk",
+      "propagandaRisk": "none",
+      "description": "Carbon Brief UK-based climate science and policy analysis with data journalism.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "climate-home-news",
+      "name": "Climate Home News",
+      "url": "https://www.climatechangenews.com/feed/",
+      "category": "climate",
+      "language": "en",
+      "tier": 2,
+      "tags": [
+        "policy",
+        "negotiations"
+      ],
+      "region": "global",
+      "propagandaRisk": "none",
+      "description": "Climate Home News covering international climate policy and UN negotiations.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "inside-climate-news",
+      "name": "Inside Climate News",
+      "url": "https://insideclimatenews.org/feed/",
+      "category": "climate",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "investigative",
+        "us-climate"
+      ],
+      "region": "us",
+      "propagandaRisk": "none",
+      "description": "Inside Climate News Pulitzer-winning investigative climate journalism.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "guardian-climate",
+      "name": "The Guardian - Climate Crisis",
+      "url": "https://www.theguardian.com/environment/climate-crisis/rss",
+      "category": "climate",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "uk",
+        "global"
+      ],
+      "propagandaRisk": "none",
+      "description": "The Guardian climate crisis coverage and environmental reporting.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "nasa-climate",
+      "name": "NASA - Climate Change",
+      "url": "https://climate.nasa.gov/news/rss.xml",
+      "category": "climate",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "science",
+        "satellite-data"
+      ],
+      "region": "us",
+      "propagandaRisk": "medium",
+      "description": "NASA climate change science news and Earth observation data.",
+      "verified": false,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "climate-central",
+      "name": "Climate Central",
+      "url": "https://www.climatecentral.org/feed",
+      "category": "climate",
+      "language": "en",
+      "tier": 2,
+      "tags": [
+        "research",
+        "visualization"
+      ],
+      "region": "us",
+      "propagandaRisk": "none",
+      "description": "Climate Central research and reporting on climate change and sea level rise.",
+      "verified": false,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "desmog",
+      "name": "DeSmog",
+      "url": "https://www.desmog.com/feed/",
+      "category": "climate",
+      "language": "en",
+      "tier": 2,
+      "tags": [
+        "disinformation",
+        "fossil-fuels"
+      ],
+      "propagandaRisk": "none",
+      "description": "DeSmog investigating climate disinformation and fossil fuel industry influence.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "google-news-climate",
+      "name": "Google News - Climate Change",
+      "url": "https://news.google.com/rss/search?q=climate+change&hl=en-US&gl=US&ceid=US:en",
+      "category": "climate",
+      "language": "en",
+      "tier": 4,
+      "tags": [
+        "aggregator"
+      ],
+      "fallbackUrl": "https://news.google.com/rss/search?q=climate+change&hl=en-US&gl=US&ceid=US:en",
+      "propagandaRisk": "none",
+      "description": "Google News aggregation of climate change stories.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "good-news-network",
+      "name": "Good News Network",
+      "url": "https://www.goodnewsnetwork.org/feed/",
+      "category": "happy",
+      "language": "en",
+      "tier": 2,
+      "tags": [
+        "positive",
+        "feel-good"
+      ],
+      "propagandaRisk": "none",
+      "description": "Good News Network covering inspiring and positive news stories worldwide.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "positive-news",
+      "name": "Positive News",
+      "url": "https://www.positive.news/feed/",
+      "category": "happy",
+      "language": "en",
+      "tier": 2,
+      "tags": [
+        "constructive",
+        "solutions"
+      ],
+      "region": "uk",
+      "propagandaRisk": "none",
+      "description": "Positive News constructive journalism magazine covering solutions and progress.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "reasons-cheerful",
+      "name": "Reasons to be Cheerful",
+      "url": "https://reasonstobecheerful.world/feed/",
+      "category": "happy",
+      "language": "en",
+      "tier": 2,
+      "tags": [
+        "solutions",
+        "progress"
+      ],
+      "propagandaRisk": "none",
+      "description": "Reasons to be Cheerful solutions journalism from David Byrne's project.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "upworthy",
+      "name": "Upworthy",
+      "url": "https://www.upworthy.com/feed",
+      "category": "happy",
+      "language": "en",
+      "tier": 3,
+      "tags": [
+        "viral",
+        "feel-good"
+      ],
+      "propagandaRisk": "none",
+      "description": "Upworthy positive and inspiring viral content and stories.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "sunny-skyz",
+      "name": "Sunny Skyz",
+      "url": "https://www.sunnyskyz.com/rss.xml",
+      "category": "happy",
+      "language": "en",
+      "tier": 3,
+      "tags": [
+        "feel-good",
+        "viral"
+      ],
+      "propagandaRisk": "none",
+      "description": "Sunny Skyz good news, funny videos, and feel-good stories.",
+      "verified": false,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "future-crunch",
+      "name": "Future Crunch",
+      "url": "https://futurecrunch.com/feed/",
+      "category": "happy",
+      "language": "en",
+      "tier": 2,
+      "tags": [
+        "progress",
+        "science"
+      ],
+      "propagandaRisk": "none",
+      "description": "Future Crunch covering good news in science, technology, and human progress.",
+      "verified": false,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "guardian-upside",
+      "name": "The Guardian - The Upside",
+      "url": "https://www.theguardian.com/lifeandstyle/series/the-upside/rss",
+      "category": "happy",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "solutions",
+        "positive"
+      ],
+      "region": "uk",
+      "propagandaRisk": "none",
+      "description": "The Guardian 'The Upside' series covering positive solutions and progress.",
+      "verified": false,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "google-news-happy",
+      "name": "Google News - Good News",
+      "url": "https://news.google.com/rss/search?q=good+news+positive&hl=en-US&gl=US&ceid=US:en",
+      "category": "happy",
+      "language": "en",
+      "tier": 4,
+      "tags": [
+        "aggregator"
+      ],
+      "fallbackUrl": "https://news.google.com/rss/search?q=good+news+positive&hl=en-US&gl=US&ceid=US:en",
+      "propagandaRisk": "none",
+      "description": "Google News aggregation of positive and good news stories.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "xinhua-en",
+      "name": "Xinhua - English",
+      "url": "https://www.xinhuanet.com/english/rss/worldrss.xml",
+      "category": "asia",
+      "language": "en",
+      "tier": 2,
+      "tags": [
+        "china",
+        "state-media"
+      ],
+      "region": "china",
+      "propagandaRisk": "high",
+      "description": "Xinhua News Agency English-language feed. Chinese state media — use with awareness.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "rt-news",
+      "name": "RT News",
+      "url": "https://www.rt.com/rss/news/",
+      "category": "europe",
+      "language": "en",
+      "tier": 3,
+      "tags": [
+        "russia",
+        "state-media"
+      ],
+      "region": "russia",
+      "propagandaRisk": "high",
+      "description": "RT (Russia Today) English-language news. Russian state media — use with awareness.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "tass-en",
+      "name": "TASS - English",
+      "url": "https://tass.com/rss/v2.xml",
+      "category": "europe",
+      "language": "en",
+      "tier": 3,
+      "tags": [
+        "russia",
+        "state-media"
+      ],
+      "region": "russia",
+      "propagandaRisk": "high",
+      "description": "TASS Russian state news agency. Russian state media — use with awareness.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "press-tv",
+      "name": "Press TV",
+      "url": "https://www.presstv.ir/RSS",
+      "category": "middleeast",
+      "language": "en",
+      "tier": 3,
+      "tags": [
+        "iran",
+        "state-media"
+      ],
+      "region": "iran",
+      "propagandaRisk": "high",
+      "description": "Press TV Iranian state media English-language news — use with awareness.",
+      "verified": false,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "cgtn-news",
+      "name": "CGTN - China Global Television Network",
+      "url": "https://www.cgtn.com/subscribe/rss/section/news.xml",
+      "category": "asia",
+      "language": "en",
+      "tier": 3,
+      "tags": [
+        "china",
+        "state-media"
+      ],
+      "region": "china",
+      "propagandaRisk": "high",
+      "description": "CGTN Chinese state broadcast network English news — use with awareness.",
+      "verified": false,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "whitehouse-briefings",
+      "name": "White House - Briefings",
+      "url": "https://www.whitehouse.gov/feed/",
+      "category": "us",
+      "language": "en",
+      "tier": 2,
+      "tags": [
+        "government",
+        "official"
+      ],
+      "region": "us",
+      "propagandaRisk": "medium",
+      "description": "White House official briefings and statements from the US government.",
+      "verified": false,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "gov-uk-press",
+      "name": "UK Government Press",
+      "url": "https://www.gov.uk/search/news-and-communications.atom",
+      "category": "europe",
+      "language": "en",
+      "tier": 2,
+      "tags": [
+        "government",
+        "official"
+      ],
+      "region": "uk",
+      "propagandaRisk": "medium",
+      "description": "UK Government press releases and communications.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "dawn-news",
+      "name": "Dawn",
+      "url": "https://www.dawn.com/feeds/home",
+      "category": "asia",
+      "language": "en",
+      "tier": 2,
+      "tags": [
+        "pakistan"
+      ],
+      "region": "south-asia",
+      "propagandaRisk": "none",
+      "description": "Dawn Pakistani English-language newspaper covering South Asian affairs.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "japan-times",
+      "name": "The Japan Times",
+      "url": "https://www.japantimes.co.jp/feed/",
+      "category": "asia",
+      "language": "en",
+      "tier": 2,
+      "tags": [
+        "japan"
+      ],
+      "region": "japan",
+      "propagandaRisk": "none",
+      "description": "The Japan Times English-language Japanese news and culture.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "chosun-en",
+      "name": "Chosun Ilbo - English",
+      "url": "https://english.chosun.com/rss/rss.xml",
+      "category": "asia",
+      "language": "en",
+      "tier": 2,
+      "tags": [
+        "south-korea"
+      ],
+      "region": "east-asia",
+      "propagandaRisk": "none",
+      "description": "Chosun Ilbo English edition covering South Korean news and politics.",
+      "verified": false,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "yonhap-ko",
+      "name": "Yonhap News - Korean",
+      "url": "https://www.yna.co.kr/RSS/news.xml",
+      "category": "asia",
+      "language": "ko",
+      "tier": 1,
+      "tags": [
+        "south-korea",
+        "wire-service"
+      ],
+      "region": "east-asia",
+      "propagandaRisk": "none",
+      "description": "Yonhap News Agency Korean-language feed from South Korea.",
+      "verified": false,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "le-monde-fr",
+      "name": "Le Monde - A la une",
+      "url": "https://www.lemonde.fr/rss/une.xml",
+      "category": "europe",
+      "language": "fr",
+      "tier": 1,
+      "tags": [
+        "france",
+        "national"
+      ],
+      "region": "france",
+      "propagandaRisk": "none",
+      "description": "Le Monde front page news in French from France's leading newspaper.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "spiegel-de",
+      "name": "Der Spiegel - Schlagzeilen",
+      "url": "https://www.spiegel.de/schlagzeilen/index.rss",
+      "category": "europe",
+      "language": "de",
+      "tier": 1,
+      "tags": [
+        "germany",
+        "national"
+      ],
+      "region": "germany",
+      "propagandaRisk": "none",
+      "description": "Der Spiegel German-language headlines and news.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "el-pais-en",
+      "name": "El Pais - English",
+      "url": "https://feeds.elpais.com/mrss-s/pages/ep/site/english.elpais.com/portada",
+      "category": "europe",
+      "language": "en",
+      "tier": 2,
+      "tags": [
+        "spain"
+      ],
+      "region": "spain",
+      "propagandaRisk": "none",
+      "description": "El Pais English edition covering Spanish and international news.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "asahi-shimbun-en",
+      "name": "The Asahi Shimbun - English",
+      "url": "https://www.asahi.com/ajw/feed/",
+      "category": "asia",
+      "language": "en",
+      "tier": 2,
+      "tags": [
+        "japan"
+      ],
+      "region": "japan",
+      "propagandaRisk": "none",
+      "description": "The Asahi Shimbun Asia & Japan Watch English-language Japanese news.",
+      "verified": false,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "al-arabiya-en",
+      "name": "Al Arabiya - English",
+      "url": "https://www.alarabiya.net/feed/rss2/en.xml",
+      "category": "middleeast",
+      "language": "en",
+      "tier": 2,
+      "tags": [
+        "saudi-arabia",
+        "pan-arab"
+      ],
+      "region": "middle-east",
+      "propagandaRisk": "medium",
+      "description": "Al Arabiya English news network covering Middle East affairs.",
+      "verified": false,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "aljazeera-ar",
+      "name": "Al Jazeera - Arabic",
+      "url": "https://www.aljazeera.net/aljazeerarss/a7730e48-f395-4c12-b661-36d68dce46e4/73d0e1b4-532f-45ef-b135-bfdff8b8cab9",
+      "category": "middleeast",
+      "language": "ar",
+      "tier": 1,
+      "tags": [
+        "qatar",
+        "pan-arab"
+      ],
+      "region": "middle-east",
+      "propagandaRisk": "none",
+      "description": "Al Jazeera Arabic language news covering the Arab world.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "dw-de",
+      "name": "Deutsche Welle - Deutsch",
+      "url": "https://rss.dw.com/rdf/rss-de-all",
+      "category": "europe",
+      "language": "de",
+      "tier": 1,
+      "tags": [
+        "germany"
+      ],
+      "region": "germany",
+      "propagandaRisk": "low",
+      "description": "Deutsche Welle German-language news feed.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "france24-fr",
+      "name": "France 24 - Francais",
+      "url": "https://www.france24.com/fr/rss",
+      "category": "europe",
+      "language": "fr",
+      "tier": 1,
+      "tags": [
+        "france"
+      ],
+      "region": "france",
+      "propagandaRisk": "low",
+      "description": "France 24 French-language international news.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "elpais-es",
+      "name": "El Pais - Espanol",
+      "url": "https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/portada",
+      "category": "latam",
+      "language": "es",
+      "tier": 1,
+      "tags": [
+        "spain",
+        "spanish"
+      ],
+      "region": "spain",
+      "propagandaRisk": "none",
+      "description": "El Pais Spanish-language news, widely read in Latin America.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "nhk-ja",
+      "name": "NHK News - Japanese",
+      "url": "https://www.nhk.or.jp/rss/news/cat0.xml",
+      "category": "asia",
+      "language": "ja",
+      "tier": 1,
+      "tags": [
+        "japan",
+        "public-broadcaster"
+      ],
+      "region": "japan",
+      "propagandaRisk": "low",
+      "description": "NHK Japanese-language news from Japan's public broadcaster.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "people-daily-zh",
+      "name": "People's Daily - Chinese",
+      "url": "http://www.people.com.cn/rss/politics.xml",
+      "category": "asia",
+      "language": "zh",
+      "tier": 2,
+      "tags": [
+        "china",
+        "state-media"
+      ],
+      "region": "china",
+      "propagandaRisk": "high",
+      "description": "People's Daily Chinese-language news. Chinese Communist Party organ — use with awareness.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "coindesk-markets",
+      "name": "CoinDesk - Markets",
+      "url": "https://www.coindesk.com/arc/outboundfeeds/rss/?outputType=xml&_gl=markets",
+      "category": "crypto",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "markets",
+        "trading"
+      ],
+      "propagandaRisk": "none",
+      "description": "CoinDesk markets feed covering crypto trading and market analysis.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "defense-blog",
+      "name": "Defence Blog",
+      "url": "https://defence-blog.com/feed/",
+      "category": "defense",
+      "language": "en",
+      "tier": 3,
+      "tags": [
+        "military-tech",
+        "equipment"
+      ],
+      "propagandaRisk": "none",
+      "description": "Defence Blog covering military equipment, technology, and defense industry.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "cato-institute",
+      "name": "Cato Institute",
+      "url": "https://www.cato.org/rss/recent-opeds",
+      "category": "thinktanks",
+      "language": "en",
+      "tier": 2,
+      "tags": [
+        "libertarian",
+        "policy"
+      ],
+      "region": "us",
+      "propagandaRisk": "none",
+      "description": "Cato Institute libertarian policy research and commentary.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "wri",
+      "name": "World Resources Institute",
+      "url": "https://www.wri.org/rss.xml",
+      "category": "climate",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "research",
+        "sustainability"
+      ],
+      "region": "global",
+      "propagandaRisk": "none",
+      "description": "World Resources Institute research on environment, climate, and sustainability.",
+      "verified": false,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "irena-news",
+      "name": "IRENA - International Renewable Energy Agency",
+      "url": "https://www.irena.org/RSS",
+      "category": "energy",
+      "language": "en",
+      "tier": 2,
+      "tags": [
+        "renewables",
+        "policy"
+      ],
+      "region": "global",
+      "propagandaRisk": "none",
+      "description": "IRENA news on global renewable energy adoption and policy.",
+      "verified": false,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "axios-tech",
+      "name": "Axios - Technology",
+      "url": "https://api.axios.com/feed/technology/",
+      "category": "tech",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "concise",
+        "policy-tech"
+      ],
+      "propagandaRisk": "none",
+      "description": "Axios technology coverage with concise, smart reporting.",
+      "verified": false,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "atlantic-politics",
+      "name": "The Atlantic - Politics",
+      "url": "https://www.theatlantic.com/feed/channel/politics/",
+      "category": "politics",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "analysis",
+        "long-form"
+      ],
+      "region": "us",
+      "propagandaRisk": "none",
+      "description": "The Atlantic political analysis and long-form commentary.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "propublica",
+      "name": "ProPublica",
+      "url": "https://www.propublica.org/feeds/propublica/main",
+      "category": "us",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "investigative",
+        "nonprofit"
+      ],
+      "region": "us",
+      "propagandaRisk": "none",
+      "description": "ProPublica investigative journalism in the public interest.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "intercept",
+      "name": "The Intercept",
+      "url": "https://theintercept.com/feed/?rss",
+      "category": "us",
+      "language": "en",
+      "tier": 2,
+      "tags": [
+        "investigative",
+        "national-security"
+      ],
+      "region": "us",
+      "propagandaRisk": "none",
+      "description": "The Intercept investigative journalism on national security and civil liberties.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "atlantic-global",
+      "name": "The Atlantic - Global",
+      "url": "https://www.theatlantic.com/feed/channel/international/",
+      "category": "politics",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "analysis",
+        "long-form"
+      ],
+      "region": "global",
+      "propagandaRisk": "none",
+      "description": "The Atlantic international coverage and analysis.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "economist-world",
+      "name": "The Economist - The World This Week",
+      "url": "https://www.economist.com/the-world-this-week/rss.xml",
+      "category": "politics",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "analysis",
+        "weekly"
+      ],
+      "region": "global",
+      "propagandaRisk": "none",
+      "description": "The Economist weekly world news summary.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "nation-africa",
+      "name": "Nation Africa",
+      "url": "https://nation.africa/rss",
+      "category": "africa",
+      "language": "en",
+      "tier": 2,
+      "tags": [
+        "east-africa",
+        "kenya"
+      ],
+      "region": "east-africa",
+      "propagandaRisk": "none",
+      "description": "Nation Africa East African news from Kenya's leading media group.",
+      "verified": false,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "rest-of-world",
+      "name": "Rest of World",
+      "url": "https://restofworld.org/feed/latest/",
+      "category": "tech",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "global-south",
+        "technology"
+      ],
+      "region": "global",
+      "propagandaRisk": "none",
+      "description": "Rest of World covering technology impact across the Global South.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "technode",
+      "name": "TechNode",
+      "url": "https://technode.com/feed/",
+      "category": "startups",
+      "language": "en",
+      "tier": 3,
+      "tags": [
+        "china-tech",
+        "startups"
+      ],
+      "region": "china",
+      "propagandaRisk": "none",
+      "description": "TechNode covering Chinese technology ecosystem and startups.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "wired-security",
+      "name": "Wired - Security",
+      "url": "https://www.wired.com/feed/category/security/latest/rss",
+      "category": "security",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "journalism",
+        "long-form"
+      ],
+      "propagandaRisk": "none",
+      "description": "Wired security section covering hacking, privacy, and cybersecurity.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "commodity-weather-group",
+      "name": "Commodity Weather Group",
+      "url": "https://news.google.com/rss/search?q=commodity+weather+agriculture&hl=en-US&gl=US&ceid=US:en",
+      "category": "commodities",
+      "language": "en",
+      "tier": 3,
+      "tags": [
+        "weather",
+        "agriculture"
+      ],
+      "propagandaRisk": "none",
+      "description": "Commodity weather and agriculture news via Google News aggregation.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "mexico-news-daily",
+      "name": "Mexico News Daily",
+      "url": "https://mexiconewsdaily.com/feed/",
+      "category": "latam",
+      "language": "en",
+      "tier": 3,
+      "tags": [
+        "mexico"
+      ],
+      "region": "mexico",
+      "propagandaRisk": "none",
+      "description": "Mexico News Daily English-language Mexican news coverage.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "mongabay",
+      "name": "Mongabay",
+      "url": "https://news.mongabay.com/feed/",
+      "category": "climate",
+      "language": "en",
+      "tier": 2,
+      "tags": [
+        "biodiversity",
+        "forests"
+      ],
+      "region": "global",
+      "propagandaRisk": "none",
+      "description": "Mongabay environmental news covering biodiversity and tropical forests.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "cleantech-group",
+      "name": "CleanTechnica",
+      "url": "https://cleantechnica.com/feed/",
+      "category": "energy",
+      "language": "en",
+      "tier": 2,
+      "tags": [
+        "cleantech",
+        "ev"
+      ],
+      "propagandaRisk": "none",
+      "description": "CleanTechnica covering clean energy, electric vehicles, and sustainability.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "military-times",
+      "name": "Military Times",
+      "url": "https://www.militarytimes.com/arc/outboundfeeds/rss/?outputType=xml",
+      "category": "defense",
+      "language": "en",
+      "tier": 2,
+      "tags": [
+        "us-military",
+        "veterans"
+      ],
+      "region": "us",
+      "propagandaRisk": "none",
+      "description": "Military Times covering US military news, benefits, and veteran affairs.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "atlantic-council",
+      "name": "Atlantic Council",
+      "url": "https://www.atlanticcouncil.org/feed/",
+      "category": "thinktanks",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "transatlantic",
+        "nato"
+      ],
+      "region": "us",
+      "propagandaRisk": "none",
+      "description": "Atlantic Council research on transatlantic relations and global challenges.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "irin-news",
+      "name": "The New Humanitarian",
+      "url": "https://www.thenewhumanitarian.org/feed",
+      "category": "crisis",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "humanitarian",
+        "independent"
+      ],
+      "region": "global",
+      "propagandaRisk": "none",
+      "description": "The New Humanitarian independent journalism on humanitarian crises.",
+      "verified": false,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "aei",
+      "name": "American Enterprise Institute",
+      "url": "https://www.aei.org/feed/",
+      "category": "thinktanks",
+      "language": "en",
+      "tier": 2,
+      "tags": [
+        "conservative",
+        "policy"
+      ],
+      "region": "us",
+      "propagandaRisk": "none",
+      "description": "American Enterprise Institute conservative policy research.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "bne-intellinews",
+      "name": "bne IntelliNews",
+      "url": "https://www.intellinews.com/rss",
+      "category": "europe",
+      "language": "en",
+      "tier": 3,
+      "tags": [
+        "eastern-europe",
+        "business"
+      ],
+      "region": "eastern-europe",
+      "propagandaRisk": "none",
+      "description": "bne IntelliNews covering Eastern European and Central Asian business.",
+      "verified": false,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "south-africa-mail-guardian",
+      "name": "Mail & Guardian",
+      "url": "https://mg.co.za/feed/",
+      "category": "africa",
+      "language": "en",
+      "tier": 2,
+      "tags": [
+        "south-africa"
+      ],
+      "region": "south-africa",
+      "propagandaRisk": "none",
+      "description": "Mail & Guardian South African investigative journalism.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "quartz-africa",
+      "name": "Quartz - Africa",
+      "url": "https://qz.com/africa/feed",
+      "category": "africa",
+      "language": "en",
+      "tier": 2,
+      "tags": [
+        "business",
+        "tech"
+      ],
+      "region": "africa",
+      "propagandaRisk": "none",
+      "description": "Quartz Africa covering African business and technology.",
+      "verified": false,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "eia-today-energy",
+      "name": "EIA - Today in Energy",
+      "url": "https://www.eia.gov/todayinenergy/rss.xml",
+      "category": "energy",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "data",
+        "us-energy"
+      ],
+      "region": "us",
+      "propagandaRisk": "medium",
+      "description": "US Energy Information Administration daily energy analysis and data.",
+      "verified": false,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "coinbase-blog",
+      "name": "Coinbase Blog",
+      "url": "https://www.coinbase.com/blog/rss",
+      "category": "crypto",
+      "language": "en",
+      "tier": 2,
+      "tags": [
+        "exchange",
+        "institutional"
+      ],
+      "propagandaRisk": "none",
+      "description": "Coinbase official blog covering crypto market insights and product updates.",
+      "verified": false,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "stockholm-intl-peace",
+      "name": "SIPRI - Stockholm International Peace Research Institute",
+      "url": "https://www.sipri.org/rss.xml",
+      "category": "defense",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "arms-control",
+        "peace"
+      ],
+      "region": "europe",
+      "propagandaRisk": "none",
+      "description": "SIPRI research on international peace, security, and arms control.",
+      "verified": false,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "wfp-news",
+      "name": "World Food Programme",
+      "url": "https://www.wfp.org/rss.xml",
+      "category": "crisis",
+      "language": "en",
+      "tier": 1,
+      "tags": [
+        "food-security",
+        "un"
+      ],
+      "region": "global",
+      "propagandaRisk": "none",
+      "description": "UN World Food Programme news on food security and humanitarian operations.",
+      "verified": false,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "protocol-fintech",
+      "name": "American Banker",
+      "url": "https://www.americanbanker.com/feed",
+      "category": "finance",
+      "language": "en",
+      "tier": 2,
+      "tags": [
+        "banking",
+        "fintech"
+      ],
+      "region": "us",
+      "propagandaRisk": "none",
+      "description": "American Banker covering banking, fintech, and financial regulation.",
+      "verified": false,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "semiconductor-engineering",
+      "name": "Semiconductor Engineering",
+      "url": "https://semiengineering.com/feed/",
+      "category": "tech",
+      "language": "en",
+      "tier": 2,
+      "tags": [
+        "semiconductors",
+        "chips"
+      ],
+      "propagandaRisk": "none",
+      "description": "Semiconductor Engineering covering chip design, manufacturing, and industry.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "google-news-us",
+      "name": "Google News - US",
+      "url": "https://news.google.com/rss/search?q=US+news&hl=en-US&gl=US&ceid=US:en",
+      "category": "us",
+      "language": "en",
+      "tier": 4,
+      "tags": [
+        "aggregator"
+      ],
+      "region": "us",
+      "fallbackUrl": "https://news.google.com/rss/search?q=US+news&hl=en-US&gl=US&ceid=US:en",
+      "propagandaRisk": "none",
+      "description": "Google News aggregation of US news stories.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "google-news-europe",
+      "name": "Google News - Europe",
+      "url": "https://news.google.com/rss/search?q=europe+news&hl=en-US&gl=US&ceid=US:en",
+      "category": "europe",
+      "language": "en",
+      "tier": 4,
+      "tags": [
+        "aggregator"
+      ],
+      "region": "europe",
+      "fallbackUrl": "https://news.google.com/rss/search?q=europe+news&hl=en-US&gl=US&ceid=US:en",
+      "propagandaRisk": "none",
+      "description": "Google News aggregation of European news stories.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "google-news-asia",
+      "name": "Google News - Asia",
+      "url": "https://news.google.com/rss/search?q=asia+news&hl=en-US&gl=US&ceid=US:en",
+      "category": "asia",
+      "language": "en",
+      "tier": 4,
+      "tags": [
+        "aggregator"
+      ],
+      "region": "asia",
+      "fallbackUrl": "https://news.google.com/rss/search?q=asia+news&hl=en-US&gl=US&ceid=US:en",
+      "propagandaRisk": "none",
+      "description": "Google News aggregation of Asian news stories.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "google-news-tech",
+      "name": "Google News - Technology",
+      "url": "https://news.google.com/rss/search?q=technology+news&hl=en-US&gl=US&ceid=US:en",
+      "category": "tech",
+      "language": "en",
+      "tier": 4,
+      "tags": [
+        "aggregator"
+      ],
+      "fallbackUrl": "https://news.google.com/rss/search?q=technology+news&hl=en-US&gl=US&ceid=US:en",
+      "propagandaRisk": "none",
+      "description": "Google News aggregation of technology news.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "google-news-security",
+      "name": "Google News - Cybersecurity",
+      "url": "https://news.google.com/rss/search?q=cybersecurity&hl=en-US&gl=US&ceid=US:en",
+      "category": "security",
+      "language": "en",
+      "tier": 4,
+      "tags": [
+        "aggregator"
+      ],
+      "fallbackUrl": "https://news.google.com/rss/search?q=cybersecurity&hl=en-US&gl=US&ceid=US:en",
+      "propagandaRisk": "none",
+      "description": "Google News aggregation of cybersecurity news.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "google-news-finance",
+      "name": "Google News - Finance",
+      "url": "https://news.google.com/rss/search?q=financial+markets&hl=en-US&gl=US&ceid=US:en",
+      "category": "finance",
+      "language": "en",
+      "tier": 4,
+      "tags": [
+        "aggregator"
+      ],
+      "fallbackUrl": "https://news.google.com/rss/search?q=financial+markets&hl=en-US&gl=US&ceid=US:en",
+      "propagandaRisk": "none",
+      "description": "Google News aggregation of financial markets news.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "google-news-defense-procurement",
+      "name": "Google News - Defense Procurement",
+      "url": "https://news.google.com/rss/search?q=defense+procurement&hl=en-US&gl=US&ceid=US:en",
+      "category": "defense",
+      "language": "en",
+      "tier": 4,
+      "tags": [
+        "aggregator"
+      ],
+      "fallbackUrl": "https://news.google.com/rss/search?q=defense+procurement&hl=en-US&gl=US&ceid=US:en",
+      "propagandaRisk": "none",
+      "description": "Google News aggregation of defense procurement news.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "google-news-thinktanks",
+      "name": "Google News - Think Tanks Policy",
+      "url": "https://news.google.com/rss/search?q=think+tank+policy+research&hl=en-US&gl=US&ceid=US:en",
+      "category": "thinktanks",
+      "language": "en",
+      "tier": 4,
+      "tags": [
+        "aggregator"
+      ],
+      "fallbackUrl": "https://news.google.com/rss/search?q=think+tank+policy+research&hl=en-US&gl=US&ceid=US:en",
+      "propagandaRisk": "none",
+      "description": "Google News aggregation of think tank and policy research.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "solutions-journalism",
+      "name": "Solutions Journalism Network",
+      "url": "https://www.solutionsjournalism.org/feed",
+      "category": "happy",
+      "language": "en",
+      "tier": 2,
+      "tags": [
+        "solutions",
+        "methodology"
+      ],
+      "propagandaRisk": "none",
+      "description": "Solutions Journalism Network promoting and supporting solutions-focused reporting.",
+      "verified": false,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "metal-miner",
+      "name": "MetalMiner",
+      "url": "https://agmetalminer.com/feed/",
+      "category": "commodities",
+      "language": "en",
+      "tier": 3,
+      "tags": [
+        "metals",
+        "procurement"
+      ],
+      "propagandaRisk": "none",
+      "description": "MetalMiner covering metal and commodity procurement intelligence.",
+      "verified": true,
+      "lastVerified": "2026-03-30"
+    },
+    {
+      "id": "africa-confidential",
+      "name": "Africa Confidential",
+      "url": "https://www.africa-confidential.com/rss",
+      "category": "africa",
+      "language": "en",
+      "tier": 2,
+      "tags": [
+        "intelligence",
+        "politics"
+      ],
+      "region": "africa",
+      "propagandaRisk": "none",
+      "description": "Africa Confidential in-depth political and economic analysis of Africa.",
+      "verified": false,
+      "lastVerified": "2026-03-30"
+    }
+  ]
+}

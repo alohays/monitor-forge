@@ -1,0 +1,329 @@
+{
+  "version": "1",
+  "_meta": {
+    "category": "commodity",
+    "difficulty": "intermediate",
+    "requires_api_keys": [
+      "GROQ_API_KEY",
+      "FRED_API_KEY"
+    ],
+    "optional_api_keys": [
+      "OPENROUTER_API_KEY"
+    ],
+    "preview_description": "Comprehensive commodity intelligence with energy, metals, agriculture, and AI analysis"
+  },
+  "monitor": {
+    "name": "Commodity Intelligence",
+    "slug": "commodity-intelligence",
+    "description": "Full-featured commodity market intelligence dashboard with energy, metals, and agriculture tracking",
+    "domain": "commodities",
+    "tags": [
+      "commodities",
+      "energy",
+      "metals",
+      "agriculture",
+      "markets"
+    ],
+    "branding": {
+      "primaryColor": "#D4A017"
+    }
+  },
+  "sources": [
+    {
+      "name": "metal-miner",
+      "type": "rss",
+      "url": "https://agmetalminer.com/feed/",
+      "category": "commodities",
+      "tier": 3,
+      "interval": 600,
+      "language": "en",
+      "tags": [
+        "metals",
+        "procurement"
+      ]
+    },
+    {
+      "name": "reuters-commodities",
+      "type": "rss",
+      "url": "https://news.google.com/rss/search?q=site:reuters.com+commodities&hl=en-US&gl=US&ceid=US:en",
+      "category": "commodities",
+      "tier": 1,
+      "interval": 300,
+      "language": "en",
+      "tags": [
+        "wire-service",
+        "markets"
+      ]
+    },
+    {
+      "name": "oilprice-com",
+      "type": "rss",
+      "url": "https://oilprice.com/rss/main",
+      "category": "commodities",
+      "tier": 2,
+      "interval": 300,
+      "language": "en",
+      "tags": [
+        "oil",
+        "gas",
+        "energy"
+      ]
+    },
+    {
+      "name": "commodity-weather-group",
+      "type": "rss",
+      "url": "https://news.google.com/rss/search?q=commodity+weather+agriculture&hl=en-US&gl=US&ceid=US:en",
+      "category": "commodities",
+      "tier": 3,
+      "interval": 900,
+      "language": "en",
+      "tags": [
+        "weather",
+        "agriculture"
+      ]
+    },
+    {
+      "name": "google-news-commodities",
+      "type": "rss",
+      "url": "https://news.google.com/rss/search?q=commodity+markets&hl=en-US&gl=US&ceid=US:en",
+      "category": "commodities",
+      "tier": 4,
+      "interval": 600,
+      "language": "en",
+      "tags": [
+        "aggregator"
+      ]
+    },
+    {
+      "name": "cleantech-group",
+      "type": "rss",
+      "url": "https://cleantechnica.com/feed/",
+      "category": "energy",
+      "tier": 2,
+      "interval": 600,
+      "language": "en",
+      "tags": [
+        "cleantech",
+        "ev"
+      ]
+    },
+    {
+      "name": "google-news-energy",
+      "type": "rss",
+      "url": "https://news.google.com/rss/search?q=energy+transition&hl=en-US&gl=US&ceid=US:en",
+      "category": "energy",
+      "tier": 4,
+      "interval": 600,
+      "language": "en",
+      "tags": [
+        "aggregator"
+      ]
+    },
+    {
+      "name": "utility-dive",
+      "type": "rss",
+      "url": "https://www.utilitydive.com/feeds/news/",
+      "category": "energy",
+      "tier": 2,
+      "interval": 600,
+      "language": "en",
+      "tags": [
+        "utilities",
+        "grid"
+      ]
+    },
+    {
+      "name": "energy-monitor",
+      "type": "rss",
+      "url": "https://www.energymonitor.ai/feed/",
+      "category": "energy",
+      "tier": 2,
+      "interval": 600,
+      "language": "en",
+      "tags": [
+        "transition",
+        "analysis"
+      ]
+    },
+    {
+      "name": "bloomberg-markets",
+      "type": "rss",
+      "url": "https://news.google.com/rss/search?q=site:bloomberg.com+markets&hl=en-US&gl=US&ceid=US:en",
+      "category": "finance",
+      "tier": 1,
+      "interval": 300,
+      "language": "en",
+      "tags": [
+        "markets",
+        "global-finance"
+      ]
+    },
+    {
+      "name": "wsj-markets",
+      "type": "rss",
+      "url": "https://feeds.a.dj.com/rss/RSSMarketsMain.xml",
+      "category": "finance",
+      "tier": 1,
+      "interval": 600,
+      "language": "en",
+      "tags": [
+        "wall-street",
+        "markets"
+      ]
+    },
+    {
+      "name": "coindesk",
+      "type": "rss",
+      "url": "https://www.coindesk.com/arc/outboundfeeds/rss/",
+      "category": "crypto",
+      "tier": 1,
+      "interval": 600,
+      "language": "en",
+      "tags": [
+        "bitcoin",
+        "ethereum"
+      ]
+    },
+    {
+      "name": "coingecko-markets",
+      "type": "rest-api",
+      "url": "https://api.coingecko.com/api/v3/coins/markets",
+      "category": "crypto",
+      "tier": 1,
+      "interval": 120,
+      "language": "en",
+      "tags": [
+        "crypto",
+        "market-data"
+      ]
+    },
+    {
+      "name": "fred-economic",
+      "type": "rest-api",
+      "url": "https://api.stlouisfed.org/fred/series/observations",
+      "category": "economic-data",
+      "tier": 2,
+      "interval": 3600,
+      "language": "en",
+      "tags": [
+        "economic",
+        "federal-reserve"
+      ],
+      "authEnvVar": "FRED_API_KEY"
+    }
+  ],
+  "layers": [],
+  "panels": [
+    {
+      "name": "commodity-news",
+      "type": "news-feed",
+      "displayName": "Commodity News",
+      "position": 0,
+      "config": {
+        "categories": [
+          "commodities",
+          "energy",
+          "finance"
+        ],
+        "maxItems": 50
+      }
+    },
+    {
+      "name": "market-ticker",
+      "type": "market-ticker",
+      "displayName": "Market Ticker",
+      "position": 1,
+      "config": {}
+    },
+    {
+      "name": "commodity-brief",
+      "type": "ai-brief",
+      "displayName": "Commodity Intelligence Brief",
+      "position": 2,
+      "config": {
+        "refreshInterval": 600
+      }
+    },
+    {
+      "name": "entity-tracker",
+      "type": "entity-tracker",
+      "displayName": "Key Commodities",
+      "position": 3,
+      "config": {
+        "entities": [
+          "Crude Oil",
+          "Gold",
+          "Silver",
+          "Copper",
+          "Natural Gas",
+          "Wheat",
+          "Bitcoin"
+        ],
+        "maxEntities": 20
+      }
+    }
+  ],
+  "views": [
+    {
+      "name": "overview",
+      "displayName": "Overview",
+      "panels": [
+        "commodity-news",
+        "commodity-brief"
+      ],
+      "default": true
+    },
+    {
+      "name": "energy",
+      "displayName": "Energy",
+      "panels": [
+        "commodity-news",
+        "market-ticker"
+      ]
+    },
+    {
+      "name": "metals",
+      "displayName": "Metals",
+      "panels": [
+        "commodity-news",
+        "entity-tracker"
+      ]
+    }
+  ],
+  "ai": {
+    "enabled": true,
+    "fallbackChain": [
+      "groq",
+      "openrouter"
+    ],
+    "providers": {
+      "groq": {
+        "model": "llama-3.3-70b-versatile",
+        "apiKeyEnv": "GROQ_API_KEY"
+      },
+      "openrouter": {
+        "model": "anthropic/claude-sonnet-4",
+        "apiKeyEnv": "OPENROUTER_API_KEY"
+      }
+    },
+    "analysis": {
+      "summarization": true,
+      "entityExtraction": true,
+      "sentimentAnalysis": true,
+      "focalPointDetection": true,
+      "customPrompt": "Focus on commodity price movements, supply chain disruptions, energy market shifts, and geopolitical factors affecting global commodity markets."
+    }
+  },
+  "map": {
+    "style": "https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json",
+    "center": [
+      0,
+      20
+    ],
+    "zoom": 3,
+    "projection": "mercator"
+  },
+  "theme": {
+    "palette": "sunset"
+  }
+}

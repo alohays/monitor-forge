@@ -1,0 +1,154 @@
+{
+  "version": "1",
+  "_meta": {
+    "category": "happy",
+    "difficulty": "beginner",
+    "requires_api_keys": [],
+    "optional_api_keys": [],
+    "preview_description": "Curated positive news from Good News Network, Positive News, and more"
+  },
+  "monitor": {
+    "name": "Happy Monitor",
+    "slug": "happy-monitor",
+    "description": "Curated positive and uplifting news dashboard",
+    "domain": "happy",
+    "tags": [
+      "positive",
+      "good-news",
+      "solutions"
+    ]
+  },
+  "sources": [
+    {
+      "name": "good-news-network",
+      "type": "rss",
+      "url": "https://www.goodnewsnetwork.org/feed/",
+      "category": "happy",
+      "tier": 2,
+      "interval": 300,
+      "language": "en",
+      "tags": [
+        "positive",
+        "feel-good"
+      ]
+    },
+    {
+      "name": "positive-news",
+      "type": "rss",
+      "url": "https://www.positive.news/feed/",
+      "category": "happy",
+      "tier": 2,
+      "interval": 300,
+      "language": "en",
+      "tags": [
+        "constructive",
+        "solutions"
+      ]
+    },
+    {
+      "name": "reasons-cheerful",
+      "type": "rss",
+      "url": "https://reasonstobecheerful.world/feed/",
+      "category": "happy",
+      "tier": 2,
+      "interval": 300,
+      "language": "en",
+      "tags": [
+        "solutions",
+        "progress"
+      ]
+    },
+    {
+      "name": "google-news-happy",
+      "type": "rss",
+      "url": "https://news.google.com/rss/search?q=good+news+positive&hl=en-US&gl=US&ceid=US:en",
+      "category": "happy",
+      "tier": 4,
+      "interval": 600,
+      "language": "en",
+      "tags": [
+        "aggregator"
+      ]
+    },
+    {
+      "name": "desmog",
+      "type": "rss",
+      "url": "https://www.desmog.com/feed/",
+      "category": "climate",
+      "tier": 2,
+      "interval": 600,
+      "language": "en",
+      "tags": [
+        "disinformation",
+        "fossil-fuels"
+      ]
+    },
+    {
+      "name": "carbon-brief",
+      "type": "rss",
+      "url": "https://www.carbonbrief.org/feed/",
+      "category": "climate",
+      "tier": 1,
+      "interval": 900,
+      "language": "en",
+      "tags": [
+        "science",
+        "policy",
+        "data"
+      ]
+    },
+    {
+      "name": "upworthy",
+      "type": "rss",
+      "url": "https://www.upworthy.com/feed",
+      "category": "happy",
+      "tier": 3,
+      "interval": 600,
+      "language": "en",
+      "tags": [
+        "viral",
+        "feel-good"
+      ]
+    }
+  ],
+  "layers": [],
+  "panels": [
+    {
+      "name": "good-news",
+      "type": "news-feed",
+      "displayName": "Good News",
+      "position": 0,
+      "config": {
+        "categories": [
+          "happy"
+        ],
+        "maxItems": 30
+      }
+    }
+  ],
+  "views": [
+    {
+      "name": "overview",
+      "displayName": "Overview",
+      "panels": [
+        "good-news"
+      ],
+      "default": true
+    }
+  ],
+  "ai": {
+    "enabled": false
+  },
+  "map": {
+    "style": "https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json",
+    "center": [
+      0,
+      20
+    ],
+    "zoom": 3,
+    "projection": "mercator"
+  },
+  "theme": {
+    "palette": "forest"
+  }
+}

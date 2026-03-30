@@ -1,0 +1,46 @@
+# {{PROJECT_NAME}}
+
+A real-time intelligence dashboard built with [monitor-forge](https://github.com/alohays/monitor-forge).
+
+## Getting Started
+
+```bash
+# Install dependencies
+npm install
+
+# Validate configuration
+npm run validate
+
+# Start development server
+npm run dev
+```
+
+## Configuration
+
+Edit `monitor-forge.config.json` to customize your dashboard, or use the CLI:
+
+```bash
+# Add a data source
+npx tsx forge/bin/forge.ts source add rss --name my-feed --url https://example.com/rss --category news
+
+# Add a panel
+npx tsx forge/bin/forge.ts panel add news-feed --name my-panel --display-name "My Panel"
+
+# Add a view
+npx tsx forge/bin/forge.ts view add main --display-name "Main" --panels "my-panel" --default
+```
+
+## Deployment
+
+```bash
+# Build for production
+npm run build
+
+# Deploy to Vercel
+npm run deploy
+```
+
+## Learn More
+
+- [monitor-forge Documentation](https://github.com/alohays/monitor-forge)
+- [Configuration Reference](https://github.com/alohays/monitor-forge/blob/main/forge/AGENTS.md)

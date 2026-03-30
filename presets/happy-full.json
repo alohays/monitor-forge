@@ -1,0 +1,305 @@
+{
+  "version": "1",
+  "_meta": {
+    "category": "happy",
+    "difficulty": "beginner",
+    "requires_api_keys": [],
+    "optional_api_keys": [
+      "GROQ_API_KEY"
+    ],
+    "preview_description": "Comprehensive positive news coverage with science breakthroughs, conservation wins, and innovation stories"
+  },
+  "monitor": {
+    "name": "Happy Intelligence",
+    "slug": "happy-intelligence",
+    "description": "Comprehensive positive news dashboard covering good news, science breakthroughs, and solutions journalism",
+    "domain": "happy",
+    "tags": [
+      "positive",
+      "good-news",
+      "solutions",
+      "science",
+      "innovation"
+    ]
+  },
+  "sources": [
+    {
+      "name": "good-news-network",
+      "type": "rss",
+      "url": "https://www.goodnewsnetwork.org/feed/",
+      "category": "happy",
+      "tier": 2,
+      "interval": 300,
+      "language": "en",
+      "tags": [
+        "positive",
+        "feel-good"
+      ]
+    },
+    {
+      "name": "positive-news",
+      "type": "rss",
+      "url": "https://www.positive.news/feed/",
+      "category": "happy",
+      "tier": 2,
+      "interval": 300,
+      "language": "en",
+      "tags": [
+        "constructive",
+        "solutions"
+      ]
+    },
+    {
+      "name": "reasons-cheerful",
+      "type": "rss",
+      "url": "https://reasonstobecheerful.world/feed/",
+      "category": "happy",
+      "tier": 2,
+      "interval": 300,
+      "language": "en",
+      "tags": [
+        "solutions",
+        "progress"
+      ]
+    },
+    {
+      "name": "google-news-happy",
+      "type": "rss",
+      "url": "https://news.google.com/rss/search?q=good+news+positive&hl=en-US&gl=US&ceid=US:en",
+      "category": "happy",
+      "tier": 4,
+      "interval": 600,
+      "language": "en",
+      "tags": [
+        "aggregator"
+      ]
+    },
+    {
+      "name": "desmog",
+      "type": "rss",
+      "url": "https://www.desmog.com/feed/",
+      "category": "climate",
+      "tier": 2,
+      "interval": 600,
+      "language": "en",
+      "tags": [
+        "disinformation",
+        "fossil-fuels"
+      ]
+    },
+    {
+      "name": "guardian-climate",
+      "type": "rss",
+      "url": "https://www.theguardian.com/environment/climate-crisis/rss",
+      "category": "climate",
+      "tier": 1,
+      "interval": 900,
+      "language": "en",
+      "tags": [
+        "uk",
+        "global"
+      ]
+    },
+    {
+      "name": "upworthy",
+      "type": "rss",
+      "url": "https://www.upworthy.com/feed",
+      "category": "happy",
+      "tier": 3,
+      "interval": 600,
+      "language": "en",
+      "tags": [
+        "viral",
+        "feel-good"
+      ]
+    },
+    {
+      "name": "inside-climate-news",
+      "type": "rss",
+      "url": "https://insideclimatenews.org/feed/",
+      "category": "climate",
+      "tier": 1,
+      "interval": 900,
+      "language": "en",
+      "tags": [
+        "investigative",
+        "us-climate"
+      ]
+    },
+    {
+      "name": "carbon-brief",
+      "type": "rss",
+      "url": "https://www.carbonbrief.org/feed/",
+      "category": "climate",
+      "tier": 1,
+      "interval": 900,
+      "language": "en",
+      "tags": [
+        "science",
+        "policy",
+        "data"
+      ]
+    },
+    {
+      "name": "cleantech-group",
+      "type": "rss",
+      "url": "https://cleantechnica.com/feed/",
+      "category": "energy",
+      "tier": 2,
+      "interval": 900,
+      "language": "en",
+      "tags": [
+        "cleantech",
+        "ev"
+      ]
+    },
+    {
+      "name": "utility-dive",
+      "type": "rss",
+      "url": "https://www.utilitydive.com/feeds/news/",
+      "category": "energy",
+      "tier": 2,
+      "interval": 900,
+      "language": "en",
+      "tags": [
+        "utilities",
+        "grid"
+      ]
+    },
+    {
+      "name": "google-news-climate",
+      "type": "rss",
+      "url": "https://news.google.com/rss/search?q=climate+change&hl=en-US&gl=US&ceid=US:en",
+      "category": "climate",
+      "tier": 4,
+      "interval": 900,
+      "language": "en",
+      "tags": [
+        "aggregator"
+      ]
+    },
+    {
+      "name": "mongabay",
+      "type": "rss",
+      "url": "https://news.mongabay.com/feed/",
+      "category": "climate",
+      "tier": 2,
+      "interval": 900,
+      "language": "en",
+      "tags": [
+        "biodiversity",
+        "forests"
+      ]
+    },
+    {
+      "name": "google-news-energy",
+      "type": "rss",
+      "url": "https://news.google.com/rss/search?q=energy+transition&hl=en-US&gl=US&ceid=US:en",
+      "category": "energy",
+      "tier": 4,
+      "interval": 900,
+      "language": "en",
+      "tags": [
+        "aggregator"
+      ]
+    },
+    {
+      "name": "rest-of-world",
+      "type": "rss",
+      "url": "https://restofworld.org/feed/latest/",
+      "category": "tech",
+      "tier": 1,
+      "interval": 900,
+      "language": "en",
+      "tags": [
+        "global-south",
+        "technology"
+      ]
+    }
+  ],
+  "layers": [],
+  "panels": [
+    {
+      "name": "good-news",
+      "type": "news-feed",
+      "displayName": "Good News",
+      "position": 0,
+      "config": {
+        "categories": [
+          "happy",
+          "climate",
+          "energy",
+          "tech"
+        ],
+        "maxItems": 50
+      }
+    },
+    {
+      "name": "bright-spots",
+      "type": "ai-brief",
+      "displayName": "Bright Spots Brief",
+      "position": 1,
+      "config": {
+        "refreshInterval": 600
+      }
+    }
+  ],
+  "views": [
+    {
+      "name": "overview",
+      "displayName": "All Good News",
+      "panels": [
+        "good-news",
+        "bright-spots"
+      ],
+      "default": true
+    },
+    {
+      "name": "science-innovation",
+      "displayName": "Science & Innovation",
+      "panels": [
+        "good-news",
+        "bright-spots"
+      ]
+    },
+    {
+      "name": "people-planet",
+      "displayName": "People & Planet",
+      "panels": [
+        "good-news",
+        "bright-spots"
+      ]
+    }
+  ],
+  "ai": {
+    "enabled": true,
+    "fallbackChain": [
+      "groq"
+    ],
+    "providers": {
+      "groq": {
+        "model": "llama-3.3-70b-versatile",
+        "apiKeyEnv": "GROQ_API_KEY"
+      }
+    },
+    "analysis": {
+      "summarization": true,
+      "entityExtraction": true,
+      "sentimentAnalysis": false,
+      "focalPointDetection": false,
+      "customPrompt": "Focus on bright spots: scientific breakthroughs, conservation wins, community solutions, renewable energy milestones, and stories of human progress and resilience."
+    }
+  },
+  "map": {
+    "style": "https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json",
+    "center": [
+      0,
+      20
+    ],
+    "zoom": 3,
+    "projection": "mercator"
+  },
+  "theme": {
+    "palette": "forest"
+  }
+}
