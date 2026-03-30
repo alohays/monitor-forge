@@ -1,0 +1,165 @@
+{
+  "version": "1",
+  "_meta": {
+    "category": "commodity",
+    "difficulty": "beginner",
+    "requires_api_keys": [],
+    "optional_api_keys": [],
+    "preview_description": "Track global commodity markets including oil, metals, and agriculture"
+  },
+  "monitor": {
+    "name": "Commodity Monitor",
+    "slug": "commodity-monitor",
+    "description": "Minimal commodity market tracking dashboard",
+    "domain": "commodities",
+    "tags": [
+      "commodities",
+      "energy",
+      "metals"
+    ]
+  },
+  "sources": [
+    {
+      "name": "sp-global-commodities",
+      "type": "rss",
+      "url": "https://www.spglobal.com/commodityinsights/en/rss-feed",
+      "category": "commodities",
+      "tier": 1,
+      "interval": 300,
+      "language": "en",
+      "tags": [
+        "oil",
+        "metals",
+        "agriculture"
+      ]
+    },
+    {
+      "name": "reuters-commodities",
+      "type": "rss",
+      "url": "https://news.google.com/rss/search?q=site:reuters.com+commodities&hl=en-US&gl=US&ceid=US:en",
+      "category": "commodities",
+      "tier": 1,
+      "interval": 300,
+      "language": "en",
+      "tags": [
+        "wire-service",
+        "markets"
+      ]
+    },
+    {
+      "name": "oilprice-com",
+      "type": "rss",
+      "url": "https://oilprice.com/rss/main",
+      "category": "commodities",
+      "tier": 2,
+      "interval": 300,
+      "language": "en",
+      "tags": [
+        "oil",
+        "gas",
+        "energy"
+      ]
+    },
+    {
+      "name": "kitco-gold",
+      "type": "rss",
+      "url": "https://www.kitco.com/feed/",
+      "category": "commodities",
+      "tier": 2,
+      "interval": 300,
+      "language": "en",
+      "tags": [
+        "gold",
+        "precious-metals"
+      ]
+    },
+    {
+      "name": "mining-com",
+      "type": "rss",
+      "url": "https://www.mining.com/feed/",
+      "category": "commodities",
+      "tier": 2,
+      "interval": 600,
+      "language": "en",
+      "tags": [
+        "mining",
+        "metals"
+      ]
+    },
+    {
+      "name": "iea-news",
+      "type": "rss",
+      "url": "https://www.iea.org/rss/news.xml",
+      "category": "energy",
+      "tier": 1,
+      "interval": 600,
+      "language": "en",
+      "tags": [
+        "policy",
+        "data"
+      ]
+    },
+    {
+      "name": "energy-monitor",
+      "type": "rss",
+      "url": "https://www.energymonitor.ai/feed/",
+      "category": "energy",
+      "tier": 2,
+      "interval": 600,
+      "language": "en",
+      "tags": [
+        "transition",
+        "analysis"
+      ]
+    }
+  ],
+  "layers": [],
+  "panels": [
+    {
+      "name": "commodity-news",
+      "type": "news-feed",
+      "displayName": "Commodity News",
+      "position": 0,
+      "config": {
+        "categories": [
+          "commodities",
+          "energy"
+        ],
+        "maxItems": 30
+      }
+    },
+    {
+      "name": "market-ticker",
+      "type": "market-ticker",
+      "displayName": "Market Ticker",
+      "position": 1,
+      "config": {}
+    }
+  ],
+  "views": [
+    {
+      "name": "overview",
+      "displayName": "Overview",
+      "panels": [
+        "commodity-news",
+        "market-ticker"
+      ],
+      "default": true
+    }
+  ],
+  "ai": {
+    "enabled": false
+  },
+  "map": {
+    "style": "https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json",
+    "center": [
+      0,
+      20
+    ],
+    "zoom": 3,
+    "projection": "mercator"
+  },
+  "theme": {
+    "palette": "sunset"
+  }
+}

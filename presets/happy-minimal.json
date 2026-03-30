@@ -1,0 +1,154 @@
+{
+  "version": "1",
+  "_meta": {
+    "category": "happy",
+    "difficulty": "beginner",
+    "requires_api_keys": [],
+    "optional_api_keys": [],
+    "preview_description": "Curated positive news from Good News Network, Positive News, and more"
+  },
+  "monitor": {
+    "name": "Happy Monitor",
+    "slug": "happy-monitor",
+    "description": "Curated positive and uplifting news dashboard",
+    "domain": "happy",
+    "tags": [
+      "positive",
+      "good-news",
+      "solutions"
+    ]
+  },
+  "sources": [
+    {
+      "name": "good-news-network",
+      "type": "rss",
+      "url": "https://www.goodnewsnetwork.org/feed/",
+      "category": "happy",
+      "tier": 2,
+      "interval": 300,
+      "language": "en",
+      "tags": [
+        "positive",
+        "feel-good"
+      ]
+    },
+    {
+      "name": "positive-news",
+      "type": "rss",
+      "url": "https://www.positive.news/feed/",
+      "category": "happy",
+      "tier": 2,
+      "interval": 300,
+      "language": "en",
+      "tags": [
+        "constructive",
+        "solutions"
+      ]
+    },
+    {
+      "name": "reasons-cheerful",
+      "type": "rss",
+      "url": "https://reasonstobecheerful.world/feed/",
+      "category": "happy",
+      "tier": 2,
+      "interval": 300,
+      "language": "en",
+      "tags": [
+        "solutions",
+        "progress"
+      ]
+    },
+    {
+      "name": "guardian-upside",
+      "type": "rss",
+      "url": "https://www.theguardian.com/lifeandstyle/series/the-upside/rss",
+      "category": "happy",
+      "tier": 1,
+      "interval": 600,
+      "language": "en",
+      "tags": [
+        "solutions",
+        "positive"
+      ]
+    },
+    {
+      "name": "future-crunch",
+      "type": "rss",
+      "url": "https://futurecrunch.com/feed/",
+      "category": "happy",
+      "tier": 2,
+      "interval": 600,
+      "language": "en",
+      "tags": [
+        "progress",
+        "science"
+      ]
+    },
+    {
+      "name": "solutions-journalism",
+      "type": "rss",
+      "url": "https://www.solutionsjournalism.org/feed",
+      "category": "happy",
+      "tier": 2,
+      "interval": 600,
+      "language": "en",
+      "tags": [
+        "solutions",
+        "methodology"
+      ]
+    },
+    {
+      "name": "upworthy",
+      "type": "rss",
+      "url": "https://www.upworthy.com/feed",
+      "category": "happy",
+      "tier": 3,
+      "interval": 600,
+      "language": "en",
+      "tags": [
+        "viral",
+        "feel-good"
+      ]
+    }
+  ],
+  "layers": [],
+  "panels": [
+    {
+      "name": "good-news",
+      "type": "news-feed",
+      "displayName": "Good News",
+      "position": 0,
+      "config": {
+        "categories": [
+          "happy"
+        ],
+        "maxItems": 30
+      }
+    }
+  ],
+  "views": [
+    {
+      "name": "overview",
+      "displayName": "Overview",
+      "panels": [
+        "good-news"
+      ],
+      "default": true
+    }
+  ],
+  "ai": {
+    "enabled": false
+  },
+  "map": {
+    "style": "https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json",
+    "center": [
+      0,
+      20
+    ],
+    "zoom": 3,
+    "projection": "mercator"
+  },
+  "theme": {
+    "palette": "forest"
+  }
+}
