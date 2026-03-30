@@ -23,8 +23,8 @@ const parser = new XMLParser({
   trimValues: true,
   processEntities: true,
   htmlEntities: true,
-  isArray: (_name: string, jpath: string) =>
-    jpath === 'rss.channel.item' || jpath === 'feed.entry',
+  isArray: (_name: string, jpath: string | object) =>
+    typeof jpath === 'string' && (jpath === 'rss.channel.item' || jpath === 'feed.entry'),
 });
 
 export default async function handler(request: Request): Promise<Response> {
@@ -45,10 +45,20 @@ export default async function handler(request: Request): Promise<Response> {
 
   try {
     const allItems: RSSItem[] = [];
+    const errors: string[] = [];
 
     for (const feedUrl of feeds) {
-      const items = await getCached(`rss:${feedUrl}`, 300, () => fetchRSSFeed(feedUrl));
-      allItems.push(...items);
+      try {
+        const items = await getCached(`rss:${feedUrl}`, 300, () => fetchRSSFeed(feedUrl));
+        allItems.push(...items);
+      } catch (err) {
+        errors.push(`${feedUrl}: ${err}`);
+      }
+    }
+
+    // If ALL feeds failed, return 500
+    if (allItems.length === 0 && errors.length > 0) {
+      return errorResponse(500, `RSS fetch failed: ${errors.join('; ')}`);
     }
 
     // Sort by date, newest first

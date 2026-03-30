@@ -112,17 +112,15 @@ describe('news/v1 handler', () => {
   // ─── Malformed & Malicious XML Handling ───────────────────
 
   describe('malformed and malicious XML handling', () => {
-    it('returns empty items for truncated XML', async () => {
+    it('returns 500 for truncated XML when it is the only feed', async () => {
       const truncated = `<?xml version="1.0"?><rss><channel><item><title>Truncated`;
       vi.spyOn(globalThis, 'fetch').mockResolvedValueOnce(
         new Response(truncated, { status: 200 }),
       );
       const request = new Request('https://example.com/api/news/v1?feeds=https://feed.example.com/truncated');
       const response = await handler(request);
-      expect(response.status).toBe(200);
-      const body = await response.json() as { items: unknown[] };
-      // Truncated <item> without </item> won't match the regex → 0 items
-      expect(body.items).toHaveLength(0);
+      // fast-xml-parser 5.5+ throws on truncated XML; single feed failure → 500
+      expect(response.status).toBe(500);
     });
 
     it('returns empty items for feed with no items', async () => {
@@ -288,16 +286,18 @@ describe('news/v1 handler', () => {
       expect(body.items[0].link).toBe('https://example.com/alternate');
     });
 
-    it('handles multiple feeds with mixed success', async () => {
+    it('handles multiple feeds with mixed success (partial success)', async () => {
       vi.spyOn(globalThis, 'fetch')
         .mockResolvedValueOnce(new Response(sampleRSS, { status: 200 }))
         .mockRejectedValueOnce(new Error('Feed 2 down'));
-      // When one feed fails, the entire request fails (current behavior)
+      // When one feed succeeds, return 200 with partial results (graceful degradation)
       const request = new Request(
         'https://example.com/api/news/v1?feeds=https://feed.example.com/ok,https://feed.example.com/bad-multi'
       );
       const response = await handler(request);
-      expect(response.status).toBe(500);
+      expect(response.status).toBe(200);
+      const body = await response.json() as { items: unknown[] };
+      expect(body.items.length).toBeGreaterThan(0);
     });
   });
 });
