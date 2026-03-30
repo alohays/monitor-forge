@@ -1,5 +1,5 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
-import { join, dirname } from 'node:path';
+import { join, dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { execSync } from 'node:child_process';
 import { getPreset } from './presets.js';
@@ -96,7 +96,7 @@ function generateConfig(template: string, projectName: string, ai: boolean): str
 
 export async function scaffold(options: ScaffoldOptions): Promise<string> {
   const { directory, projectName, template, ai, install } = options;
-  const targetDir = join(process.cwd(), directory);
+  const targetDir = resolve(directory);
 
   if (existsSync(targetDir)) {
     throw new Error(`Directory "${directory}" already exists. Please choose a different name.`);

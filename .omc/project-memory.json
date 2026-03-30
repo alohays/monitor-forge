@@ -1,0 +1,237 @@
+{
+  "version": "1.0.0",
+  "lastScanned": 1774908695056,
+  "projectRoot": "/Users/iyunseong/.clawteam/workspaces/mf-v050-qa/fix-scaffold",
+  "techStack": {
+    "languages": [
+      {
+        "name": "JavaScript/TypeScript",
+        "version": ">=18.0.0",
+        "confidence": "high",
+        "markers": [
+          "package.json"
+        ]
+      },
+      {
+        "name": "TypeScript",
+        "version": null,
+        "confidence": "high",
+        "markers": [
+          "tsconfig.json"
+        ]
+      }
+    ],
+    "frameworks": [
+      {
+        "name": "@playwright/test",
+        "version": "1.58.2",
+        "category": "testing"
+      },
+      {
+        "name": "vite",
+        "version": "6.0.0",
+        "category": "build"
+      },
+      {
+        "name": "vitest",
+        "version": "4.0.18",
+        "category": "testing"
+      }
+    ],
+    "packageManager": "npm",
+    "runtime": "Node.js 18.0.0"
+  },
+  "build": {
+    "buildCommand": "npm run build",
+    "testCommand": "npm test",
+    "lintCommand": "npm run lint",
+    "devCommand": "npm run dev",
+    "scripts": {
+      "forge": "tsx forge/bin/forge.ts",
+      "dev": "tsx forge/bin/forge.ts dev",
+      "build": "tsx forge/bin/forge.ts build",
+      "deploy": "tsx forge/bin/forge.ts deploy",
+      "validate": "tsx forge/bin/forge.ts validate",
+      "typecheck": "tsc --noEmit",
+      "lint": "eslint . --ext .ts,.tsx",
+      "test": "vitest run",
+      "test:watch": "vitest",
+      "test:coverage": "vitest run --coverage",
+      "test:e2e": "npx playwright test --config e2e/playwright.config.ts",
+      "prepare": "git config core.hooksPath .githooks && (tsx forge/bin/forge.ts build --skip-vite --format json || true)"
+    }
+  },
+  "conventions": {
+    "namingStyle": "camelCase/PascalCase",
+    "importStyle": "ES modules",
+    "testPattern": "*.test.ts",
+    "fileOrganization": null
+  },
+  "structure": {
+    "isMonorepo": true,
+    "workspaces": [
+      "packages/*"
+    ],
+    "mainDirectories": [
+      "docs",
+      "scripts",
+      "src",
+      "test"
+    ],
+    "gitBranches": {
+      "defaultBranch": "main",
+      "branchingStrategy": null
+    }
+  },
+  "customNotes": [],
+  "directoryMap": {
+    "api": {
+      "path": "api",
+      "purpose": "API routes",
+      "fileCount": 1,
+      "lastAccessed": 1774908694940,
+      "keyFiles": [
+        "AGENTS.md"
+      ]
+    },
+    "data": {
+      "path": "data",
+      "purpose": "Data files",
+      "fileCount": 0,
+      "lastAccessed": 1774908694940,
+      "keyFiles": []
+    },
+    "docs": {
+      "path": "docs",
+      "purpose": "Documentation",
+      "fileCount": 1,
+      "lastAccessed": 1774908694945,
+      "keyFiles": [
+        "gh-cli-bridge.md"
+      ]
+    },
+    "e2e": {
+      "path": "e2e",
+      "purpose": null,
+      "fileCount": 2,
+      "lastAccessed": 1774908694946,
+      "keyFiles": [
+        "playwright.config.ts",
+        "visual-animations.spec.ts"
+      ]
+    },
+    "forge": {
+      "path": "forge",
+      "purpose": null,
+      "fileCount": 1,
+      "lastAccessed": 1774908694946,
+      "keyFiles": [
+        "AGENTS.md"
+      ]
+    },
+    "packages": {
+      "path": "packages",
+      "purpose": null,
+      "fileCount": 0,
+      "lastAccessed": 1774908694946,
+      "keyFiles": []
+    },
+    "presets": {
+      "path": "presets",
+      "purpose": null,
+      "fileCount": 19,
+      "lastAccessed": 1774908694946,
+      "keyFiles": [
+        "blank.json",
+        "climate-full.json",
+        "climate-minimal.json",
+        "commodity-full.json",
+        "commodity-minimal.json"
+      ]
+    },
+    "scripts": {
+      "path": "scripts",
+      "purpose": "Build/utility scripts",
+      "fileCount": 1,
+      "lastAccessed": 1774908694947,
+      "keyFiles": [
+        "verify-feeds.ts"
+      ]
+    },
+    "src": {
+      "path": "src",
+      "purpose": "Source code",
+      "fileCount": 4,
+      "lastAccessed": 1774908694947,
+      "keyFiles": [
+        "AGENTS.md",
+        "App.ts",
+        "main.ts",
+        "vite-env.d.ts"
+      ]
+    },
+    "test": {
+      "path": "test",
+      "purpose": "Test files",
+      "fileCount": 4,
+      "lastAccessed": 1774908694947,
+      "keyFiles": [
+        "helpers.ts",
+        "preset-validate-all.test.ts",
+        "presets-pipeline.test.ts",
+        "presets.test.ts"
+      ]
+    },
+    "e2e/helpers": {
+      "path": "e2e/helpers",
+      "purpose": "Helper functions",
+      "fileCount": 1,
+      "lastAccessed": 1774908694950,
+      "keyFiles": [
+        "mock-data.ts"
+      ]
+    },
+    "forge/bin": {
+      "path": "forge/bin",
+      "purpose": "Executable scripts",
+      "fileCount": 1,
+      "lastAccessed": 1774908694950,
+      "keyFiles": [
+        "forge.ts"
+      ]
+    },
+    "forge/data": {
+      "path": "forge/data",
+      "purpose": "Data files",
+      "fileCount": 4,
+      "lastAccessed": 1774908694950,
+      "keyFiles": [
+        "api-templates.json",
+        "api-templates.schema.ts",
+        "rss-library.json"
+      ]
+    },
+    "forge/src": {
+      "path": "forge/src",
+      "purpose": "Source code",
+      "fileCount": 0,
+      "lastAccessed": 1774908694950,
+      "keyFiles": []
+    }
+  },
+  "hotPaths": [
+    {
+      "path": "packages/create-monitor-forge/src/scaffold.ts",
+      "accessCount": 3,
+      "lastAccessed": 1774908744654,
+      "type": "file"
+    },
+    {
+      "path": "packages/create-monitor-forge/src/index.ts",
+      "accessCount": 3,
+      "lastAccessed": 1774908746124,
+      "type": "file"
+    }
+  ],
+  "userDirectives": []
+}
