@@ -1,0 +1,570 @@
+{
+  "schemaVersion": "1",
+  "templates": [
+    {
+      "id": "usgs-earthquakes",
+      "name": "USGS Earthquakes",
+      "description": "Real-time earthquake data from the USGS Earthquake Hazards Program",
+      "provider": "USGS",
+      "baseUrl": "https://earthquake.usgs.gov",
+      "endpoints": [
+        {
+          "path": "/fdsnws/event/1/query",
+          "method": "GET",
+          "params": {
+            "format": "geojson",
+            "limit": "50",
+            "orderby": "time"
+          },
+          "interval": 300,
+          "description": "Recent earthquakes worldwide"
+        }
+      ],
+      "authType": "none",
+      "rateLimit": {
+        "requests": 20,
+        "windowSeconds": 60
+      },
+      "responseFormat": "geojson",
+      "category": "geospatial",
+      "tier": 1,
+      "proxyRequired": false,
+      "docsUrl": "https://earthquake.usgs.gov/fdsnws/event/1/"
+    },
+    {
+      "id": "nasa-eonet",
+      "name": "NASA EONET",
+      "description": "Natural events tracked by NASA Earth Observatory",
+      "provider": "NASA",
+      "baseUrl": "https://eonet.gsfc.nasa.gov",
+      "endpoints": [
+        {
+          "path": "/api/v3/events",
+          "method": "GET",
+          "params": {
+            "limit": "20"
+          },
+          "interval": 600,
+          "description": "Active natural events"
+        }
+      ],
+      "authType": "none",
+      "rateLimit": {
+        "requests": 30,
+        "windowSeconds": 60
+      },
+      "responseFormat": "json",
+      "category": "geospatial",
+      "tier": 1,
+      "proxyRequired": false,
+      "docsUrl": "https://eonet.gsfc.nasa.gov/docs/v3"
+    },
+    {
+      "id": "gdacs-alerts",
+      "name": "GDACS Alerts",
+      "description": "Global disaster alerts from the Global Disaster Alert and Coordination System",
+      "provider": "GDACS",
+      "baseUrl": "https://www.gdacs.org",
+      "endpoints": [
+        {
+          "path": "/xml/rss.xml",
+          "method": "GET",
+          "params": {},
+          "interval": 600,
+          "description": "Current disaster alerts RSS feed"
+        }
+      ],
+      "authType": "none",
+      "rateLimit": {
+        "requests": 10,
+        "windowSeconds": 60
+      },
+      "responseFormat": "xml",
+      "category": "geospatial",
+      "tier": 1,
+      "proxyRequired": false,
+      "docsUrl": "https://www.gdacs.org/Knowledge/overview.aspx"
+    },
+    {
+      "id": "nws-alerts",
+      "name": "NWS Alerts",
+      "description": "Active weather alerts from the US National Weather Service",
+      "provider": "NWS",
+      "baseUrl": "https://api.weather.gov",
+      "endpoints": [
+        {
+          "path": "/alerts/active",
+          "method": "GET",
+          "params": {},
+          "interval": 300,
+          "description": "All active weather alerts"
+        }
+      ],
+      "authType": "none",
+      "rateLimit": {
+        "requests": 30,
+        "windowSeconds": 60
+      },
+      "responseFormat": "json",
+      "category": "geospatial",
+      "tier": 1,
+      "proxyRequired": false,
+      "docsUrl": "https://www.weather.gov/documentation/services-web-api"
+    },
+    {
+      "id": "coingecko-markets",
+      "name": "CoinGecko Markets",
+      "description": "Cryptocurrency market data including price, volume, and market cap",
+      "provider": "CoinGecko",
+      "baseUrl": "https://api.coingecko.com",
+      "endpoints": [
+        {
+          "path": "/api/v3/coins/markets",
+          "method": "GET",
+          "params": {
+            "vs_currency": "usd",
+            "order": "market_cap_desc",
+            "per_page": "50"
+          },
+          "interval": 120,
+          "description": "Top coins by market cap"
+        }
+      ],
+      "authType": "none",
+      "rateLimit": {
+        "requests": 10,
+        "windowSeconds": 60
+      },
+      "responseFormat": "json",
+      "category": "financial",
+      "tier": 1,
+      "proxyRequired": false,
+      "docsUrl": "https://docs.coingecko.com/reference/coins-markets"
+    },
+    {
+      "id": "polymarket-events",
+      "name": "Polymarket Events",
+      "description": "Active prediction market events from Polymarket",
+      "provider": "Polymarket",
+      "baseUrl": "https://gamma-api.polymarket.com",
+      "endpoints": [
+        {
+          "path": "/events",
+          "method": "GET",
+          "params": {
+            "active": "true",
+            "limit": "20"
+          },
+          "interval": 300,
+          "description": "Active prediction market events"
+        }
+      ],
+      "authType": "none",
+      "rateLimit": {
+        "requests": 20,
+        "windowSeconds": 60
+      },
+      "responseFormat": "json",
+      "category": "financial",
+      "tier": 2,
+      "proxyRequired": false,
+      "docsUrl": "https://docs.polymarket.com/"
+    },
+    {
+      "id": "ecb-exchange-rates",
+      "name": "ECB Exchange Rates",
+      "description": "Euro foreign exchange reference rates from the European Central Bank",
+      "provider": "ECB",
+      "baseUrl": "https://data-api.ecb.europa.eu",
+      "endpoints": [
+        {
+          "path": "/service/data/EXR/D..EUR.SP00.A",
+          "method": "GET",
+          "params": {
+            "lastNObservations": "5",
+            "format": "jsondata"
+          },
+          "interval": 3600,
+          "description": "Daily EUR exchange rates"
+        }
+      ],
+      "authType": "none",
+      "rateLimit": {
+        "requests": 20,
+        "windowSeconds": 60
+      },
+      "responseFormat": "json",
+      "category": "financial",
+      "tier": 1,
+      "proxyRequired": false,
+      "docsUrl": "https://data.ecb.europa.eu/help/api/overview"
+    },
+    {
+      "id": "fred-economic",
+      "name": "FRED Economic Data",
+      "description": "Economic data series from the Federal Reserve Bank of St. Louis",
+      "provider": "Federal Reserve",
+      "baseUrl": "https://api.stlouisfed.org",
+      "endpoints": [
+        {
+          "path": "/fred/series/observations",
+          "method": "GET",
+          "params": {
+            "file_type": "json"
+          },
+          "interval": 3600,
+          "description": "Economic series observations"
+        }
+      ],
+      "authType": "api-key",
+      "authEnvVar": "FRED_API_KEY",
+      "rateLimit": {
+        "requests": 120,
+        "windowSeconds": 60
+      },
+      "responseFormat": "json",
+      "category": "financial",
+      "tier": 2,
+      "proxyRequired": true,
+      "docsUrl": "https://fred.stlouisfed.org/docs/api/fred/"
+    },
+    {
+      "id": "gdelt-events",
+      "name": "GDELT Events",
+      "description": "Global event monitoring from the GDELT Project",
+      "provider": "GDELT",
+      "baseUrl": "https://api.gdeltproject.org",
+      "endpoints": [
+        {
+          "path": "/api/v2/doc/doc",
+          "method": "GET",
+          "params": {
+            "query": "",
+            "mode": "artlist",
+            "maxrecords": "50",
+            "format": "json"
+          },
+          "interval": 300,
+          "description": "Recent global news articles"
+        }
+      ],
+      "authType": "none",
+      "rateLimit": {
+        "requests": 10,
+        "windowSeconds": 60
+      },
+      "responseFormat": "json",
+      "category": "intelligence",
+      "tier": 1,
+      "proxyRequired": false,
+      "docsUrl": "https://blog.gdeltproject.org/gdelt-doc-2-0-api-debuts/"
+    },
+    {
+      "id": "mediastack-news",
+      "name": "MediaStack News",
+      "description": "Live worldwide news data from MediaStack",
+      "provider": "MediaStack",
+      "baseUrl": "https://api.mediastack.com",
+      "endpoints": [
+        {
+          "path": "/v1/news",
+          "method": "GET",
+          "params": {
+            "languages": "en",
+            "limit": "50"
+          },
+          "interval": 600,
+          "description": "Latest news articles"
+        }
+      ],
+      "authType": "api-key",
+      "authEnvVar": "MEDIASTACK_API_KEY",
+      "rateLimit": {
+        "requests": 100,
+        "windowSeconds": 60
+      },
+      "responseFormat": "json",
+      "category": "intelligence",
+      "tier": 2,
+      "proxyRequired": true,
+      "docsUrl": "https://mediastack.com/documentation"
+    },
+    {
+      "id": "newsdata-latest",
+      "name": "NewsData Latest",
+      "description": "Latest news from NewsData.io aggregator",
+      "provider": "NewsData.io",
+      "baseUrl": "https://newsdata.io",
+      "endpoints": [
+        {
+          "path": "/api/1/latest",
+          "method": "GET",
+          "params": {
+            "language": "en"
+          },
+          "interval": 600,
+          "description": "Latest news articles"
+        }
+      ],
+      "authType": "api-key",
+      "authEnvVar": "NEWSDATA_API_KEY",
+      "rateLimit": {
+        "requests": 30,
+        "windowSeconds": 60
+      },
+      "responseFormat": "json",
+      "category": "intelligence",
+      "tier": 2,
+      "proxyRequired": true,
+      "docsUrl": "https://newsdata.io/documentation"
+    },
+    {
+      "id": "nasa-apod",
+      "name": "NASA APOD",
+      "description": "Astronomy Picture of the Day from NASA",
+      "provider": "NASA",
+      "baseUrl": "https://api.nasa.gov",
+      "endpoints": [
+        {
+          "path": "/planetary/apod",
+          "method": "GET",
+          "params": {},
+          "interval": 86400,
+          "description": "Astronomy picture of the day"
+        }
+      ],
+      "authType": "api-key",
+      "authEnvVar": "NASA_API_KEY",
+      "rateLimit": {
+        "requests": 30,
+        "windowSeconds": 3600
+      },
+      "responseFormat": "json",
+      "category": "science",
+      "tier": 1,
+      "proxyRequired": true,
+      "docsUrl": "https://api.nasa.gov/"
+    },
+    {
+      "id": "spacex-launches",
+      "name": "SpaceX Launches",
+      "description": "Launch data from the SpaceX open API",
+      "provider": "SpaceX",
+      "baseUrl": "https://api.spacexdata.com",
+      "endpoints": [
+        {
+          "path": "/v5/launches/latest",
+          "method": "GET",
+          "params": {},
+          "interval": 3600,
+          "description": "Latest launch information"
+        }
+      ],
+      "authType": "none",
+      "rateLimit": {
+        "requests": 15,
+        "windowSeconds": 60
+      },
+      "responseFormat": "json",
+      "category": "science",
+      "tier": 1,
+      "proxyRequired": false,
+      "docsUrl": "https://github.com/r-spacex/SpaceX-API"
+    },
+    {
+      "id": "iss-location",
+      "name": "ISS Location",
+      "description": "Real-time International Space Station position tracker",
+      "provider": "Open Notify",
+      "baseUrl": "http://api.open-notify.org",
+      "endpoints": [
+        {
+          "path": "/iss-now.json",
+          "method": "GET",
+          "params": {},
+          "interval": 30,
+          "description": "Current ISS latitude and longitude"
+        }
+      ],
+      "authType": "none",
+      "rateLimit": {
+        "requests": 60,
+        "windowSeconds": 60
+      },
+      "responseFormat": "json",
+      "category": "science",
+      "tier": 1,
+      "proxyRequired": false,
+      "docsUrl": "http://open-notify.org/Open-Notify-API/"
+    },
+    {
+      "id": "noaa-climate",
+      "name": "NOAA Climate Data",
+      "description": "Climate data from NOAA National Centers for Environmental Information",
+      "provider": "NOAA",
+      "baseUrl": "https://www.ncdc.noaa.gov",
+      "endpoints": [
+        {
+          "path": "/cdo-web/api/v2/data",
+          "method": "GET",
+          "params": {
+            "datasetid": "GHCND",
+            "limit": "25"
+          },
+          "interval": 3600,
+          "description": "Climate observations dataset"
+        }
+      ],
+      "authType": "api-key",
+      "authEnvVar": "NOAA_API_KEY",
+      "rateLimit": {
+        "requests": 5,
+        "windowSeconds": 1
+      },
+      "responseFormat": "json",
+      "category": "science",
+      "tier": 2,
+      "proxyRequired": true,
+      "docsUrl": "https://www.ncdc.noaa.gov/cdo-web/webservices/v2"
+    },
+    {
+      "id": "reddit-worldnews",
+      "name": "Reddit World News",
+      "description": "Top posts from the r/worldnews subreddit",
+      "provider": "Reddit",
+      "baseUrl": "https://www.reddit.com",
+      "endpoints": [
+        {
+          "path": "/r/worldnews/top.json",
+          "method": "GET",
+          "params": {
+            "limit": "25",
+            "t": "day"
+          },
+          "interval": 300,
+          "description": "Top world news posts today"
+        }
+      ],
+      "authType": "none",
+      "rateLimit": {
+        "requests": 10,
+        "windowSeconds": 60
+      },
+      "responseFormat": "json",
+      "category": "social",
+      "tier": 1,
+      "proxyRequired": false,
+      "docsUrl": "https://www.reddit.com/dev/api/"
+    },
+    {
+      "id": "wikipedia-current",
+      "name": "Wikipedia Current Events",
+      "description": "Current events portal from Wikipedia",
+      "provider": "Wikipedia",
+      "baseUrl": "https://en.wikipedia.org",
+      "endpoints": [
+        {
+          "path": "/w/api.php",
+          "method": "GET",
+          "params": {
+            "action": "parse",
+            "page": "Portal:Current_events",
+            "prop": "text",
+            "format": "json"
+          },
+          "interval": 1800,
+          "description": "Current events page content"
+        }
+      ],
+      "authType": "none",
+      "rateLimit": {
+        "requests": 200,
+        "windowSeconds": 60
+      },
+      "responseFormat": "json",
+      "category": "social",
+      "tier": 1,
+      "proxyRequired": false,
+      "docsUrl": "https://www.mediawiki.org/wiki/API:Main_page"
+    },
+    {
+      "id": "github-status",
+      "name": "GitHub Status",
+      "description": "GitHub system status and incident history",
+      "provider": "GitHub",
+      "baseUrl": "https://www.githubstatus.com",
+      "endpoints": [
+        {
+          "path": "/api/v2/incidents.json",
+          "method": "GET",
+          "params": {},
+          "interval": 300,
+          "description": "Recent GitHub incidents"
+        }
+      ],
+      "authType": "none",
+      "rateLimit": {
+        "requests": 60,
+        "windowSeconds": 60
+      },
+      "responseFormat": "json",
+      "category": "infrastructure",
+      "tier": 1,
+      "proxyRequired": false,
+      "docsUrl": "https://www.githubstatus.com/api"
+    },
+    {
+      "id": "cloudflare-radar",
+      "name": "Cloudflare Radar",
+      "description": "Internet traffic insights from Cloudflare Radar",
+      "provider": "Cloudflare",
+      "baseUrl": "https://api.cloudflare.com",
+      "endpoints": [
+        {
+          "path": "/client/v4/radar/http/summary/http_protocol",
+          "method": "GET",
+          "params": {},
+          "interval": 3600,
+          "description": "HTTP protocol distribution summary"
+        }
+      ],
+      "authType": "bearer",
+      "authEnvVar": "CLOUDFLARE_API_KEY",
+      "rateLimit": {
+        "requests": 20,
+        "windowSeconds": 300
+      },
+      "responseFormat": "json",
+      "category": "infrastructure",
+      "tier": 3,
+      "proxyRequired": true,
+      "docsUrl": "https://developers.cloudflare.com/radar/"
+    },
+    {
+      "id": "internet-outages",
+      "name": "IODA Internet Outages",
+      "description": "Internet outage detection and analysis from IODA",
+      "provider": "Georgia Tech / IODA",
+      "baseUrl": "https://api.ioda.inetintel.cc.gatech.edu",
+      "endpoints": [
+        {
+          "path": "/v2/signals/raw",
+          "method": "GET",
+          "params": {},
+          "interval": 600,
+          "description": "Raw internet outage signals"
+        }
+      ],
+      "authType": "none",
+      "rateLimit": {
+        "requests": 10,
+        "windowSeconds": 60
+      },
+      "responseFormat": "json",
+      "category": "infrastructure",
+      "tier": 2,
+      "proxyRequired": false,
+      "docsUrl": "https://api.ioda.inetintel.cc.gatech.edu/v2/"
+    }
+  ]
+}
