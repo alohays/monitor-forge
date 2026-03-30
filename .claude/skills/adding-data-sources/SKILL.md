@@ -3,6 +3,28 @@
 ## Trigger
 User wants to add RSS feeds, API sources, or WebSocket connections to their monitor.
 
+## Recommended: Add from Curated Library
+
+The fastest way to add sources is from the built-in library of 244 curated RSS feeds (20 categories) and 20 public API templates.
+
+```bash
+# Browse available library feeds by category
+npx tsx forge/bin/forge.ts source list-library --category tech --format json
+
+# Add a feed from the curated library (idempotent with --upsert)
+npx tsx forge/bin/forge.ts source add rss --from-library <feed-id> --upsert
+
+# Browse available API templates
+npx tsx forge/bin/forge.ts source list-templates --format json
+
+# Add a source from an API template
+npx tsx forge/bin/forge.ts source add rest-api --from-template <template-id> --upsert
+```
+
+Library feeds include pre-configured URLs, categories, tiers, and propaganda risk metadata. Use `list-library` and `list-templates` to discover available IDs.
+
+For sources not in the library, use the manual add commands below.
+
 ## Source Types
 
 | Type | Use Case | Example |

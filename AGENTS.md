@@ -27,6 +27,18 @@ npx tsx forge/bin/forge.ts setup --template tech-minimal --name "My Dashboard" -
 npx tsx forge/bin/forge.ts source add rss --name my-feed --url https://example.com/rss --category news --upsert
 npx tsx forge/bin/forge.ts panel add news-feed --name my-panel --display-name "My Panel" --upsert
 npx tsx forge/bin/forge.ts view add main --display-name "Main" --panels "my-panel" --default --upsert
+
+# Add source from curated library (244 feeds across 20 categories)
+npx tsx forge/bin/forge.ts source add rss --from-library hn-front-page --upsert
+
+# Add source from public API template (20 templates: USGS, NASA, GDELT, etc.)
+npx tsx forge/bin/forge.ts source add rest-api --from-template usgs-earthquakes --upsert
+
+# Browse available library feeds by category
+npx tsx forge/bin/forge.ts source list-library --category tech
+
+# Apply a declarative config patch (merge-by-name, dry-run first)
+npx tsx forge/bin/forge.ts apply patch.json --dry-run
 ```
 
 ## Error Recovery
