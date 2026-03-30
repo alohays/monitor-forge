@@ -42,8 +42,7 @@ export function registerPresetCommands(program: Command): void {
   preset
     .command('apply <name>')
     .description('Apply a preset to the current configuration')
-    .option('--merge', 'Merge with existing config instead of replacing', false)
-    .action((name, opts) => {
+    .action((name) => {
       const format = (program.opts().format ?? 'table') as OutputFormat;
       const dryRun = program.opts().dryRun ?? false;
 
