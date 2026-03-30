@@ -69,12 +69,12 @@ export function registerSourceCommands(program: Command): void {
   const source = program.command('source').description('Manage data sources');
 
   source
-    .command('add <type>')
+    .command('add [type]')
     .description('Add a data source (rss, rest-api, websocket)')
-    .requiredOption('--name <name>', 'Unique source name (lowercase, hyphens)')
-    .requiredOption('--url <url>', 'Source URL')
-    .requiredOption('--category <category>', 'Category for grouping')
-    .option('--tier <tier>', 'Authority tier 1-4 (1=official, 4=unverified)', '3')
+    .option('--name <name>', 'Unique source name (lowercase, hyphens)')
+    .option('--url <url>', 'Source URL')
+    .option('--category <category>', 'Category for grouping')
+    .option('--tier <tier>', 'Authority tier 1-4 (1=official, 4=unverified)')
     .option('--interval <seconds>', 'Refresh interval in seconds', '300')
     .option('--language <lang>', 'Language code', 'en')
     .option('--tags <tags...>', 'Tags for filtering')
@@ -178,13 +178,26 @@ export function registerSourceCommands(program: Command): void {
           return;
         }
 
-        // Standard add mode
+        // Standard add mode — require type, --name, --url, --category
+        if (!type) {
+          throw new Error("required argument 'type' not specified");
+        }
+        if (!opts.name) {
+          throw new Error("required option '--name <name>' not specified");
+        }
+        if (!opts.url) {
+          throw new Error("required option '--url <url>' not specified");
+        }
+        if (!opts.category) {
+          throw new Error("required option '--category <category>' not specified");
+        }
+
         const sourceConfig: SourceConfig = SourceSchema.parse({
           name: opts.name,
           type,
           url: opts.url,
           category: opts.category,
-          tier: parseInt(opts.tier, 10),
+          tier: parseInt(opts.tier ?? '3', 10),
           interval: parseInt(opts.interval, 10),
           language: opts.language,
           tags: opts.tags ?? [],
