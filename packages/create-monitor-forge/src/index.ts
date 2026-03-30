@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { basename } from 'node:path';
 import { Command } from 'commander';
 import { scaffold } from './scaffold.js';
 import { runInteractive } from './prompts.js';
@@ -33,7 +34,7 @@ const program = new Command()
 
         options = {
           directory,
-          projectName: directory,
+          projectName: basename(directory),
           template: opts.template,
           ai: opts.ai,
           install: opts.install,
