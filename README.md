@@ -12,7 +12,7 @@ The first agent-native dashboard framework — designed for [Claude Code](https:
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Node.js](https://img.shields.io/badge/Node.js-%3E%3D18-green.svg)](https://nodejs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5-blue.svg)](https://www.typescriptlang.org/)
-[![GitHub release](https://img.shields.io/github/v/release/alohays/monitor-forge)](https://github.com/alohays/monitor-forge/releases)
+[![v0.5.0](https://img.shields.io/badge/version-0.5.0-brightgreen)](https://github.com/alohays/monitor-forge/releases/tag/v0.5.0)
 
 <p>
   <a href="#-quick-start"><img src="https://img.shields.io/badge/Quick_Start-blue?style=for-the-badge" alt="Quick Start"></a>
@@ -42,12 +42,21 @@ The first agent-native dashboard framework — designed for [Claude Code](https:
 | Setup time | N/A (single purpose) | Hours to days | **Minutes** |
 | Customization | Edit source code | Edit source code | **CLI commands** |
 | AI agent support | None | None | **Native** (AGENTS.md, Skills) |
-| Domain presets | 1 | 1 per fork | **15 included** |
+| Domain presets | 1 | 1 per fork | **19 included** |
 | AI analysis | None | DIY | **Built-in** (Groq/OpenRouter) |
 | Adding sources | Edit code | Edit code | **`forge source add`** |
 | Deploy | Manual | Manual | **One-click** (Vercel) |
 
 ## 🚀 Quick Start
+
+```bash
+npx create-monitor-forge my-dashboard
+cd my-dashboard
+npm install
+npm run dev    # dashboard at http://localhost:5173
+```
+
+Or clone the repo directly:
 
 ```bash
 git clone https://github.com/YOUR_USERNAME/monitor-forge.git my-monitor
@@ -112,8 +121,8 @@ All customization via `forge` commands. `--format json` for seamless AI agent in
 </td>
 <td width="33%" valign="top">
 
-### 📋 15 Domain Presets
-Pre-built configs across 8 domains: tech, finance, geopolitics, climate, cyber, health, korea. From blank canvas to full setup.
+### 📋 19 Domain Presets
+Pre-built configs across 10 domains: tech, finance, geopolitics, climate, cyber, health, korea, commodity, happy. From blank canvas to full setup.
 
 </td>
 <td width="33%" valign="top">
@@ -143,6 +152,26 @@ Vercel Edge Functions with security headers, CSP, and proxy domain allowlist. RS
 
 </td>
 </tr>
+<tr>
+<td width="33%" valign="top">
+
+### 📰 244 Curated RSS Feeds
+Browse and add from a curated library of 244 RSS feeds across 20 categories — no URL hunting required.
+
+</td>
+<td width="33%" valign="top">
+
+### 🔌 20 API Templates
+Pre-configured API source templates for popular services. Add with a single command.
+
+</td>
+<td width="33%" valign="top">
+
+### 📝 Declarative Config Patching
+Apply bulk configuration changes with `forge apply` — describe your desired state in a patch file.
+
+</td>
+</tr>
 </table>
 
 ## 📦 Available Presets
@@ -167,6 +196,31 @@ Vercel Edge Functions with security headers, CSP, and proxy domain allowlist. RS
 | `health-full` | health | 7 | 4 | + Lancet, CDC Newsroom, bioRxiv, Global Health Now |
 | `korea-minimal` | korea | 3 | 2 | Yonhap English, Korea Herald, BBC Asia |
 | `korea-full` | korea | 7 | 4 | + NK News, Hankyoreh, Reuters Asia, Korea Times |
+| `commodity-minimal` | commodity | 7 RSS | 2 | Basic commodity tracking |
+| `commodity-full` | commodity | 17 RSS + API | 4 | Full commodity intelligence with AI |
+| `happy-minimal` | happy | 7 RSS | 2 | Curated positive news |
+| `happy-full` | happy | 16 RSS | 4 | Comprehensive positive news with AI |
+
+## 📚 Data Library
+
+monitor-forge ships with a curated data library so you can add sources without hunting for URLs:
+
+- **244 RSS Feeds** across 20 categories (tech, finance, science, health, world news, and more)
+- **20 API Templates** for popular services (weather, crypto, earthquake, air quality, and more)
+
+```bash
+# Browse available RSS feeds
+npm run forge -- source list-library
+
+# Add a feed from the library by ID
+npm run forge -- source add --from-library reuters-world
+
+# Browse API templates
+npm run forge -- source list-templates
+
+# Add an API source from a template
+npm run forge -- source add --from-template openweathermap
+```
 
 ## 📡 Workflow & Data Flow
 
@@ -332,7 +386,13 @@ flowchart LR
 | `forge env check/generate` | Manage environment variables |
 | `forge build` | Build for production |
 | `forge dev` | Start development server |
+| `forge apply <file>` | Apply declarative config patch |
+| `forge source list-library` | Browse 244 curated RSS feeds |
+| `forge source list-templates` | Browse 20 API templates |
+| `forge source add --from-library <id>` | Add source from curated library |
+| `forge source add --from-template <id>` | Add source from API template |
 | `forge deploy` | Deploy to Vercel |
+| `forge gh-bridge` *(experimental)* | GitHub CLI bridge PoC |
 
 ## 🔧 Tech Stack
 
@@ -351,7 +411,7 @@ monitor-forge/
 │   ├── core/              # Map, panels, sources, AI engines
 │   └── styles/            # CSS + themes
 ├── ☁️ api/                # Vercel Edge Functions
-├── 📋 presets/            # 15 preset templates (8 domains)
+├── 📋 presets/            # 19 preset templates (10 domains)
 ├── 🗺️ data/geo/           # GeoJSON data files
 ├── 🤖 .claude/skills/     # 5 Claude Code Skills
 ├── 📝 .skills/            # 2 workflow guides
