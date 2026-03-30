@@ -34,5 +34,15 @@ jobs:
       - name: List presets
         run: npx tsx forge/bin/forge.ts preset list --format json
 
+      - name: Validate all presets
+        run: |
+          for preset in presets/*.json; do
+            name=$(basename "$preset" .json)
+            echo "::group::Validating preset: $name"
+            npx tsx forge/bin/forge.ts init --template "$name" --force --format json
+            npx tsx forge/bin/forge.ts validate --format json
+            echo "::endgroup::"
+          done
+
       - name: Build
         run: npx tsx forge/bin/forge.ts build --format json
