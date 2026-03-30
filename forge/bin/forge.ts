@@ -17,6 +17,8 @@ import { registerStatusCommand } from '../src/commands/status.js';
 import { registerThemeCommands } from '../src/commands/theme.js';
 import { registerConfigCommands } from '../src/commands/config.js';
 import { registerSchemaCommand } from '../src/commands/schema.js';
+// EXPERIMENTAL: gh CLI bridge PoC — validates the cli-bridge pattern for v0.6.0
+import { registerGhBridgeCommand } from '../src/commands/gh-bridge.js';
 import { createRequire } from 'node:module';
 const require = createRequire(import.meta.url);
 const pkg = require('../../package.json') as { version: string };
@@ -62,5 +64,7 @@ registerStatusCommand(program);
 registerThemeCommands(program);
 registerConfigCommands(program);
 registerSchemaCommand(program);
+// EXPERIMENTAL: gh CLI bridge PoC — not part of stable API
+registerGhBridgeCommand(program);
 
 program.parse();
