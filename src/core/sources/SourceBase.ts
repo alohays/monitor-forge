@@ -34,6 +34,9 @@ export abstract class SourceBase {
   private cache = new Map<string, { items: SourceItem[]; expires: number }>();
   private seenIds = new Set<string>();
 
+  private static readonly MAX_SEEN_IDS = 10_000;
+  private static readonly EVICTION_BATCH = 2_000;
+
   constructor(config: SourceConfig) {
     this.config = config;
   }
@@ -57,6 +60,16 @@ export abstract class SourceBase {
   }
 
   protected deduplicate(items: SourceItem[]): SourceItem[] {
+    // Evict oldest entries when seenIds reaches capacity (V8 Set preserves insertion order)
+    if (this.seenIds.size >= SourceBase.MAX_SEEN_IDS) {
+      const iterator = this.seenIds.values();
+      for (let i = 0; i < SourceBase.EVICTION_BATCH; i++) {
+        const val = iterator.next();
+        if (val.done) break;
+        this.seenIds.delete(val.value);
+      }
+    }
+
     return items.filter(item => {
       if (this.seenIds.has(item.id)) return false;
       this.seenIds.add(item.id);

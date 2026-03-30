@@ -182,7 +182,7 @@ describe('SourceManager', () => {
 
   it('uses exponential backoff on failure in startSource', async () => {
     const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
-    const manager = new SourceManager();
+    const manager = new SourceManager({ jitterPercent: 0 });
     const interval = 60; // 60 seconds
     manager.initialize([makeConfig('h6', interval)]);
     const src = manager.getSource('h6') as MockSource;
