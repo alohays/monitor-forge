@@ -30,17 +30,16 @@
   },
   "sources": [
     {
-      "name": "sp-global-commodities",
+      "name": "metal-miner",
       "type": "rss",
-      "url": "https://www.spglobal.com/commodityinsights/en/rss-feed",
+      "url": "https://agmetalminer.com/feed/",
       "category": "commodities",
-      "tier": 1,
-      "interval": 300,
+      "tier": 3,
+      "interval": 600,
       "language": "en",
       "tags": [
-        "oil",
         "metals",
-        "agriculture"
+        "procurement"
       ]
     },
     {
@@ -71,71 +70,6 @@
       ]
     },
     {
-      "name": "kitco-gold",
-      "type": "rss",
-      "url": "https://www.kitco.com/feed/",
-      "category": "commodities",
-      "tier": 2,
-      "interval": 300,
-      "language": "en",
-      "tags": [
-        "gold",
-        "precious-metals"
-      ]
-    },
-    {
-      "name": "mining-com",
-      "type": "rss",
-      "url": "https://www.mining.com/feed/",
-      "category": "commodities",
-      "tier": 2,
-      "interval": 600,
-      "language": "en",
-      "tags": [
-        "mining",
-        "metals"
-      ]
-    },
-    {
-      "name": "agrimoney",
-      "type": "rss",
-      "url": "https://www.agrimoney.com/rss",
-      "category": "commodities",
-      "tier": 3,
-      "interval": 600,
-      "language": "en",
-      "tags": [
-        "agriculture",
-        "grains"
-      ]
-    },
-    {
-      "name": "fastmarkets",
-      "type": "rss",
-      "url": "https://www.fastmarkets.com/rss",
-      "category": "commodities",
-      "tier": 2,
-      "interval": 600,
-      "language": "en",
-      "tags": [
-        "metals",
-        "pricing"
-      ]
-    },
-    {
-      "name": "metal-miner",
-      "type": "rss",
-      "url": "https://agmetalminer.com/feed/",
-      "category": "commodities",
-      "tier": 3,
-      "interval": 600,
-      "language": "en",
-      "tags": [
-        "metals",
-        "procurement"
-      ]
-    },
-    {
       "name": "commodity-weather-group",
       "type": "rss",
       "url": "https://news.google.com/rss/search?q=commodity+weather+agriculture&hl=en-US&gl=US&ceid=US:en",
@@ -149,16 +83,53 @@
       ]
     },
     {
-      "name": "iea-news",
+      "name": "google-news-commodities",
       "type": "rss",
-      "url": "https://www.iea.org/rss/news.xml",
-      "category": "energy",
-      "tier": 1,
+      "url": "https://news.google.com/rss/search?q=commodity+markets&hl=en-US&gl=US&ceid=US:en",
+      "category": "commodities",
+      "tier": 4,
       "interval": 600,
       "language": "en",
       "tags": [
-        "policy",
-        "data"
+        "aggregator"
+      ]
+    },
+    {
+      "name": "cleantech-group",
+      "type": "rss",
+      "url": "https://cleantechnica.com/feed/",
+      "category": "energy",
+      "tier": 2,
+      "interval": 600,
+      "language": "en",
+      "tags": [
+        "cleantech",
+        "ev"
+      ]
+    },
+    {
+      "name": "google-news-energy",
+      "type": "rss",
+      "url": "https://news.google.com/rss/search?q=energy+transition&hl=en-US&gl=US&ceid=US:en",
+      "category": "energy",
+      "tier": 4,
+      "interval": 600,
+      "language": "en",
+      "tags": [
+        "aggregator"
+      ]
+    },
+    {
+      "name": "utility-dive",
+      "type": "rss",
+      "url": "https://www.utilitydive.com/feeds/news/",
+      "category": "energy",
+      "tier": 2,
+      "interval": 600,
+      "language": "en",
+      "tags": [
+        "utilities",
+        "grid"
       ]
     },
     {
@@ -172,19 +143,6 @@
       "tags": [
         "transition",
         "analysis"
-      ]
-    },
-    {
-      "name": "world-nuclear-news",
-      "type": "rss",
-      "url": "https://world-nuclear-news.org/feed",
-      "category": "energy",
-      "tier": 2,
-      "interval": 900,
-      "language": "en",
-      "tags": [
-        "nuclear",
-        "power"
       ]
     },
     {

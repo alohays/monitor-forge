@@ -63,42 +63,41 @@
       ]
     },
     {
-      "name": "guardian-upside",
+      "name": "google-news-happy",
       "type": "rss",
-      "url": "https://www.theguardian.com/lifeandstyle/series/the-upside/rss",
+      "url": "https://news.google.com/rss/search?q=good+news+positive&hl=en-US&gl=US&ceid=US:en",
       "category": "happy",
+      "tier": 4,
+      "interval": 600,
+      "language": "en",
+      "tags": [
+        "aggregator"
+      ]
+    },
+    {
+      "name": "desmog",
+      "type": "rss",
+      "url": "https://www.desmog.com/feed/",
+      "category": "climate",
+      "tier": 2,
+      "interval": 600,
+      "language": "en",
+      "tags": [
+        "disinformation",
+        "fossil-fuels"
+      ]
+    },
+    {
+      "name": "guardian-climate",
+      "type": "rss",
+      "url": "https://www.theguardian.com/environment/climate-crisis/rss",
+      "category": "climate",
       "tier": 1,
-      "interval": 600,
+      "interval": 900,
       "language": "en",
       "tags": [
-        "solutions",
-        "positive"
-      ]
-    },
-    {
-      "name": "future-crunch",
-      "type": "rss",
-      "url": "https://futurecrunch.com/feed/",
-      "category": "happy",
-      "tier": 2,
-      "interval": 600,
-      "language": "en",
-      "tags": [
-        "progress",
-        "science"
-      ]
-    },
-    {
-      "name": "solutions-journalism",
-      "type": "rss",
-      "url": "https://www.solutionsjournalism.org/feed",
-      "category": "happy",
-      "tier": 2,
-      "interval": 600,
-      "language": "en",
-      "tags": [
-        "solutions",
-        "methodology"
+        "uk",
+        "global"
       ]
     },
     {
@@ -115,28 +114,16 @@
       ]
     },
     {
-      "name": "sunny-skyz",
+      "name": "inside-climate-news",
       "type": "rss",
-      "url": "https://www.sunnyskyz.com/rss.xml",
-      "category": "happy",
-      "tier": 3,
-      "interval": 600,
+      "url": "https://insideclimatenews.org/feed/",
+      "category": "climate",
+      "tier": 1,
+      "interval": 900,
       "language": "en",
       "tags": [
-        "feel-good",
-        "viral"
-      ]
-    },
-    {
-      "name": "google-news-happy",
-      "type": "rss",
-      "url": "https://news.google.com/rss/search?q=good+news+positive&hl=en-US&gl=US&ceid=US:en",
-      "category": "happy",
-      "tier": 4,
-      "interval": 600,
-      "language": "en",
-      "tags": [
-        "aggregator"
+        "investigative",
+        "us-climate"
       ]
     },
     {
@@ -154,43 +141,41 @@
       ]
     },
     {
-      "name": "renewables-now",
+      "name": "cleantech-group",
       "type": "rss",
-      "url": "https://renewablesnow.com/rss/feed.xml",
-      "category": "energy",
-      "tier": 2,
-      "interval": 900,
-      "language": "en",
-      "tags": [
-        "renewables",
-        "solar",
-        "wind"
-      ]
-    },
-    {
-      "name": "greentech-media",
-      "type": "rss",
-      "url": "https://www.canarymedia.com/feed",
+      "url": "https://cleantechnica.com/feed/",
       "category": "energy",
       "tier": 2,
       "interval": 900,
       "language": "en",
       "tags": [
         "cleantech",
-        "climate"
+        "ev"
       ]
     },
     {
-      "name": "wri",
+      "name": "utility-dive",
       "type": "rss",
-      "url": "https://www.wri.org/rss.xml",
-      "category": "climate",
-      "tier": 1,
+      "url": "https://www.utilitydive.com/feeds/news/",
+      "category": "energy",
+      "tier": 2,
       "interval": 900,
       "language": "en",
       "tags": [
-        "research",
-        "sustainability"
+        "utilities",
+        "grid"
+      ]
+    },
+    {
+      "name": "google-news-climate",
+      "type": "rss",
+      "url": "https://news.google.com/rss/search?q=climate+change&hl=en-US&gl=US&ceid=US:en",
+      "category": "climate",
+      "tier": 4,
+      "interval": 900,
+      "language": "en",
+      "tags": [
+        "aggregator"
       ]
     },
     {
@@ -207,16 +192,15 @@
       ]
     },
     {
-      "name": "irena-news",
+      "name": "google-news-energy",
       "type": "rss",
-      "url": "https://www.irena.org/RSS",
+      "url": "https://news.google.com/rss/search?q=energy+transition&hl=en-US&gl=US&ceid=US:en",
       "category": "energy",
-      "tier": 2,
+      "tier": 4,
       "interval": 900,
       "language": "en",
       "tags": [
-        "renewables",
-        "policy"
+        "aggregator"
       ]
     },
     {

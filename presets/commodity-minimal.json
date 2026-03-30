@@ -20,17 +20,16 @@
   },
   "sources": [
     {
-      "name": "sp-global-commodities",
+      "name": "metal-miner",
       "type": "rss",
-      "url": "https://www.spglobal.com/commodityinsights/en/rss-feed",
+      "url": "https://agmetalminer.com/feed/",
       "category": "commodities",
-      "tier": 1,
-      "interval": 300,
+      "tier": 3,
+      "interval": 600,
       "language": "en",
       "tags": [
-        "oil",
         "metals",
-        "agriculture"
+        "procurement"
       ]
     },
     {
@@ -61,42 +60,41 @@
       ]
     },
     {
-      "name": "kitco-gold",
+      "name": "commodity-weather-group",
       "type": "rss",
-      "url": "https://www.kitco.com/feed/",
+      "url": "https://news.google.com/rss/search?q=commodity+weather+agriculture&hl=en-US&gl=US&ceid=US:en",
       "category": "commodities",
-      "tier": 2,
-      "interval": 300,
+      "tier": 3,
+      "interval": 900,
       "language": "en",
       "tags": [
-        "gold",
-        "precious-metals"
+        "weather",
+        "agriculture"
       ]
     },
     {
-      "name": "mining-com",
+      "name": "google-news-commodities",
       "type": "rss",
-      "url": "https://www.mining.com/feed/",
+      "url": "https://news.google.com/rss/search?q=commodity+markets&hl=en-US&gl=US&ceid=US:en",
       "category": "commodities",
-      "tier": 2,
+      "tier": 4,
       "interval": 600,
       "language": "en",
       "tags": [
-        "mining",
-        "metals"
+        "aggregator"
       ]
     },
     {
-      "name": "iea-news",
+      "name": "utility-dive",
       "type": "rss",
-      "url": "https://www.iea.org/rss/news.xml",
+      "url": "https://www.utilitydive.com/feeds/news/",
       "category": "energy",
-      "tier": 1,
+      "tier": 2,
       "interval": 600,
       "language": "en",
       "tags": [
-        "policy",
-        "data"
+        "utilities",
+        "grid"
       ]
     },
     {

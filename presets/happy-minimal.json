@@ -59,42 +59,42 @@
       ]
     },
     {
-      "name": "guardian-upside",
+      "name": "google-news-happy",
       "type": "rss",
-      "url": "https://www.theguardian.com/lifeandstyle/series/the-upside/rss",
+      "url": "https://news.google.com/rss/search?q=good+news+positive&hl=en-US&gl=US&ceid=US:en",
       "category": "happy",
+      "tier": 4,
+      "interval": 600,
+      "language": "en",
+      "tags": [
+        "aggregator"
+      ]
+    },
+    {
+      "name": "desmog",
+      "type": "rss",
+      "url": "https://www.desmog.com/feed/",
+      "category": "climate",
+      "tier": 2,
+      "interval": 600,
+      "language": "en",
+      "tags": [
+        "disinformation",
+        "fossil-fuels"
+      ]
+    },
+    {
+      "name": "carbon-brief",
+      "type": "rss",
+      "url": "https://www.carbonbrief.org/feed/",
+      "category": "climate",
       "tier": 1,
-      "interval": 600,
+      "interval": 900,
       "language": "en",
       "tags": [
-        "solutions",
-        "positive"
-      ]
-    },
-    {
-      "name": "future-crunch",
-      "type": "rss",
-      "url": "https://futurecrunch.com/feed/",
-      "category": "happy",
-      "tier": 2,
-      "interval": 600,
-      "language": "en",
-      "tags": [
-        "progress",
-        "science"
-      ]
-    },
-    {
-      "name": "solutions-journalism",
-      "type": "rss",
-      "url": "https://www.solutionsjournalism.org/feed",
-      "category": "happy",
-      "tier": 2,
-      "interval": 600,
-      "language": "en",
-      "tags": [
-        "solutions",
-        "methodology"
+        "science",
+        "policy",
+        "data"
       ]
     },
     {
