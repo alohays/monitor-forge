@@ -1,5 +1,9 @@
+import { readFileSync } from 'node:fs';
+import { resolve, dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import type { MonitorForgeConfig } from '../config/schema.js';
 import { resolveTheme } from '../theme/resolver.js';
+import type { ApiTemplates } from '../../data/api-templates.schema.js';
 
 export function generateManifests(config: MonitorForgeConfig): Record<string, string> {
   return {
@@ -190,6 +194,25 @@ export function generateProxyAllowlist(config: MonitorForgeConfig): string {
         // Skip
       }
     }
+  }
+
+  // Add domains from proxy-required API templates
+  try {
+    const __filename = fileURLToPath(import.meta.url);
+    const __dirname = dirname(__filename);
+    const templatesPath = resolve(__dirname, '../../data/api-templates.json');
+    const templates: ApiTemplates = JSON.parse(readFileSync(templatesPath, 'utf-8'));
+    for (const template of templates.templates) {
+      if (template.proxyRequired) {
+        try {
+          domains.add(new URL(template.baseUrl).hostname);
+        } catch {
+          // Skip invalid URLs
+        }
+      }
+    }
+  } catch {
+    // API templates file not found — skip silently
   }
 
   // Merge explicitly configured allowedDomains (keep wildcard — isDomainAllowed handles it)
