@@ -13,3 +13,4 @@ api/_shared/proxy-config.ts
 test-results/
 e2e/screenshots/
 qa-evidence/
+scripts/demo/frames/
